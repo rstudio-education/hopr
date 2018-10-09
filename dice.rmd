@@ -1,0 +1,39 @@
+# Project 1: Weighted Dice {-}
+
+Computers let you assemble, manipulate, and visualize data sets, all at speeds that would have wowed yesterday's scientists. In short, computers give you scientific superpowers! But if you wish to use them, you'll need to pick up some programming skills.
+
+As a data scientist who knows how to program, you will improve your ability to:
+
+* Memorize (store) entire data sets
+* Recall data values on demand
+* Perform complex calculations with large amounts of data
+* Do repetitive tasks without becoming careless or bored
+
+Computers can do all of these things quickly and error free, which lets your mind do the things _it_ does well: make decisions and assign meaning. 
+
+Sound exciting? Great! Let's begin.
+
+When I was a college student, I sometimes daydreamed of going to Las Vegas. I thought that knowing statistics might help me win big. If that's what led _you_ to data science, you better sit down; I have some bad news. Even a statistician will lose money in a casino over the long run. This is because the odds for each game are always stacked in the casino's favor. However, there is a loophole to this rule. You can make money--and reliably too. All you have to do is _be the casino_.
+
+Believe it or not, R can help you do that. Over the course of the book, you will use R to build three virtual objects: a pair of dice that you can roll to generate random numbers, a deck of cards that you can shuffle and deal from, and a slot machine modeled after some real-life video lottery terminals. After that, you'll just need to add some video graphics and a bank account (and maybe get a few government licenses), and you'll be in business. I'll leave those details to you. 
+
+These projects are lighthearted, but they are also deep. As you complete them, you will become an expert at the skills you need to work with data as a data scientist. You will learn how to store data in your computer's memory, how to access data that is already there, and how to transform data values in memory when necessary. You will also learn how to write your own programs in R that you can use to analyze data and run simulations.
+
+If simulating a slot machine (or dice, or cards) seems frivilous, think of it this way: playing a slot machine is a process. Once you can simulate it, you'll be able to simulate other processes, such as bootstrap sampling, Markov chain Monte Carlo, and other data-analysis procedures. Plus, these projects provide concrete examples for learning all of the components of R programming: objects, data types, classes, notation, functions, environments, `if` trees, loops, and vectorization. This first project will make it easier to study these things by teaching you the basics of R.
+
+Your first mission is simple: assemble R code that will simulate rolling a pair of dice, like at a craps table. Once you have done that, we'll weight the dice a bit in your favor, just to keep things interesting. 
+
+In this project, you will learn how to:
+
+* Use the R and RStudio interfaces
+* Run R commands
+* Create R objects
+* Write your own R functions and scripts
+* Load and use R packages
+* Generate random samples
+* Create quick plots
+* Get help when you need it 
+
+Don't worry if it seems like we cover a lot of ground fast. This project is designed to give you a concise overview of the R language. You will return to many of the concepts we meet here in projects 2 and 3, where you will examine the concepts in depth.
+
+You'll need to have both R and RStudio installed on your computer before you can use them. Both are free and easy to download. See [Appendix A](#starting) for complete instructions. If you are ready to begin, open RStudio on your computer and read on. 

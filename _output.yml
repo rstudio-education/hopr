@@ -1,0 +1,14 @@
+bookdown::gitbook:
+  config:
+    toc:
+      collapse: section
+      before: |
+        <li><strong><a href="./">Hands-On Programming with R</a></strong></li>
+    edit:
+      link: https://github.com/rstudio-education/hopr/edit/master/%s
+      text: "Edit"
+    sharing: no
+  css: hopr.css
+
+bookdown::pdf_book:
+  latex_engine: "xelatex"

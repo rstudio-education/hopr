@@ -1,0 +1,22 @@
+---
+knit: "bookdown::render_book"
+title: "Hands-On Programming with R"
+author: ["Garrett Grolemund"]
+description: "This book will teach you how to program in R, with hands-on examples. I wrote it for non-programmers to provide a friendly introduction to the R language. You'll learn how to load data, assemble and disassemble data objects, navigate R's environment system, write your own functions, and use all of R's programming tools. Throughout the book, you'll use your newfound skills to solve practical data science problems."
+url: 'http\://r4ds.had.co.nz/'
+github-repo: rstudio-education/hopr
+twitter-handle: statgarrett
+cover-image: cover.png
+site: bookdown::bookdown_site
+documentclass: book
+---
+
+# Welcome {-} 
+
+<a href="https://www.amazon.com/Hands-Programming-Write-Functions-Simulations/dp/1449359019"><img src="cover.png" width="285" height="375" alt="Cover image" align="right" style="margin: 0 1em 0 1em" /></a> This is the website for __"Hands-On Programming with R"__. This book will teach you how to program in R, with hands-on examples. I wrote it for non-programmers to provide a friendly introduction to the R language. You'll learn how to load data, assemble and disassemble data objects, navigate R's environment system, write your own functions, and use all of R's programming tools. Throughout the book, you'll use your newfound skills to solve practical data science problems. 
+
+If you are already comfortable with R, and would like to focus instead how to analyze data using R's Tidyverse packages, I recommend [R for Data Science](http://r4ds.had.co.nz/), a book that I co-authored with Hadley Wickham. 
+
+This website is (and will always be) __free to use__, and is licensed under the [Creative Commons Attribution-NonCommercial-NoDerivs 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/) License. If you'd like a __physical copy__ of the book, you can order it from [amazon](https://www.amazon.com/Hands-Programming-Write-Functions-Simulations/dp/1449359019); it was published by O'Reilly in July 2014. If you'd like to give back, please consider reporting a typo or leaving a pull request at [github.com/rstudio-education/hopr](https://github.com/rstudio-education/hopr).
+
+The book is written in [RMarkdown](https://rmarkdown.rstudio.com) with [bookdown](https://bookdown.org).

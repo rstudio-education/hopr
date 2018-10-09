@@ -1,0 +1,70 @@
+# Preface {-}
+
+This book will teach you how to program in R. You'll go from loading data to writing your own functions (which will outperform the functions of other R users). But this is not a typical introduction to R. I want to help you become a data scientist, as well as a computer scientist, so this book will focus on the programming skills that are most related to data science. 
+
+The chapters in the book are arranged according to three practical projects--given that they're fairly substantial projects, they span multiple chapters. I chose these projects for two reasons. First, they cover the breadth of the R language. You will learn how to load data, assemble and disassemble data objects, navigate R's environment system, write your own functions, and use all of R's programming tools, such as `if else` statements, for loops, S3 classes, R's package system, and R's debugging tools. The projects will also teach you how to write vectorized R code, a style of lightning-fast code that takes advantage of all of the things R does best.
+
+But, more importantly, the projects will teach you how to solve the logistical problems of data science—and there are many logistical problems. When you work with data, you will need to store, retrieve, and manipulate large sets of values without introducing errors. As you work through the book, I will teach you not just how to program with R, but how to use the programming skills to support your work as a data scientist. 
+
+Not every programmer needs to be a data scientist, so not every programmer will find this book useful. You will find this book helpful if you're in one of the following categories:
+
+* You already use R as a statistical tool, but you would like to learn how to write your own functions and simulations with R.
+
+* You would like to teach yourself how to program, and you see the sense of learning a language related to data science.
+
+One of the biggest surprises in this book is that I do not cover traditional applications of R, such as models and graphs; instead, I treat R purely as a programming language. Why this narrow focus? R is designed to be a tool that helps scientists analyze data. It has many excellent functions that make plots and fit models to data. As a result, many statisticians learn to use R as if it were a piece of software—they learn which functions do what they want, and they ignore the rest. 
+
+This is an understandable approach to learning R. Visualizing and modeling data are complicated skills that require a scientist's full attention. It takes expertise, judgement, and focus to extract reliable insights from a data set. I would not recommend that any any data scientist distract herself with computer programming until she feels comfortable with the basic theory and practice of her craft. If you would like to learn the craft of data science, I recommend the book [R for Data Science](http://r4ds.had.co.nz/), my companion volume to this book, co-written with Hadley Wickham.
+
+However, learning to program _should_ be on every data scientist's to-do list. Knowing how to program will make you a more flexible analyst and augment your mastery of data science in every way. My favorite metaphor for describing this was introduced by Greg Snow on the R help mailing list in May 2006. Using functions in R is like riding a bus. _Writing_ functions in R is like driving a car.
+
+> Busses are very easy to use, you just need to know which bus to get on, where to get on, and where to get off (and you need to pay your fare). Cars, on the other hand, require much more work: you need to have some type of map or directions (even if the map is in your head), you need to put gas in every now and then, you need to know the rules of the road (have some type of drivers license). The big advantage of the car is that it can take you a bunch of places that the bus does not go and it is quicker for some trips that would require transferring between busses.
+
+> Using this analogy, programs like SPSS are busses, easy to use for the standard things, but very frustrating if you want to do something that is not already preprogrammed.
+
+> R is a 4-wheel drive SUV (though environmentally friendly) with a bike on the back, a kayak on top, good walking and running shoes in the passenger seat, and mountain climbing and spelunking gear in the back.
+
+> R can take you anywhere you want to go if you take time to learn how to use the equipment, but that is going to take longer than learning where the bus stops are in SPSS.
+> - Greg Snow
+
+Greg compares R to SPSS, but he assumes that you use the full powers of R; in other words, that you learn how to program in R. If you only use functions that preexist in R, you are using R like SPSS: it is a bus that can only take you to certain places. 
+
+This flexibility matters to data scientists. The exact details of a method or simulation will change from problem to problem. If you cannot build a method tailored to your situation, you may find yourself tempted to make unrealistic assumptions just so you can you use an ill-suited method that already exists.
+
+This book will help you make the leap from bus to car. I have written it for beginning programmers. I do not talk about the theory of computer science—there are no discussions of big `O()` and little `o()` in these pages. Nor do I get into advanced details such as the workings of _lazy evaluation_. These things are interesting if you think of computer science at the theoretical level, but they are a distraction when you first learn to program.
+
+Instead, I teach you how to program in R with three concrete examples. These examples are short, easy to understand, and cover everything you need to know.
+
+I have taught this material many times in my job as Master Instructor at RStudio. As a teacher, I have found that students learn abstract concepts much faster when they are illustrated by concrete examples. The examples have a second advantage, as well: they provide immediate practice. Learning to program is like learning to speak another language—you progress faster when you practice. In fact, learning to program _is_ learning to speak another language. You will get the best results if you follow along with the examples in the book and experiment whenever an idea strikes you.
+
+***
+
+The book is a companion to [R for Data Science](http://r4ds.had.co.nz/). In that book, Hadley Wickham and I explain how to use R to make plots, model data, and write reports. That book teaches these tasks as data-science skills, which require judgement and expertise—not as programming exercises, which they also are. This book will teach you how to program in R. It does not assume that you have mastered the data-science skills taught in _R for Data Science_ (nor that you ever intend to). However, this skill set amplifies that one. And if you master both, you will be a powerful, computer-augmented data scientist, fit to command a high salary and influence scientific dialogue.
+
+***
+
+## Conventions Used in This Book
+
+The following typographical conventions are used in this book:
+
+_Italic_:: Indicates new terms, URLs, email addresses, filenames, and file extensions.
+
+`Constant width`:: Used for program listings, as well as within paragraphs to refer to program elements such as variable or function names, databases, data types, environment variables, statements, and keywords.
+
+**`Constant width bold`**:: Shows commands or other text that should be typed literally by the user.
+
+_`Constant width italic`_:: Shows text that should be replaced with user-supplied values or by values determined by context.
+
+To comment or ask technical questions about this book, please file an issue at [github.com/rstudio-education/hopr](https://github.com/rstudio-education/hopr).
+
+## Acknowledgments
+
+Many excellent people have helped me write this book, from my two editors, Courtney Nash and Julie Steele, to the rest of the O'Reilly team, who designed, proofread, and indexed the book. Also, Greg Snow generously let me quote him in this preface. I offer them all my heartfelt thanks. 
+
+I would also like to thank Hadley Wickham, who has shaped the way I think about and teach R. Many of the ideas in this book come from Statistics 405, a course that I helped Hadley teach when I was a PhD student at Rice University. 
+
+Further ideas came from the students and teachers of Introduction to Data Science with R, a workshop that I teach on behalf of RStudio. Thank you to all of you. I'd like to offer special thanks to my teaching assistants Josh Paulson, Winston Chang, Jaime Ramos, Jay Emerson, and Vivian Zhang. 
+
+Thank you also to JJ Allaire and the rest of my colleagues at RStudio who provide the RStudio IDE, a tool that makes it much easier to use, teach, and write about R.
+
+Finally, I would like to thank my wife, Kristin, for her support and understanding while I wrote this book.

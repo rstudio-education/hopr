@@ -1,0 +1,7 @@
+rmd_files: [
+  "index.rmd",
+  "preface.rmd",
+  
+  "dice.rmd",
+  "basics.rmd"
+]
