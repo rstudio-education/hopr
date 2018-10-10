@@ -213,6 +213,7 @@ You can see which object names you have already used with the function `ls`:
 ls()
 ## "a"         "die"       "my_number" "name"     "Name"     
 ```
+
 You can also see which names you have used by examining RStudio's environment pane.
 
 You now have a virtual die that is stored in your computer's memory. You can access it whenever you like by typing the word *`die`*. So what can you do with this die? Quite a lot. R will replace an object with its contents whenever the object's name appears in a command. So, for example, you can do all sorts of math with the die. Math isn't so helpful for rolling dice, but manipulating sets of numbers will be your stock and trade as a data scientist. So let's take a look at how to do that:

@@ -7,5 +7,6 @@ rmd_files: [
   "packages.rmd",
   
   "cards.rmd",
-  "objects.rmd"
+  "objects.rmd",
+  "notation.rmd"
 ]
