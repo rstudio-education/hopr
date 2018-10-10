@@ -4,5 +4,7 @@ rmd_files: [
   
   "dice.rmd",
   "basics.rmd",
-  "packages.rmd"
+  "packages.rmd",
+  
+  "cards.rmd"
 ]
