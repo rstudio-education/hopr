@@ -1,4 +1,4 @@
-# The Very Basics
+# The Very Basics {#basics}
 
 This chapter provides a broad overview of the R language that will get you programming right away. In it, you will build a pair of virtual dice that you can use to generate random numbers. Don't worry if you've never programmed before; the chapter will teach you everything you need to know. 
 
@@ -643,4 +643,4 @@ As you've seen, R is a language that you can use to talk to your computer. You w
 
 The two most important components of the R language are objects, which store data, and functions, which manipulate data. R also uses a host of operators like `+`, `-`, `*`, `/`, and `<-` to do basic tasks. As a data scientist, you will use R objects to store data in your computer's memory, and you will use functions to automate tasks and do complicated calculations. We will examine objects in more depth later in [Project 2: Playing Cards](#cards) and dig further into functions in [Project 3: Slot Machine](#slots). The vocabulary you have developed here will make each of those projects easier to understand. However, we're not done with your dice yet.
 
-In [Appendix 2: R Packages](#packages), you'll run some simulations on your dice and build your first graphs in R. You'll also look at two of the most useful components of the R language: R _packages_, which are collections of functions writted by R's talented community of developers, and R documentation, which is a collection of help pages built into R that explains every function and data set in the language.
+In [Packages and Help Pages](#packages), you'll run some simulations on your dice and build your first graphs in R. You'll also look at two of the most useful components of the R language: R _packages_, which are collections of functions writted by R's talented community of developers, and R documentation, which is a collection of help pages built into R that explains every function and data set in the language.

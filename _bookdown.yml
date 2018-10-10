@@ -3,5 +3,6 @@ rmd_files: [
   "preface.rmd",
   
   "dice.rmd",
-  "basics.rmd"
+  "basics.rmd",
+  "packages.rmd"
 ]
