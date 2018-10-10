@@ -6,5 +6,6 @@ rmd_files: [
   "basics.rmd",
   "packages.rmd",
   
-  "cards.rmd"
+  "cards.rmd",
+  "objects.rmd"
 ]

@@ -1,6 +1,6 @@
 [[PACKAGES2]]
 [appendix]
-== R Packages {#packages}
+== R Packages {#packages2}
 
 Many of R's most useful functions do not come preloaded when you start R, but reside in _packages_ that can be installed on top of R. R packages are similar to libraries in C, C++, and Javascript, packages in Python, and gems in Ruby. An R package bundles together useful functions, help files, and data sets. You can use these functions within your own R code once you load the package they live in. Usually the contents of an R package are all related to a single type of task, which the package helps solve. R packages will let you take advantage of R's most useful features: its large community of package writers (many of whom are active data scientists) and its prewritten routines for handling many common (and exotic) data-science tasks.(((R packages, benefits of)))((("packages", seealso="R packages")))
 
