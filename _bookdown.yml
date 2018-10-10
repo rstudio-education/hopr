@@ -9,5 +9,6 @@ rmd_files: [
   "cards.rmd",
   "objects.rmd",
   "notation.rmd",
-  "modifying.rmd"
+  "modifying.rmd",
+  "environments.rmd"
 ]
