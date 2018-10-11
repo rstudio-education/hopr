@@ -12,5 +12,6 @@ rmd_files: [
   "modifying.rmd",
   "environments.rmd",
   
-  "slots.rmd"
+  "slots.rmd",
+  "programs.rmd"
 ]
