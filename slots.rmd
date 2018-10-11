@@ -1,0 +1,17 @@
+# Project 3: Slot Machine {-}
+
+Slot machines are the most popular game in modern casinos. If you've never seen one, a slot machine resembles an arcade game that has a lever on its side. For a small fee you can pull the lever, and the machine will generate a random combination of three symbols. If the correct combination appears, you can win a prize, maybe even the jackpot.
+
+Slot machines make fantastic profits for casinos because they offer a very low payout rate. In many games, such as Blackjack and Roulette, the odds are only slightly stacked in the casino's favor. In the long run, the casino pays back 97 to 98 cents in prizes of every dollar that a gambler spends on these games. With slot machines, it is typical for a casino to only pay back 90 to 95 cents—and the casino keeps the rest. If this seems underhanded, keep in mind that slot machines are one of the most popular games at a casino; few people seem to mind. And if you consider that state lotteries have payout rates that are much closer to 50 cents on the dollar, slot machines don't look that bad.
+
+In this project, you will build a real, working slot machine modeled after some real life Video Lottery Terminals from Manitoba, Canada. The terminals were a source of scandal in the 1990s. You'll get to the bottom of this scandal by writing a program that recreates the slot machines. You'll then do some calculations and run some simulations that reveal the true payout rate of the machines.
+
+This project will teach you how to write programs and run simulations in R. You will also learn how to: 
+
+* Use a practical strategy to design programs
+* Use `if` and `else` statements to tell R what to do when
+* Create lookup tables to find values
+* Use `for`, `while`, and `repeat` loops to automate repetitive operations 
+* Use S3 methods, R's version of Object-Oriented Programming
+* Measure the speed of R code
+* Write fast, vectorized R code

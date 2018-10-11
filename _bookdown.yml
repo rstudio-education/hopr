@@ -10,5 +10,7 @@ rmd_files: [
   "objects.rmd",
   "notation.rmd",
   "modifying.rmd",
-  "environments.rmd"
+  "environments.rmd",
+  
+  "slots.rmd"
 ]
