@@ -13,5 +13,6 @@ rmd_files: [
   "environments.rmd",
   
   "slots.rmd",
-  "programs.rmd"
+  "programs.rmd",
+  "S3.rmd"
 ]
