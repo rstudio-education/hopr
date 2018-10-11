@@ -16,5 +16,7 @@ rmd_files: [
   "programs.rmd",
   "S3.rmd",
   "loops.rmd",
-  "speed.rmd"
+  "speed.rmd",
+  
+  "a1-starting.rmd"
 ]
