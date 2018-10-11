@@ -19,5 +19,6 @@ rmd_files: [
   "speed.rmd",
   
   "a1-starting.rmd",
-  "a2-packages.rmd"
+  "a2-packages.rmd",
+  "a3-updating.rmd"
 ]
