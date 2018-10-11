@@ -14,5 +14,6 @@ rmd_files: [
   
   "slots.rmd",
   "programs.rmd",
-  "S3.rmd"
+  "S3.rmd",
+  "loops.rmd"
 ]
