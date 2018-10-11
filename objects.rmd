@@ -830,7 +830,7 @@ I've created a file for you to load that contains a data frame of playing-card i
 
 ## Loading Data {#loading}
 
-You can load the `deck` data frame from the file [_deck.csv_](http://bit.ly/deck_CSV). Please take a moment to download the file before reading on. Visit the website, click "Download Gist," and then open the folder that your web browser downloads. _deck.csv_ will be inside.
+You can load the `deck` data frame from the file [_deck.csv_](http://bit.ly/deck_CSV). Please take a moment to download the file before reading on. Visit the website, click "Download Zip," and then unzip and open the folder that your web browser downloads. _deck.csv_ will be inside.
 
 _deck.csv_ is a comma-separated values file, or CSV for short. CSVs are plain-text files, which means you can open them in a text editor (as well as many other programs). If you open _desk.csv_, you'll notice that it contains a table of data that looks like the following table. Each row of the table is saved on its own line, and a comma is used to separate the cells within each row.  Every CSV file shares this basic format:
 
