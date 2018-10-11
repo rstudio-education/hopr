@@ -21,5 +21,6 @@ rmd_files: [
   "a1-starting.rmd",
   "a2-packages.rmd",
   "a3-updating.rmd",
-  "a4-data.rmd"
+  "a4-data.rmd",
+  "a5-debug.rmd"
 ]
