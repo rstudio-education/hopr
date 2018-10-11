@@ -18,5 +18,6 @@ rmd_files: [
   "loops.rmd",
   "speed.rmd",
   
-  "a1-starting.rmd"
+  "a1-starting.rmd",
+  "a2-packages.rmd"
 ]
