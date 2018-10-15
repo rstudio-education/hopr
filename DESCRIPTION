@@ -1,0 +1,11 @@
+Package: hopr
+Title: Hands-On Programming with R.
+Version: 0.1
+Authors@R: person("Garrett", "Grolemund", , "garrett@rstudio.com", "aut")
+Depends: R (>= 3.1.0)
+URL: https://github.com/rstudio-education/hopr
+Imports:
+  bookdown,
+  knitr,
+  rmarkdown
+Remotes: rstudio/bookdown
