@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Hands-On Programming with R</title>
+  <meta name="description" content="This book will teach you how to program in R, with hands-on examples. I wrote it for non-programmers to provide a friendly introduction to the R language. You’ll learn how to load data, assemble and disassemble data objects, navigate R’s environment system, write your own functions, and use all of R’s programming tools. Throughout the book, you’ll use your newfound skills to solve practical data science problems.">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Hands-On Programming with R" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="http://r4ds.had.co.nz/" />
+  <meta property="og:image" content="http://r4ds.had.co.nz/cover.png" />
+  <meta property="og:description" content="This book will teach you how to program in R, with hands-on examples. I wrote it for non-programmers to provide a friendly introduction to the R language. You’ll learn how to load data, assemble and disassemble data objects, navigate R’s environment system, write your own functions, and use all of R’s programming tools. Throughout the book, you’ll use your newfound skills to solve practical data science problems." />
+  <meta name="github-repo" content="rstudio-education/hopr" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Hands-On Programming with R" />
+  <meta name="twitter:site" content="@statgarrett" />
+  <meta name="twitter:description" content="This book will teach you how to program in R, with hands-on examples. I wrote it for non-programmers to provide a friendly introduction to the R language. You’ll learn how to load data, assemble and disassemble data objects, navigate R’s environment system, write your own functions, and use all of R’s programming tools. Throughout the book, you’ll use your newfound skills to solve practical data science problems." />
+  <meta name="twitter:image" content="http://r4ds.had.co.nz/cover.png" />
+
+<meta name="author" content="Garrett Grolemund">
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="loops.html">
+<link rel="next" href="starting.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="hopr.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><strong><a href="./">Hands-On Programming with R</a></strong></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html"><i class="fa fa-check"></i>Preface</a><ul>
+<li class="chapter" data-level="0.1" data-path="preface.html"><a href="preface.html#conventions-used-in-this-book"><i class="fa fa-check"></i><b>0.1</b> Conventions Used in This Book</a></li>
+<li class="chapter" data-level="0.2" data-path="preface.html"><a href="preface.html#acknowledgments"><i class="fa fa-check"></i><b>0.2</b> Acknowledgments</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="project-1-weighted-dice.html"><a href="project-1-weighted-dice.html"><i class="fa fa-check"></i>Project 1: Weighted Dice</a></li>
+<li class="chapter" data-level="1" data-path="basics.html"><a href="basics.html"><i class="fa fa-check"></i><b>1</b> The Very Basics</a><ul>
+<li class="chapter" data-level="1.1" data-path="basics.html"><a href="basics.html#the-r-user-interface"><i class="fa fa-check"></i><b>1.1</b> The R User Interface</a></li>
+<li class="chapter" data-level="1.2" data-path="basics.html"><a href="basics.html#objects"><i class="fa fa-check"></i><b>1.2</b> Objects</a></li>
+<li class="chapter" data-level="1.3" data-path="basics.html"><a href="basics.html#functions"><i class="fa fa-check"></i><b>1.3</b> Functions</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="basics.html"><a href="basics.html#sample-with-replacement"><i class="fa fa-check"></i><b>1.3.1</b> Sample with Replacement</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="basics.html"><a href="basics.html#write-functions"><i class="fa fa-check"></i><b>1.4</b> Writing Your Own Functions</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="basics.html"><a href="basics.html#the-function-constructor"><i class="fa fa-check"></i><b>1.4.1</b> The Function Constructor</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="basics.html"><a href="basics.html#arguments"><i class="fa fa-check"></i><b>1.5</b> Arguments</a></li>
+<li class="chapter" data-level="1.6" data-path="basics.html"><a href="basics.html#scripts"><i class="fa fa-check"></i><b>1.6</b> Scripts</a></li>
+<li class="chapter" data-level="1.7" data-path="basics.html"><a href="basics.html#summary"><i class="fa fa-check"></i><b>1.7</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="packages.html"><a href="packages.html"><i class="fa fa-check"></i><b>2</b> Packages and Help Pages</a><ul>
+<li class="chapter" data-level="2.1" data-path="packages.html"><a href="packages.html#packages-1"><i class="fa fa-check"></i><b>2.1</b> Packages</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="packages.html"><a href="packages.html#install.packages"><i class="fa fa-check"></i><b>2.1.1</b> install.packages</a></li>
+<li class="chapter" data-level="2.1.2" data-path="packages.html"><a href="packages.html#library"><i class="fa fa-check"></i><b>2.1.2</b> library</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="packages.html"><a href="packages.html#getting-help-with-help-pages"><i class="fa fa-check"></i><b>2.2</b> Getting Help with Help Pages</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="packages.html"><a href="packages.html#parts-of-a-help-page"><i class="fa fa-check"></i><b>2.2.1</b> Parts of a Help Page</a></li>
+<li class="chapter" data-level="2.2.2" data-path="packages.html"><a href="packages.html#getting-more-help"><i class="fa fa-check"></i><b>2.2.2</b> Getting More Help</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="packages.html"><a href="packages.html#summary-1"><i class="fa fa-check"></i><b>2.3</b> Summary</a></li>
+<li class="chapter" data-level="2.4" data-path="packages.html"><a href="packages.html#project-1-wrap-up"><i class="fa fa-check"></i><b>2.4</b> Project 1 Wrap-up</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="project-2-playing-cards.html"><a href="project-2-playing-cards.html"><i class="fa fa-check"></i>Project 2: Playing Cards</a></li>
+<li class="chapter" data-level="3" data-path="r-objects.html"><a href="r-objects.html"><i class="fa fa-check"></i><b>3</b> R Objects</a><ul>
+<li class="chapter" data-level="3.1" data-path="r-objects.html"><a href="r-objects.html#atomic-vectors"><i class="fa fa-check"></i><b>3.1</b> Atomic Vectors</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="r-objects.html"><a href="r-objects.html#doubles"><i class="fa fa-check"></i><b>3.1.1</b> Doubles</a></li>
+<li class="chapter" data-level="3.1.2" data-path="r-objects.html"><a href="r-objects.html#integers"><i class="fa fa-check"></i><b>3.1.2</b> Integers</a></li>
+<li class="chapter" data-level="3.1.3" data-path="r-objects.html"><a href="r-objects.html#characters"><i class="fa fa-check"></i><b>3.1.3</b> Characters</a></li>
+<li class="chapter" data-level="3.1.4" data-path="r-objects.html"><a href="r-objects.html#logicals"><i class="fa fa-check"></i><b>3.1.4</b> Logicals</a></li>
+<li class="chapter" data-level="3.1.5" data-path="r-objects.html"><a href="r-objects.html#complex-and-raw"><i class="fa fa-check"></i><b>3.1.5</b> Complex and Raw</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="r-objects.html"><a href="r-objects.html#attributes"><i class="fa fa-check"></i><b>3.2</b> Attributes</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="r-objects.html"><a href="r-objects.html#names"><i class="fa fa-check"></i><b>3.2.1</b> Names</a></li>
+<li class="chapter" data-level="3.2.2" data-path="r-objects.html"><a href="r-objects.html#dim"><i class="fa fa-check"></i><b>3.2.2</b> Dim</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="r-objects.html"><a href="r-objects.html#matrices"><i class="fa fa-check"></i><b>3.3</b> Matrices</a></li>
+<li class="chapter" data-level="3.4" data-path="r-objects.html"><a href="r-objects.html#arrays"><i class="fa fa-check"></i><b>3.4</b> Arrays</a></li>
+<li class="chapter" data-level="3.5" data-path="r-objects.html"><a href="r-objects.html#class"><i class="fa fa-check"></i><b>3.5</b> Class</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="r-objects.html"><a href="r-objects.html#dates-and-times"><i class="fa fa-check"></i><b>3.5.1</b> Dates and Times</a></li>
+<li class="chapter" data-level="3.5.2" data-path="r-objects.html"><a href="r-objects.html#factors"><i class="fa fa-check"></i><b>3.5.2</b> Factors</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="r-objects.html"><a href="r-objects.html#coercion"><i class="fa fa-check"></i><b>3.6</b> Coercion</a></li>
+<li class="chapter" data-level="3.7" data-path="r-objects.html"><a href="r-objects.html#lists"><i class="fa fa-check"></i><b>3.7</b> Lists</a></li>
+<li class="chapter" data-level="3.8" data-path="r-objects.html"><a href="r-objects.html#data-frames"><i class="fa fa-check"></i><b>3.8</b> Data Frames</a></li>
+<li class="chapter" data-level="3.9" data-path="r-objects.html"><a href="r-objects.html#loading"><i class="fa fa-check"></i><b>3.9</b> Loading Data</a></li>
+<li class="chapter" data-level="3.10" data-path="r-objects.html"><a href="r-objects.html#saving-data"><i class="fa fa-check"></i><b>3.10</b> Saving Data</a></li>
+<li class="chapter" data-level="3.11" data-path="r-objects.html"><a href="r-objects.html#summary-2"><i class="fa fa-check"></i><b>3.11</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="r-notation.html"><a href="r-notation.html"><i class="fa fa-check"></i><b>4</b> R Notation</a><ul>
+<li class="chapter" data-level="4.1" data-path="r-notation.html"><a href="r-notation.html#selecting-values"><i class="fa fa-check"></i><b>4.1</b> Selecting Values</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="r-notation.html"><a href="r-notation.html#positive-integers"><i class="fa fa-check"></i><b>4.1.1</b> Positive Integers</a></li>
+<li class="chapter" data-level="4.1.2" data-path="r-notation.html"><a href="r-notation.html#negative-integers"><i class="fa fa-check"></i><b>4.1.2</b> Negative Integers</a></li>
+<li class="chapter" data-level="4.1.3" data-path="r-notation.html"><a href="r-notation.html#zero"><i class="fa fa-check"></i><b>4.1.3</b> Zero</a></li>
+<li class="chapter" data-level="4.1.4" data-path="r-notation.html"><a href="r-notation.html#blank-spaces"><i class="fa fa-check"></i><b>4.1.4</b> Blank Spaces</a></li>
+<li class="chapter" data-level="4.1.5" data-path="r-objects.html"><a href="r-objects.html#logicals"><i class="fa fa-check"></i><b>4.1.5</b> Logical Values</a></li>
+<li class="chapter" data-level="4.1.6" data-path="r-notation.html"><a href="r-notation.html#names-1"><i class="fa fa-check"></i><b>4.1.6</b> Names</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="r-notation.html"><a href="r-notation.html#deal-a-card"><i class="fa fa-check"></i><b>4.2</b> Deal a Card</a></li>
+<li class="chapter" data-level="4.3" data-path="r-notation.html"><a href="r-notation.html#shuffle-the-deck"><i class="fa fa-check"></i><b>4.3</b> Shuffle the Deck</a></li>
+<li class="chapter" data-level="4.4" data-path="r-notation.html"><a href="r-notation.html#dollar-signs-and-double-brackets"><i class="fa fa-check"></i><b>4.4</b> Dollar Signs and Double Brackets</a></li>
+<li class="chapter" data-level="4.5" data-path="r-notation.html"><a href="r-notation.html#summary-3"><i class="fa fa-check"></i><b>4.5</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="modify.html"><a href="modify.html"><i class="fa fa-check"></i><b>5</b> Modifying Values</a><ul>
+<li class="chapter" data-level="5.0.1" data-path="modify.html"><a href="modify.html#changing-values-in-place"><i class="fa fa-check"></i><b>5.0.1</b> Changing Values in Place</a></li>
+<li class="chapter" data-level="5.0.2" data-path="modify.html"><a href="modify.html#logical-subsetting"><i class="fa fa-check"></i><b>5.0.2</b> Logical Subsetting</a></li>
+<li class="chapter" data-level="5.0.3" data-path="modify.html"><a href="modify.html#missing"><i class="fa fa-check"></i><b>5.0.3</b> Missing Information</a></li>
+<li class="chapter" data-level="5.0.4" data-path="modify.html"><a href="modify.html#summary-4"><i class="fa fa-check"></i><b>5.0.4</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="environments.html"><a href="environments.html"><i class="fa fa-check"></i><b>6</b> Environments</a><ul>
+<li class="chapter" data-level="6.1" data-path="environments.html"><a href="environments.html#environments-1"><i class="fa fa-check"></i><b>6.1</b> Environments</a></li>
+<li class="chapter" data-level="6.2" data-path="environments.html"><a href="environments.html#working-with-environments"><i class="fa fa-check"></i><b>6.2</b> Working with Environments</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="environments.html"><a href="environments.html#the-active-environment"><i class="fa fa-check"></i><b>6.2.1</b> The Active Environment</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="environments.html"><a href="environments.html#scoping-rules"><i class="fa fa-check"></i><b>6.3</b> Scoping Rules</a></li>
+<li class="chapter" data-level="6.4" data-path="environments.html"><a href="environments.html#assignment"><i class="fa fa-check"></i><b>6.4</b> Assignment</a></li>
+<li class="chapter" data-level="6.5" data-path="environments.html"><a href="environments.html#evaluation"><i class="fa fa-check"></i><b>6.5</b> Evaluation</a></li>
+<li class="chapter" data-level="6.6" data-path="environments.html"><a href="environments.html#closures"><i class="fa fa-check"></i><b>6.6</b> Closures</a></li>
+<li class="chapter" data-level="6.7" data-path="environments.html"><a href="environments.html#summary-5"><i class="fa fa-check"></i><b>6.7</b> Summary</a></li>
+<li class="chapter" data-level="6.8" data-path="environments.html"><a href="environments.html#project-2-wrap-up"><i class="fa fa-check"></i><b>6.8</b> Project 2 Wrap-up</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="project-3-slot-machine.html"><a href="project-3-slot-machine.html"><i class="fa fa-check"></i>Project 3: Slot Machine</a></li>
+<li class="chapter" data-level="7" data-path="programs.html"><a href="programs.html"><i class="fa fa-check"></i><b>7</b> Programs</a><ul>
+<li class="chapter" data-level="7.1" data-path="programs.html"><a href="programs.html#strategy"><i class="fa fa-check"></i><b>7.1</b> Strategy</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="programs.html"><a href="programs.html#sequential-steps"><i class="fa fa-check"></i><b>7.1.1</b> Sequential Steps</a></li>
+<li class="chapter" data-level="7.1.2" data-path="programs.html"><a href="programs.html#parallel-cases"><i class="fa fa-check"></i><b>7.1.2</b> Parallel Cases</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="programs.html"><a href="programs.html#if-statements"><i class="fa fa-check"></i><b>7.2</b> if Statements</a></li>
+<li class="chapter" data-level="7.3" data-path="programs.html"><a href="programs.html#else-statements"><i class="fa fa-check"></i><b>7.3</b> else Statements</a></li>
+<li class="chapter" data-level="7.4" data-path="programs.html"><a href="programs.html#lookup-tables"><i class="fa fa-check"></i><b>7.4</b> Lookup Tables</a></li>
+<li class="chapter" data-level="7.5" data-path="programs.html"><a href="programs.html#code-comments"><i class="fa fa-check"></i><b>7.5</b> Code Comments</a></li>
+<li class="chapter" data-level="7.6" data-path="programs.html"><a href="programs.html#summary-6"><i class="fa fa-check"></i><b>7.6</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="s3.html"><a href="s3.html"><i class="fa fa-check"></i><b>8</b> S3</a><ul>
+<li class="chapter" data-level="8.1" data-path="s3.html"><a href="s3.html#the-s3-system"><i class="fa fa-check"></i><b>8.1</b> The S3 System</a></li>
+<li class="chapter" data-level="8.2" data-path="s3.html"><a href="s3.html#attributes-1"><i class="fa fa-check"></i><b>8.2</b> Attributes</a></li>
+<li class="chapter" data-level="8.3" data-path="s3.html"><a href="s3.html#generic-functions"><i class="fa fa-check"></i><b>8.3</b> Generic Functions</a></li>
+<li class="chapter" data-level="8.4" data-path="s3.html"><a href="s3.html#methods"><i class="fa fa-check"></i><b>8.4</b> Methods</a><ul>
+<li class="chapter" data-level="8.4.1" data-path="s3.html"><a href="s3.html#method-dispatch"><i class="fa fa-check"></i><b>8.4.1</b> Method Dispatch</a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="s3.html"><a href="s3.html#classes"><i class="fa fa-check"></i><b>8.5</b> Classes</a></li>
+<li class="chapter" data-level="8.6" data-path="s3.html"><a href="s3.html#s3-and-debugging"><i class="fa fa-check"></i><b>8.6</b> S3 and Debugging</a></li>
+<li class="chapter" data-level="8.7" data-path="s3.html"><a href="s3.html#s4-and-r5"><i class="fa fa-check"></i><b>8.7</b> S4 and R5</a></li>
+<li class="chapter" data-level="8.8" data-path="s3.html"><a href="s3.html#summary-7"><i class="fa fa-check"></i><b>8.8</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="loops.html"><a href="loops.html"><i class="fa fa-check"></i><b>9</b> Loops</a><ul>
+<li class="chapter" data-level="9.1" data-path="loops.html"><a href="loops.html#expected-values"><i class="fa fa-check"></i><b>9.1</b> Expected Values</a></li>
+<li class="chapter" data-level="9.2" data-path="loops.html"><a href="loops.html#expand.grid"><i class="fa fa-check"></i><b>9.2</b> expand.grid</a></li>
+<li class="chapter" data-level="9.3" data-path="loops.html"><a href="loops.html#for-loops"><i class="fa fa-check"></i><b>9.3</b> for Loops</a></li>
+<li class="chapter" data-level="9.4" data-path="loops.html"><a href="loops.html#while-loops"><i class="fa fa-check"></i><b>9.4</b> while Loops</a></li>
+<li class="chapter" data-level="9.5" data-path="loops.html"><a href="loops.html#repeat-loops"><i class="fa fa-check"></i><b>9.5</b> repeat Loops</a></li>
+<li class="chapter" data-level="9.6" data-path="loops.html"><a href="loops.html#summary-8"><i class="fa fa-check"></i><b>9.6</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="speed.html"><a href="speed.html"><i class="fa fa-check"></i><b>10</b> Speed</a><ul>
+<li class="chapter" data-level="10.1" data-path="speed.html"><a href="speed.html#vectorized-code"><i class="fa fa-check"></i><b>10.1</b> Vectorized Code</a></li>
+<li class="chapter" data-level="10.2" data-path="speed.html"><a href="speed.html#how-to-write-vectorized-code"><i class="fa fa-check"></i><b>10.2</b> How to Write Vectorized Code</a></li>
+<li class="chapter" data-level="10.3" data-path="speed.html"><a href="speed.html#how-to-write-fast-for-loops-in-r"><i class="fa fa-check"></i><b>10.3</b> How to Write Fast for Loops in R</a></li>
+<li class="chapter" data-level="10.4" data-path="speed.html"><a href="speed.html#vectorized-code-in-practice"><i class="fa fa-check"></i><b>10.4</b> Vectorized Code in Practice</a><ul>
+<li class="chapter" data-level="10.4.1" data-path="speed.html"><a href="speed.html#loops-versus-vectorized-code"><i class="fa fa-check"></i><b>10.4.1</b> Loops Versus Vectorized Code</a></li>
+</ul></li>
+<li class="chapter" data-level="10.5" data-path="speed.html"><a href="speed.html#summary-9"><i class="fa fa-check"></i><b>10.5</b> Summary</a></li>
+<li class="chapter" data-level="10.6" data-path="speed.html"><a href="speed.html#project-3-wrap-up"><i class="fa fa-check"></i><b>10.6</b> Project 3 Wrap-up</a></li>
+</ul></li>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="starting.html"><a href="starting.html"><i class="fa fa-check"></i><b>A</b> Installing R and RStudio</a><ul>
+<li class="chapter" data-level="A.1" data-path="starting.html"><a href="starting.html#how-to-download-and-install-r"><i class="fa fa-check"></i><b>A.1</b> How to Download and Install R</a><ul>
+<li class="chapter" data-level="A.1.1" data-path="starting.html"><a href="starting.html#windows"><i class="fa fa-check"></i><b>A.1.1</b> Windows</a></li>
+<li class="chapter" data-level="A.1.2" data-path="starting.html"><a href="starting.html#mac"><i class="fa fa-check"></i><b>A.1.2</b> Mac</a></li>
+<li class="chapter" data-level="A.1.3" data-path="starting.html"><a href="starting.html#linux"><i class="fa fa-check"></i><b>A.1.3</b> Linux</a></li>
+</ul></li>
+<li class="chapter" data-level="A.2" data-path="starting.html"><a href="starting.html#using-r"><i class="fa fa-check"></i><b>A.2</b> Using R</a></li>
+<li class="chapter" data-level="A.3" data-path="starting.html"><a href="starting.html#rstudio"><i class="fa fa-check"></i><b>A.3</b> RStudio</a></li>
+<li class="chapter" data-level="A.4" data-path="starting.html"><a href="starting.html#opening-r"><i class="fa fa-check"></i><b>A.4</b> Opening R</a></li>
+</ul></li>
+<li class="chapter" data-level="B" data-path="packages2.html"><a href="packages2.html"><i class="fa fa-check"></i><b>B</b> R Packages</a><ul>
+<li class="chapter" data-level="B.1" data-path="packages2.html"><a href="packages2.html#installing-packages"><i class="fa fa-check"></i><b>B.1</b> Installing Packages</a></li>
+<li class="chapter" data-level="B.2" data-path="packages2.html"><a href="packages2.html#loading-packages"><i class="fa fa-check"></i><b>B.2</b> Loading Packages</a></li>
+</ul></li>
+<li class="chapter" data-level="C" data-path="updating.html"><a href="updating.html"><i class="fa fa-check"></i><b>C</b> Updating R and Its Packages</a><ul>
+<li class="chapter" data-level="C.1" data-path="updating.html"><a href="updating.html#r-packages"><i class="fa fa-check"></i><b>C.1</b> R Packages</a></li>
+</ul></li>
+<li class="chapter" data-level="D" data-path="dataio.html"><a href="dataio.html"><i class="fa fa-check"></i><b>D</b> Loading and Saving Data in R</a><ul>
+<li class="chapter" data-level="D.1" data-path="dataio.html"><a href="dataio.html#data-sets-in-base-r"><i class="fa fa-check"></i><b>D.1</b> Data Sets in Base R</a></li>
+<li class="chapter" data-level="D.2" data-path="dataio.html"><a href="dataio.html#working-directory"><i class="fa fa-check"></i><b>D.2</b> Working Directory</a></li>
+<li class="chapter" data-level="D.3" data-path="dataio.html"><a href="dataio.html#plain-text-files"><i class="fa fa-check"></i><b>D.3</b> Plain-text Files</a><ul>
+<li class="chapter" data-level="D.3.1" data-path="dataio.html"><a href="dataio.html#read.table"><i class="fa fa-check"></i><b>D.3.1</b> read.table</a></li>
+<li class="chapter" data-level="D.3.2" data-path="dataio.html"><a href="dataio.html#the-read-family"><i class="fa fa-check"></i><b>D.3.2</b> The read Family</a></li>
+<li class="chapter" data-level="D.3.3" data-path="dataio.html"><a href="dataio.html#read.fwf"><i class="fa fa-check"></i><b>D.3.3</b> read.fwf</a></li>
+<li class="chapter" data-level="D.3.4" data-path="dataio.html"><a href="dataio.html#html-links"><i class="fa fa-check"></i><b>D.3.4</b> HTML Links</a></li>
+<li class="chapter" data-level="D.3.5" data-path="dataio.html"><a href="dataio.html#saving-plain-text-files"><i class="fa fa-check"></i><b>D.3.5</b> Saving Plain-Text Files</a></li>
+<li class="chapter" data-level="D.3.6" data-path="dataio.html"><a href="dataio.html#compressing-files"><i class="fa fa-check"></i><b>D.3.6</b> Compressing Files</a></li>
+</ul></li>
+<li class="chapter" data-level="D.4" data-path="dataio.html"><a href="dataio.html#r-files"><i class="fa fa-check"></i><b>D.4</b> R Files</a><ul>
+<li class="chapter" data-level="D.4.1" data-path="dataio.html"><a href="dataio.html#saving-r-files"><i class="fa fa-check"></i><b>D.4.1</b> Saving R Files</a></li>
+</ul></li>
+<li class="chapter" data-level="D.5" data-path="dataio.html"><a href="dataio.html#excel-spreadsheets"><i class="fa fa-check"></i><b>D.5</b> Excel Spreadsheets</a><ul>
+<li class="chapter" data-level="D.5.1" data-path="dataio.html"><a href="dataio.html#export-from-excel"><i class="fa fa-check"></i><b>D.5.1</b> Export from Excel</a></li>
+<li class="chapter" data-level="D.5.2" data-path="dataio.html"><a href="dataio.html#copy-and-paste"><i class="fa fa-check"></i><b>D.5.2</b> Copy and Paste</a></li>
+<li class="chapter" data-level="D.5.3" data-path="dataio.html"><a href="dataio.html#xlconnect"><i class="fa fa-check"></i><b>D.5.3</b> XLConnect</a></li>
+<li class="chapter" data-level="D.5.4" data-path="dataio.html"><a href="dataio.html#reading-spreadsheets"><i class="fa fa-check"></i><b>D.5.4</b> Reading Spreadsheets</a></li>
+<li class="chapter" data-level="D.5.5" data-path="dataio.html"><a href="dataio.html#writing-spreadsheets"><i class="fa fa-check"></i><b>D.5.5</b> Writing Spreadsheets</a></li>
+</ul></li>
+<li class="chapter" data-level="D.6" data-path="dataio.html"><a href="dataio.html#loading-files-from-other-programs"><i class="fa fa-check"></i><b>D.6</b> Loading Files from Other Programs</a><ul>
+<li class="chapter" data-level="D.6.1" data-path="dataio.html"><a href="dataio.html#connecting-to-databases"><i class="fa fa-check"></i><b>D.6.1</b> Connecting to Databases</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="E" data-path="debug.html"><a href="debug.html"><i class="fa fa-check"></i><b>E</b> Debugging R Code</a><ul>
+<li class="chapter" data-level="E.1" data-path="debug.html"><a href="debug.html#traceback"><i class="fa fa-check"></i><b>E.1</b> traceback</a></li>
+<li class="chapter" data-level="E.2" data-path="debug.html"><a href="debug.html#browser"><i class="fa fa-check"></i><b>E.2</b> browser</a></li>
+<li class="chapter" data-level="E.3" data-path="debug.html"><a href="debug.html#break-points"><i class="fa fa-check"></i><b>E.3</b> Break Points</a></li>
+<li class="chapter" data-level="E.4" data-path="debug.html"><a href="debug.html#debug-1"><i class="fa fa-check"></i><b>E.4</b> debug</a></li>
+<li class="chapter" data-level="E.5" data-path="debug.html"><a href="debug.html#trace"><i class="fa fa-check"></i><b>E.5</b> trace</a></li>
+<li class="chapter" data-level="E.6" data-path="debug.html"><a href="debug.html#recover"><i class="fa fa-check"></i><b>E.6</b> recover</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Hands-On Programming with R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="speed" class="section level1">
+<h1><span class="header-section-number">10</span> Speed</h1>
+<p>As a data scientist, you need speed. You can work with bigger data and do more ambitious tasks when your code runs fast. This chapter will show you a specific way to write fast code in R. You will then use the method to simulate 10 million plays of your slot machine.</p>
+<div id="vectorized-code" class="section level2">
+<h2><span class="header-section-number">10.1</span> Vectorized Code</h2>
+<p>You can write a piece of code in many different ways, but the fastest R code will usually take advantage of three things: logical tests, subsetting, and element-wise execution. These are the things that R does best. Code that uses these things usually has a certain quality: it is <em>vectorized</em>; the code can take a vector of values as input and manipulate each value in the vector at the same time.</p>
+<p>To see what vectorized code looks like, compare these two examples of an absolute value function. Each takes a vector of numbers and transforms it into a vector of absolute values (e.g., positive numbers). The first example is not vectorized; <code>abs_loop</code> uses a <code>for</code> loop to manipulate each element of the vector one at a time:</p>
+<div class="sourceCode" id="cb380"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb380-1" data-line-number="1">abs_loop &lt;-<span class="st"> </span><span class="cf">function</span>(vec){</a>
+<a class="sourceLine" id="cb380-2" data-line-number="2">  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(vec)) {</a>
+<a class="sourceLine" id="cb380-3" data-line-number="3">    <span class="cf">if</span> (vec[i] <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>) {</a>
+<a class="sourceLine" id="cb380-4" data-line-number="4">      vec[i] &lt;-<span class="st"> </span><span class="op">-</span>vec[i]</a>
+<a class="sourceLine" id="cb380-5" data-line-number="5">    }</a>
+<a class="sourceLine" id="cb380-6" data-line-number="6">  }</a>
+<a class="sourceLine" id="cb380-7" data-line-number="7">  vec</a>
+<a class="sourceLine" id="cb380-8" data-line-number="8">}</a></code></pre></div>
+<p>The second example, <code>abs_set</code>, is a vectorized version of <code>abs_loop</code>. It uses logical subsetting to manipulate every negative number in the vector at the same time:</p>
+<div class="sourceCode" id="cb381"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb381-1" data-line-number="1">abs_sets &lt;-<span class="st"> </span><span class="cf">function</span>(vec){</a>
+<a class="sourceLine" id="cb381-2" data-line-number="2">  negs &lt;-<span class="st"> </span>vec <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span></a>
+<a class="sourceLine" id="cb381-3" data-line-number="3">  vec[negs] &lt;-<span class="st"> </span>vec[negs] <span class="op">*</span><span class="st"> </span><span class="dv">-1</span></a>
+<a class="sourceLine" id="cb381-4" data-line-number="4">  vec</a>
+<a class="sourceLine" id="cb381-5" data-line-number="5">}</a></code></pre></div>
+<p><code>abs_set</code> is much faster than <code>abs_loop</code> because it relies on operations that R does quickly: logical tests, subsetting, and element-wise execution.</p>
+<p>You can use the <code>system.time</code> function to see just how fast <code>abs_set</code> is. <code>system.time</code> takes an R expression, runs it, and then displays how much time elapsed while the expression ran.</p>
+<p>To compare <code>abs_loop</code> and <code>abs_set</code>, first make a long vector of positive and negative numbers. <code>long</code> will contain 10 million values:</p>
+<div class="sourceCode" id="cb382"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb382-1" data-line-number="1">long &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>), <span class="dv">5000000</span>)</a></code></pre></div>
+
+<div class="rmdnote">
+<code>rep</code> repeats a value, or vector of values, many times. To use <code>rep</code>, give it a vector of values and then the number of times to repeat the vector. R will return the results as a new, longer vector.
+</div>
+
+<p>You can then use <code>system.time</code> to measure how much time it takes each function to evaluate <code>long</code>:</p>
+<div class="sourceCode" id="cb383"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb383-1" data-line-number="1"><span class="kw">system.time</span>(<span class="kw">abs_loop</span>(long))</a>
+<a class="sourceLine" id="cb383-2" data-line-number="2">##    user  system elapsed </a>
+<a class="sourceLine" id="cb383-3" data-line-number="3">##  15.982   0.032  16.018</a>
+<a class="sourceLine" id="cb383-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb383-5" data-line-number="5"><span class="kw">system.time</span>(<span class="kw">abs_sets</span>(long))</a>
+<a class="sourceLine" id="cb383-6" data-line-number="6">##    user  system elapsed </a>
+<a class="sourceLine" id="cb383-7" data-line-number="7">##   0.529   0.063   0.592</a></code></pre></div>
+
+<div class="rmdimportant">
+Don’t confuse <code>system.time</code> with <code>Sys.time</code>, which returns the current time.
+</div>
+
+<p>The first two columns of the output of <code>system.time</code> report how many seconds your computer spent executing the call on the user side and system sides of your process, a dichotomy that will vary from OS to OS.</p>
+<p>The last column displays how many seconds elapsed while R ran the expression. The results show that <code>abs_set</code> calculated the absolute value 30 times faster than <code>abs_loop</code> when applied to a vector of 10 million numbers. You can expect similar speed-ups whenever you write vectorized code.</p>
+
+<div class="exercise">
+<span id="exr:unnamed-chunk-91" class="exercise"><strong>Exercise 10.1  (How fast is abs?)  </strong></span>Many preexisting R functions are already vectorized and have been optimized to perform quickly. You can make your code faster by relying on these functions whenever possible. For example, R comes with a built-in absolute value function, <code>abs</code>.
+</div>
+
+<p>Check to see how much faster <code>abs</code> computes the absolute value of <code>long</code> than <code>abs_loop</code> and <code>abs_set</code> do.</p>
+
+<div class="solution">
+ <span class="solution"><em>Solution. </em></span> You can measure the speed of <code>abs</code> with <code>system.time</code>. It takes <code>abs</code> a lightning-fast 0.05 seconds to calculate the absolute value of 10 million numbers. This is 0.592 / 0.054 = 10.96 times faster than <code>abs_set</code> and nearly 300 times faster than <code>abs_loop</code>:
+</div>
+
+<div class="sourceCode" id="cb384"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb384-1" data-line-number="1"><span class="kw">system.time</span>(<span class="kw">abs</span>(long))</a>
+<a class="sourceLine" id="cb384-2" data-line-number="2">##   user  system elapsed </a>
+<a class="sourceLine" id="cb384-3" data-line-number="3">##  0.037   0.018   0.054</a></code></pre></div>
+</div>
+<div id="how-to-write-vectorized-code" class="section level2">
+<h2><span class="header-section-number">10.2</span> How to Write Vectorized Code</h2>
+<p>Vectorized code is easy to write in R because most R functions are already vectorized. Code based on these functions can easily be made vectorized and therefore fast. To create vectorized code:</p>
+<ol style="list-style-type: decimal">
+<li>Use vectorized functions to complete the sequential steps in your program.</li>
+<li>Use logical subsetting to handle parallel cases. Try to manipulate every element in a case at once.</li>
+</ol>
+<p><code>abs_loop</code> and <code>abs_set</code> illustrate these rules. The functions both handle two cases and perform one sequential step, <a href="speed.html#fig:abs">10.1</a>. If a number is positive, the functions leave it alone. If a number is negative, the functions multiply it by negative one.</p>
+<div class="figure"><span id="fig:abs"></span>
+<img src="images/hopr_1001.png" alt="abs_loop uses a for loop to sift data into one of two cases: negative numbers and nonnegative numbers."  />
+<p class="caption">
+Figure 10.1: abs_loop uses a for loop to sift data into one of two cases: negative numbers and nonnegative numbers.
+</p>
+</div>
+<p>You can identify all of the elements of a vector that fall into a case with a logical test. R will execute the test in element-wise fashion and return a <code>TRUE</code> for every element that belongs in the case. For example, <code>vec &lt; 0</code> identifies every value of <code>vec</code> that belongs to the negative case. You can use the same logical test to extract the set of negative values with logical subsetting:</p>
+<div class="sourceCode" id="cb385"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb385-1" data-line-number="1">vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">-2</span>, <span class="dv">3</span>, <span class="dv">-4</span>, <span class="dv">5</span>, <span class="dv">-6</span>, <span class="dv">7</span>, <span class="dv">-8</span>, <span class="dv">9</span>, <span class="dv">-10</span>)</a>
+<a class="sourceLine" id="cb385-2" data-line-number="2">vec <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span></a>
+<a class="sourceLine" id="cb385-3" data-line-number="3">## FALSE TRUE FALSE TRUE FALSE TRUE FALSE TRUE FALSE TRUE</a>
+<a class="sourceLine" id="cb385-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb385-5" data-line-number="5">vec[vec <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>]</a>
+<a class="sourceLine" id="cb385-6" data-line-number="6">## -2  -4  -6  -8 -10</a></code></pre></div>
+<p>The plan in <a href="speed.html#fig:abs">10.1</a> now requires a sequential step: you must multiply each of the negative values by negative one. All of R’s arithmetic operators are vectorized, so you can use <code>*</code> to complete this step in vectorized fashion. <code>*</code> will multiply each number in <code>vec[vec &lt; 0]</code> by negative one at the same time:</p>
+<div class="sourceCode" id="cb386"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb386-1" data-line-number="1">vec[vec <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>] <span class="op">*</span><span class="st"> </span><span class="dv">-1</span></a>
+<a class="sourceLine" id="cb386-2" data-line-number="2">## 2  4  6  8 10</a></code></pre></div>
+<p>Finally, you can use R’s assignment operator, which is also vectorized, to save the new set over the old set in the original <code>vec</code> object. Since <code>&lt;-</code> is vectorized, the elements of the new set will be paired up to the elements of the old set, in order, and then element-wise assignment will occur. As a result, each negative value will be replaced by its positive partner, as in <a href="speed.html#fig:assignment">10.2</a>.</p>
+<div class="figure"><span id="fig:assignment"></span>
+<img src="images/hopr_1002.png" alt="Use logical subsetting to modify groups of values in place. R's arithmetic and assignment operators are vectorized, which lets you manipulate and update multiple values at once."  />
+<p class="caption">
+Figure 10.2: Use logical subsetting to modify groups of values in place. R’s arithmetic and assignment operators are vectorized, which lets you manipulate and update multiple values at once.
+</p>
+</div>
+
+<div class="exercise">
+<span id="exr:unnamed-chunk-93" class="exercise"><strong>Exercise 10.2  (Vectorize a Function)  </strong></span>The following function converts a vector of slot symbols to a vector of new slot symbols. Can you vectorize it? How much faster does the vectorized version work?
+</div>
+
+<div class="sourceCode" id="cb387"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb387-1" data-line-number="1">change_symbols &lt;-<span class="st"> </span><span class="cf">function</span>(vec){</a>
+<a class="sourceLine" id="cb387-2" data-line-number="2">  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(vec)){</a>
+<a class="sourceLine" id="cb387-3" data-line-number="3">    <span class="cf">if</span> (vec[i] <span class="op">==</span><span class="st"> &quot;DD&quot;</span>) {</a>
+<a class="sourceLine" id="cb387-4" data-line-number="4">      vec[i] &lt;-<span class="st"> &quot;joker&quot;</span></a>
+<a class="sourceLine" id="cb387-5" data-line-number="5">    } <span class="cf">else</span> <span class="cf">if</span> (vec[i] <span class="op">==</span><span class="st"> &quot;C&quot;</span>) {</a>
+<a class="sourceLine" id="cb387-6" data-line-number="6">      vec[i] &lt;-<span class="st"> &quot;ace&quot;</span></a>
+<a class="sourceLine" id="cb387-7" data-line-number="7">    } <span class="cf">else</span> <span class="cf">if</span> (vec[i] <span class="op">==</span><span class="st"> &quot;7&quot;</span>) {</a>
+<a class="sourceLine" id="cb387-8" data-line-number="8">      vec[i] &lt;-<span class="st"> &quot;king&quot;</span></a>
+<a class="sourceLine" id="cb387-9" data-line-number="9">    }<span class="cf">else</span> <span class="cf">if</span> (vec[i] <span class="op">==</span><span class="st"> &quot;B&quot;</span>) {</a>
+<a class="sourceLine" id="cb387-10" data-line-number="10">      vec[i] &lt;-<span class="st"> &quot;queen&quot;</span></a>
+<a class="sourceLine" id="cb387-11" data-line-number="11">    } <span class="cf">else</span> <span class="cf">if</span> (vec[i] <span class="op">==</span><span class="st"> &quot;BB&quot;</span>) {</a>
+<a class="sourceLine" id="cb387-12" data-line-number="12">      vec[i] &lt;-<span class="st"> &quot;jack&quot;</span></a>
+<a class="sourceLine" id="cb387-13" data-line-number="13">    } <span class="cf">else</span> <span class="cf">if</span> (vec[i] <span class="op">==</span><span class="st"> &quot;BBB&quot;</span>) {</a>
+<a class="sourceLine" id="cb387-14" data-line-number="14">      vec[i] &lt;-<span class="st"> &quot;ten&quot;</span></a>
+<a class="sourceLine" id="cb387-15" data-line-number="15">    } <span class="cf">else</span> {</a>
+<a class="sourceLine" id="cb387-16" data-line-number="16">      vec[i] &lt;-<span class="st"> &quot;nine&quot;</span></a>
+<a class="sourceLine" id="cb387-17" data-line-number="17">    } </a>
+<a class="sourceLine" id="cb387-18" data-line-number="18">  }</a>
+<a class="sourceLine" id="cb387-19" data-line-number="19">  vec</a>
+<a class="sourceLine" id="cb387-20" data-line-number="20">}</a>
+<a class="sourceLine" id="cb387-21" data-line-number="21"></a>
+<a class="sourceLine" id="cb387-22" data-line-number="22">vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;DD&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;7&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;BB&quot;</span>, <span class="st">&quot;BBB&quot;</span>, <span class="st">&quot;0&quot;</span>)</a>
+<a class="sourceLine" id="cb387-23" data-line-number="23"></a>
+<a class="sourceLine" id="cb387-24" data-line-number="24"><span class="kw">change_symbols</span>(vec)</a>
+<a class="sourceLine" id="cb387-25" data-line-number="25">##  &quot;joker&quot; &quot;ace&quot;   &quot;king&quot;  &quot;queen&quot; &quot;jack&quot;  &quot;ten&quot;   &quot;nine&quot;</a>
+<a class="sourceLine" id="cb387-26" data-line-number="26"></a>
+<a class="sourceLine" id="cb387-27" data-line-number="27">many &lt;-<span class="st"> </span><span class="kw">rep</span>(vec, <span class="dv">1000000</span>)</a>
+<a class="sourceLine" id="cb387-28" data-line-number="28"></a>
+<a class="sourceLine" id="cb387-29" data-line-number="29"><span class="kw">system.time</span>(<span class="kw">change_symbols</span>(many))</a>
+<a class="sourceLine" id="cb387-30" data-line-number="30">##    user  system elapsed </a>
+<a class="sourceLine" id="cb387-31" data-line-number="31">##  30.057   0.031  30.079</a></code></pre></div>
+
+<div class="solution">
+ <span class="solution"><em>Solution. </em></span> <code>change_symbols</code> uses a <code>for</code> loop to sort values into seven different cases, as demonstrated in <a href="speed.html#fig:change">10.3</a>.
+</div>
+
+<p>To vectorize <code>change_symbols</code>, create a logical test that can identify each case:</p>
+<div class="sourceCode" id="cb388"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb388-1" data-line-number="1">vec[vec <span class="op">==</span><span class="st"> &quot;DD&quot;</span>]</a>
+<a class="sourceLine" id="cb388-2" data-line-number="2">## &quot;DD&quot;</a>
+<a class="sourceLine" id="cb388-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb388-4" data-line-number="4">vec[vec <span class="op">==</span><span class="st"> &quot;C&quot;</span>]</a>
+<a class="sourceLine" id="cb388-5" data-line-number="5">## &quot;C&quot;</a>
+<a class="sourceLine" id="cb388-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb388-7" data-line-number="7">vec[vec <span class="op">==</span><span class="st"> &quot;7&quot;</span>]</a>
+<a class="sourceLine" id="cb388-8" data-line-number="8">## &quot;7&quot;</a>
+<a class="sourceLine" id="cb388-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb388-10" data-line-number="10">vec[vec <span class="op">==</span><span class="st"> &quot;B&quot;</span>]</a>
+<a class="sourceLine" id="cb388-11" data-line-number="11">## &quot;B&quot;</a>
+<a class="sourceLine" id="cb388-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb388-13" data-line-number="13">vec[vec <span class="op">==</span><span class="st"> &quot;BB&quot;</span>]</a>
+<a class="sourceLine" id="cb388-14" data-line-number="14">## &quot;BB&quot;</a>
+<a class="sourceLine" id="cb388-15" data-line-number="15"></a>
+<a class="sourceLine" id="cb388-16" data-line-number="16">vec[vec <span class="op">==</span><span class="st"> &quot;BBB&quot;</span>]</a>
+<a class="sourceLine" id="cb388-17" data-line-number="17">## &quot;BBB&quot;</a>
+<a class="sourceLine" id="cb388-18" data-line-number="18"></a>
+<a class="sourceLine" id="cb388-19" data-line-number="19">vec[vec <span class="op">==</span><span class="st"> &quot;0&quot;</span>]</a>
+<a class="sourceLine" id="cb388-20" data-line-number="20">## &quot;0&quot;</a></code></pre></div>
+<div class="figure"><span id="fig:change"></span>
+<img src="images/hopr_1003.png" alt="change_many does something different for each of seven cases."  />
+<p class="caption">
+Figure 10.3: change_many does something different for each of seven cases.
+</p>
+</div>
+<p>Then write code that can change the symbols for each case:</p>
+<div class="sourceCode" id="cb389"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb389-1" data-line-number="1">vec[vec <span class="op">==</span><span class="st"> &quot;DD&quot;</span>] &lt;-<span class="st"> &quot;joker&quot;</span></a>
+<a class="sourceLine" id="cb389-2" data-line-number="2">vec[vec <span class="op">==</span><span class="st"> &quot;C&quot;</span>] &lt;-<span class="st"> &quot;ace&quot;</span></a>
+<a class="sourceLine" id="cb389-3" data-line-number="3">vec[vec <span class="op">==</span><span class="st"> &quot;7&quot;</span>] &lt;-<span class="st"> &quot;king&quot;</span></a>
+<a class="sourceLine" id="cb389-4" data-line-number="4">vec[vec <span class="op">==</span><span class="st"> &quot;B&quot;</span>] &lt;-<span class="st"> &quot;queen&quot;</span></a>
+<a class="sourceLine" id="cb389-5" data-line-number="5">vec[vec <span class="op">==</span><span class="st"> &quot;BB&quot;</span>] &lt;-<span class="st"> &quot;jack&quot;</span></a>
+<a class="sourceLine" id="cb389-6" data-line-number="6">vec[vec <span class="op">==</span><span class="st"> &quot;BBB&quot;</span>] &lt;-<span class="st"> &quot;ten&quot;</span></a>
+<a class="sourceLine" id="cb389-7" data-line-number="7">vec[vec <span class="op">==</span><span class="st"> &quot;0&quot;</span>] &lt;-<span class="st"> &quot;nine&quot;</span></a></code></pre></div>
+<p>When you combine this into a function, you have a vectorized version of <code>change_symbols</code> that runs about 14 times faster:</p>
+<div class="sourceCode" id="cb390"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb390-1" data-line-number="1">change_vec &lt;-<span class="st"> </span><span class="cf">function</span> (vec) {</a>
+<a class="sourceLine" id="cb390-2" data-line-number="2">  vec[vec <span class="op">==</span><span class="st"> &quot;DD&quot;</span>] &lt;-<span class="st"> &quot;joker&quot;</span></a>
+<a class="sourceLine" id="cb390-3" data-line-number="3">  vec[vec <span class="op">==</span><span class="st"> &quot;C&quot;</span>] &lt;-<span class="st"> &quot;ace&quot;</span></a>
+<a class="sourceLine" id="cb390-4" data-line-number="4">  vec[vec <span class="op">==</span><span class="st"> &quot;7&quot;</span>] &lt;-<span class="st"> &quot;king&quot;</span></a>
+<a class="sourceLine" id="cb390-5" data-line-number="5">  vec[vec <span class="op">==</span><span class="st"> &quot;B&quot;</span>] &lt;-<span class="st"> &quot;queen&quot;</span></a>
+<a class="sourceLine" id="cb390-6" data-line-number="6">  vec[vec <span class="op">==</span><span class="st"> &quot;BB&quot;</span>] &lt;-<span class="st"> &quot;jack&quot;</span></a>
+<a class="sourceLine" id="cb390-7" data-line-number="7">  vec[vec <span class="op">==</span><span class="st"> &quot;BBB&quot;</span>] &lt;-<span class="st"> &quot;ten&quot;</span></a>
+<a class="sourceLine" id="cb390-8" data-line-number="8">  vec[vec <span class="op">==</span><span class="st"> &quot;0&quot;</span>] &lt;-<span class="st"> &quot;nine&quot;</span></a>
+<a class="sourceLine" id="cb390-9" data-line-number="9">  </a>
+<a class="sourceLine" id="cb390-10" data-line-number="10">  vec</a>
+<a class="sourceLine" id="cb390-11" data-line-number="11">}</a>
+<a class="sourceLine" id="cb390-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb390-13" data-line-number="13"><span class="kw">system.time</span>(<span class="kw">change_vec</span>(many))</a>
+<a class="sourceLine" id="cb390-14" data-line-number="14">##   user  system elapsed </a>
+<a class="sourceLine" id="cb390-15" data-line-number="15">##  1.994   0.059   2.051 </a></code></pre></div>
+<p>Or, even better, use a lookup table. Lookup tables are a vectorized method because they rely on R’s vectorized selection operations:</p>
+<div class="sourceCode" id="cb391"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb391-1" data-line-number="1">change_vec2 &lt;-<span class="st"> </span><span class="cf">function</span>(vec){</a>
+<a class="sourceLine" id="cb391-2" data-line-number="2">  tb &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;DD&quot;</span> =<span class="st"> &quot;joker&quot;</span>, <span class="st">&quot;C&quot;</span> =<span class="st"> &quot;ace&quot;</span>, <span class="st">&quot;7&quot;</span> =<span class="st"> &quot;king&quot;</span>, <span class="st">&quot;B&quot;</span> =<span class="st"> &quot;queen&quot;</span>, </a>
+<a class="sourceLine" id="cb391-3" data-line-number="3">    <span class="st">&quot;BB&quot;</span> =<span class="st"> &quot;jack&quot;</span>, <span class="st">&quot;BBB&quot;</span> =<span class="st"> &quot;ten&quot;</span>, <span class="st">&quot;0&quot;</span> =<span class="st"> &quot;nine&quot;</span>)</a>
+<a class="sourceLine" id="cb391-4" data-line-number="4">  <span class="kw">unname</span>(tb[vec])</a>
+<a class="sourceLine" id="cb391-5" data-line-number="5">}</a>
+<a class="sourceLine" id="cb391-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb391-7" data-line-number="7"><span class="kw">system.time</span>(<span class="kw">change_vec</span>(many))</a>
+<a class="sourceLine" id="cb391-8" data-line-number="8">##   user  system elapsed </a>
+<a class="sourceLine" id="cb391-9" data-line-number="9">##  0.687   0.059   0.746 </a></code></pre></div>
+<p>Here, a lookup table is 40 times faster than the original function.</p>
+<p><code>abs_loop</code> and <code>change_many</code> illustrate a characteristic of vectorized code: programmers often write slower, nonvectorized code by relying on unnecessary <code>for</code> loops, like the one in <code>change_many</code>. I think this is the result of a general misunderstanding about R. <code>for</code> loops do not behave the same way in R as they do in other languages, which means you should write code differently in R than you would in other languages.</p>
+<p>When you write in languages like C and Fortran, you must compile your code before your computer can run it. This compilation step optimizes how the <code>for</code> loops in the code use your computer’s memory, which makes the <code>for</code> loops very fast. As a result, many programmers use <code>for</code> loops frequently when they write in C and Fortran.</p>
+<p>When you write in R, however, you do not compile your code. You skip this step, which makes programming in R a more user-friendly experience. Unfortunately, this also means you do not give your loops the speed boost they would receive in C or Fortran. As a result, your loops will run slower than the other operations we have studied: logical tests, subsetting, and element-wise execution. If you can write your code with the faster operations instead of a <code>for</code> loop, you should do so. No matter which language you write in, you should try to use the features of the language that run the fastest.</p>
+
+<div class="rmdtip">
+<p><strong>if and for</strong></p>
+A good way to spot <code>for</code> loops that could be vectorized is to look for combinations of <code>if</code> and <code>for</code>. <code>if</code> can only be applied to one value at a time, which means it is often used in conjunction with a <code>for</code> loop. The <code>for</code> loop helps apply <code>if</code> to an entire vector of values. This combination can usually be replaced with logical subsetting, which will do the same thing but run much faster.
+</div>
+
+<p>This doesn’t mean that you should never use <code>for</code> loops in R. There are still many places in R where <code>for</code> loops make sense. <code>for</code> loops perform a basic task that you cannot always recreate with vectorized code. <code>for</code> loops are also easy to understand and run reasonably fast in R, so long as you take a few precautions.</p>
+</div>
+<div id="how-to-write-fast-for-loops-in-r" class="section level2">
+<h2><span class="header-section-number">10.3</span> How to Write Fast for Loops in R</h2>
+<p>You can dramatically increase the speed of your <code>for</code> loops by doing two things to optimize each loop. First, do as much as you can outside of the <code>for</code> loop. Every line of code that you place inside of the <code>for</code> loop will be run many, many times. If a line of code only needs to be run once, place it outside of the loop to avoid repetition.</p>
+<p>Second, make sure that any storage objects that you use with the loop are large enough to contain <em>all</em> of the results of the loop. For example, both loops below will need to store one million values. The first loop stores its values in an object named <code>output</code> that begins with a length of <em>one million</em>:</p>
+<div class="sourceCode" id="cb392"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb392-1" data-line-number="1"><span class="kw">system.time</span>(</a>
+<a class="sourceLine" id="cb392-2" data-line-number="2">  output &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="ot">NA</span>, <span class="dv">1000000</span>) </a>
+<a class="sourceLine" id="cb392-3" data-line-number="3">  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">1000000</span>) {</a>
+<a class="sourceLine" id="cb392-4" data-line-number="4">    output[i] &lt;-<span class="st"> </span>i <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb392-5" data-line-number="5">  }</a>
+<a class="sourceLine" id="cb392-6" data-line-number="6">)</a>
+<a class="sourceLine" id="cb392-7" data-line-number="7">##   user  system elapsed </a>
+<a class="sourceLine" id="cb392-8" data-line-number="8">##  1.709   0.015   1.724 </a></code></pre></div>
+<p>The second loop stores its values in an object named <code>output</code> that begins with a length of <em>one</em>. R will expand the object to a length of one million as it runs the loop. The code in this loop is very similar to the code in the first loop, but the loop takes <em>37 minutes</em> longer to run than the first loop:</p>
+<div class="sourceCode" id="cb393"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb393-1" data-line-number="1"><span class="kw">system.time</span>(</a>
+<a class="sourceLine" id="cb393-2" data-line-number="2">  output &lt;-<span class="st"> </span><span class="ot">NA</span> </a>
+<a class="sourceLine" id="cb393-3" data-line-number="3">  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">1000000</span>) {</a>
+<a class="sourceLine" id="cb393-4" data-line-number="4">    output[i] &lt;-<span class="st"> </span>i <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb393-5" data-line-number="5">  }</a>
+<a class="sourceLine" id="cb393-6" data-line-number="6">)</a>
+<a class="sourceLine" id="cb393-7" data-line-number="7">##     user   system  elapsed </a>
+<a class="sourceLine" id="cb393-8" data-line-number="8">## 1689.537  560.951 2249.927</a></code></pre></div>
+<p>The two loops do the same thing, so what accounts for the difference? In the second loop, R has to increase the length of <code>output</code> by one for each run of the loop. To do this, R needs to find a new place in your computer’s memory that can contain the larger object. R must then copy the <code>output</code> vector over and erase the old version of <code>output</code> before moving on to the next run of the loop. By the end of the loop, R has rewritten <code>output</code> in your computer’s memory one million times.</p>
+<p>In the first case, the size of <code>output</code> never changes; R can define one <code>output</code> object in memory and use it for each run of the <code>for</code> loop.</p>
+
+<div class="rmdtip">
+<p>The authors of R use low-level languages like C and Fortran to write basic R functions, many of which use <code>for</code> loops. These functions are compiled and optimized before they become a part of R, which makes them quite fast.</p>
+Whenever you see <code>.Primitive</code>, <code>.Internal</code>, or <code>.Call</code> written in a function’s definition, you can be confident the function is calling code from another language. You’ll get all of the speed advantages of that language by using the function.
+</div>
+
+</div>
+<div id="vectorized-code-in-practice" class="section level2">
+<h2><span class="header-section-number">10.4</span> Vectorized Code in Practice</h2>
+<p>To see how vectorized code can help you as a data scientist, consider our slot machine project. In <a href="loops.html#loops">Loops</a>, you calculated the exact payout rate for your slot machine, but you could have estimated this payout rate with a simulation. If you played the slot machine many, many times, the average prize over all of the plays would be a good estimate of the true payout rate.</p>
+<p>This method of estimation is based on the law of large numbers and is similar to many statistical simulations. To run this simulation, you could use a <code>for</code> loop:</p>
+<div class="sourceCode" id="cb394"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb394-1" data-line-number="1">winnings &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="dt">length =</span> <span class="dv">1000000</span>)</a>
+<a class="sourceLine" id="cb394-2" data-line-number="2"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">1000000</span>) {</a>
+<a class="sourceLine" id="cb394-3" data-line-number="3">  winnings[i] &lt;-<span class="st"> </span><span class="kw">play</span>()</a>
+<a class="sourceLine" id="cb394-4" data-line-number="4">}</a>
+<a class="sourceLine" id="cb394-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb394-6" data-line-number="6"><span class="kw">mean</span>(winnings)</a>
+<a class="sourceLine" id="cb394-7" data-line-number="7">## 0.9366984</a></code></pre></div>
+<p>The estimated payout rate after 10 million runs is 0.937, which is very close to the true payout rate of 0.934. Note that I’m using the modified <code>score</code> function that treats diamonds as wilds.</p>
+<p>If you run this simulation, you will notice that it takes a while to run. In fact, the simulation takes 342,308 seconds to run, which is about 5.7 minutes. This is not particularly impressive, and you can do better by using vectorized code:</p>
+<div class="sourceCode" id="cb395"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb395-1" data-line-number="1"><span class="kw">system.time</span>(<span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">1000000</span>) {</a>
+<a class="sourceLine" id="cb395-2" data-line-number="2">  winnings[i] &lt;-<span class="st"> </span><span class="kw">play</span>()</a>
+<a class="sourceLine" id="cb395-3" data-line-number="3">})</a>
+<a class="sourceLine" id="cb395-4" data-line-number="4">##    user  system elapsed </a>
+<a class="sourceLine" id="cb395-5" data-line-number="5">## 342.041   0.355 342.308 </a></code></pre></div>
+<p>The current <code>score</code> function is not vectorized. It takes a single slot combination and uses an <code>if</code> tree to assign a prize to it. This combination of an <code>if</code> tree with a <code>for</code> loop suggests that you could write a piece of vectorized code that takes <em>many</em> slot combinations and then uses logical subsetting to operate on them all at once.</p>
+<p>For example, you could rewrite <code>get_symbols</code> to generate <em>n</em> slot combinations and return them as an <em>n</em> x 3 matrix, like the one that follows. Each row of the matrix will contain one slot combination to be scored:</p>
+<div class="sourceCode" id="cb396"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb396-1" data-line-number="1">get_many_symbols &lt;-<span class="st"> </span><span class="cf">function</span>(n) {</a>
+<a class="sourceLine" id="cb396-2" data-line-number="2">  wheel &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;DD&quot;</span>, <span class="st">&quot;7&quot;</span>, <span class="st">&quot;BBB&quot;</span>, <span class="st">&quot;BB&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;0&quot;</span>)</a>
+<a class="sourceLine" id="cb396-3" data-line-number="3">  vec &lt;-<span class="st"> </span><span class="kw">sample</span>(wheel, <span class="dt">size =</span> <span class="dv">3</span> <span class="op">*</span><span class="st"> </span>n, <span class="dt">replace =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb396-4" data-line-number="4">    <span class="dt">prob =</span> <span class="kw">c</span>(<span class="fl">0.03</span>, <span class="fl">0.03</span>, <span class="fl">0.06</span>, <span class="fl">0.1</span>, <span class="fl">0.25</span>, <span class="fl">0.01</span>, <span class="fl">0.52</span>))</a>
+<a class="sourceLine" id="cb396-5" data-line-number="5">  <span class="kw">matrix</span>(vec, <span class="dt">ncol =</span> <span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb396-6" data-line-number="6">}</a>
+<a class="sourceLine" id="cb396-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb396-8" data-line-number="8"><span class="kw">get_many_symbols</span>(<span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb396-9" data-line-number="9">##      [,1]  [,2] [,3] </a>
+<a class="sourceLine" id="cb396-10" data-line-number="10">## [1,] &quot;B&quot;   &quot;0&quot;  &quot;B&quot;  </a>
+<a class="sourceLine" id="cb396-11" data-line-number="11">## [2,] &quot;0&quot;   &quot;BB&quot; &quot;7&quot;  </a>
+<a class="sourceLine" id="cb396-12" data-line-number="12">## [3,] &quot;0&quot;   &quot;0&quot;  &quot;BBB&quot;</a>
+<a class="sourceLine" id="cb396-13" data-line-number="13">## [4,] &quot;0&quot;   &quot;0&quot;  &quot;B&quot;  </a>
+<a class="sourceLine" id="cb396-14" data-line-number="14">## [5,] &quot;BBB&quot; &quot;0&quot;  &quot;0&quot; </a></code></pre></div>
+<p>You could also rewrite <code>play</code> to take a parameter, <code>n</code>, and return <code>n</code> prizes, in a data frame:</p>
+<div class="sourceCode" id="cb397"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb397-1" data-line-number="1">play_many &lt;-<span class="st"> </span><span class="cf">function</span>(n) {</a>
+<a class="sourceLine" id="cb397-2" data-line-number="2">  symb_mat &lt;-<span class="st"> </span><span class="kw">get_many_symbols</span>(<span class="dt">n =</span> n)</a>
+<a class="sourceLine" id="cb397-3" data-line-number="3">  <span class="kw">data.frame</span>(<span class="dt">w1 =</span> symb_mat[,<span class="dv">1</span>], <span class="dt">w2 =</span> symb_mat[,<span class="dv">2</span>],</a>
+<a class="sourceLine" id="cb397-4" data-line-number="4">             <span class="dt">w3 =</span> symb_mat[,<span class="dv">3</span>], <span class="dt">prize =</span> <span class="kw">score_many</span>(symb_mat))</a>
+<a class="sourceLine" id="cb397-5" data-line-number="5">}</a></code></pre></div>
+<p>This new function would make it easy to simulate a million, or even 10 million plays of the slot machine, which will be our goal. When we’re finished, you will be able to estimate the payout rate with:</p>
+<div class="sourceCode" id="cb398"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb398-1" data-line-number="1"><span class="co"># plays &lt;- play_many(10000000))</span></a>
+<a class="sourceLine" id="cb398-2" data-line-number="2"><span class="co"># mean(plays$prize)</span></a></code></pre></div>
+<p>Now you just need to write <code>score_many</code>, a vectorized (matix-ized?) version of <code>score</code> that takes an <em>n</em> x 3 matrix and returns <em>n</em> prizes. It will be difficult to write this function because <code>score</code> is already quite complicated. I would not expect you to feel confident doing this on your own until you have more practice and experience than we’ve been able to develop here.</p>
+<p>Should you like to test your skills and write a version of <code>score_many</code>, I recommend that you use the function <code>rowSums</code> within your code. It calculates the sum of each row of numbers (or logicals) in a matrix.</p>
+<p>If you would like to test yourself in a more modest way, I recommend that you study the following model <code>score_many</code> function until you understand how each part works and how the parts work together to create a vectorized function. To do this, it will be helpful to create a concrete example, like this:</p>
+<div class="sourceCode" id="cb399"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb399-1" data-line-number="1">symbols &lt;-<span class="st"> </span><span class="kw">matrix</span>(</a>
+<a class="sourceLine" id="cb399-2" data-line-number="2">  <span class="kw">c</span>(<span class="st">&quot;DD&quot;</span>, <span class="st">&quot;DD&quot;</span>, <span class="st">&quot;DD&quot;</span>, </a>
+<a class="sourceLine" id="cb399-3" data-line-number="3">    <span class="st">&quot;C&quot;</span>, <span class="st">&quot;DD&quot;</span>, <span class="st">&quot;0&quot;</span>, </a>
+<a class="sourceLine" id="cb399-4" data-line-number="4">    <span class="st">&quot;B&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;B&quot;</span>, </a>
+<a class="sourceLine" id="cb399-5" data-line-number="5">    <span class="st">&quot;B&quot;</span>, <span class="st">&quot;BB&quot;</span>, <span class="st">&quot;BBB&quot;</span>, </a>
+<a class="sourceLine" id="cb399-6" data-line-number="6">    <span class="st">&quot;C&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;0&quot;</span>, </a>
+<a class="sourceLine" id="cb399-7" data-line-number="7">    <span class="st">&quot;7&quot;</span>, <span class="st">&quot;DD&quot;</span>, <span class="st">&quot;DD&quot;</span>), <span class="dt">nrow =</span> <span class="dv">6</span>, <span class="dt">byrow =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb399-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb399-9" data-line-number="9">symbols</a>
+<a class="sourceLine" id="cb399-10" data-line-number="10">##      [,1] [,2] [,3] </a>
+<a class="sourceLine" id="cb399-11" data-line-number="11">## [1,] &quot;DD&quot; &quot;DD&quot; &quot;DD&quot; </a>
+<a class="sourceLine" id="cb399-12" data-line-number="12">## [2,] &quot;C&quot;  &quot;DD&quot; &quot;0&quot;  </a>
+<a class="sourceLine" id="cb399-13" data-line-number="13">## [3,] &quot;B&quot;  &quot;B&quot;  &quot;B&quot;  </a>
+<a class="sourceLine" id="cb399-14" data-line-number="14">## [4,] &quot;B&quot;  &quot;BB&quot; &quot;BBB&quot;</a>
+<a class="sourceLine" id="cb399-15" data-line-number="15">## [5,] &quot;C&quot;  &quot;C&quot;  &quot;0&quot;  </a>
+<a class="sourceLine" id="cb399-16" data-line-number="16">## [6,] &quot;7&quot;  &quot;DD&quot; &quot;DD&quot; </a></code></pre></div>
+<p>Then you can run each line of <code>score_many</code> against the example and examine the results as you go.</p>
+
+<div class="exercise">
+<span id="exr:unnamed-chunk-97" class="exercise"><strong>Exercise 10.3  (Test Your Understanding)  </strong></span>Study the model <code>score_many</code> function until you are satisfied that you understand how it works and could write a similar function yourself.
+</div>
+
+
+<div class="exercise">
+<span id="exr:unnamed-chunk-98" class="exercise"><strong>Exercise 10.4  (Advanced Challenge)  </strong></span>Instead of examining the model answer, write your own vectorized version of <code>score</code>. Assume that the data is stored in an <em>n</em> × 3 matrix where each row of the matrix contains one combination of slots to be scored.
+</div>
+
+<p>You can use the version of <code>score</code> that treats diamonds as wild or the version of <code>score</code> that doesn’t. However, the model answer will use the version treating diamonds as wild.</p>
+
+<div class="solution">
+ <span class="solution"><em>Solution. </em></span> <code>score_many</code> is a vectorized version of <code>score</code>. You can use it to run the simulation at the start of this section in a little over 20 seconds. This is 17 times faster than using a <code>for</code> loop:
+</div>
+
+<div class="sourceCode" id="cb400"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb400-1" data-line-number="1"><span class="co"># symbols should be a matrix with a column for each slot machine window</span></a>
+<a class="sourceLine" id="cb400-2" data-line-number="2">score_many &lt;-<span class="st"> </span><span class="cf">function</span>(symbols) {</a>
+<a class="sourceLine" id="cb400-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb400-4" data-line-number="4">  <span class="co"># Step 1: Assign base prize based on cherries and diamonds ---------</span></a>
+<a class="sourceLine" id="cb400-5" data-line-number="5">  ## Count the number of cherries and diamonds in each combination</a>
+<a class="sourceLine" id="cb400-6" data-line-number="6">  cherries &lt;-<span class="st"> </span><span class="kw">rowSums</span>(symbols <span class="op">==</span><span class="st"> &quot;C&quot;</span>)</a>
+<a class="sourceLine" id="cb400-7" data-line-number="7">  diamonds &lt;-<span class="st"> </span><span class="kw">rowSums</span>(symbols <span class="op">==</span><span class="st"> &quot;DD&quot;</span>) </a>
+<a class="sourceLine" id="cb400-8" data-line-number="8">  </a>
+<a class="sourceLine" id="cb400-9" data-line-number="9">  ## Wild diamonds count as cherries</a>
+<a class="sourceLine" id="cb400-10" data-line-number="10">  prize &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">5</span>)[cherries <span class="op">+</span><span class="st"> </span>diamonds <span class="op">+</span><span class="st"> </span><span class="dv">1</span>]</a>
+<a class="sourceLine" id="cb400-11" data-line-number="11">  </a>
+<a class="sourceLine" id="cb400-12" data-line-number="12">  ## ...but not if there are zero real cherries </a>
+<a class="sourceLine" id="cb400-13" data-line-number="13">  ### (cherries is coerced to FALSE where cherries == 0)</a>
+<a class="sourceLine" id="cb400-14" data-line-number="14">  prize[<span class="op">!</span>cherries] &lt;-<span class="st"> </span><span class="dv">0</span></a>
+<a class="sourceLine" id="cb400-15" data-line-number="15">  </a>
+<a class="sourceLine" id="cb400-16" data-line-number="16">  <span class="co"># Step 2: Change prize for combinations that contain three of a kind </span></a>
+<a class="sourceLine" id="cb400-17" data-line-number="17">  same &lt;-<span class="st"> </span>symbols[, <span class="dv">1</span>] <span class="op">==</span><span class="st"> </span>symbols[, <span class="dv">2</span>] <span class="op">&amp;</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb400-18" data-line-number="18"><span class="st">    </span>symbols[, <span class="dv">2</span>] <span class="op">==</span><span class="st"> </span>symbols[, <span class="dv">3</span>]</a>
+<a class="sourceLine" id="cb400-19" data-line-number="19">  payoffs &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;DD&quot;</span> =<span class="st"> </span><span class="dv">100</span>, <span class="st">&quot;7&quot;</span> =<span class="st"> </span><span class="dv">80</span>, <span class="st">&quot;BBB&quot;</span> =<span class="st"> </span><span class="dv">40</span>, </a>
+<a class="sourceLine" id="cb400-20" data-line-number="20">    <span class="st">&quot;BB&quot;</span> =<span class="st"> </span><span class="dv">25</span>, <span class="st">&quot;B&quot;</span> =<span class="st"> </span><span class="dv">10</span>, <span class="st">&quot;C&quot;</span> =<span class="st"> </span><span class="dv">10</span>, <span class="st">&quot;0&quot;</span> =<span class="st"> </span><span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb400-21" data-line-number="21">  prize[same] &lt;-<span class="st"> </span>payoffs[symbols[same, <span class="dv">1</span>]]</a>
+<a class="sourceLine" id="cb400-22" data-line-number="22">  </a>
+<a class="sourceLine" id="cb400-23" data-line-number="23">  <span class="co"># Step 3: Change prize for combinations that contain all bars ------</span></a>
+<a class="sourceLine" id="cb400-24" data-line-number="24">  bars &lt;-<span class="st"> </span>symbols <span class="op">==</span><span class="st"> &quot;B&quot;</span> <span class="op">|</span><span class="st"> </span>symbols <span class="op">==</span><span class="st">  &quot;BB&quot;</span> <span class="op">|</span><span class="st"> </span>symbols <span class="op">==</span><span class="st"> &quot;BBB&quot;</span></a>
+<a class="sourceLine" id="cb400-25" data-line-number="25">  all_bars &lt;-<span class="st"> </span>bars[, <span class="dv">1</span>] <span class="op">&amp;</span><span class="st"> </span>bars[, <span class="dv">2</span>] <span class="op">&amp;</span><span class="st"> </span>bars[, <span class="dv">3</span>] <span class="op">&amp;</span><span class="st"> </span><span class="op">!</span>same</a>
+<a class="sourceLine" id="cb400-26" data-line-number="26">  prize[all_bars] &lt;-<span class="st"> </span><span class="dv">5</span></a>
+<a class="sourceLine" id="cb400-27" data-line-number="27">  </a>
+<a class="sourceLine" id="cb400-28" data-line-number="28">  <span class="co"># Step 4: Handle wilds ---------------------------------------------</span></a>
+<a class="sourceLine" id="cb400-29" data-line-number="29">  </a>
+<a class="sourceLine" id="cb400-30" data-line-number="30">  ## combos with two diamonds</a>
+<a class="sourceLine" id="cb400-31" data-line-number="31">  two_wilds &lt;-<span class="st"> </span>diamonds <span class="op">==</span><span class="st"> </span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb400-32" data-line-number="32"></a>
+<a class="sourceLine" id="cb400-33" data-line-number="33">  ### Identify the nonwild symbol</a>
+<a class="sourceLine" id="cb400-34" data-line-number="34">  one &lt;-<span class="st"> </span>two_wilds <span class="op">&amp;</span><span class="st"> </span>symbols[, <span class="dv">1</span>] <span class="op">!=</span><span class="st"> </span>symbols[, <span class="dv">2</span>] <span class="op">&amp;</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb400-35" data-line-number="35"><span class="st">    </span>symbols[, <span class="dv">2</span>] <span class="op">==</span><span class="st"> </span>symbols[, <span class="dv">3</span>]</a>
+<a class="sourceLine" id="cb400-36" data-line-number="36">  two &lt;-<span class="st"> </span>two_wilds <span class="op">&amp;</span><span class="st"> </span>symbols[, <span class="dv">1</span>] <span class="op">!=</span><span class="st"> </span>symbols[, <span class="dv">2</span>] <span class="op">&amp;</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb400-37" data-line-number="37"><span class="st">    </span>symbols[, <span class="dv">1</span>] <span class="op">==</span><span class="st"> </span>symbols[, <span class="dv">3</span>]</a>
+<a class="sourceLine" id="cb400-38" data-line-number="38">  three &lt;-<span class="st"> </span>two_wilds <span class="op">&amp;</span><span class="st"> </span>symbols[, <span class="dv">1</span>] <span class="op">==</span><span class="st"> </span>symbols[, <span class="dv">2</span>] <span class="op">&amp;</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb400-39" data-line-number="39"><span class="st">    </span>symbols[, <span class="dv">2</span>] <span class="op">!=</span><span class="st"> </span>symbols[, <span class="dv">3</span>]</a>
+<a class="sourceLine" id="cb400-40" data-line-number="40">  </a>
+<a class="sourceLine" id="cb400-41" data-line-number="41">  ### Treat as three of a kind</a>
+<a class="sourceLine" id="cb400-42" data-line-number="42">  prize[one] &lt;-<span class="st"> </span>payoffs[symbols[one, <span class="dv">1</span>]]</a>
+<a class="sourceLine" id="cb400-43" data-line-number="43">  prize[two] &lt;-<span class="st"> </span>payoffs[symbols[two, <span class="dv">2</span>]]</a>
+<a class="sourceLine" id="cb400-44" data-line-number="44">  prize[three] &lt;-<span class="st"> </span>payoffs[symbols[three, <span class="dv">3</span>]]</a>
+<a class="sourceLine" id="cb400-45" data-line-number="45">  </a>
+<a class="sourceLine" id="cb400-46" data-line-number="46">  ## combos with one wild</a>
+<a class="sourceLine" id="cb400-47" data-line-number="47">  one_wild &lt;-<span class="st"> </span>diamonds <span class="op">==</span><span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb400-48" data-line-number="48">  </a>
+<a class="sourceLine" id="cb400-49" data-line-number="49">  ### Treat as all bars (if appropriate)</a>
+<a class="sourceLine" id="cb400-50" data-line-number="50">  wild_bars &lt;-<span class="st"> </span>one_wild <span class="op">&amp;</span><span class="st"> </span>(<span class="kw">rowSums</span>(bars) <span class="op">==</span><span class="st"> </span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb400-51" data-line-number="51">  prize[wild_bars] &lt;-<span class="st"> </span><span class="dv">5</span></a>
+<a class="sourceLine" id="cb400-52" data-line-number="52">  </a>
+<a class="sourceLine" id="cb400-53" data-line-number="53">  ### Treat as three of a kind (if appropriate)</a>
+<a class="sourceLine" id="cb400-54" data-line-number="54">  one &lt;-<span class="st"> </span>one_wild <span class="op">&amp;</span><span class="st"> </span>symbols[, <span class="dv">1</span>] <span class="op">==</span><span class="st"> </span>symbols[, <span class="dv">2</span>]</a>
+<a class="sourceLine" id="cb400-55" data-line-number="55">  two &lt;-<span class="st"> </span>one_wild <span class="op">&amp;</span><span class="st"> </span>symbols[, <span class="dv">2</span>] <span class="op">==</span><span class="st"> </span>symbols[, <span class="dv">3</span>]</a>
+<a class="sourceLine" id="cb400-56" data-line-number="56">  three &lt;-<span class="st"> </span>one_wild <span class="op">&amp;</span><span class="st"> </span>symbols[, <span class="dv">3</span>] <span class="op">==</span><span class="st"> </span>symbols[, <span class="dv">1</span>]</a>
+<a class="sourceLine" id="cb400-57" data-line-number="57">  prize[one] &lt;-<span class="st"> </span>payoffs[symbols[one, <span class="dv">1</span>]]</a>
+<a class="sourceLine" id="cb400-58" data-line-number="58">  prize[two] &lt;-<span class="st"> </span>payoffs[symbols[two, <span class="dv">2</span>]]</a>
+<a class="sourceLine" id="cb400-59" data-line-number="59">  prize[three] &lt;-<span class="st"> </span>payoffs[symbols[three, <span class="dv">3</span>]]</a>
+<a class="sourceLine" id="cb400-60" data-line-number="60"> </a>
+<a class="sourceLine" id="cb400-61" data-line-number="61">  <span class="co"># Step 5: Double prize for every diamond in combo ------------------</span></a>
+<a class="sourceLine" id="cb400-62" data-line-number="62">  <span class="kw">unname</span>(prize <span class="op">*</span><span class="st"> </span><span class="dv">2</span><span class="op">^</span>diamonds)</a>
+<a class="sourceLine" id="cb400-63" data-line-number="63">  </a>
+<a class="sourceLine" id="cb400-64" data-line-number="64">}</a>
+<a class="sourceLine" id="cb400-65" data-line-number="65"></a>
+<a class="sourceLine" id="cb400-66" data-line-number="66"><span class="kw">system.time</span>(<span class="kw">play_many</span>(<span class="dv">10000000</span>))</a>
+<a class="sourceLine" id="cb400-67" data-line-number="67">##   user  system elapsed </a>
+<a class="sourceLine" id="cb400-68" data-line-number="68">## 20.942   1.433  22.367</a></code></pre></div>
+<div id="loops-versus-vectorized-code" class="section level3">
+<h3><span class="header-section-number">10.4.1</span> Loops Versus Vectorized Code</h3>
+<p>In many languages, <code>for</code> loops run very fast. As a result, programmers learn to use <code>for</code> loops whenever possible when they code. Often these programmers continue to rely on <code>for</code> loops when they begin to program in R, usually without taking the simple steps needed to optimize R’s <code>for</code> loops. These programmers may become disillusioned with R when their code does not work as fast as they would like. If you think that this may be happening to you, examine how often you are using <code>for</code> loops and what you are using them to do. If you find yourself using <code>for</code> loops for every task, there is a good chance that you are “speaking R with a C accent.” The cure is to learn to write and use vectorized code.</p>
+<p>This doesn’t mean that <code>for</code> loops have no place in R. <code>for</code> loops are a very useful feature; they can do many things that vectorized code cannot do. You also should not become a slave to vectorized code. Sometimes it would take more time to rewrite code in vectorized format than to let a <code>for</code> loop run. For example, would it be faster to let the slot simulation run for 5.7 minutes or to rewrite <code>score</code>?</p>
+</div>
+</div>
+<div id="summary-9" class="section level2">
+<h2><span class="header-section-number">10.5</span> Summary</h2>
+<p>Fast code is an important component of data science because you can do more with fast code than you can do with slow code. You can work with larger data sets before computational constraints intervene, and you can do more computation before time constraints intervene. The fastest code in R will rely on the things that R does best: logical tests, subsetting, and element-wise execution. I’ve called this type of code vectorized code because code written with these operations will take a vector of values as input and operate on each element of the vector at the same time. The majority of the code written in R is already vectorized.</p>
+<p>If you use these operations, but your code does not appear vectorized, analyze the sequential steps and parallel cases in your program. Ensure that you’ve used vectorized functions to handle the steps and logical subsetting to handle the cases. Be aware, however, that some tasks cannot be vectorized.</p>
+</div>
+<div id="project-3-wrap-up" class="section level2">
+<h2><span class="header-section-number">10.6</span> Project 3 Wrap-up</h2>
+<p>You have now written your first program in R, and it is a program that you should be proud of. <code>play</code> is not a simple <code>hello world</code> exercise, but a real program that does a real task in a complicated way.</p>
+<p>Writing new programs in R will always be challenging because programming depends so much on your own creativity, problem-solving ability, and experience writing similar types of programs. However, you can use the suggestions in this chapter to make even the most complicated program manageable: divide tasks into simple steps and cases, work with concrete examples, and describe possible solutions in English.</p>
+<p>This project completes the education you began in <a href="basics.html#basics">The Very Basics</a>. You can now use R to handle data, which has augmented your ability to analyze data. You can:</p>
+<ul>
+<li>Load and store data in your computer—not on paper or in your mind</li>
+<li>Accurately recall and change individual values without relying on your memory</li>
+<li>Instruct your computer to do tedious, or complex, tasks on your behalf</li>
+</ul>
+<p>These skills solve an important logistical problem faced by every data scientist: <em>how can you store and manipulate data without making errors?</em> However, this is not the only problem that you will face as a data scientist. The next problem will appear when you try to understand the information contained in your data. It is nearly impossible to spot insights or to discover patterns in raw data. A third problem will appear when you try to use your data set to reason about reality, which includes things not contained in your data set. What exactly does your data imply about things outside of the data set? How certain can you be?</p>
+<p>I refer to these problems as the logistical, tactical, and strategic problems of data science, as shown in <a href="speed.html#fig:venn">10.4</a>. You’ll face them whenever you try to learn from data:</p>
+<ul>
+<li><strong>A logistical problem:</strong> - How can you store and manipulate data without making errors?</li>
+<li><strong>A tactical problem</strong> - How can you discover the information contained in your data?</li>
+<li><strong>A strategic problem</strong> - How can you use the data to draw conclusions about the world at large?</li>
+</ul>
+<div class="figure"><span id="fig:venn"></span>
+<img src="images/hopr_1004.png" alt="The three core skill sets of data science: computer programming, data comprehension, and scientific reasoning."  />
+<p class="caption">
+Figure 10.4: The three core skill sets of data science: computer programming, data comprehension, and scientific reasoning.
+</p>
+</div>
+<p>A well-rounded data scientist will need to be able to solve each of these problems in many different situations. By learning to program in R, you have mastered the logistical problem, which is a prerequisite for solving the tactical and strategic problems.</p>
+<p>If you would like to learn how to reason with data, or how to transform, visualize, and explore your data sets with R tools, I recommend the book <a href="http://r4ds.had.co.nz/"><em>R for Data Science</em></a>, the companion volume to this book. <em>R for Data Science</em> teaches a simple workflow for transforming, visualizing, and modeling data in R, as well as how to report results with the R Markdown package.</p>
+
+</div>
+</div>
+
+
+
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="loops.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="starting.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": false,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio-education/hopr/edit/master/speed.rmd",
+"text": "Edit"
+},
+"download": null,
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

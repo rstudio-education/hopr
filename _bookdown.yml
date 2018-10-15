@@ -1,3 +1,5 @@
+output_dir: "docs"
+
 rmd_files: [
   "index.rmd",
   "preface.rmd",

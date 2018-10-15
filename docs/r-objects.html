@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Hands-On Programming with R</title>
+  <meta name="description" content="This book will teach you how to program in R, with hands-on examples. I wrote it for non-programmers to provide a friendly introduction to the R language. You’ll learn how to load data, assemble and disassemble data objects, navigate R’s environment system, write your own functions, and use all of R’s programming tools. Throughout the book, you’ll use your newfound skills to solve practical data science problems.">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Hands-On Programming with R" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="http://r4ds.had.co.nz/" />
+  <meta property="og:image" content="http://r4ds.had.co.nz/cover.png" />
+  <meta property="og:description" content="This book will teach you how to program in R, with hands-on examples. I wrote it for non-programmers to provide a friendly introduction to the R language. You’ll learn how to load data, assemble and disassemble data objects, navigate R’s environment system, write your own functions, and use all of R’s programming tools. Throughout the book, you’ll use your newfound skills to solve practical data science problems." />
+  <meta name="github-repo" content="rstudio-education/hopr" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Hands-On Programming with R" />
+  <meta name="twitter:site" content="@statgarrett" />
+  <meta name="twitter:description" content="This book will teach you how to program in R, with hands-on examples. I wrote it for non-programmers to provide a friendly introduction to the R language. You’ll learn how to load data, assemble and disassemble data objects, navigate R’s environment system, write your own functions, and use all of R’s programming tools. Throughout the book, you’ll use your newfound skills to solve practical data science problems." />
+  <meta name="twitter:image" content="http://r4ds.had.co.nz/cover.png" />
+
+<meta name="author" content="Garrett Grolemund">
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="project-2-playing-cards.html">
+<link rel="next" href="r-notation.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="hopr.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><strong><a href="./">Hands-On Programming with R</a></strong></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html"><i class="fa fa-check"></i>Preface</a><ul>
+<li class="chapter" data-level="0.1" data-path="preface.html"><a href="preface.html#conventions-used-in-this-book"><i class="fa fa-check"></i><b>0.1</b> Conventions Used in This Book</a></li>
+<li class="chapter" data-level="0.2" data-path="preface.html"><a href="preface.html#acknowledgments"><i class="fa fa-check"></i><b>0.2</b> Acknowledgments</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="project-1-weighted-dice.html"><a href="project-1-weighted-dice.html"><i class="fa fa-check"></i>Project 1: Weighted Dice</a></li>
+<li class="chapter" data-level="1" data-path="basics.html"><a href="basics.html"><i class="fa fa-check"></i><b>1</b> The Very Basics</a><ul>
+<li class="chapter" data-level="1.1" data-path="basics.html"><a href="basics.html#the-r-user-interface"><i class="fa fa-check"></i><b>1.1</b> The R User Interface</a></li>
+<li class="chapter" data-level="1.2" data-path="basics.html"><a href="basics.html#objects"><i class="fa fa-check"></i><b>1.2</b> Objects</a></li>
+<li class="chapter" data-level="1.3" data-path="basics.html"><a href="basics.html#functions"><i class="fa fa-check"></i><b>1.3</b> Functions</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="basics.html"><a href="basics.html#sample-with-replacement"><i class="fa fa-check"></i><b>1.3.1</b> Sample with Replacement</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="basics.html"><a href="basics.html#write-functions"><i class="fa fa-check"></i><b>1.4</b> Writing Your Own Functions</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="basics.html"><a href="basics.html#the-function-constructor"><i class="fa fa-check"></i><b>1.4.1</b> The Function Constructor</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="basics.html"><a href="basics.html#arguments"><i class="fa fa-check"></i><b>1.5</b> Arguments</a></li>
+<li class="chapter" data-level="1.6" data-path="basics.html"><a href="basics.html#scripts"><i class="fa fa-check"></i><b>1.6</b> Scripts</a></li>
+<li class="chapter" data-level="1.7" data-path="basics.html"><a href="basics.html#summary"><i class="fa fa-check"></i><b>1.7</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="packages.html"><a href="packages.html"><i class="fa fa-check"></i><b>2</b> Packages and Help Pages</a><ul>
+<li class="chapter" data-level="2.1" data-path="packages.html"><a href="packages.html#packages-1"><i class="fa fa-check"></i><b>2.1</b> Packages</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="packages.html"><a href="packages.html#install.packages"><i class="fa fa-check"></i><b>2.1.1</b> install.packages</a></li>
+<li class="chapter" data-level="2.1.2" data-path="packages.html"><a href="packages.html#library"><i class="fa fa-check"></i><b>2.1.2</b> library</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="packages.html"><a href="packages.html#getting-help-with-help-pages"><i class="fa fa-check"></i><b>2.2</b> Getting Help with Help Pages</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="packages.html"><a href="packages.html#parts-of-a-help-page"><i class="fa fa-check"></i><b>2.2.1</b> Parts of a Help Page</a></li>
+<li class="chapter" data-level="2.2.2" data-path="packages.html"><a href="packages.html#getting-more-help"><i class="fa fa-check"></i><b>2.2.2</b> Getting More Help</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="packages.html"><a href="packages.html#summary-1"><i class="fa fa-check"></i><b>2.3</b> Summary</a></li>
+<li class="chapter" data-level="2.4" data-path="packages.html"><a href="packages.html#project-1-wrap-up"><i class="fa fa-check"></i><b>2.4</b> Project 1 Wrap-up</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="project-2-playing-cards.html"><a href="project-2-playing-cards.html"><i class="fa fa-check"></i>Project 2: Playing Cards</a></li>
+<li class="chapter" data-level="3" data-path="r-objects.html"><a href="r-objects.html"><i class="fa fa-check"></i><b>3</b> R Objects</a><ul>
+<li class="chapter" data-level="3.1" data-path="r-objects.html"><a href="r-objects.html#atomic-vectors"><i class="fa fa-check"></i><b>3.1</b> Atomic Vectors</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="r-objects.html"><a href="r-objects.html#doubles"><i class="fa fa-check"></i><b>3.1.1</b> Doubles</a></li>
+<li class="chapter" data-level="3.1.2" data-path="r-objects.html"><a href="r-objects.html#integers"><i class="fa fa-check"></i><b>3.1.2</b> Integers</a></li>
+<li class="chapter" data-level="3.1.3" data-path="r-objects.html"><a href="r-objects.html#characters"><i class="fa fa-check"></i><b>3.1.3</b> Characters</a></li>
+<li class="chapter" data-level="3.1.4" data-path="r-objects.html"><a href="r-objects.html#logicals"><i class="fa fa-check"></i><b>3.1.4</b> Logicals</a></li>
+<li class="chapter" data-level="3.1.5" data-path="r-objects.html"><a href="r-objects.html#complex-and-raw"><i class="fa fa-check"></i><b>3.1.5</b> Complex and Raw</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="r-objects.html"><a href="r-objects.html#attributes"><i class="fa fa-check"></i><b>3.2</b> Attributes</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="r-objects.html"><a href="r-objects.html#names"><i class="fa fa-check"></i><b>3.2.1</b> Names</a></li>
+<li class="chapter" data-level="3.2.2" data-path="r-objects.html"><a href="r-objects.html#dim"><i class="fa fa-check"></i><b>3.2.2</b> Dim</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="r-objects.html"><a href="r-objects.html#matrices"><i class="fa fa-check"></i><b>3.3</b> Matrices</a></li>
+<li class="chapter" data-level="3.4" data-path="r-objects.html"><a href="r-objects.html#arrays"><i class="fa fa-check"></i><b>3.4</b> Arrays</a></li>
+<li class="chapter" data-level="3.5" data-path="r-objects.html"><a href="r-objects.html#class"><i class="fa fa-check"></i><b>3.5</b> Class</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="r-objects.html"><a href="r-objects.html#dates-and-times"><i class="fa fa-check"></i><b>3.5.1</b> Dates and Times</a></li>
+<li class="chapter" data-level="3.5.2" data-path="r-objects.html"><a href="r-objects.html#factors"><i class="fa fa-check"></i><b>3.5.2</b> Factors</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="r-objects.html"><a href="r-objects.html#coercion"><i class="fa fa-check"></i><b>3.6</b> Coercion</a></li>
+<li class="chapter" data-level="3.7" data-path="r-objects.html"><a href="r-objects.html#lists"><i class="fa fa-check"></i><b>3.7</b> Lists</a></li>
+<li class="chapter" data-level="3.8" data-path="r-objects.html"><a href="r-objects.html#data-frames"><i class="fa fa-check"></i><b>3.8</b> Data Frames</a></li>
+<li class="chapter" data-level="3.9" data-path="r-objects.html"><a href="r-objects.html#loading"><i class="fa fa-check"></i><b>3.9</b> Loading Data</a></li>
+<li class="chapter" data-level="3.10" data-path="r-objects.html"><a href="r-objects.html#saving-data"><i class="fa fa-check"></i><b>3.10</b> Saving Data</a></li>
+<li class="chapter" data-level="3.11" data-path="r-objects.html"><a href="r-objects.html#summary-2"><i class="fa fa-check"></i><b>3.11</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="r-notation.html"><a href="r-notation.html"><i class="fa fa-check"></i><b>4</b> R Notation</a><ul>
+<li class="chapter" data-level="4.1" data-path="r-notation.html"><a href="r-notation.html#selecting-values"><i class="fa fa-check"></i><b>4.1</b> Selecting Values</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="r-notation.html"><a href="r-notation.html#positive-integers"><i class="fa fa-check"></i><b>4.1.1</b> Positive Integers</a></li>
+<li class="chapter" data-level="4.1.2" data-path="r-notation.html"><a href="r-notation.html#negative-integers"><i class="fa fa-check"></i><b>4.1.2</b> Negative Integers</a></li>
+<li class="chapter" data-level="4.1.3" data-path="r-notation.html"><a href="r-notation.html#zero"><i class="fa fa-check"></i><b>4.1.3</b> Zero</a></li>
+<li class="chapter" data-level="4.1.4" data-path="r-notation.html"><a href="r-notation.html#blank-spaces"><i class="fa fa-check"></i><b>4.1.4</b> Blank Spaces</a></li>
+<li class="chapter" data-level="4.1.5" data-path="r-objects.html"><a href="r-objects.html#logicals"><i class="fa fa-check"></i><b>4.1.5</b> Logical Values</a></li>
+<li class="chapter" data-level="4.1.6" data-path="r-notation.html"><a href="r-notation.html#names-1"><i class="fa fa-check"></i><b>4.1.6</b> Names</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="r-notation.html"><a href="r-notation.html#deal-a-card"><i class="fa fa-check"></i><b>4.2</b> Deal a Card</a></li>
+<li class="chapter" data-level="4.3" data-path="r-notation.html"><a href="r-notation.html#shuffle-the-deck"><i class="fa fa-check"></i><b>4.3</b> Shuffle the Deck</a></li>
+<li class="chapter" data-level="4.4" data-path="r-notation.html"><a href="r-notation.html#dollar-signs-and-double-brackets"><i class="fa fa-check"></i><b>4.4</b> Dollar Signs and Double Brackets</a></li>
+<li class="chapter" data-level="4.5" data-path="r-notation.html"><a href="r-notation.html#summary-3"><i class="fa fa-check"></i><b>4.5</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="modify.html"><a href="modify.html"><i class="fa fa-check"></i><b>5</b> Modifying Values</a><ul>
+<li class="chapter" data-level="5.0.1" data-path="modify.html"><a href="modify.html#changing-values-in-place"><i class="fa fa-check"></i><b>5.0.1</b> Changing Values in Place</a></li>
+<li class="chapter" data-level="5.0.2" data-path="modify.html"><a href="modify.html#logical-subsetting"><i class="fa fa-check"></i><b>5.0.2</b> Logical Subsetting</a></li>
+<li class="chapter" data-level="5.0.3" data-path="modify.html"><a href="modify.html#missing"><i class="fa fa-check"></i><b>5.0.3</b> Missing Information</a></li>
+<li class="chapter" data-level="5.0.4" data-path="modify.html"><a href="modify.html#summary-4"><i class="fa fa-check"></i><b>5.0.4</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="environments.html"><a href="environments.html"><i class="fa fa-check"></i><b>6</b> Environments</a><ul>
+<li class="chapter" data-level="6.1" data-path="environments.html"><a href="environments.html#environments-1"><i class="fa fa-check"></i><b>6.1</b> Environments</a></li>
+<li class="chapter" data-level="6.2" data-path="environments.html"><a href="environments.html#working-with-environments"><i class="fa fa-check"></i><b>6.2</b> Working with Environments</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="environments.html"><a href="environments.html#the-active-environment"><i class="fa fa-check"></i><b>6.2.1</b> The Active Environment</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="environments.html"><a href="environments.html#scoping-rules"><i class="fa fa-check"></i><b>6.3</b> Scoping Rules</a></li>
+<li class="chapter" data-level="6.4" data-path="environments.html"><a href="environments.html#assignment"><i class="fa fa-check"></i><b>6.4</b> Assignment</a></li>
+<li class="chapter" data-level="6.5" data-path="environments.html"><a href="environments.html#evaluation"><i class="fa fa-check"></i><b>6.5</b> Evaluation</a></li>
+<li class="chapter" data-level="6.6" data-path="environments.html"><a href="environments.html#closures"><i class="fa fa-check"></i><b>6.6</b> Closures</a></li>
+<li class="chapter" data-level="6.7" data-path="environments.html"><a href="environments.html#summary-5"><i class="fa fa-check"></i><b>6.7</b> Summary</a></li>
+<li class="chapter" data-level="6.8" data-path="environments.html"><a href="environments.html#project-2-wrap-up"><i class="fa fa-check"></i><b>6.8</b> Project 2 Wrap-up</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="project-3-slot-machine.html"><a href="project-3-slot-machine.html"><i class="fa fa-check"></i>Project 3: Slot Machine</a></li>
+<li class="chapter" data-level="7" data-path="programs.html"><a href="programs.html"><i class="fa fa-check"></i><b>7</b> Programs</a><ul>
+<li class="chapter" data-level="7.1" data-path="programs.html"><a href="programs.html#strategy"><i class="fa fa-check"></i><b>7.1</b> Strategy</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="programs.html"><a href="programs.html#sequential-steps"><i class="fa fa-check"></i><b>7.1.1</b> Sequential Steps</a></li>
+<li class="chapter" data-level="7.1.2" data-path="programs.html"><a href="programs.html#parallel-cases"><i class="fa fa-check"></i><b>7.1.2</b> Parallel Cases</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="programs.html"><a href="programs.html#if-statements"><i class="fa fa-check"></i><b>7.2</b> if Statements</a></li>
+<li class="chapter" data-level="7.3" data-path="programs.html"><a href="programs.html#else-statements"><i class="fa fa-check"></i><b>7.3</b> else Statements</a></li>
+<li class="chapter" data-level="7.4" data-path="programs.html"><a href="programs.html#lookup-tables"><i class="fa fa-check"></i><b>7.4</b> Lookup Tables</a></li>
+<li class="chapter" data-level="7.5" data-path="programs.html"><a href="programs.html#code-comments"><i class="fa fa-check"></i><b>7.5</b> Code Comments</a></li>
+<li class="chapter" data-level="7.6" data-path="programs.html"><a href="programs.html#summary-6"><i class="fa fa-check"></i><b>7.6</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="s3.html"><a href="s3.html"><i class="fa fa-check"></i><b>8</b> S3</a><ul>
+<li class="chapter" data-level="8.1" data-path="s3.html"><a href="s3.html#the-s3-system"><i class="fa fa-check"></i><b>8.1</b> The S3 System</a></li>
+<li class="chapter" data-level="8.2" data-path="s3.html"><a href="s3.html#attributes-1"><i class="fa fa-check"></i><b>8.2</b> Attributes</a></li>
+<li class="chapter" data-level="8.3" data-path="s3.html"><a href="s3.html#generic-functions"><i class="fa fa-check"></i><b>8.3</b> Generic Functions</a></li>
+<li class="chapter" data-level="8.4" data-path="s3.html"><a href="s3.html#methods"><i class="fa fa-check"></i><b>8.4</b> Methods</a><ul>
+<li class="chapter" data-level="8.4.1" data-path="s3.html"><a href="s3.html#method-dispatch"><i class="fa fa-check"></i><b>8.4.1</b> Method Dispatch</a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="s3.html"><a href="s3.html#classes"><i class="fa fa-check"></i><b>8.5</b> Classes</a></li>
+<li class="chapter" data-level="8.6" data-path="s3.html"><a href="s3.html#s3-and-debugging"><i class="fa fa-check"></i><b>8.6</b> S3 and Debugging</a></li>
+<li class="chapter" data-level="8.7" data-path="s3.html"><a href="s3.html#s4-and-r5"><i class="fa fa-check"></i><b>8.7</b> S4 and R5</a></li>
+<li class="chapter" data-level="8.8" data-path="s3.html"><a href="s3.html#summary-7"><i class="fa fa-check"></i><b>8.8</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="loops.html"><a href="loops.html"><i class="fa fa-check"></i><b>9</b> Loops</a><ul>
+<li class="chapter" data-level="9.1" data-path="loops.html"><a href="loops.html#expected-values"><i class="fa fa-check"></i><b>9.1</b> Expected Values</a></li>
+<li class="chapter" data-level="9.2" data-path="loops.html"><a href="loops.html#expand.grid"><i class="fa fa-check"></i><b>9.2</b> expand.grid</a></li>
+<li class="chapter" data-level="9.3" data-path="loops.html"><a href="loops.html#for-loops"><i class="fa fa-check"></i><b>9.3</b> for Loops</a></li>
+<li class="chapter" data-level="9.4" data-path="loops.html"><a href="loops.html#while-loops"><i class="fa fa-check"></i><b>9.4</b> while Loops</a></li>
+<li class="chapter" data-level="9.5" data-path="loops.html"><a href="loops.html#repeat-loops"><i class="fa fa-check"></i><b>9.5</b> repeat Loops</a></li>
+<li class="chapter" data-level="9.6" data-path="loops.html"><a href="loops.html#summary-8"><i class="fa fa-check"></i><b>9.6</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="speed.html"><a href="speed.html"><i class="fa fa-check"></i><b>10</b> Speed</a><ul>
+<li class="chapter" data-level="10.1" data-path="speed.html"><a href="speed.html#vectorized-code"><i class="fa fa-check"></i><b>10.1</b> Vectorized Code</a></li>
+<li class="chapter" data-level="10.2" data-path="speed.html"><a href="speed.html#how-to-write-vectorized-code"><i class="fa fa-check"></i><b>10.2</b> How to Write Vectorized Code</a></li>
+<li class="chapter" data-level="10.3" data-path="speed.html"><a href="speed.html#how-to-write-fast-for-loops-in-r"><i class="fa fa-check"></i><b>10.3</b> How to Write Fast for Loops in R</a></li>
+<li class="chapter" data-level="10.4" data-path="speed.html"><a href="speed.html#vectorized-code-in-practice"><i class="fa fa-check"></i><b>10.4</b> Vectorized Code in Practice</a><ul>
+<li class="chapter" data-level="10.4.1" data-path="speed.html"><a href="speed.html#loops-versus-vectorized-code"><i class="fa fa-check"></i><b>10.4.1</b> Loops Versus Vectorized Code</a></li>
+</ul></li>
+<li class="chapter" data-level="10.5" data-path="speed.html"><a href="speed.html#summary-9"><i class="fa fa-check"></i><b>10.5</b> Summary</a></li>
+<li class="chapter" data-level="10.6" data-path="speed.html"><a href="speed.html#project-3-wrap-up"><i class="fa fa-check"></i><b>10.6</b> Project 3 Wrap-up</a></li>
+</ul></li>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="starting.html"><a href="starting.html"><i class="fa fa-check"></i><b>A</b> Installing R and RStudio</a><ul>
+<li class="chapter" data-level="A.1" data-path="starting.html"><a href="starting.html#how-to-download-and-install-r"><i class="fa fa-check"></i><b>A.1</b> How to Download and Install R</a><ul>
+<li class="chapter" data-level="A.1.1" data-path="starting.html"><a href="starting.html#windows"><i class="fa fa-check"></i><b>A.1.1</b> Windows</a></li>
+<li class="chapter" data-level="A.1.2" data-path="starting.html"><a href="starting.html#mac"><i class="fa fa-check"></i><b>A.1.2</b> Mac</a></li>
+<li class="chapter" data-level="A.1.3" data-path="starting.html"><a href="starting.html#linux"><i class="fa fa-check"></i><b>A.1.3</b> Linux</a></li>
+</ul></li>
+<li class="chapter" data-level="A.2" data-path="starting.html"><a href="starting.html#using-r"><i class="fa fa-check"></i><b>A.2</b> Using R</a></li>
+<li class="chapter" data-level="A.3" data-path="starting.html"><a href="starting.html#rstudio"><i class="fa fa-check"></i><b>A.3</b> RStudio</a></li>
+<li class="chapter" data-level="A.4" data-path="starting.html"><a href="starting.html#opening-r"><i class="fa fa-check"></i><b>A.4</b> Opening R</a></li>
+</ul></li>
+<li class="chapter" data-level="B" data-path="packages2.html"><a href="packages2.html"><i class="fa fa-check"></i><b>B</b> R Packages</a><ul>
+<li class="chapter" data-level="B.1" data-path="packages2.html"><a href="packages2.html#installing-packages"><i class="fa fa-check"></i><b>B.1</b> Installing Packages</a></li>
+<li class="chapter" data-level="B.2" data-path="packages2.html"><a href="packages2.html#loading-packages"><i class="fa fa-check"></i><b>B.2</b> Loading Packages</a></li>
+</ul></li>
+<li class="chapter" data-level="C" data-path="updating.html"><a href="updating.html"><i class="fa fa-check"></i><b>C</b> Updating R and Its Packages</a><ul>
+<li class="chapter" data-level="C.1" data-path="updating.html"><a href="updating.html#r-packages"><i class="fa fa-check"></i><b>C.1</b> R Packages</a></li>
+</ul></li>
+<li class="chapter" data-level="D" data-path="dataio.html"><a href="dataio.html"><i class="fa fa-check"></i><b>D</b> Loading and Saving Data in R</a><ul>
+<li class="chapter" data-level="D.1" data-path="dataio.html"><a href="dataio.html#data-sets-in-base-r"><i class="fa fa-check"></i><b>D.1</b> Data Sets in Base R</a></li>
+<li class="chapter" data-level="D.2" data-path="dataio.html"><a href="dataio.html#working-directory"><i class="fa fa-check"></i><b>D.2</b> Working Directory</a></li>
+<li class="chapter" data-level="D.3" data-path="dataio.html"><a href="dataio.html#plain-text-files"><i class="fa fa-check"></i><b>D.3</b> Plain-text Files</a><ul>
+<li class="chapter" data-level="D.3.1" data-path="dataio.html"><a href="dataio.html#read.table"><i class="fa fa-check"></i><b>D.3.1</b> read.table</a></li>
+<li class="chapter" data-level="D.3.2" data-path="dataio.html"><a href="dataio.html#the-read-family"><i class="fa fa-check"></i><b>D.3.2</b> The read Family</a></li>
+<li class="chapter" data-level="D.3.3" data-path="dataio.html"><a href="dataio.html#read.fwf"><i class="fa fa-check"></i><b>D.3.3</b> read.fwf</a></li>
+<li class="chapter" data-level="D.3.4" data-path="dataio.html"><a href="dataio.html#html-links"><i class="fa fa-check"></i><b>D.3.4</b> HTML Links</a></li>
+<li class="chapter" data-level="D.3.5" data-path="dataio.html"><a href="dataio.html#saving-plain-text-files"><i class="fa fa-check"></i><b>D.3.5</b> Saving Plain-Text Files</a></li>
+<li class="chapter" data-level="D.3.6" data-path="dataio.html"><a href="dataio.html#compressing-files"><i class="fa fa-check"></i><b>D.3.6</b> Compressing Files</a></li>
+</ul></li>
+<li class="chapter" data-level="D.4" data-path="dataio.html"><a href="dataio.html#r-files"><i class="fa fa-check"></i><b>D.4</b> R Files</a><ul>
+<li class="chapter" data-level="D.4.1" data-path="dataio.html"><a href="dataio.html#saving-r-files"><i class="fa fa-check"></i><b>D.4.1</b> Saving R Files</a></li>
+</ul></li>
+<li class="chapter" data-level="D.5" data-path="dataio.html"><a href="dataio.html#excel-spreadsheets"><i class="fa fa-check"></i><b>D.5</b> Excel Spreadsheets</a><ul>
+<li class="chapter" data-level="D.5.1" data-path="dataio.html"><a href="dataio.html#export-from-excel"><i class="fa fa-check"></i><b>D.5.1</b> Export from Excel</a></li>
+<li class="chapter" data-level="D.5.2" data-path="dataio.html"><a href="dataio.html#copy-and-paste"><i class="fa fa-check"></i><b>D.5.2</b> Copy and Paste</a></li>
+<li class="chapter" data-level="D.5.3" data-path="dataio.html"><a href="dataio.html#xlconnect"><i class="fa fa-check"></i><b>D.5.3</b> XLConnect</a></li>
+<li class="chapter" data-level="D.5.4" data-path="dataio.html"><a href="dataio.html#reading-spreadsheets"><i class="fa fa-check"></i><b>D.5.4</b> Reading Spreadsheets</a></li>
+<li class="chapter" data-level="D.5.5" data-path="dataio.html"><a href="dataio.html#writing-spreadsheets"><i class="fa fa-check"></i><b>D.5.5</b> Writing Spreadsheets</a></li>
+</ul></li>
+<li class="chapter" data-level="D.6" data-path="dataio.html"><a href="dataio.html#loading-files-from-other-programs"><i class="fa fa-check"></i><b>D.6</b> Loading Files from Other Programs</a><ul>
+<li class="chapter" data-level="D.6.1" data-path="dataio.html"><a href="dataio.html#connecting-to-databases"><i class="fa fa-check"></i><b>D.6.1</b> Connecting to Databases</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="E" data-path="debug.html"><a href="debug.html"><i class="fa fa-check"></i><b>E</b> Debugging R Code</a><ul>
+<li class="chapter" data-level="E.1" data-path="debug.html"><a href="debug.html#traceback"><i class="fa fa-check"></i><b>E.1</b> traceback</a></li>
+<li class="chapter" data-level="E.2" data-path="debug.html"><a href="debug.html#browser"><i class="fa fa-check"></i><b>E.2</b> browser</a></li>
+<li class="chapter" data-level="E.3" data-path="debug.html"><a href="debug.html#break-points"><i class="fa fa-check"></i><b>E.3</b> Break Points</a></li>
+<li class="chapter" data-level="E.4" data-path="debug.html"><a href="debug.html#debug-1"><i class="fa fa-check"></i><b>E.4</b> debug</a></li>
+<li class="chapter" data-level="E.5" data-path="debug.html"><a href="debug.html#trace"><i class="fa fa-check"></i><b>E.5</b> trace</a></li>
+<li class="chapter" data-level="E.6" data-path="debug.html"><a href="debug.html#recover"><i class="fa fa-check"></i><b>E.6</b> recover</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Hands-On Programming with R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="r-objects" class="section level1">
+<h1><span class="header-section-number">3</span> R Objects</h1>
+<p>In this chapter, you’ll use R to assemble a deck of 52 playing cards.</p>
+<p>You’ll start by building simple R objects that represent playing cards and then work your way up to a full-blown table of data. In short, you’ll build the equivalent of an Excel spreadsheet from scratch. When you are finished, your deck of cards will look something like this:</p>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb64-1" data-line-number="1"> face   suit value</a>
+<a class="sourceLine" id="cb64-2" data-line-number="2"> king spades    <span class="dv">13</span></a>
+<a class="sourceLine" id="cb64-3" data-line-number="3">queen spades    <span class="dv">12</span></a>
+<a class="sourceLine" id="cb64-4" data-line-number="4"> jack spades    <span class="dv">11</span></a>
+<a class="sourceLine" id="cb64-5" data-line-number="5">  ten spades    <span class="dv">10</span></a>
+<a class="sourceLine" id="cb64-6" data-line-number="6"> nine spades     <span class="dv">9</span></a>
+<a class="sourceLine" id="cb64-7" data-line-number="7">eight spades     <span class="dv">8</span></a>
+<a class="sourceLine" id="cb64-8" data-line-number="8">...</a></code></pre></div>
+<p>Do you need to build a data set from scratch to use it in R? Not at all. You can load most data sets into R with one simple step, see <a href="r-objects.html#loading">Loading Data</a>. But this exercise will teach you how R stores data, and how you can assemble—or disassemble—your own data sets. You will also learn about the various types of objects available for you to use in R (not all R objects are the same!). Consider this exercise a rite of passage; by doing it, you will become an expert on storing data in R.</p>
+<p>We’ll start with the very basics. The most simple type of object in R is an <em>atomic vector</em>. Atomic vectors are not nuclear powered, but they are very simple and they do show up everywhere. If you look closely enough, you’ll see that most structures in R are built from atomic vectors.</p>
+<div id="atomic-vectors" class="section level2">
+<h2><span class="header-section-number">3.1</span> Atomic Vectors</h2>
+<p>An atomic vector is just a simple vector of data. In fact, you’ve already made an atomic vector, your <code>die</code> object from <a href="project-1-weighted-dice.html#project-1-weighted-dice">Project 1: Weighted Dice</a>. You can make an atomic vector by grouping some values of data together with <code>c</code>:</p>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb65-1" data-line-number="1">die &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>)</a>
+<a class="sourceLine" id="cb65-2" data-line-number="2">die</a>
+<a class="sourceLine" id="cb65-3" data-line-number="3">## 1 2 3 4 5 6</a>
+<a class="sourceLine" id="cb65-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb65-5" data-line-number="5"><span class="kw">is.vector</span>(die)</a>
+<a class="sourceLine" id="cb65-6" data-line-number="6">##  TRUE</a></code></pre></div>
+
+<div class="rmdnote">
+<p><strong>is.vector</strong></p>
+<code>is.vector</code> tests whether an object is an atomic vector. It returns <code>TRUE</code> if the object is an atomic vector and <code>FALSE</code> otherwise.
+</div>
+
+<p>You can also make an atomic vector with just one value. R saves single values as an atomic vector of length 1:</p>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb66-1" data-line-number="1">five &lt;-<span class="st"> </span><span class="dv">5</span></a>
+<a class="sourceLine" id="cb66-2" data-line-number="2">five</a>
+<a class="sourceLine" id="cb66-3" data-line-number="3">## 5</a>
+<a class="sourceLine" id="cb66-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb66-5" data-line-number="5"><span class="kw">is.vector</span>(five)</a>
+<a class="sourceLine" id="cb66-6" data-line-number="6">##  TRUE</a>
+<a class="sourceLine" id="cb66-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb66-8" data-line-number="8"><span class="kw">length</span>(five)</a>
+<a class="sourceLine" id="cb66-9" data-line-number="9">## 1</a>
+<a class="sourceLine" id="cb66-10" data-line-number="10"><span class="kw">length</span>(die)</a>
+<a class="sourceLine" id="cb66-11" data-line-number="11">## 6</a></code></pre></div>
+
+<div class="rmdnote">
+<p><strong>length</strong></p>
+<code>length</code> returns the length of an atomic vector.
+</div>
+
+<p>Each atomic vector stores its values as a one-dimensional vector, and each atomic vector can only store one type of data. You can save different types of data in R by using different types of atomic vectors. Altogether, R recognizes six basic types of atomic vectors: <em>doubles</em>, <em>integers</em>, <em>characters</em>, <em>logicals</em>, <em>complex</em>, and <em>raw</em>.</p>
+<p>To create your card deck, you will need to use different types of atomic vectors to save different types of information (text and numbers). You can do this by using some simple conventions when you enter your data. For example, you can create an integer vector by including a capital <code>L</code> with your input. You can create a character vector by surrounding your input in quotation marks:</p>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb67-1" data-line-number="1">int &lt;-<span class="st"> </span>1L</a>
+<a class="sourceLine" id="cb67-2" data-line-number="2">text &lt;-<span class="st"> &quot;ace&quot;</span></a></code></pre></div>
+<p>Each type of atomic vector has its own convention (described below). R will recognize the convention and use it to create an atomic vector of the appropriate type. If you’d like to make atomic vectors that have more than one element in them, you can combine an element with the <code>c</code> function from <a href="packages.html#packages">Packages and Help Pages</a>. Use the same convention with each element:</p>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb68-1" data-line-number="1">int &lt;-<span class="st"> </span><span class="kw">c</span>(1L, 5L)</a>
+<a class="sourceLine" id="cb68-2" data-line-number="2">text &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;ace&quot;</span>, <span class="st">&quot;hearts&quot;</span>)</a></code></pre></div>
+<p>You may wonder why R uses multiple types of vectors. Vector types help R behave as you would expect. For example, R will do math with atomic vectors that contain numbers, but not with atomic vectors that contain character strings:</p>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb69-1" data-line-number="1"><span class="kw">sum</span>(num)</a>
+<a class="sourceLine" id="cb69-2" data-line-number="2">## 6</a>
+<a class="sourceLine" id="cb69-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb69-4" data-line-number="4"><span class="kw">sum</span>(text)</a>
+<a class="sourceLine" id="cb69-5" data-line-number="5">## Error in sum(text) : invalid &#39;type&#39; (character) of argument</a></code></pre></div>
+<p>But we’re getting ahead of ourselves! Get ready to say hello to the six types of atomic vectors in R.</p>
+<div id="doubles" class="section level3">
+<h3><span class="header-section-number">3.1.1</span> Doubles</h3>
+<p>A double vector stores regular numbers. The numbers can be positive or negative, large or small, and have digits to the right of the decimal place or not. In general, R will save any number that you type in R as a double. So, for example, the die you made in <a href="project-1-weighted-dice.html#project-1-weighted-dice">Project 1: Weighted Dice</a> was a double object:</p>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb70-1" data-line-number="1">die &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>)</a>
+<a class="sourceLine" id="cb70-2" data-line-number="2">die</a>
+<a class="sourceLine" id="cb70-3" data-line-number="3">## 1 2 3 4 5 6</a></code></pre></div>
+<p>You’ll usually know what type of object you are working with in R (it will be obvious), but you can also ask R what type of object an object is with <code>typeof</code>. For example:</p>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb71-1" data-line-number="1"><span class="kw">typeof</span>(die)</a>
+<a class="sourceLine" id="cb71-2" data-line-number="2">##  &quot;double&quot;</a></code></pre></div>
+<p>Some R functions refer to doubles as “numerics,” and I will often do the same. Double is a computer science term. It refers to the specific number of bytes your computer uses to store a number, but I find “numeric” to be much more intuitive when doing data science.</p>
+</div>
+<div id="integers" class="section level3">
+<h3><span class="header-section-number">3.1.2</span> Integers</h3>
+<p>Integer vectors store integers, numbers that can be written without a decimal component. As a data scientist, you won’t use the integer type very often because you can save integers as a double object.</p>
+<p>You can specifically create an integer in R by typing a number followed by an uppercase <code>L</code>. For example:</p>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb72-1" data-line-number="1">int &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="op">-</span>1L, 2L, 4L)</a>
+<a class="sourceLine" id="cb72-2" data-line-number="2">int</a>
+<a class="sourceLine" id="cb72-3" data-line-number="3">## -1  2  4</a>
+<a class="sourceLine" id="cb72-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb72-5" data-line-number="5"><span class="kw">typeof</span>(int)</a>
+<a class="sourceLine" id="cb72-6" data-line-number="6">## &quot;integer&quot;</a></code></pre></div>
+<p>Note that R won’t save a number as an integer unless you include the <code>L</code>. Integer numbers without the <code>L</code> will be saved as doubles. The only difference between <code>4</code> and <code>4L</code> is how R saves the number in your computer’s memory. Integers are defined more precisely in your computer’s memory than doubles (unless the integer is <em>very</em> large or small).</p>
+<p>Why would you save your data as an integer instead of a double? Sometimes a difference in precision can have surprising effects. Your computer allocates 64 bits of memory to store each double in an R program. This allows a lot of precision, but some numbers cannot be expressed exactly in 64 bits, the equivalent of a sequence of 64 ones and zeroes. For example, the number latexmath:<span class="math inline">\(\pi\)</span> contains an endless sequences of digits to the right of the decimal place. Your computer must round <span class="math inline">\(\pi\)</span> to something close to, but not exactly equal to <span class="math inline">\(\pi\)</span> to store <span class="math inline">\(\pi\)</span> in its memory. Many decimal numbers share a similar fate.</p>
+<p>As a result, each double is accurate to about 16 significant digits. This introduces a little bit of error. In most cases, this rounding error will go unnoticed. However, in some situations, the rounding error can cause surprising results. For example, you may expect the result of the expression below to be zero, but it is not:</p>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb73-1" data-line-number="1"><span class="kw">sqrt</span>(<span class="dv">2</span>)<span class="op">^</span><span class="dv">2</span> <span class="op">-</span><span class="st"> </span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb73-2" data-line-number="2">## 4.440892e-16</a></code></pre></div>
+<p>The square root of two cannot be expressed exactly in 16 significant digits. As a result, R has to round the quantity, and the expression resolves to something very close to—but not quite—zero.</p>
+<p>These errors are known as <em>floating-point</em> errors, and doing arithmetic in these conditions is known as <em>floating-point arithmetic</em>. Floating-point arithmetic is not a feature of R; it is a feature of computer programming. Usually floating-point errors won’t be enough to ruin your day. Just keep in mind that they may be the cause of surprising results.</p>
+<p>You can avoid floating-point errors by avoiding decimals and only using integers. However, this is not an option in most data-science situations. You cannot do much math with integers before you need a noninteger to express the result. Luckily, the errors caused by floating-point arithmetic are usually insignificant (and when they are not, they are easy to spot). As a result, you’ll generally use doubles instead of integers as a data scientist.</p>
+</div>
+<div id="characters" class="section level3">
+<h3><span class="header-section-number">3.1.3</span> Characters</h3>
+<p>A character vector stores small pieces of text. You can create a character vector in R by typing a character or string of characters surrounded by quotes:</p>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb74-1" data-line-number="1">text &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Hello&quot;</span>,  <span class="st">&quot;World&quot;</span>)</a>
+<a class="sourceLine" id="cb74-2" data-line-number="2">text</a>
+<a class="sourceLine" id="cb74-3" data-line-number="3">##  &quot;Hello&quot;  &quot;World&quot;</a>
+<a class="sourceLine" id="cb74-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb74-5" data-line-number="5"><span class="kw">typeof</span>(text)</a>
+<a class="sourceLine" id="cb74-6" data-line-number="6">## &quot;character&quot;</a>
+<a class="sourceLine" id="cb74-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb74-8" data-line-number="8"><span class="kw">typeof</span>(<span class="st">&quot;Hello&quot;</span>)</a>
+<a class="sourceLine" id="cb74-9" data-line-number="9">## &quot;character&quot;</a></code></pre></div>
+<p>The individual elements of a character vector are known as <em>strings</em>. Note that a string can contain more than just letters. You can assemble a character string from numbers or symbols as well.</p>
+
+<div class="exercise">
+<span id="exr:unnamed-chunk-10" class="exercise"><strong>Exercise 3.1  (Character or Number?)  </strong></span>Can you spot the difference between a character string and a number? Here’s a test: Which of these are character strings and which are numbers? <code>1</code>, <code>&quot;1&quot;</code>, <code>&quot;one&quot;</code>.
+</div>
+
+
+<div class="solution">
+ <span class="solution"><em>Solution. </em></span> <code>&quot;1&quot;</code> and <code>&quot;one&quot;</code> are both character strings.
+</div>
+
+<p>Character strings can contain number characters, but that doesn’t make them numeric. They’re just strings that happen to have numbers in them. You can tell strings from real numbers because strings come surrounded by quotes. In fact, anything surrounded by quotes in R will be treated as a character string—no matter what appears between the quotes.</p>
+<p>It is easy to confuse R objects with character strings. Why? Because both appear as pieces of text in R code. For example, <code>x</code> is the name of an R object named “x,” <code>&quot;x&quot;</code> is a character string that contains the character “x.” One is an object that contains raw data, the other is a piece of raw data itself.</p>
+<p>Expect an error whenever you forget your quotation marks; R will start looking for an object that probably does not exist.</p>
+</div>
+<div id="logicals" class="section level3">
+<h3><span class="header-section-number">3.1.4</span> Logicals</h3>
+<p>Logical vectors store <code>TRUE</code>s and <code>FALSE</code>s, R’s form of Boolean data. Logicals are very helpful for doing things like comparisons:</p>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb75-1" data-line-number="1"><span class="dv">3</span> <span class="op">&gt;</span><span class="st"> </span><span class="dv">4</span></a>
+<a class="sourceLine" id="cb75-2" data-line-number="2">## FALSE</a></code></pre></div>
+<p>Any time you type <code>TRUE</code> or <code>FALSE</code> in capital letters (without quotation marks), R will treat your input as logical data. R also assumes that <code>T</code> and <code>F</code> are shorthand for <code>TRUE</code> and <code>FALSE</code>:</p>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb76-1" data-line-number="1">logic &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb76-2" data-line-number="2">logic</a>
+<a class="sourceLine" id="cb76-3" data-line-number="3">##   TRUE FALSE  TRUE</a>
+<a class="sourceLine" id="cb76-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb76-5" data-line-number="5"><span class="kw">typeof</span>(logic)</a>
+<a class="sourceLine" id="cb76-6" data-line-number="6">## &quot;logical&quot;</a>
+<a class="sourceLine" id="cb76-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb76-8" data-line-number="8"><span class="kw">typeof</span>(F)</a>
+<a class="sourceLine" id="cb76-9" data-line-number="9">## &quot;logical&quot;</a></code></pre></div>
+</div>
+<div id="complex-and-raw" class="section level3">
+<h3><span class="header-section-number">3.1.5</span> Complex and Raw</h3>
+<p>Doubles, integers, characters, and logicals are the most common types of atomic vectors in R, but R also recognizes two more types: complex and raw. It is doubtful that you will ever use these to analyze data, but here they are for the sake of thoroughness.</p>
+<p>Complex vectors store complex numbers. To create a complex vector, add an imaginary term to a number with <code>i</code>:</p>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb77-1" data-line-number="1">comp &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>1i, <span class="dv">1</span> <span class="op">+</span><span class="st"> </span>2i, <span class="dv">1</span> <span class="op">+</span><span class="st"> </span>3i)</a>
+<a class="sourceLine" id="cb77-2" data-line-number="2">comp</a>
+<a class="sourceLine" id="cb77-3" data-line-number="3">## 1+1i 1+2i 1+3i</a>
+<a class="sourceLine" id="cb77-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb77-5" data-line-number="5"><span class="kw">typeof</span>(comp)</a>
+<a class="sourceLine" id="cb77-6" data-line-number="6">## &quot;complex&quot;</a></code></pre></div>
+<p>Raw vectors store raw bytes of data. Making raw vectors gets complicated, but you can make an empty raw vector of length <em>n</em> with <code>raw(n)</code>. See the help page of <code>raw</code> for more options when working with this type of data:</p>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb78-1" data-line-number="1"><span class="kw">raw</span>(<span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb78-2" data-line-number="2">## 00 00 00</a>
+<a class="sourceLine" id="cb78-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb78-4" data-line-number="4"><span class="kw">typeof</span>(<span class="kw">raw</span>(<span class="dv">3</span>))</a>
+<a class="sourceLine" id="cb78-5" data-line-number="5">## &quot;raw&quot;</a></code></pre></div>
+
+<div class="exercise">
+<p><span id="exr:unnamed-chunk-12" class="exercise"><strong>Exercise 3.2  (Vector of Cards)  </strong></span>Create an atomic vector that stores just the face names of the cards in a royal flush, for example, the ace of spades, king of spades, queen of spades, jack of spades, and ten of spades. The face name of the ace of spades would be “ace,” and “spades” is the suit.</p>
+Which type of vector will you use to save the names?
+</div>
+
+
+<div class="solution">
+ <span class="solution"><em>Solution. </em></span> A character vector is the most appropriate type of atomic vector in which to save card names. You can create one with the <code>c</code> function if you surround each name with quotation marks:
+</div>
+
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb79-1" data-line-number="1">hand &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;ace&quot;</span>, <span class="st">&quot;king&quot;</span>, <span class="st">&quot;queen&quot;</span>, <span class="st">&quot;jack&quot;</span>, <span class="st">&quot;ten&quot;</span>)</a>
+<a class="sourceLine" id="cb79-2" data-line-number="2">hand</a>
+<a class="sourceLine" id="cb79-3" data-line-number="3">## &quot;ace&quot;   &quot;king&quot;  &quot;queen&quot; &quot;jack&quot;  &quot;ten&quot;  </a>
+<a class="sourceLine" id="cb79-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb79-5" data-line-number="5"><span class="kw">typeof</span>(hand)</a>
+<a class="sourceLine" id="cb79-6" data-line-number="6">## &quot;character&quot;</a></code></pre></div>
+<p>This creates a one-dimensional group of card names—great job! Now let’s make a more sophisticated data structure, a two-dimensional table of card names and suits. You can build a more sophisticated object from an atomic vector by giving it some attributes and assigning it a class.</p>
+</div>
+</div>
+<div id="attributes" class="section level2">
+<h2><span class="header-section-number">3.2</span> Attributes</h2>
+<p>An attribute is a piece of information that you can attach to an atomic vector (or any R object). The attribute won’t affect any of the values in the object, and it will not appear when you display your object. You can think of an attribute as “metadata”; it is just a convenient place to put information associated with an object. R will normally ignore this metadata, but some R functions will check for specific attributes. These functions may use the attributes to do special things with the data.</p>
+<p>You can see which attributes an object has with <code>attributes</code>. <code>attributes</code> will return <code>NULL</code> if an object has no attributes. An atomic vector, like <code>die</code>, won’t have any attributes unless you give it some:</p>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb80-1" data-line-number="1"><span class="kw">attributes</span>(die)</a>
+<a class="sourceLine" id="cb80-2" data-line-number="2">## NULL</a></code></pre></div>
+
+<div class="rmdtip">
+<p><strong>NULL</strong></p>
+R uses <code>NULL</code> to represent the null set, an empty object. <code>NULL</code> is often returned by functions whose values are undefined. You can create a <code>NULL</code> object by typing <code>NULL</code> in capital letters.
+</div>
+
+<div id="names" class="section level3">
+<h3><span class="header-section-number">3.2.1</span> Names</h3>
+<p>The most common attributes to give an atomic vector are names, dimensions (dim), and classes. Each of these attributes has its own helper function that you can use to give attributes to an object. You can also use the helper functions to look up the value of these attributes for objects that already have them. For example, you can look up the value of the names attribute of <code>die</code> with <code>names</code>:</p>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb81-1" data-line-number="1"><span class="kw">names</span>(die)</a>
+<a class="sourceLine" id="cb81-2" data-line-number="2">## NULL</a></code></pre></div>
+<p><code>NULL</code> means that <code>die</code> does not have a names attribute. You can give one to <code>die</code> by assigning a character vector to the output of <code>names</code>. The vector should include one name for each element in <code>die</code>:</p>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb82-1" data-line-number="1"><span class="kw">names</span>(die) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;one&quot;</span>, <span class="st">&quot;two&quot;</span>, <span class="st">&quot;three&quot;</span>, <span class="st">&quot;four&quot;</span>, <span class="st">&quot;five&quot;</span>, <span class="st">&quot;six&quot;</span>)</a></code></pre></div>
+<p>Now <code>die</code> has a names attribute:</p>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb83-1" data-line-number="1"><span class="kw">names</span>(die)</a>
+<a class="sourceLine" id="cb83-2" data-line-number="2">## &quot;one&quot;   &quot;two&quot;   &quot;three&quot; &quot;four&quot;  &quot;five&quot;  &quot;six&quot; </a>
+<a class="sourceLine" id="cb83-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb83-4" data-line-number="4"><span class="kw">attributes</span>(die)</a>
+<a class="sourceLine" id="cb83-5" data-line-number="5">## $names</a>
+<a class="sourceLine" id="cb83-6" data-line-number="6">## [1] &quot;one&quot;   &quot;two&quot;   &quot;three&quot; &quot;four&quot;  &quot;five&quot;  &quot;six&quot;</a></code></pre></div>
+<p>R will display the names above the elements of <code>die</code> whenever you look at the vector:</p>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb84-1" data-line-number="1">die</a>
+<a class="sourceLine" id="cb84-2" data-line-number="2">##  one   two three  four  five   six </a>
+<a class="sourceLine" id="cb84-3" data-line-number="3">##    1     2     3     4     5     6 </a></code></pre></div>
+<p>However, the names won’t affect the actual values of the vector, nor will the names be affected when you manipulate the values of the vector:</p>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb85-1" data-line-number="1">die <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb85-2" data-line-number="2">##  one   two three  four  five   six </a>
+<a class="sourceLine" id="cb85-3" data-line-number="3">##    2     3     4     5     6     7</a></code></pre></div>
+<p>You can also use <code>names</code> to change the names attribute or remove it all together. To change the names, assign a new set of labels to <code>names</code>:</p>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb86-1" data-line-number="1"><span class="kw">names</span>(die) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;uno&quot;</span>, <span class="st">&quot;dos&quot;</span>, <span class="st">&quot;tres&quot;</span>, <span class="st">&quot;quatro&quot;</span>, <span class="st">&quot;cinco&quot;</span>, <span class="st">&quot;seis&quot;</span>)</a>
+<a class="sourceLine" id="cb86-2" data-line-number="2">die</a>
+<a class="sourceLine" id="cb86-3" data-line-number="3">##   uno    dos   tres quatro  cinco   seis </a>
+<a class="sourceLine" id="cb86-4" data-line-number="4">##     1      2      3      4      5      6 </a></code></pre></div>
+<p>To remove the names attribute, set it to <code>NULL</code>:</p>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb87-1" data-line-number="1"><span class="kw">names</span>(die) &lt;-<span class="st"> </span><span class="ot">NULL</span></a>
+<a class="sourceLine" id="cb87-2" data-line-number="2">die</a>
+<a class="sourceLine" id="cb87-3" data-line-number="3">##  1 2 3 4 5 6</a></code></pre></div>
+</div>
+<div id="dim" class="section level3">
+<h3><span class="header-section-number">3.2.2</span> Dim</h3>
+<p>You can transform an atomic vector into an <em>n</em>-dimensional array by giving it a dimensions attribute with <code>dim</code>. To do this, set the <code>dim</code> attribute to a numeric vector of length <em>n</em>. R will reorganize the elements of the vector into <em>n</em> dimensions. Each dimension will have as many rows (or columns, etc.) as the <em>nth</em> value of the <code>dim</code> vector. For example, you can reorganize <code>die</code> into a 2 × 3 matrix (which has 2 rows and 3 columns):</p>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb88-1" data-line-number="1"><span class="kw">dim</span>(die) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb88-2" data-line-number="2">die</a>
+<a class="sourceLine" id="cb88-3" data-line-number="3">##      [,1] [,2] [,3]</a>
+<a class="sourceLine" id="cb88-4" data-line-number="4">## [1,]    1    3    5</a>
+<a class="sourceLine" id="cb88-5" data-line-number="5">## [2,]    2    4    6</a></code></pre></div>
+<p>or a 3 × 2 matrix (which has 3 rows and 2 columns):</p>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb89-1" data-line-number="1"><span class="kw">dim</span>(die) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb89-2" data-line-number="2">die</a>
+<a class="sourceLine" id="cb89-3" data-line-number="3">##      [,1] [,2]</a>
+<a class="sourceLine" id="cb89-4" data-line-number="4">## [1,]    1    4</a>
+<a class="sourceLine" id="cb89-5" data-line-number="5">## [2,]    2    5</a>
+<a class="sourceLine" id="cb89-6" data-line-number="6">## [3,]    3    6</a></code></pre></div>
+<p>or a 1 × 2 × 3 hypercube (which has 1 row, 2 columns, and 3 “slices”). This is a three-dimensional structure, but R will need to show it slice by slice by slice on your two-dimensional computer screen:</p>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb90-1" data-line-number="1"><span class="kw">dim</span>(die) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb90-2" data-line-number="2">die</a>
+<a class="sourceLine" id="cb90-3" data-line-number="3">## , , 1</a>
+<a class="sourceLine" id="cb90-4" data-line-number="4">## </a>
+<a class="sourceLine" id="cb90-5" data-line-number="5">##      [,1] [,2]</a>
+<a class="sourceLine" id="cb90-6" data-line-number="6">## [1,]    1    2</a>
+<a class="sourceLine" id="cb90-7" data-line-number="7">## </a>
+<a class="sourceLine" id="cb90-8" data-line-number="8">## , , 2</a>
+<a class="sourceLine" id="cb90-9" data-line-number="9">## </a>
+<a class="sourceLine" id="cb90-10" data-line-number="10">##      [,1] [,2]</a>
+<a class="sourceLine" id="cb90-11" data-line-number="11">## [1,]    3    4</a>
+<a class="sourceLine" id="cb90-12" data-line-number="12">## </a>
+<a class="sourceLine" id="cb90-13" data-line-number="13">## , , 3</a>
+<a class="sourceLine" id="cb90-14" data-line-number="14">## </a>
+<a class="sourceLine" id="cb90-15" data-line-number="15">##      [,1] [,2]</a>
+<a class="sourceLine" id="cb90-16" data-line-number="16">## [1,]    5    6</a></code></pre></div>
+<p>R will always use the first value in <code>dim</code> for the number of rows and the second value for the number of columns. In general, rows always come first in R operations that deal with both rows and columns.</p>
+<p>You may notice that you don’t have much control over how R reorganizes the values into rows and columns. For example, R always fills up each matrix by columns, instead of by rows. If you’d like more control over this process, you can use one of R’s helper functions, <code>matrix</code> or <code>array</code>. They do the same thing as changing the <code>dim</code> attribute, but they provide extra arguments to customize the process.</p>
+</div>
+</div>
+<div id="matrices" class="section level2">
+<h2><span class="header-section-number">3.3</span> Matrices</h2>
+<p>Matrices store values in a two-dimensional array, just like a matrix from linear algebra. To create one, first give <code>matrix</code> an atomic vector to reorganize into a matrix. Then, define how many rows should be in the matrix by setting the <code>nrow</code> argument to a number. <code>matrix</code> will organize your vector of values into a matrix with the specified number of rows. Alternatively, you can set the <code>ncol</code> argument, which tells R how many columns to include in the matrix:</p>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb91-1" data-line-number="1">m &lt;-<span class="st"> </span><span class="kw">matrix</span>(die, <span class="dt">nrow =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb91-2" data-line-number="2">m</a>
+<a class="sourceLine" id="cb91-3" data-line-number="3">##      [,1] [,2] [,3]</a>
+<a class="sourceLine" id="cb91-4" data-line-number="4">## [1,]    1    3    5</a>
+<a class="sourceLine" id="cb91-5" data-line-number="5">## [2,]    2    4    6</a></code></pre></div>
+<p><code>matrix</code> will fill up the matrix column by column by default, but you can fill the matrix row by row if you include the argument <code>byrow = TRUE</code>:</p>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb92-1" data-line-number="1">m &lt;-<span class="st"> </span><span class="kw">matrix</span>(die, <span class="dt">nrow =</span> <span class="dv">2</span>, <span class="dt">byrow =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb92-2" data-line-number="2">m</a>
+<a class="sourceLine" id="cb92-3" data-line-number="3">##      [,1] [,2] [,3]</a>
+<a class="sourceLine" id="cb92-4" data-line-number="4">## [1,]    1    2    3</a>
+<a class="sourceLine" id="cb92-5" data-line-number="5">## [2,]    4    5    6</a></code></pre></div>
+<p><code>matrix</code> also has other default arguments that you can use to customize your matrix. You can read about them at <code>matrix</code>’s help page (accessible by <code>?matrix</code>).</p>
+</div>
+<div id="arrays" class="section level2">
+<h2><span class="header-section-number">3.4</span> Arrays</h2>
+<p>The <code>array</code> function creates an n-dimensional array. For example, you could use <code>array</code> to sort values into a cube of three dimensions or a hypercube in 4, 5, or <em>n</em> dimensions. <code>array</code> is not as customizeable as <code>matrix</code> and basically does the same thing as setting the <code>dim</code> attribute. To use <code>array</code>, provide an atomic vector as the first argument, and a vector of dimensions as the second argument, now called <code>dim</code>:</p>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb93-1" data-line-number="1">ar &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="kw">c</span>(<span class="dv">11</span><span class="op">:</span><span class="dv">14</span>, <span class="dv">21</span><span class="op">:</span><span class="dv">24</span>, <span class="dv">31</span><span class="op">:</span><span class="dv">34</span>), <span class="dt">dim =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">3</span>))</a>
+<a class="sourceLine" id="cb93-2" data-line-number="2">ar</a>
+<a class="sourceLine" id="cb93-3" data-line-number="3">## , , 1</a>
+<a class="sourceLine" id="cb93-4" data-line-number="4">## </a>
+<a class="sourceLine" id="cb93-5" data-line-number="5">##      [,1] [,2]</a>
+<a class="sourceLine" id="cb93-6" data-line-number="6">## [1,]   11   13</a>
+<a class="sourceLine" id="cb93-7" data-line-number="7">## [2,]   12   14</a>
+<a class="sourceLine" id="cb93-8" data-line-number="8">## </a>
+<a class="sourceLine" id="cb93-9" data-line-number="9">## , , 2</a>
+<a class="sourceLine" id="cb93-10" data-line-number="10">## </a>
+<a class="sourceLine" id="cb93-11" data-line-number="11">##      [,1] [,2]</a>
+<a class="sourceLine" id="cb93-12" data-line-number="12">## [1,]   21   23</a>
+<a class="sourceLine" id="cb93-13" data-line-number="13">## [2,]   22   24</a>
+<a class="sourceLine" id="cb93-14" data-line-number="14">## </a>
+<a class="sourceLine" id="cb93-15" data-line-number="15">## , , 3</a>
+<a class="sourceLine" id="cb93-16" data-line-number="16">## </a>
+<a class="sourceLine" id="cb93-17" data-line-number="17">##      [,1] [,2]</a>
+<a class="sourceLine" id="cb93-18" data-line-number="18">## [1,]   31   33</a>
+<a class="sourceLine" id="cb93-19" data-line-number="19">## [2,]   32   34</a></code></pre></div>
+
+<div class="exercise">
+<span id="exr:unnamed-chunk-15" class="exercise"><strong>Exercise 3.3  (Make a Matrix)  </strong></span>Create the following matrix, which stores the name and suit of every card in a royal flush.
+</div>
+
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb94-1" data-line-number="1">##      [,1]    [,2]    </a>
+<a class="sourceLine" id="cb94-2" data-line-number="2">## [1,] &quot;ace&quot;   &quot;spades&quot;</a>
+<a class="sourceLine" id="cb94-3" data-line-number="3">## [2,] &quot;king&quot;  &quot;spades&quot;</a>
+<a class="sourceLine" id="cb94-4" data-line-number="4">## [3,] &quot;queen&quot; &quot;spades&quot;</a>
+<a class="sourceLine" id="cb94-5" data-line-number="5">## [4,] &quot;jack&quot;  &quot;spades&quot;</a>
+<a class="sourceLine" id="cb94-6" data-line-number="6">## [5,] &quot;ten&quot;   &quot;spades&quot;</a></code></pre></div>
+
+<div class="solution">
+ <span class="solution"><em>Solution. </em></span> There is more than one way to build this matrix, but in every case, you will need to start by making a character vector with 10 values. If you start with the following character vector, you can turn it into a matrix with any of the following three commands:
+</div>
+
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb95-1" data-line-number="1">hand1 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;ace&quot;</span>, <span class="st">&quot;king&quot;</span>, <span class="st">&quot;queen&quot;</span>, <span class="st">&quot;jack&quot;</span>, <span class="st">&quot;ten&quot;</span>, <span class="st">&quot;spades&quot;</span>, <span class="st">&quot;spades&quot;</span>, </a>
+<a class="sourceLine" id="cb95-2" data-line-number="2">  <span class="st">&quot;spades&quot;</span>, <span class="st">&quot;spades&quot;</span>, <span class="st">&quot;spades&quot;</span>)</a>
+<a class="sourceLine" id="cb95-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb95-4" data-line-number="4"><span class="kw">matrix</span>(hand1, <span class="dt">nrow =</span> <span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb95-5" data-line-number="5"><span class="kw">matrix</span>(hand1, <span class="dt">ncol =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb95-6" data-line-number="6"><span class="kw">dim</span>(hand1) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">2</span>)</a></code></pre></div>
+<p>You can also start with a character vector that lists the cards in a slightly different order. In this case, you will need to ask R to fill the matrix row by row instead of column by column:</p>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb96-1" data-line-number="1">hand2 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;ace&quot;</span>, <span class="st">&quot;spades&quot;</span>, <span class="st">&quot;king&quot;</span>, <span class="st">&quot;spades&quot;</span>, <span class="st">&quot;queen&quot;</span>, <span class="st">&quot;spades&quot;</span>, <span class="st">&quot;jack&quot;</span>, </a>
+<a class="sourceLine" id="cb96-2" data-line-number="2">  <span class="st">&quot;spades&quot;</span>, <span class="st">&quot;ten&quot;</span>, <span class="st">&quot;spades&quot;</span>)</a>
+<a class="sourceLine" id="cb96-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb96-4" data-line-number="4"><span class="kw">matrix</span>(hand2, <span class="dt">nrow =</span> <span class="dv">5</span>, <span class="dt">byrow =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb96-5" data-line-number="5"><span class="kw">matrix</span>(hand2, <span class="dt">ncol =</span> <span class="dv">2</span>, <span class="dt">byrow =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+</div>
+<div id="class" class="section level2">
+<h2><span class="header-section-number">3.5</span> Class</h2>
+<p>Notice that changing the dimensions of your object will not change the type of the object, but it <em>will</em> change the object’s <code>class</code> attribute:</p>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb97-1" data-line-number="1"><span class="kw">dim</span>(die) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb97-2" data-line-number="2"><span class="kw">typeof</span>(die)</a>
+<a class="sourceLine" id="cb97-3" data-line-number="3">##  &quot;double&quot;</a>
+<a class="sourceLine" id="cb97-4" data-line-number="4"> </a>
+<a class="sourceLine" id="cb97-5" data-line-number="5"><span class="kw">class</span>(die)</a>
+<a class="sourceLine" id="cb97-6" data-line-number="6">##  &quot;matrix&quot;</a></code></pre></div>
+<p>A matrix is a special case of an atomic vector. For example, the <code>die</code> matrix is a special case of a double vector. Every element in the matrix is still a double, but the elements have been arranged into a new structure. R added a <code>class</code> attribute to <code>die</code> when you changed its dimensions. This class describes <code>die</code>’s new format. Many R functions will specifically look for an object’s <code>class</code> attribute, and then handle the object in a predetermined way based on the attribute.</p>
+<p>Note that an object’s <code>class</code> attribute will not always appear when you run <code>attributes</code>; you may need to specifically search for it with <code>class</code>:</p>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb98-1" data-line-number="1"><span class="kw">attributes</span>(die)</a>
+<a class="sourceLine" id="cb98-2" data-line-number="2">## $dim</a>
+<a class="sourceLine" id="cb98-3" data-line-number="3">## [1] 2 3</a></code></pre></div>
+<p>You can apply <code>class</code> to objects that do not have a <code>class</code> attribute. <code>class</code> will return a value based on the object’s atomic type. Notice that the “class” of a double is “numeric,” an odd deviation, but one I am thankful for. I think that the most important property of a double vector is that it contains numbers, a property that “numeric” makes obvious:</p>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb99-1" data-line-number="1"><span class="kw">class</span>(<span class="st">&quot;Hello&quot;</span>)</a>
+<a class="sourceLine" id="cb99-2" data-line-number="2">##  &quot;character&quot;</a>
+<a class="sourceLine" id="cb99-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb99-4" data-line-number="4"><span class="kw">class</span>(<span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb99-5" data-line-number="5">##  &quot;numeric&quot;</a></code></pre></div>
+<p>You can also use <code>class</code> to set an object’s <code>class</code> attribute, but this is usually a bad idea. R will expect objects of a class to share certain traits, such as attributes, that your object may not possess. You’ll learn how to make and use your own classes in <a href="project-3-slot-machine.html#project-3-slot-machine">Project 3: Slot Machine</a>.</p>
+<div id="dates-and-times" class="section level3">
+<h3><span class="header-section-number">3.5.1</span> Dates and Times</h3>
+<p>The attribute system lets R represent more types of data than just doubles, integers, characters, logicals, complexes, and raws. The time looks like a character string when you display it, but its data type is actually <code>&quot;double&quot;</code>, and its class is <code>&quot;POSIXct&quot;</code> <code>&quot;POSIXt&quot;</code> (it has two classes):</p>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb100-1" data-line-number="1">now &lt;-<span class="st"> </span><span class="kw">Sys.time</span>()</a>
+<a class="sourceLine" id="cb100-2" data-line-number="2">now</a>
+<a class="sourceLine" id="cb100-3" data-line-number="3">## &quot;2014-03-17 12:00:00 UTC&quot;</a>
+<a class="sourceLine" id="cb100-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb100-5" data-line-number="5"><span class="kw">typeof</span>(now)</a>
+<a class="sourceLine" id="cb100-6" data-line-number="6">##  &quot;double&quot;</a>
+<a class="sourceLine" id="cb100-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb100-8" data-line-number="8"><span class="kw">class</span>(now)</a>
+<a class="sourceLine" id="cb100-9" data-line-number="9">## &quot;POSIXct&quot; &quot;POSIXt&quot; </a></code></pre></div>
+<p>POSIXct is a widely used framework for representing dates and times. In the POSIXct framework, each time is represented by the number of seconds that have passed between the time and 12:00 AM January 1st 1970 (in the Universal Time Coordinated (UTC) zone). For example, the time above occurs 1,395,057,600 seconds after then. So in the POSIXct system, the time would be saved as 1395057600.</p>
+<p>R creates the time object by building a double vector with one element, <code>1395057600</code>. You can see this vector by removing the <code>class</code> attribute of <code>now</code>, or by using the <code>unclass</code> function, which does the same thing:</p>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb101-1" data-line-number="1"><span class="kw">unclass</span>(now)</a>
+<a class="sourceLine" id="cb101-2" data-line-number="2">## 1395057600</a></code></pre></div>
+<p>R then gives the double vector a <code>class</code> attribute that contains two classes, <code>&quot;POSIXct&quot;</code> and <code>&quot;POSIXt&quot;</code>. This attribute alerts R functions that they are dealing with a POSIXct time, so they can treat it in a special way. For example, R functions will use the POSIXct standard to convert the time into a user-friendly character string before displaying it.</p>
+<p>You can take advantage of this system by giving the <code>POSIXct</code> class to random R objects. For example, have you ever wondered what day it was a million seconds after 12:00 a.m. Jan. 1, 1970?</p>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb102-1" data-line-number="1">mil &lt;-<span class="st"> </span><span class="dv">1000000</span></a>
+<a class="sourceLine" id="cb102-2" data-line-number="2">mil</a>
+<a class="sourceLine" id="cb102-3" data-line-number="3">## 1e+06</a>
+<a class="sourceLine" id="cb102-4" data-line-number="4"> </a>
+<a class="sourceLine" id="cb102-5" data-line-number="5"><span class="kw">class</span>(mil) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;POSIXct&quot;</span>, <span class="st">&quot;POSIXt&quot;</span>)</a>
+<a class="sourceLine" id="cb102-6" data-line-number="6">mil</a>
+<a class="sourceLine" id="cb102-7" data-line-number="7">## &quot;1970-01-12 13:46:40 UTC&quot;</a></code></pre></div>
+<p>Jan. 12, 1970. Yikes. A million seconds goes by faster than you would think. This conversion worked well because the <code>POSIXct</code> class does not rely on any additional attributes, but in general, forcing the class of an object is a bad idea.</p>
+<p>There are many different classes of data in R and its packages, and new classes are invented every day. It would be difficult to learn about every class, but you do not have to. Most classes are only useful in specific situations. Since each class comes with its own help page, you can wait to learn about a class until you encounter it. However, there is one class of data that is so ubiquitous in R that you should learn about it alongside the atomic data types. That class is <code>factors</code>.</p>
+</div>
+<div id="factors" class="section level3">
+<h3><span class="header-section-number">3.5.2</span> Factors</h3>
+<p>Factors are R’s way of storing categorical information, like ethnicity or eye color. Think of a factor as something like a gender; it can only have certain values (male or female), and these values may have their own idiosyncratic order (ladies first). This arrangement makes factors very useful for recording the treatment levels of a study and other categorical variables.</p>
+<p>To make a factor, pass an atomic vector into the <code>factor</code> function. R will recode the data in the vector as integers and store the results in an integer vector. R will also add a <code>levels</code> attribute to the integer, which contains a set of labels for displaying the factor values, and a <code>class</code> attribute, which contains the class <code>factor</code>:</p>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb103-1" data-line-number="1">gender &lt;-<span class="st"> </span><span class="kw">factor</span>(<span class="kw">c</span>(<span class="st">&quot;male&quot;</span>, <span class="st">&quot;female&quot;</span>, <span class="st">&quot;female&quot;</span>, <span class="st">&quot;male&quot;</span>))</a>
+<a class="sourceLine" id="cb103-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb103-3" data-line-number="3"><span class="kw">typeof</span>(gender)</a>
+<a class="sourceLine" id="cb103-4" data-line-number="4">## &quot;integer&quot;</a>
+<a class="sourceLine" id="cb103-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb103-6" data-line-number="6"><span class="kw">attributes</span>(gender)</a>
+<a class="sourceLine" id="cb103-7" data-line-number="7">## $levels</a>
+<a class="sourceLine" id="cb103-8" data-line-number="8">## [1] &quot;female&quot; &quot;male&quot;  </a>
+<a class="sourceLine" id="cb103-9" data-line-number="9">## </a>
+<a class="sourceLine" id="cb103-10" data-line-number="10">## $class</a>
+<a class="sourceLine" id="cb103-11" data-line-number="11">## [1] &quot;factor&quot;</a></code></pre></div>
+<p>You can see exactly how R is storing your factor with <code>unclass</code>:</p>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb104-1" data-line-number="1"><span class="kw">unclass</span>(gender)</a>
+<a class="sourceLine" id="cb104-2" data-line-number="2">## [1] 2 1 1 2</a>
+<a class="sourceLine" id="cb104-3" data-line-number="3">## attr(,&quot;levels&quot;)</a>
+<a class="sourceLine" id="cb104-4" data-line-number="4">## [1] &quot;female&quot; &quot;male&quot;  </a></code></pre></div>
+<p>R uses the levels attribute when it displays the factor, as you will see. R will display each <code>1</code> as <code>female</code>, the first label in the levels vector, and each <code>2</code> as <code>male</code>, the second label. If the factor included <code>3</code>s, they would be displayed as the third label, and so on:</p>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb105-1" data-line-number="1">gender</a>
+<a class="sourceLine" id="cb105-2" data-line-number="2">## male   female female male  </a>
+<a class="sourceLine" id="cb105-3" data-line-number="3">## Levels: female male</a></code></pre></div>
+<p>Factors make it easy to put categorical variables into a statistical model because the variables are already coded as numbers. However, factors can be confusing since they look like character strings but behave like integers.</p>
+<p>R will often try to convert character strings to factors when you load and create data. In general, you will have a smoother experience if you do not let R make factors until you ask for them. I’ll show you how to do this when we start reading in data.</p>
+<p>You can convert a factor to a character string with the <code>as.character</code> function. R will retain the display version of the factor, not the integers stored in memory:</p>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb106-1" data-line-number="1"><span class="kw">as.character</span>(gender)</a>
+<a class="sourceLine" id="cb106-2" data-line-number="2">## &quot;male&quot;   &quot;female&quot; &quot;female&quot; &quot;male&quot;</a></code></pre></div>
+<p>Now that you understand the possibilities provided by R’s atomic vectors, let’s make a more complicated type of playing card.</p>
+
+<div class="exercise">
+<p><span id="exr:unnamed-chunk-17" class="exercise"><strong>Exercise 3.4  (Write a Card)  </strong></span>Many card games assign a numerical value to each card. For example, in blackjack, each face card is worth 10 points, each number card is worth between 2 and 10 points, and each ace is worth 1 or 11 points, depending on the final score.</p>
+Make a virtual playing card by combining “ace,” “heart,” and 1 into a vector. What type of atomic vector will result? Check if you are right.
+</div>
+
+
+<div class="solution">
+ <span class="solution"><em>Solution. </em></span> You may have guessed that this exercise would not go well. Each atomic vector can only store one type of data. As a result, R coerces all of your values to character strings:
+</div>
+
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb107-1" data-line-number="1">card &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;ace&quot;</span>, <span class="st">&quot;hearts&quot;</span>, <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb107-2" data-line-number="2">card</a>
+<a class="sourceLine" id="cb107-3" data-line-number="3">## &quot;ace&quot;    &quot;hearts&quot; &quot;1&quot; </a></code></pre></div>
+<p>This will cause trouble if you want to do math with that point value, for example, to see who won your game of blackjack.</p>
+
+<div class="rmdwarning">
+<p><strong>Data types in vectors</strong></p>
+If you try to put multiple types of data into a vector, R will convert the elements to a single type of data.
+</div>
+
+<p>Since matrices and arrays are special cases of atomic vectors, they suffer from the same behavior. Each can only store one type of data.</p>
+<p>This creates a couple of problems. First, many data sets contain multiple types of data. Simple programs like Excel and Numbers can save multiple types of data in the same data set, and you should hope that R can too. Don’t worry, it can.</p>
+<p>Second, coercion is a common behavior in R, so you’ll want to know how it works.</p>
+</div>
+</div>
+<div id="coercion" class="section level2">
+<h2><span class="header-section-number">3.6</span> Coercion</h2>
+<p>R’s coercion behavior may seem inconvenient, but it is not arbitrary. R always follows the same rules when it coerces data types. Once you are familiar with these rules, you can use R’s coercion behavior to do surprisingly useful things.</p>
+<p>So how does R coerce data types? If a character string is present in an atomic vector, R will convert everything else in the vector to character strings. If a vector only contains logicals and numbers, R will convert the logicals to numbers; every <code>TRUE</code> becomes a 1, and every <code>FALSE</code> becomes a 0, as shown in <a href="r-objects.html#fig:coercion">3.1</a>.</p>
+<div class="figure"><span id="fig:coercion"></span>
+<img src="images/hopr_0301.png" alt="R always uses the same rules to coerce data to a single type. If character strings are present, everything will be coerced to a character string. Otherwise, logicals are coerced to numerics."  />
+<p class="caption">
+Figure 3.1: R always uses the same rules to coerce data to a single type. If character strings are present, everything will be coerced to a character string. Otherwise, logicals are coerced to numerics.
+</p>
+</div>
+<p>This arrangement preserves information. It is easy to look at a character string and tell what information it used to contain. For example, you can easily spot the origins of <code>&quot;TRUE&quot;</code> and <code>&quot;5&quot;</code>. You can also easily back-transform a vector of 1s and 0s to <code>TRUE</code>s and <code>FALSE</code>s.</p>
+<p>R uses the same coercion rules when you try to do math with logical values. So the following code:</p>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb108-1" data-line-number="1"><span class="kw">sum</span>(<span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">FALSE</span>))</a></code></pre></div>
+<p>will become:</p>
+<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb109-1" data-line-number="1"><span class="kw">sum</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>))</a>
+<a class="sourceLine" id="cb109-2" data-line-number="2">## 2</a></code></pre></div>
+<p>This means that <code>sum</code> will count the number of <code>TRUE</code>s in a logical vector (and <code>mean</code> will calculate the proportion of <code>TRUE</code>s). Neat, huh?</p>
+<p>You can explicitly ask R to convert data from one type to another with the <code>as</code> functions. R will convert the data whenever there is a sensible way to do so:</p>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb110-1" data-line-number="1"><span class="kw">as.character</span>(<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb110-2" data-line-number="2">## &quot;1&quot;</a>
+<a class="sourceLine" id="cb110-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb110-4" data-line-number="4"><span class="kw">as.logical</span>(<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb110-5" data-line-number="5">## TRUE</a>
+<a class="sourceLine" id="cb110-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb110-7" data-line-number="7"><span class="kw">as.numeric</span>(<span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb110-8" data-line-number="8">## 0</a></code></pre></div>
+<p>You now know how R coerces data types, but this won’t help you save a playing card. To do that, you will need to avoid coercion altogether. You can do this by using a new type of object, a <em>list</em>.</p>
+<p>Before we look at lists, let’s address a question that might be on your mind.</p>
+<p>Many data sets contain multiple types of information. The inability of vectors, matrices, and arrays to store multiple data types seems like a major limitation. So why bother with them?</p>
+<p>In some cases, using only a single type of data is a huge advantage. Vectors, matrices, and arrays make it very easy to do math on large sets of numbers because R knows that it can manipulate each value the same way. Operations with vectors, matrices, and arrays also tend to be fast because the objects are so simple to store in memory.</p>
+<p>In other cases, allowing only a single type of data is not a disadvantage. Vectors are the most common data structure in R because they store variables very well. Each value in a variable measures the same property, so there’s no need to use different types of data.</p>
+</div>
+<div id="lists" class="section level2">
+<h2><span class="header-section-number">3.7</span> Lists</h2>
+<p>Lists are like atomic vectors because they group data into a one-dimensional set. However, lists do not group together individual values; lists group together R objects, such as atomic vectors and other lists. For example, you can make a list that contains a numeric vector of length 31 in its first element, a character vector of length 1 in its second element, and a new list of length 2 in its third element. To do this, use the <code>list</code> function.</p>
+<p><code>list</code> creates a list the same way <code>c</code> creates a vector. Separate each element in the list with a comma:</p>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb111-1" data-line-number="1">list1 &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dv">100</span><span class="op">:</span><span class="dv">130</span>, <span class="st">&quot;R&quot;</span>, <span class="kw">list</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>))</a>
+<a class="sourceLine" id="cb111-2" data-line-number="2">list1</a>
+<a class="sourceLine" id="cb111-3" data-line-number="3">## [[1]]</a>
+<a class="sourceLine" id="cb111-4" data-line-number="4">## [1] 100 101 102 103 104 105 106 107 108 109 110 111 112</a>
+<a class="sourceLine" id="cb111-5" data-line-number="5">## [14] 113 114 115 116 117 118 119 120 121 122 123 124 125</a>
+<a class="sourceLine" id="cb111-6" data-line-number="6">## [27] 126 127 128 129 130</a>
+<a class="sourceLine" id="cb111-7" data-line-number="7">## </a>
+<a class="sourceLine" id="cb111-8" data-line-number="8">## [[2]]</a>
+<a class="sourceLine" id="cb111-9" data-line-number="9">## [1] &quot;R&quot;</a>
+<a class="sourceLine" id="cb111-10" data-line-number="10">##</a>
+<a class="sourceLine" id="cb111-11" data-line-number="11">## [[3]]</a>
+<a class="sourceLine" id="cb111-12" data-line-number="12">## [[3]][[1]]</a>
+<a class="sourceLine" id="cb111-13" data-line-number="13">## [1] TRUE</a>
+<a class="sourceLine" id="cb111-14" data-line-number="14">##</a>
+<a class="sourceLine" id="cb111-15" data-line-number="15">## [[3]][[2]]</a>
+<a class="sourceLine" id="cb111-16" data-line-number="16">## [1] FALSE</a></code></pre></div>
+<p>I left the <code>[1]</code> notation in the output so you can see how it changes for lists. The double-bracketed indexes tell you which element of the list is being displayed. The single-bracket indexes tell you which subelement of an element is being displayed. For example, <code>100</code> is the first subelement of the first element in the list. <code>&quot;R&quot;</code> is the first sub-element of the second element. This two-system notation arises because each element of a list can be <em>any</em> R object, including a new vector (or list) with its own indexes.</p>
+<p>Lists are a basic type of object in R, on par with atomic vectors. Like atomic vectors, they are used as building blocks to create many more spohisticated types of R objects.</p>
+<p>As you can imagine, the structure of lists can become quite complicated, but this flexibility makes lists a useful all-purpose storage tool in R: you can group together anything with a list.</p>
+<p>However, not every list needs to be complicated. You can store a playing card in a very simple list.</p>
+
+<div class="exercise">
+<span id="exr:unnamed-chunk-20" class="exercise"><strong>Exercise 3.5  (Use a List to Make a Card)  </strong></span>Use a list to store a single playing card, like the ace of hearts, which has a point value of one. The list should save the face of the card, the suit, and the point value in separate elements.
+</div>
+
+
+<div class="solution">
+ <span class="solution"><em>Solution. </em></span> You can create your card like this. In the following example, the first element of the list is a character vector (of length 1). The second element is also a character vector, and the third element is a numeric vector:
+</div>
+
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb112-1" data-line-number="1">card &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="st">&quot;ace&quot;</span>, <span class="st">&quot;hearts&quot;</span>, <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb112-2" data-line-number="2">card</a>
+<a class="sourceLine" id="cb112-3" data-line-number="3">## [[1]]</a>
+<a class="sourceLine" id="cb112-4" data-line-number="4">## [1] &quot;ace&quot;</a>
+<a class="sourceLine" id="cb112-5" data-line-number="5">##</a>
+<a class="sourceLine" id="cb112-6" data-line-number="6">## [[2]]</a>
+<a class="sourceLine" id="cb112-7" data-line-number="7">## [1] &quot;hearts&quot;</a>
+<a class="sourceLine" id="cb112-8" data-line-number="8">##</a>
+<a class="sourceLine" id="cb112-9" data-line-number="9">## [[3]]</a>
+<a class="sourceLine" id="cb112-10" data-line-number="10">## [1] 1</a></code></pre></div>
+<p>You can also use a list to store a whole deck of playing cards. Since you can save a single playing card as a list, you can save a deck of playing cards as a list of 52 sublists (one for each card). But let’s not bother—there’s a much cleaner way to do the same thing. You can use a special class of list, known as a <em>data frame</em>.</p>
+</div>
+<div id="data-frames" class="section level2">
+<h2><span class="header-section-number">3.8</span> Data Frames</h2>
+<p>Data frames are the two-dimensional version of a list. They are far and away the most useful storage structure for data analysis, and they provide an ideal way to store an entire deck of cards. You can think of a data frame as R’s equivalent to the Excel spreadsheet because it stores data in a similar format.</p>
+<p>Data frames group vectors together into a two-dimensional table. Each vector becomes a column in the table. As a result, each column of a data frame can contain a different type of data; but within a column, every cell must be the same type of data, as in <a href="r-objects.html#fig:data-frame">3.2</a>.</p>
+<div class="figure"><span id="fig:data-frame"></span>
+<img src="images/hopr_0302.png" alt="Data frames store data as a sequence of columns. Each column can be a different data type. Every column in a data frame must be the same length."  />
+<p class="caption">
+Figure 3.2: Data frames store data as a sequence of columns. Each column can be a different data type. Every column in a data frame must be the same length.
+</p>
+</div>
+<p>Creating a data frame by hand takes a lot of typing, but you can do it (if you like) with the <code>data.frame</code> function. Give <code>data.frame</code> any number of vectors, each separated with a comma. Each vector should be set equal to a name that describes the vector. <code>data.frame</code> will turn each vector into a column of the new data frame:</p>
+<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb113-1" data-line-number="1">df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">face =</span> <span class="kw">c</span>(<span class="st">&quot;ace&quot;</span>, <span class="st">&quot;two&quot;</span>, <span class="st">&quot;six&quot;</span>),  </a>
+<a class="sourceLine" id="cb113-2" data-line-number="2">  <span class="dt">suit =</span> <span class="kw">c</span>(<span class="st">&quot;clubs&quot;</span>, <span class="st">&quot;clubs&quot;</span>, <span class="st">&quot;clubs&quot;</span>), <span class="dt">value =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>))</a>
+<a class="sourceLine" id="cb113-3" data-line-number="3">df</a>
+<a class="sourceLine" id="cb113-4" data-line-number="4">## face  suit value</a>
+<a class="sourceLine" id="cb113-5" data-line-number="5">##  ace clubs     1</a>
+<a class="sourceLine" id="cb113-6" data-line-number="6">##  two clubs     2</a>
+<a class="sourceLine" id="cb113-7" data-line-number="7">##  six clubs     3</a></code></pre></div>
+<p>You’ll need to make sure that each vector is the same length (or can be made so with R’s recycling rules; see <a href="basics.html#fig:recycle">1.4</a>, as data frames cannot combine columns of different lengths.</p>
+<p>In the previous code, I named the arguments in <code>data.frame</code> <code>face</code>, <code>suit</code>, and <code>value</code>, but you can name the arguments whatever you like. <code>data.frame</code> will use your argument names to label the columns of the data frame.</p>
+
+<div class="rmdtip">
+<p><strong>Names</strong></p>
+<p>You can also give names to a list or vector when you create one of these objects. Use the same syntax as with <code>data.frame</code>:</p>
+<p><code>list(face = &quot;ace&quot;, suit = &quot;hearts&quot;, value = 1)</code><br />
+<code>c(face = &quot;ace&quot;, suit = &quot;hearts&quot;, value = &quot;one&quot;)</code></p>
+The names will be stored in the object’s <code>names</code> attribute.
+</div>
+
+<p>If you look at the type of a data frame, you will see that it is a list. In fact, each data frame is a list with class <code>data.frame</code>. You can see what types of objects are grouped together by a list (or data frame) with the <code>str</code> function:</p>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb114-1" data-line-number="1"><span class="kw">typeof</span>(df)</a>
+<a class="sourceLine" id="cb114-2" data-line-number="2">## &quot;list&quot;</a>
+<a class="sourceLine" id="cb114-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb114-4" data-line-number="4"><span class="kw">class</span>(df)</a>
+<a class="sourceLine" id="cb114-5" data-line-number="5">## &quot;data.frame&quot;</a>
+<a class="sourceLine" id="cb114-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb114-7" data-line-number="7"><span class="kw">str</span>(df)</a>
+<a class="sourceLine" id="cb114-8" data-line-number="8">## &#39;data.frame&#39;:    3 obs. of  3 variables:</a>
+<a class="sourceLine" id="cb114-9" data-line-number="9">##  $ face : Factor w/ 3 levels &quot;ace&quot;,&quot;six&quot;,&quot;two&quot;: 1 3 2</a>
+<a class="sourceLine" id="cb114-10" data-line-number="10">##  $ suit : Factor w/ 1 level &quot;clubs&quot;: 1 1 1</a>
+<a class="sourceLine" id="cb114-11" data-line-number="11">##  $ value: num  1 2 3</a></code></pre></div>
+<p>Notice that R saved your character strings as factors. I told you that R likes factors! It is not a very big deal here, but you can prevent this behavior by adding the argument <code>stringsAsFactors = FALSE</code> to <code>data.frame</code>:</p>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb115-1" data-line-number="1">df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">face =</span> <span class="kw">c</span>(<span class="st">&quot;ace&quot;</span>, <span class="st">&quot;two&quot;</span>, <span class="st">&quot;six&quot;</span>),  </a>
+<a class="sourceLine" id="cb115-2" data-line-number="2">  <span class="dt">suit =</span> <span class="kw">c</span>(<span class="st">&quot;clubs&quot;</span>, <span class="st">&quot;clubs&quot;</span>, <span class="st">&quot;clubs&quot;</span>), <span class="dt">value =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>),</a>
+<a class="sourceLine" id="cb115-3" data-line-number="3">  <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<p>A data frame is a great way to build an entire deck of cards. You can make each row in the data frame a playing card, and each column a type of value—each with its own appropriate data type. The data frame would look something like this:</p>
+<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb116-1" data-line-number="1">##   face     suit value</a>
+<a class="sourceLine" id="cb116-2" data-line-number="2">##   king   spades    13</a>
+<a class="sourceLine" id="cb116-3" data-line-number="3">##  queen   spades    12</a>
+<a class="sourceLine" id="cb116-4" data-line-number="4">##   jack   spades    11</a>
+<a class="sourceLine" id="cb116-5" data-line-number="5">##    ten   spades    10</a>
+<a class="sourceLine" id="cb116-6" data-line-number="6">##   nine   spades     9</a>
+<a class="sourceLine" id="cb116-7" data-line-number="7">##  eight   spades     8</a>
+<a class="sourceLine" id="cb116-8" data-line-number="8">##  seven   spades     7</a>
+<a class="sourceLine" id="cb116-9" data-line-number="9">##    six   spades     6</a>
+<a class="sourceLine" id="cb116-10" data-line-number="10">##   five   spades     5</a>
+<a class="sourceLine" id="cb116-11" data-line-number="11">##   four   spades     4</a>
+<a class="sourceLine" id="cb116-12" data-line-number="12">##  three   spades     3</a>
+<a class="sourceLine" id="cb116-13" data-line-number="13">##    two   spades     2</a>
+<a class="sourceLine" id="cb116-14" data-line-number="14">##    ace   spades     1</a>
+<a class="sourceLine" id="cb116-15" data-line-number="15">##   king    clubs    13</a>
+<a class="sourceLine" id="cb116-16" data-line-number="16">##  queen    clubs    12</a>
+<a class="sourceLine" id="cb116-17" data-line-number="17">##   jack    clubs    11</a>
+<a class="sourceLine" id="cb116-18" data-line-number="18">##    ten    clubs    10</a>
+<a class="sourceLine" id="cb116-19" data-line-number="19">##   ... and so on.</a></code></pre></div>
+<p>You could create this data frame with <code>data.frame</code>, but look at the typing involved! You need to write three vectors, each with 52 elements:</p>
+<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb117-1" data-line-number="1">deck &lt;-<span class="st"> </span><span class="kw">data.frame</span>(</a>
+<a class="sourceLine" id="cb117-2" data-line-number="2">  <span class="dt">face =</span> <span class="kw">c</span>(<span class="st">&quot;king&quot;</span>, <span class="st">&quot;queen&quot;</span>, <span class="st">&quot;jack&quot;</span>, <span class="st">&quot;ten&quot;</span>, <span class="st">&quot;nine&quot;</span>, <span class="st">&quot;eight&quot;</span>, <span class="st">&quot;seven&quot;</span>, <span class="st">&quot;six&quot;</span>,</a>
+<a class="sourceLine" id="cb117-3" data-line-number="3">    <span class="st">&quot;five&quot;</span>, <span class="st">&quot;four&quot;</span>, <span class="st">&quot;three&quot;</span>, <span class="st">&quot;two&quot;</span>, <span class="st">&quot;ace&quot;</span>, <span class="st">&quot;king&quot;</span>, <span class="st">&quot;queen&quot;</span>, <span class="st">&quot;jack&quot;</span>, <span class="st">&quot;ten&quot;</span>, </a>
+<a class="sourceLine" id="cb117-4" data-line-number="4">    <span class="st">&quot;nine&quot;</span>, <span class="st">&quot;eight&quot;</span>, <span class="st">&quot;seven&quot;</span>, <span class="st">&quot;six&quot;</span>, <span class="st">&quot;five&quot;</span>, <span class="st">&quot;four&quot;</span>, <span class="st">&quot;three&quot;</span>, <span class="st">&quot;two&quot;</span>, <span class="st">&quot;ace&quot;</span>, </a>
+<a class="sourceLine" id="cb117-5" data-line-number="5">    <span class="st">&quot;king&quot;</span>, <span class="st">&quot;queen&quot;</span>, <span class="st">&quot;jack&quot;</span>, <span class="st">&quot;ten&quot;</span>, <span class="st">&quot;nine&quot;</span>, <span class="st">&quot;eight&quot;</span>, <span class="st">&quot;seven&quot;</span>, <span class="st">&quot;six&quot;</span>, <span class="st">&quot;five&quot;</span>, </a>
+<a class="sourceLine" id="cb117-6" data-line-number="6">    <span class="st">&quot;four&quot;</span>, <span class="st">&quot;three&quot;</span>, <span class="st">&quot;two&quot;</span>, <span class="st">&quot;ace&quot;</span>, <span class="st">&quot;king&quot;</span>, <span class="st">&quot;queen&quot;</span>, <span class="st">&quot;jack&quot;</span>, <span class="st">&quot;ten&quot;</span>, <span class="st">&quot;nine&quot;</span>, </a>
+<a class="sourceLine" id="cb117-7" data-line-number="7">    <span class="st">&quot;eight&quot;</span>, <span class="st">&quot;seven&quot;</span>, <span class="st">&quot;six&quot;</span>, <span class="st">&quot;five&quot;</span>, <span class="st">&quot;four&quot;</span>, <span class="st">&quot;three&quot;</span>, <span class="st">&quot;two&quot;</span>, <span class="st">&quot;ace&quot;</span>),  </a>
+<a class="sourceLine" id="cb117-8" data-line-number="8">  <span class="dt">suit =</span> <span class="kw">c</span>(<span class="st">&quot;spades&quot;</span>, <span class="st">&quot;spades&quot;</span>, <span class="st">&quot;spades&quot;</span>, <span class="st">&quot;spades&quot;</span>, <span class="st">&quot;spades&quot;</span>, <span class="st">&quot;spades&quot;</span>, </a>
+<a class="sourceLine" id="cb117-9" data-line-number="9">    <span class="st">&quot;spades&quot;</span>, <span class="st">&quot;spades&quot;</span>, <span class="st">&quot;spades&quot;</span>, <span class="st">&quot;spades&quot;</span>, <span class="st">&quot;spades&quot;</span>, <span class="st">&quot;spades&quot;</span>, <span class="st">&quot;spades&quot;</span>, </a>
+<a class="sourceLine" id="cb117-10" data-line-number="10">    <span class="st">&quot;clubs&quot;</span>, <span class="st">&quot;clubs&quot;</span>, <span class="st">&quot;clubs&quot;</span>, <span class="st">&quot;clubs&quot;</span>, <span class="st">&quot;clubs&quot;</span>, <span class="st">&quot;clubs&quot;</span>, <span class="st">&quot;clubs&quot;</span>, <span class="st">&quot;clubs&quot;</span>, </a>
+<a class="sourceLine" id="cb117-11" data-line-number="11">    <span class="st">&quot;clubs&quot;</span>, <span class="st">&quot;clubs&quot;</span>, <span class="st">&quot;clubs&quot;</span>, <span class="st">&quot;clubs&quot;</span>, <span class="st">&quot;clubs&quot;</span>, <span class="st">&quot;diamonds&quot;</span>, <span class="st">&quot;diamonds&quot;</span>, </a>
+<a class="sourceLine" id="cb117-12" data-line-number="12">    <span class="st">&quot;diamonds&quot;</span>, <span class="st">&quot;diamonds&quot;</span>, <span class="st">&quot;diamonds&quot;</span>, <span class="st">&quot;diamonds&quot;</span>, <span class="st">&quot;diamonds&quot;</span>, <span class="st">&quot;diamonds&quot;</span>, </a>
+<a class="sourceLine" id="cb117-13" data-line-number="13">    <span class="st">&quot;diamonds&quot;</span>, <span class="st">&quot;diamonds&quot;</span>, <span class="st">&quot;diamonds&quot;</span>, <span class="st">&quot;diamonds&quot;</span>, <span class="st">&quot;diamonds&quot;</span>, <span class="st">&quot;hearts&quot;</span>, </a>
+<a class="sourceLine" id="cb117-14" data-line-number="14">    <span class="st">&quot;hearts&quot;</span>, <span class="st">&quot;hearts&quot;</span>, <span class="st">&quot;hearts&quot;</span>, <span class="st">&quot;hearts&quot;</span>, <span class="st">&quot;hearts&quot;</span>, <span class="st">&quot;hearts&quot;</span>, <span class="st">&quot;hearts&quot;</span>, </a>
+<a class="sourceLine" id="cb117-15" data-line-number="15">    <span class="st">&quot;hearts&quot;</span>, <span class="st">&quot;hearts&quot;</span>, <span class="st">&quot;hearts&quot;</span>, <span class="st">&quot;hearts&quot;</span>, <span class="st">&quot;hearts&quot;</span>), </a>
+<a class="sourceLine" id="cb117-16" data-line-number="16">  <span class="dt">value =</span> <span class="kw">c</span>(<span class="dv">13</span>, <span class="dv">12</span>, <span class="dv">11</span>, <span class="dv">10</span>, <span class="dv">9</span>, <span class="dv">8</span>, <span class="dv">7</span>, <span class="dv">6</span>, <span class="dv">5</span>, <span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">13</span>, <span class="dv">12</span>, <span class="dv">11</span>, <span class="dv">10</span>, <span class="dv">9</span>, <span class="dv">8</span>, </a>
+<a class="sourceLine" id="cb117-17" data-line-number="17">    <span class="dv">7</span>, <span class="dv">6</span>, <span class="dv">5</span>, <span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">13</span>, <span class="dv">12</span>, <span class="dv">11</span>, <span class="dv">10</span>, <span class="dv">9</span>, <span class="dv">8</span>, <span class="dv">7</span>, <span class="dv">6</span>, <span class="dv">5</span>, <span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">13</span>, <span class="dv">12</span>, <span class="dv">11</span>, </a>
+<a class="sourceLine" id="cb117-18" data-line-number="18">    <span class="dv">10</span>, <span class="dv">9</span>, <span class="dv">8</span>, <span class="dv">7</span>, <span class="dv">6</span>, <span class="dv">5</span>, <span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb117-19" data-line-number="19">)</a></code></pre></div>
+<p>You should avoid typing large data sets in by hand whenever possible. Typing invites typos and errors, not to mention RSI. It is always better to acquire large data sets as a computer file. You can then ask R to read the file and store the contents as an object.</p>
+<p>I’ve created a file for you to load that contains a data frame of playing-card information, so don’t worry about typing in the code. Instead, turn your attention toward loading data into R.</p>
+</div>
+<div id="loading" class="section level2">
+<h2><span class="header-section-number">3.9</span> Loading Data</h2>
+<p>You can load the <code>deck</code> data frame from the file <a href="http://bit.ly/deck_CSV"><em>deck.csv</em></a>. Please take a moment to download the file before reading on. Visit the website, click “Download Zip,” and then unzip and open the folder that your web browser downloads. <em>deck.csv</em> will be inside.</p>
+<p><em>deck.csv</em> is a comma-separated values file, or CSV for short. CSVs are plain-text files, which means you can open them in a text editor (as well as many other programs). If you open <em>desk.csv</em>, you’ll notice that it contains a table of data that looks like the following table. Each row of the table is saved on its own line, and a comma is used to separate the cells within each row. Every CSV file shares this basic format:</p>
+<pre><code>&quot;face&quot;,&quot;suit,&quot;value&quot;
+&quot;king&quot;,&quot;spades&quot;,13
+&quot;queen&quot;,&quot;spades,12
+&quot;jack&quot;,&quot;spades,11
+&quot;ten&quot;,&quot;spades,10
+&quot;nine&quot;,&quot;spades,9
+... and so on.</code></pre>
+<p>Most data-science applications can open plain-text files and export data as plain-text files. This makes plain-text files a sort of lingua franca for data science.</p>
+<p>To load a plain-text file into R, click the Import Dataset icon in RStudio, shown in <a href="r-objects.html#fig:import">3.3</a>. Then select “From text file.”</p>
+<div class="figure"><span id="fig:import"></span>
+<img src="images/hopr_0303.png" alt="You can import data from plain-text files with RStudio's Import Dataset."  />
+<p class="caption">
+Figure 3.3: You can import data from plain-text files with RStudio’s Import Dataset.
+</p>
+</div>
+<p>RStudio will ask you to select the file you want to import, then it will open a wizard to help you import the data, as in <a href="r-objects.html#fig:wizard">3.4</a>. Use the wizard to tell RStudio what name to give the data set. You can also use the wizard to tell RStudio which character the data set uses as a separator, which character it uses to represent decimals (usually a period in the United States and a comma in Europe), and whether or not the data set comes with a row of column names (known as a <em>header</em>). To help you out, the wizard shows you what the raw file looks like, as well as what your loaded data will look like based on the input settings.</p>
+<p>You can also unclick the box “Strings as factors” in the wizard. I recommend doing this. If you do, R will load all of your character strings as character strings. If you do not, R will convert them to factors.</p>
+<div class="figure"><span id="fig:wizard"></span>
+<img src="images/hopr_0304.png" alt="RStudio's import wizard."  />
+<p class="caption">
+Figure 3.4: RStudio’s import wizard.
+</p>
+</div>
+<p>Once everything looks right, click Import. RStudio will read in the data and save it to a data frame. RStudio will also open a data viewer, so you can see your new data in a spreadsheet format. This is a good way to check that everything came through as expected. If all worked well, your file should appear in a View tab of RStudio, like in <a href="r-objects.html#fig:view">3.5</a>. You can examine the data frame in the console with <em><code>head(deck)</code></em>.</p>
+
+<div class="rmdtip">
+<p><strong>Online data</strong></p>
+You can load a plain-text file straight from the Internet by clicking the “From Web URL…” option under Import Dataset. The file will need to have its own URL, and you will need to be connected.
+</div>
+
+<div class="figure"><span id="fig:view"></span>
+<img src="images/hopr_0305.png" alt="When you import a data set, RStudio will save the data to a data frame and then display the data frame in a View tab. You can open any data frame in a View tab at any time with the View function."  />
+<p class="caption">
+Figure 3.5: When you import a data set, RStudio will save the data to a data frame and then display the data frame in a View tab. You can open any data frame in a View tab at any time with the View function.
+</p>
+</div>
+<p>Now it is your turn. Download <em>deck.csv</em> and import it into RStudio. Be sure to save the output to an R object called <code>deck</code>: you’ll use it in the next few chapters. If everything goes correctly, the first few lines of your data frame should look like this:</p>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb119-1" data-line-number="1"><span class="kw">head</span>(deck)</a>
+<a class="sourceLine" id="cb119-2" data-line-number="2">##  face   suit value</a>
+<a class="sourceLine" id="cb119-3" data-line-number="3">##  king spades    13</a>
+<a class="sourceLine" id="cb119-4" data-line-number="4">## queen spades    12</a>
+<a class="sourceLine" id="cb119-5" data-line-number="5">##  jack spades    11</a>
+<a class="sourceLine" id="cb119-6" data-line-number="6">##   ten spades    10</a>
+<a class="sourceLine" id="cb119-7" data-line-number="7">##  nine spades     9</a>
+<a class="sourceLine" id="cb119-8" data-line-number="8">## eight spades     8</a></code></pre></div>
+
+<div class="rmdnote">
+<code>head</code> and <code>tail</code> are two functions that provide an easy way to peek at large data sets. <code>head</code> will return just the first six rows of the data set, and <code>tail</code> will return just the last six rows. To see a different number of rows, give <code>head</code> or <code>tails</code> a second argument, the number of rows you would like to view, for example, <code>head(deck, 10)</code>.
+</div>
+
+<p>R can open many types of files—not just CSVs. Visit <a href="dataio.html#dataio">Loading and Saving Data in R</a> to learn how to open other common types of files in R.</p>
+</div>
+<div id="saving-data" class="section level2">
+<h2><span class="header-section-number">3.10</span> Saving Data</h2>
+<p>Before we go any further, let’s save a copy of <code>deck</code> as a new <em>.csv</em> file. That way you can email it to a colleague, store it on a thumb drive, or open it in a different program. You can save any data frame in R to a <em>.csv</em> file with the command <code>write.csv</code>. To save <code>deck</code>, run:</p>
+<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb120-1" data-line-number="1"><span class="kw">write.csv</span>(deck, <span class="dt">file =</span> <span class="st">&quot;cards.csv&quot;</span>, <span class="dt">row.names =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<p>R will turn your data frame into a plain-text file with the comma-separated values format and save the file to your working directory. To see where your working directory is, run <em><code>getwd()</code></em>. To change the location of your working directory, visit Session &gt; Set Working Directory &gt; Choose Directory in the RStudio menu bar.</p>
+<p>You can customize the save process with <code>write.csv</code>’s large set of optional arguments (see <code>?write.csv</code> for details). However, there are three arguments that you should use <em>every</em> time you run <code>write.csv</code>.</p>
+<p>First, you should give <code>write.csv</code> the name of the data frame that you wish to save. Next, you should provide a file name to give your file. R will take this name quite literally, so be sure to provide an extension.</p>
+<p>Finally, you should add the argument <code>row.names = FALSE</code>. This will prevent R from adding a column of numbers at the start of your data frame. These numbers will identify your rows from 1 to 52, but it is unlikely that whatever program you open <em>cards.csv</em> in will understand the row name system. More than likely, the program will assume that the row names are the first column of data in your data frame. In fact, this is exactly what R will assume if you reopen <em>cards.csv</em>. If you save and open <em>cards.csv</em> several times in R, you’ll notice duplicate columns of row numbers forming at the start of your data frame. I can’t explain why R does this, but I can explain how to avoid it: use <code>row.names = FALSE</code> whenever you save data with <code>write.csv</code>.</p>
+<p>For more details about saving files, including how to compress saved files and how to save files in other formats, see <a href="dataio.html#dataio">Loading and Saving Data in R</a>.</p>
+<p>Good work. You now have a virtual deck of cards to work with. Take a breather, and when you come back, we’ll start writing some functions to use on your deck.</p>
+</div>
+<div id="summary-2" class="section level2">
+<h2><span class="header-section-number">3.11</span> Summary</h2>
+<p>You can save data in R with five different objects, which let you store different types of values in different types of relationships, as in <a href="r-objects.html#fig:structures">3.6</a>. Of these objects, data frames are by far the most useful for data science. Data frames store one of the most common forms of data used in data science, tabular data.</p>
+<div class="figure"><span id="fig:structures"></span>
+<img src="images/hopr_0306.png" alt="R's most common data structures are vectors, matrices, arrays, lists, and data frames."  />
+<p class="caption">
+Figure 3.6: R’s most common data structures are vectors, matrices, arrays, lists, and data frames.
+</p>
+</div>
+<p>You can load tabular data into a data frame with RStudio’s Import Dataset button—so long as the data is saved as a plain-text file. This requirement is not as limiting as it sounds. Most software programs can export data as a plain-text file. So if you have an Excel file (for example) you can open the file in Excel and export the data as a CSV to use with R. In fact, opening a file in its original program is good practice. Excel files use metadata, like sheets and formulas, that help Excel work with the file. R can try to extract raw data from the file, but it won’t be as good at doing this as Microsoft Excel is. No program is better at converting Excel files than Excel. Similarly, no program is better at converting SAS Xport files than SAS, and so on.</p>
+<p>However, you may find yourself with a program-specific file, but not the program that created it. You wouldn’t want to buy a multi-thousand-dollar SAS license just to open a SAS file. Thankfully R <em>can</em> open many types of files, including files from other programs and databases. R even has its own program-specific formats that can help you save memory and time if you know that you will be working entirely in R. If you’d like to know more about all of your options for loading and saving data in R, see <a href="dataio.html#dataio">Loading and Saving Data in R</a>.</p>
+<p><a href="r-notation.html#r-notation">R Notation</a> will build upon the skills you learned in this chapter. Here, you learned how to store data in R. In <a href="r-notation.html#r-notation">R Notation</a>, you will learn how to access values once they’ve been stored. You’ll also write two functions that will let you start using your deck, a shuffle function and a deal function.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="project-2-playing-cards.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="r-notation.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": false,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio-education/hopr/edit/master/objects.rmd",
+"text": "Edit"
+},
+"download": null,
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

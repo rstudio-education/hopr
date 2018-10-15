@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Hands-On Programming with R</title>
+  <meta name="description" content="This book will teach you how to program in R, with hands-on examples. I wrote it for non-programmers to provide a friendly introduction to the R language. You’ll learn how to load data, assemble and disassemble data objects, navigate R’s environment system, write your own functions, and use all of R’s programming tools. Throughout the book, you’ll use your newfound skills to solve practical data science problems.">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Hands-On Programming with R" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="http://r4ds.had.co.nz/" />
+  <meta property="og:image" content="http://r4ds.had.co.nz/cover.png" />
+  <meta property="og:description" content="This book will teach you how to program in R, with hands-on examples. I wrote it for non-programmers to provide a friendly introduction to the R language. You’ll learn how to load data, assemble and disassemble data objects, navigate R’s environment system, write your own functions, and use all of R’s programming tools. Throughout the book, you’ll use your newfound skills to solve practical data science problems." />
+  <meta name="github-repo" content="rstudio-education/hopr" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Hands-On Programming with R" />
+  <meta name="twitter:site" content="@statgarrett" />
+  <meta name="twitter:description" content="This book will teach you how to program in R, with hands-on examples. I wrote it for non-programmers to provide a friendly introduction to the R language. You’ll learn how to load data, assemble and disassemble data objects, navigate R’s environment system, write your own functions, and use all of R’s programming tools. Throughout the book, you’ll use your newfound skills to solve practical data science problems." />
+  <meta name="twitter:image" content="http://r4ds.had.co.nz/cover.png" />
+
+<meta name="author" content="Garrett Grolemund">
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="modify.html">
+<link rel="next" href="project-3-slot-machine.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="hopr.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><strong><a href="./">Hands-On Programming with R</a></strong></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html"><i class="fa fa-check"></i>Preface</a><ul>
+<li class="chapter" data-level="0.1" data-path="preface.html"><a href="preface.html#conventions-used-in-this-book"><i class="fa fa-check"></i><b>0.1</b> Conventions Used in This Book</a></li>
+<li class="chapter" data-level="0.2" data-path="preface.html"><a href="preface.html#acknowledgments"><i class="fa fa-check"></i><b>0.2</b> Acknowledgments</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="project-1-weighted-dice.html"><a href="project-1-weighted-dice.html"><i class="fa fa-check"></i>Project 1: Weighted Dice</a></li>
+<li class="chapter" data-level="1" data-path="basics.html"><a href="basics.html"><i class="fa fa-check"></i><b>1</b> The Very Basics</a><ul>
+<li class="chapter" data-level="1.1" data-path="basics.html"><a href="basics.html#the-r-user-interface"><i class="fa fa-check"></i><b>1.1</b> The R User Interface</a></li>
+<li class="chapter" data-level="1.2" data-path="basics.html"><a href="basics.html#objects"><i class="fa fa-check"></i><b>1.2</b> Objects</a></li>
+<li class="chapter" data-level="1.3" data-path="basics.html"><a href="basics.html#functions"><i class="fa fa-check"></i><b>1.3</b> Functions</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="basics.html"><a href="basics.html#sample-with-replacement"><i class="fa fa-check"></i><b>1.3.1</b> Sample with Replacement</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="basics.html"><a href="basics.html#write-functions"><i class="fa fa-check"></i><b>1.4</b> Writing Your Own Functions</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="basics.html"><a href="basics.html#the-function-constructor"><i class="fa fa-check"></i><b>1.4.1</b> The Function Constructor</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="basics.html"><a href="basics.html#arguments"><i class="fa fa-check"></i><b>1.5</b> Arguments</a></li>
+<li class="chapter" data-level="1.6" data-path="basics.html"><a href="basics.html#scripts"><i class="fa fa-check"></i><b>1.6</b> Scripts</a></li>
+<li class="chapter" data-level="1.7" data-path="basics.html"><a href="basics.html#summary"><i class="fa fa-check"></i><b>1.7</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="packages.html"><a href="packages.html"><i class="fa fa-check"></i><b>2</b> Packages and Help Pages</a><ul>
+<li class="chapter" data-level="2.1" data-path="packages.html"><a href="packages.html#packages-1"><i class="fa fa-check"></i><b>2.1</b> Packages</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="packages.html"><a href="packages.html#install.packages"><i class="fa fa-check"></i><b>2.1.1</b> install.packages</a></li>
+<li class="chapter" data-level="2.1.2" data-path="packages.html"><a href="packages.html#library"><i class="fa fa-check"></i><b>2.1.2</b> library</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="packages.html"><a href="packages.html#getting-help-with-help-pages"><i class="fa fa-check"></i><b>2.2</b> Getting Help with Help Pages</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="packages.html"><a href="packages.html#parts-of-a-help-page"><i class="fa fa-check"></i><b>2.2.1</b> Parts of a Help Page</a></li>
+<li class="chapter" data-level="2.2.2" data-path="packages.html"><a href="packages.html#getting-more-help"><i class="fa fa-check"></i><b>2.2.2</b> Getting More Help</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="packages.html"><a href="packages.html#summary-1"><i class="fa fa-check"></i><b>2.3</b> Summary</a></li>
+<li class="chapter" data-level="2.4" data-path="packages.html"><a href="packages.html#project-1-wrap-up"><i class="fa fa-check"></i><b>2.4</b> Project 1 Wrap-up</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="project-2-playing-cards.html"><a href="project-2-playing-cards.html"><i class="fa fa-check"></i>Project 2: Playing Cards</a></li>
+<li class="chapter" data-level="3" data-path="r-objects.html"><a href="r-objects.html"><i class="fa fa-check"></i><b>3</b> R Objects</a><ul>
+<li class="chapter" data-level="3.1" data-path="r-objects.html"><a href="r-objects.html#atomic-vectors"><i class="fa fa-check"></i><b>3.1</b> Atomic Vectors</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="r-objects.html"><a href="r-objects.html#doubles"><i class="fa fa-check"></i><b>3.1.1</b> Doubles</a></li>
+<li class="chapter" data-level="3.1.2" data-path="r-objects.html"><a href="r-objects.html#integers"><i class="fa fa-check"></i><b>3.1.2</b> Integers</a></li>
+<li class="chapter" data-level="3.1.3" data-path="r-objects.html"><a href="r-objects.html#characters"><i class="fa fa-check"></i><b>3.1.3</b> Characters</a></li>
+<li class="chapter" data-level="3.1.4" data-path="r-objects.html"><a href="r-objects.html#logicals"><i class="fa fa-check"></i><b>3.1.4</b> Logicals</a></li>
+<li class="chapter" data-level="3.1.5" data-path="r-objects.html"><a href="r-objects.html#complex-and-raw"><i class="fa fa-check"></i><b>3.1.5</b> Complex and Raw</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="r-objects.html"><a href="r-objects.html#attributes"><i class="fa fa-check"></i><b>3.2</b> Attributes</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="r-objects.html"><a href="r-objects.html#names"><i class="fa fa-check"></i><b>3.2.1</b> Names</a></li>
+<li class="chapter" data-level="3.2.2" data-path="r-objects.html"><a href="r-objects.html#dim"><i class="fa fa-check"></i><b>3.2.2</b> Dim</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="r-objects.html"><a href="r-objects.html#matrices"><i class="fa fa-check"></i><b>3.3</b> Matrices</a></li>
+<li class="chapter" data-level="3.4" data-path="r-objects.html"><a href="r-objects.html#arrays"><i class="fa fa-check"></i><b>3.4</b> Arrays</a></li>
+<li class="chapter" data-level="3.5" data-path="r-objects.html"><a href="r-objects.html#class"><i class="fa fa-check"></i><b>3.5</b> Class</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="r-objects.html"><a href="r-objects.html#dates-and-times"><i class="fa fa-check"></i><b>3.5.1</b> Dates and Times</a></li>
+<li class="chapter" data-level="3.5.2" data-path="r-objects.html"><a href="r-objects.html#factors"><i class="fa fa-check"></i><b>3.5.2</b> Factors</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="r-objects.html"><a href="r-objects.html#coercion"><i class="fa fa-check"></i><b>3.6</b> Coercion</a></li>
+<li class="chapter" data-level="3.7" data-path="r-objects.html"><a href="r-objects.html#lists"><i class="fa fa-check"></i><b>3.7</b> Lists</a></li>
+<li class="chapter" data-level="3.8" data-path="r-objects.html"><a href="r-objects.html#data-frames"><i class="fa fa-check"></i><b>3.8</b> Data Frames</a></li>
+<li class="chapter" data-level="3.9" data-path="r-objects.html"><a href="r-objects.html#loading"><i class="fa fa-check"></i><b>3.9</b> Loading Data</a></li>
+<li class="chapter" data-level="3.10" data-path="r-objects.html"><a href="r-objects.html#saving-data"><i class="fa fa-check"></i><b>3.10</b> Saving Data</a></li>
+<li class="chapter" data-level="3.11" data-path="r-objects.html"><a href="r-objects.html#summary-2"><i class="fa fa-check"></i><b>3.11</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="r-notation.html"><a href="r-notation.html"><i class="fa fa-check"></i><b>4</b> R Notation</a><ul>
+<li class="chapter" data-level="4.1" data-path="r-notation.html"><a href="r-notation.html#selecting-values"><i class="fa fa-check"></i><b>4.1</b> Selecting Values</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="r-notation.html"><a href="r-notation.html#positive-integers"><i class="fa fa-check"></i><b>4.1.1</b> Positive Integers</a></li>
+<li class="chapter" data-level="4.1.2" data-path="r-notation.html"><a href="r-notation.html#negative-integers"><i class="fa fa-check"></i><b>4.1.2</b> Negative Integers</a></li>
+<li class="chapter" data-level="4.1.3" data-path="r-notation.html"><a href="r-notation.html#zero"><i class="fa fa-check"></i><b>4.1.3</b> Zero</a></li>
+<li class="chapter" data-level="4.1.4" data-path="r-notation.html"><a href="r-notation.html#blank-spaces"><i class="fa fa-check"></i><b>4.1.4</b> Blank Spaces</a></li>
+<li class="chapter" data-level="4.1.5" data-path="r-objects.html"><a href="r-objects.html#logicals"><i class="fa fa-check"></i><b>4.1.5</b> Logical Values</a></li>
+<li class="chapter" data-level="4.1.6" data-path="r-notation.html"><a href="r-notation.html#names-1"><i class="fa fa-check"></i><b>4.1.6</b> Names</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="r-notation.html"><a href="r-notation.html#deal-a-card"><i class="fa fa-check"></i><b>4.2</b> Deal a Card</a></li>
+<li class="chapter" data-level="4.3" data-path="r-notation.html"><a href="r-notation.html#shuffle-the-deck"><i class="fa fa-check"></i><b>4.3</b> Shuffle the Deck</a></li>
+<li class="chapter" data-level="4.4" data-path="r-notation.html"><a href="r-notation.html#dollar-signs-and-double-brackets"><i class="fa fa-check"></i><b>4.4</b> Dollar Signs and Double Brackets</a></li>
+<li class="chapter" data-level="4.5" data-path="r-notation.html"><a href="r-notation.html#summary-3"><i class="fa fa-check"></i><b>4.5</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="modify.html"><a href="modify.html"><i class="fa fa-check"></i><b>5</b> Modifying Values</a><ul>
+<li class="chapter" data-level="5.0.1" data-path="modify.html"><a href="modify.html#changing-values-in-place"><i class="fa fa-check"></i><b>5.0.1</b> Changing Values in Place</a></li>
+<li class="chapter" data-level="5.0.2" data-path="modify.html"><a href="modify.html#logical-subsetting"><i class="fa fa-check"></i><b>5.0.2</b> Logical Subsetting</a></li>
+<li class="chapter" data-level="5.0.3" data-path="modify.html"><a href="modify.html#missing"><i class="fa fa-check"></i><b>5.0.3</b> Missing Information</a></li>
+<li class="chapter" data-level="5.0.4" data-path="modify.html"><a href="modify.html#summary-4"><i class="fa fa-check"></i><b>5.0.4</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="environments.html"><a href="environments.html"><i class="fa fa-check"></i><b>6</b> Environments</a><ul>
+<li class="chapter" data-level="6.1" data-path="environments.html"><a href="environments.html#environments-1"><i class="fa fa-check"></i><b>6.1</b> Environments</a></li>
+<li class="chapter" data-level="6.2" data-path="environments.html"><a href="environments.html#working-with-environments"><i class="fa fa-check"></i><b>6.2</b> Working with Environments</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="environments.html"><a href="environments.html#the-active-environment"><i class="fa fa-check"></i><b>6.2.1</b> The Active Environment</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="environments.html"><a href="environments.html#scoping-rules"><i class="fa fa-check"></i><b>6.3</b> Scoping Rules</a></li>
+<li class="chapter" data-level="6.4" data-path="environments.html"><a href="environments.html#assignment"><i class="fa fa-check"></i><b>6.4</b> Assignment</a></li>
+<li class="chapter" data-level="6.5" data-path="environments.html"><a href="environments.html#evaluation"><i class="fa fa-check"></i><b>6.5</b> Evaluation</a></li>
+<li class="chapter" data-level="6.6" data-path="environments.html"><a href="environments.html#closures"><i class="fa fa-check"></i><b>6.6</b> Closures</a></li>
+<li class="chapter" data-level="6.7" data-path="environments.html"><a href="environments.html#summary-5"><i class="fa fa-check"></i><b>6.7</b> Summary</a></li>
+<li class="chapter" data-level="6.8" data-path="environments.html"><a href="environments.html#project-2-wrap-up"><i class="fa fa-check"></i><b>6.8</b> Project 2 Wrap-up</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="project-3-slot-machine.html"><a href="project-3-slot-machine.html"><i class="fa fa-check"></i>Project 3: Slot Machine</a></li>
+<li class="chapter" data-level="7" data-path="programs.html"><a href="programs.html"><i class="fa fa-check"></i><b>7</b> Programs</a><ul>
+<li class="chapter" data-level="7.1" data-path="programs.html"><a href="programs.html#strategy"><i class="fa fa-check"></i><b>7.1</b> Strategy</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="programs.html"><a href="programs.html#sequential-steps"><i class="fa fa-check"></i><b>7.1.1</b> Sequential Steps</a></li>
+<li class="chapter" data-level="7.1.2" data-path="programs.html"><a href="programs.html#parallel-cases"><i class="fa fa-check"></i><b>7.1.2</b> Parallel Cases</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="programs.html"><a href="programs.html#if-statements"><i class="fa fa-check"></i><b>7.2</b> if Statements</a></li>
+<li class="chapter" data-level="7.3" data-path="programs.html"><a href="programs.html#else-statements"><i class="fa fa-check"></i><b>7.3</b> else Statements</a></li>
+<li class="chapter" data-level="7.4" data-path="programs.html"><a href="programs.html#lookup-tables"><i class="fa fa-check"></i><b>7.4</b> Lookup Tables</a></li>
+<li class="chapter" data-level="7.5" data-path="programs.html"><a href="programs.html#code-comments"><i class="fa fa-check"></i><b>7.5</b> Code Comments</a></li>
+<li class="chapter" data-level="7.6" data-path="programs.html"><a href="programs.html#summary-6"><i class="fa fa-check"></i><b>7.6</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="s3.html"><a href="s3.html"><i class="fa fa-check"></i><b>8</b> S3</a><ul>
+<li class="chapter" data-level="8.1" data-path="s3.html"><a href="s3.html#the-s3-system"><i class="fa fa-check"></i><b>8.1</b> The S3 System</a></li>
+<li class="chapter" data-level="8.2" data-path="s3.html"><a href="s3.html#attributes-1"><i class="fa fa-check"></i><b>8.2</b> Attributes</a></li>
+<li class="chapter" data-level="8.3" data-path="s3.html"><a href="s3.html#generic-functions"><i class="fa fa-check"></i><b>8.3</b> Generic Functions</a></li>
+<li class="chapter" data-level="8.4" data-path="s3.html"><a href="s3.html#methods"><i class="fa fa-check"></i><b>8.4</b> Methods</a><ul>
+<li class="chapter" data-level="8.4.1" data-path="s3.html"><a href="s3.html#method-dispatch"><i class="fa fa-check"></i><b>8.4.1</b> Method Dispatch</a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="s3.html"><a href="s3.html#classes"><i class="fa fa-check"></i><b>8.5</b> Classes</a></li>
+<li class="chapter" data-level="8.6" data-path="s3.html"><a href="s3.html#s3-and-debugging"><i class="fa fa-check"></i><b>8.6</b> S3 and Debugging</a></li>
+<li class="chapter" data-level="8.7" data-path="s3.html"><a href="s3.html#s4-and-r5"><i class="fa fa-check"></i><b>8.7</b> S4 and R5</a></li>
+<li class="chapter" data-level="8.8" data-path="s3.html"><a href="s3.html#summary-7"><i class="fa fa-check"></i><b>8.8</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="loops.html"><a href="loops.html"><i class="fa fa-check"></i><b>9</b> Loops</a><ul>
+<li class="chapter" data-level="9.1" data-path="loops.html"><a href="loops.html#expected-values"><i class="fa fa-check"></i><b>9.1</b> Expected Values</a></li>
+<li class="chapter" data-level="9.2" data-path="loops.html"><a href="loops.html#expand.grid"><i class="fa fa-check"></i><b>9.2</b> expand.grid</a></li>
+<li class="chapter" data-level="9.3" data-path="loops.html"><a href="loops.html#for-loops"><i class="fa fa-check"></i><b>9.3</b> for Loops</a></li>
+<li class="chapter" data-level="9.4" data-path="loops.html"><a href="loops.html#while-loops"><i class="fa fa-check"></i><b>9.4</b> while Loops</a></li>
+<li class="chapter" data-level="9.5" data-path="loops.html"><a href="loops.html#repeat-loops"><i class="fa fa-check"></i><b>9.5</b> repeat Loops</a></li>
+<li class="chapter" data-level="9.6" data-path="loops.html"><a href="loops.html#summary-8"><i class="fa fa-check"></i><b>9.6</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="speed.html"><a href="speed.html"><i class="fa fa-check"></i><b>10</b> Speed</a><ul>
+<li class="chapter" data-level="10.1" data-path="speed.html"><a href="speed.html#vectorized-code"><i class="fa fa-check"></i><b>10.1</b> Vectorized Code</a></li>
+<li class="chapter" data-level="10.2" data-path="speed.html"><a href="speed.html#how-to-write-vectorized-code"><i class="fa fa-check"></i><b>10.2</b> How to Write Vectorized Code</a></li>
+<li class="chapter" data-level="10.3" data-path="speed.html"><a href="speed.html#how-to-write-fast-for-loops-in-r"><i class="fa fa-check"></i><b>10.3</b> How to Write Fast for Loops in R</a></li>
+<li class="chapter" data-level="10.4" data-path="speed.html"><a href="speed.html#vectorized-code-in-practice"><i class="fa fa-check"></i><b>10.4</b> Vectorized Code in Practice</a><ul>
+<li class="chapter" data-level="10.4.1" data-path="speed.html"><a href="speed.html#loops-versus-vectorized-code"><i class="fa fa-check"></i><b>10.4.1</b> Loops Versus Vectorized Code</a></li>
+</ul></li>
+<li class="chapter" data-level="10.5" data-path="speed.html"><a href="speed.html#summary-9"><i class="fa fa-check"></i><b>10.5</b> Summary</a></li>
+<li class="chapter" data-level="10.6" data-path="speed.html"><a href="speed.html#project-3-wrap-up"><i class="fa fa-check"></i><b>10.6</b> Project 3 Wrap-up</a></li>
+</ul></li>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="starting.html"><a href="starting.html"><i class="fa fa-check"></i><b>A</b> Installing R and RStudio</a><ul>
+<li class="chapter" data-level="A.1" data-path="starting.html"><a href="starting.html#how-to-download-and-install-r"><i class="fa fa-check"></i><b>A.1</b> How to Download and Install R</a><ul>
+<li class="chapter" data-level="A.1.1" data-path="starting.html"><a href="starting.html#windows"><i class="fa fa-check"></i><b>A.1.1</b> Windows</a></li>
+<li class="chapter" data-level="A.1.2" data-path="starting.html"><a href="starting.html#mac"><i class="fa fa-check"></i><b>A.1.2</b> Mac</a></li>
+<li class="chapter" data-level="A.1.3" data-path="starting.html"><a href="starting.html#linux"><i class="fa fa-check"></i><b>A.1.3</b> Linux</a></li>
+</ul></li>
+<li class="chapter" data-level="A.2" data-path="starting.html"><a href="starting.html#using-r"><i class="fa fa-check"></i><b>A.2</b> Using R</a></li>
+<li class="chapter" data-level="A.3" data-path="starting.html"><a href="starting.html#rstudio"><i class="fa fa-check"></i><b>A.3</b> RStudio</a></li>
+<li class="chapter" data-level="A.4" data-path="starting.html"><a href="starting.html#opening-r"><i class="fa fa-check"></i><b>A.4</b> Opening R</a></li>
+</ul></li>
+<li class="chapter" data-level="B" data-path="packages2.html"><a href="packages2.html"><i class="fa fa-check"></i><b>B</b> R Packages</a><ul>
+<li class="chapter" data-level="B.1" data-path="packages2.html"><a href="packages2.html#installing-packages"><i class="fa fa-check"></i><b>B.1</b> Installing Packages</a></li>
+<li class="chapter" data-level="B.2" data-path="packages2.html"><a href="packages2.html#loading-packages"><i class="fa fa-check"></i><b>B.2</b> Loading Packages</a></li>
+</ul></li>
+<li class="chapter" data-level="C" data-path="updating.html"><a href="updating.html"><i class="fa fa-check"></i><b>C</b> Updating R and Its Packages</a><ul>
+<li class="chapter" data-level="C.1" data-path="updating.html"><a href="updating.html#r-packages"><i class="fa fa-check"></i><b>C.1</b> R Packages</a></li>
+</ul></li>
+<li class="chapter" data-level="D" data-path="dataio.html"><a href="dataio.html"><i class="fa fa-check"></i><b>D</b> Loading and Saving Data in R</a><ul>
+<li class="chapter" data-level="D.1" data-path="dataio.html"><a href="dataio.html#data-sets-in-base-r"><i class="fa fa-check"></i><b>D.1</b> Data Sets in Base R</a></li>
+<li class="chapter" data-level="D.2" data-path="dataio.html"><a href="dataio.html#working-directory"><i class="fa fa-check"></i><b>D.2</b> Working Directory</a></li>
+<li class="chapter" data-level="D.3" data-path="dataio.html"><a href="dataio.html#plain-text-files"><i class="fa fa-check"></i><b>D.3</b> Plain-text Files</a><ul>
+<li class="chapter" data-level="D.3.1" data-path="dataio.html"><a href="dataio.html#read.table"><i class="fa fa-check"></i><b>D.3.1</b> read.table</a></li>
+<li class="chapter" data-level="D.3.2" data-path="dataio.html"><a href="dataio.html#the-read-family"><i class="fa fa-check"></i><b>D.3.2</b> The read Family</a></li>
+<li class="chapter" data-level="D.3.3" data-path="dataio.html"><a href="dataio.html#read.fwf"><i class="fa fa-check"></i><b>D.3.3</b> read.fwf</a></li>
+<li class="chapter" data-level="D.3.4" data-path="dataio.html"><a href="dataio.html#html-links"><i class="fa fa-check"></i><b>D.3.4</b> HTML Links</a></li>
+<li class="chapter" data-level="D.3.5" data-path="dataio.html"><a href="dataio.html#saving-plain-text-files"><i class="fa fa-check"></i><b>D.3.5</b> Saving Plain-Text Files</a></li>
+<li class="chapter" data-level="D.3.6" data-path="dataio.html"><a href="dataio.html#compressing-files"><i class="fa fa-check"></i><b>D.3.6</b> Compressing Files</a></li>
+</ul></li>
+<li class="chapter" data-level="D.4" data-path="dataio.html"><a href="dataio.html#r-files"><i class="fa fa-check"></i><b>D.4</b> R Files</a><ul>
+<li class="chapter" data-level="D.4.1" data-path="dataio.html"><a href="dataio.html#saving-r-files"><i class="fa fa-check"></i><b>D.4.1</b> Saving R Files</a></li>
+</ul></li>
+<li class="chapter" data-level="D.5" data-path="dataio.html"><a href="dataio.html#excel-spreadsheets"><i class="fa fa-check"></i><b>D.5</b> Excel Spreadsheets</a><ul>
+<li class="chapter" data-level="D.5.1" data-path="dataio.html"><a href="dataio.html#export-from-excel"><i class="fa fa-check"></i><b>D.5.1</b> Export from Excel</a></li>
+<li class="chapter" data-level="D.5.2" data-path="dataio.html"><a href="dataio.html#copy-and-paste"><i class="fa fa-check"></i><b>D.5.2</b> Copy and Paste</a></li>
+<li class="chapter" data-level="D.5.3" data-path="dataio.html"><a href="dataio.html#xlconnect"><i class="fa fa-check"></i><b>D.5.3</b> XLConnect</a></li>
+<li class="chapter" data-level="D.5.4" data-path="dataio.html"><a href="dataio.html#reading-spreadsheets"><i class="fa fa-check"></i><b>D.5.4</b> Reading Spreadsheets</a></li>
+<li class="chapter" data-level="D.5.5" data-path="dataio.html"><a href="dataio.html#writing-spreadsheets"><i class="fa fa-check"></i><b>D.5.5</b> Writing Spreadsheets</a></li>
+</ul></li>
+<li class="chapter" data-level="D.6" data-path="dataio.html"><a href="dataio.html#loading-files-from-other-programs"><i class="fa fa-check"></i><b>D.6</b> Loading Files from Other Programs</a><ul>
+<li class="chapter" data-level="D.6.1" data-path="dataio.html"><a href="dataio.html#connecting-to-databases"><i class="fa fa-check"></i><b>D.6.1</b> Connecting to Databases</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="E" data-path="debug.html"><a href="debug.html"><i class="fa fa-check"></i><b>E</b> Debugging R Code</a><ul>
+<li class="chapter" data-level="E.1" data-path="debug.html"><a href="debug.html#traceback"><i class="fa fa-check"></i><b>E.1</b> traceback</a></li>
+<li class="chapter" data-level="E.2" data-path="debug.html"><a href="debug.html#browser"><i class="fa fa-check"></i><b>E.2</b> browser</a></li>
+<li class="chapter" data-level="E.3" data-path="debug.html"><a href="debug.html#break-points"><i class="fa fa-check"></i><b>E.3</b> Break Points</a></li>
+<li class="chapter" data-level="E.4" data-path="debug.html"><a href="debug.html#debug-1"><i class="fa fa-check"></i><b>E.4</b> debug</a></li>
+<li class="chapter" data-level="E.5" data-path="debug.html"><a href="debug.html#trace"><i class="fa fa-check"></i><b>E.5</b> trace</a></li>
+<li class="chapter" data-level="E.6" data-path="debug.html"><a href="debug.html#recover"><i class="fa fa-check"></i><b>E.6</b> recover</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Hands-On Programming with R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="environments" class="section level1">
+<h1><span class="header-section-number">6</span> Environments</h1>
+<p>Your deck is now ready for a game of blackjack (or hearts or war), but are your <code>shuffle</code> and <code>deal</code> functions up to snuff? Definitely not. For example, <code>deal</code> deals the same card over and over again:</p>
+<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb201-1" data-line-number="1"><span class="kw">deal</span>(deck)</a>
+<a class="sourceLine" id="cb201-2" data-line-number="2">## face   suit value</a>
+<a class="sourceLine" id="cb201-3" data-line-number="3">## king spades    13</a>
+<a class="sourceLine" id="cb201-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb201-5" data-line-number="5"><span class="kw">deal</span>(deck)</a>
+<a class="sourceLine" id="cb201-6" data-line-number="6">## face   suit value</a>
+<a class="sourceLine" id="cb201-7" data-line-number="7">## king spades    13</a>
+<a class="sourceLine" id="cb201-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb201-9" data-line-number="9"><span class="kw">deal</span>(deck)</a>
+<a class="sourceLine" id="cb201-10" data-line-number="10">## face   suit value</a>
+<a class="sourceLine" id="cb201-11" data-line-number="11">## king spades    13</a></code></pre></div>
+<p>And the <code>shuffle</code> function doesn’t actually shuffle <code>deck</code> (it returns a copy of <code>deck</code> that has been shuffled). In short, both of these functions use <code>deck</code>, but neither manipulates <code>deck</code>—and we would like them to.</p>
+<p>To fix these functions, you will need to learn how R stores, looks up, and manipulates objects like <code>deck</code>. R does all of these things with the help of an environment system.</p>
+<div id="environments-1" class="section level2">
+<h2><span class="header-section-number">6.1</span> Environments</h2>
+<p>Consider for a moment how your computer stores files. Every file is saved in a folder, and each folder is saved in another folder, which forms a hierarchical file system. If your computer wants to open up a file, it must first look up the file in this file system.</p>
+<p>You can see your file system by opening a finder window. For example, <a href="environments.html#fig:folders">6.1</a> shows part of the file system on my computer. I have tons of folders. Inside one of them is a subfolder named <em>Documents</em>, inside of that subfolder is a sub-subfolder named <em>ggsubplot</em>, inside of that folder is a folder named <em>inst</em>, inside of that is a folder named <em>doc</em>, and inside of that is a file named <em>manual.pdf</em>.</p>
+<div class="figure"><span id="fig:folders"></span>
+<img src="images/hopr_0601.png" alt="Your computer arranges files into a hierarchy of folders and subfolders. To look at a file, you need to find where it is saved in the file system."  />
+<p class="caption">
+Figure 6.1: Your computer arranges files into a hierarchy of folders and subfolders. To look at a file, you need to find where it is saved in the file system.
+</p>
+</div>
+<p>R uses a similar system to save R objects. Each object is saved inside of an environment, a list-like object that resembles a folder on your computer. Each environment is connected to a <em>parent environment</em>, a higher-level environment, which creates a hierarchy of environments.</p>
+<p>You can see R’s environment system with the <code>parenvs</code> function in the devtools package. <code>parenvs(all = TRUE)</code> will return a list of the environments that your R session is using. The actual output will vary from session to session depending on which packages you have loaded. Here’s the output from my current session:</p>
+<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb202-1" data-line-number="1"><span class="kw">library</span>(devtools)</a>
+<a class="sourceLine" id="cb202-2" data-line-number="2"><span class="kw">parenvs</span>(<span class="dt">all =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb202-3" data-line-number="3">##    label                            name               </a>
+<a class="sourceLine" id="cb202-4" data-line-number="4">## 1  &lt;environment: R_GlobalEnv&gt;       &quot;&quot;                 </a>
+<a class="sourceLine" id="cb202-5" data-line-number="5">## 2  &lt;environment: package:devtools&gt;  &quot;package:devtools&quot; </a>
+<a class="sourceLine" id="cb202-6" data-line-number="6">## 3  &lt;environment: 0x7fff3321c388&gt;    &quot;tools:rstudio&quot;    </a>
+<a class="sourceLine" id="cb202-7" data-line-number="7">## 4  &lt;environment: package:stats&gt;     &quot;package:stats&quot;    </a>
+<a class="sourceLine" id="cb202-8" data-line-number="8">## 5  &lt;environment: package:graphics&gt;  &quot;package:graphics&quot; </a>
+<a class="sourceLine" id="cb202-9" data-line-number="9">## 6  &lt;environment: package:grDevices&gt; &quot;package:grDevices&quot;</a>
+<a class="sourceLine" id="cb202-10" data-line-number="10">## 7  &lt;environment: package:utils&gt;     &quot;package:utils&quot;    </a>
+<a class="sourceLine" id="cb202-11" data-line-number="11">## 8  &lt;environment: package:datasets&gt;  &quot;package:datasets&quot; </a>
+<a class="sourceLine" id="cb202-12" data-line-number="12">## 9  &lt;environment: package:methods&gt;   &quot;package:methods&quot;  </a>
+<a class="sourceLine" id="cb202-13" data-line-number="13">## 10 &lt;environment: 0x7fff3193dab0&gt;    &quot;Autoloads&quot;        </a>
+<a class="sourceLine" id="cb202-14" data-line-number="14">## 11 &lt;environment: base&gt;              &quot;&quot;                 </a>
+<a class="sourceLine" id="cb202-15" data-line-number="15">## 12 &lt;environment: R_EmptyEnv&gt;        &quot;&quot;                 </a></code></pre></div>
+<p>It takes some imagination to interpret this output, so let’s visualize the environments as a system of folders, <a href="environments.html#fig:environments">6.2</a>. You can think of the environment tree like this. The lowest-level environment is named <code>R_GlobalEnv</code> and is saved inside an environment named <code>package:devtools</code>, which is saved inside the environment named <code>0x7fff3321c388</code>, and so on, until you get to the final, highest-level environment, <code>R_EmptyEnv</code>. <code>R_EmptyEnv</code> is the only R environment that does not have a parent environment.</p>
+<div class="figure"><span id="fig:environments"></span>
+<img src="images/hopr_0602.png" alt="R stores R objects in an environment tree that resembles your computer's folder system."  />
+<p class="caption">
+Figure 6.2: R stores R objects in an environment tree that resembles your computer’s folder system.
+</p>
+</div>
+<p>Remember that this example is just a metaphor. R’s environments exist in your RAM memory, and not in your file system. Also, R environments aren’t technically saved inside one another. Each environment is connected to a parent environment, which makes it easy to search up R’s environment tree. But this connection is one-way: there’s no way to look at one environment and tell what its “children” are. So you cannot search down R’s environment tree. In other ways, though, R’s environment system works similar to a file system.</p>
+</div>
+<div id="working-with-environments" class="section level2">
+<h2><span class="header-section-number">6.2</span> Working with Environments</h2>
+<p>R comes with some helper functions that you can use to explore your environment tree. First, you can refer to any of the environments in your tree with <code>as.environment</code>. <code>as.environment</code> takes an environment name (as a character string) and returns the corresponding environment:</p>
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb203-1" data-line-number="1"><span class="kw">as.environment</span>(<span class="st">&quot;package:stats&quot;</span>)</a>
+<a class="sourceLine" id="cb203-2" data-line-number="2">## &lt;environment: package:stats&gt;</a>
+<a class="sourceLine" id="cb203-3" data-line-number="3">## attr(,&quot;name&quot;)</a>
+<a class="sourceLine" id="cb203-4" data-line-number="4">## [1] &quot;package:stats&quot;</a>
+<a class="sourceLine" id="cb203-5" data-line-number="5">## attr(,&quot;path&quot;)</a>
+<a class="sourceLine" id="cb203-6" data-line-number="6">## [1] &quot;/Library/Frameworks/R.framework/Versions/3.0/Resources/library/stats&quot;</a></code></pre></div>
+<p>Three environments in your tree also come with their own accessor functions. These are the global environment (<code>R_GlobalEnv</code>), the base environment (<code>base</code>), and the empty environment (<code>R_EmptyEnv</code>). You can refer to them with:</p>
+<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb204-1" data-line-number="1"><span class="kw">globalenv</span>()</a>
+<a class="sourceLine" id="cb204-2" data-line-number="2">## &lt;environment: R_GlobalEnv&gt;</a>
+<a class="sourceLine" id="cb204-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb204-4" data-line-number="4"><span class="kw">baseenv</span>()</a>
+<a class="sourceLine" id="cb204-5" data-line-number="5">## &lt;environment: base&gt;</a>
+<a class="sourceLine" id="cb204-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb204-7" data-line-number="7"><span class="kw">emptyenv</span>()</a>
+<a class="sourceLine" id="cb204-8" data-line-number="8">##&lt;environment: R_EmptyEnv&gt;</a></code></pre></div>
+<p>Next, you can look up an environment’s parent with <code>parent.env</code>:</p>
+<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb205-1" data-line-number="1"><span class="kw">parent.env</span>(<span class="kw">globalenv</span>())</a>
+<a class="sourceLine" id="cb205-2" data-line-number="2">## &lt;environment: package:devtools&gt;</a>
+<a class="sourceLine" id="cb205-3" data-line-number="3">## attr(,&quot;name&quot;)</a>
+<a class="sourceLine" id="cb205-4" data-line-number="4">## [1] &quot;package:devtools&quot;</a>
+<a class="sourceLine" id="cb205-5" data-line-number="5">## attr(,&quot;path&quot;)</a>
+<a class="sourceLine" id="cb205-6" data-line-number="6">## [1] &quot;/Library/Frameworks/R.framework/Versions/3.0/Resources/library/devtools&quot;</a></code></pre></div>
+<p>Notice that the empty environment is the only R environment without a parent:</p>
+<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb206-1" data-line-number="1"><span class="kw">parent.env</span>(<span class="kw">emptyenv</span>())</a>
+<a class="sourceLine" id="cb206-2" data-line-number="2">## Error in parent.env(emptyenv()) : the empty environment has no parent</a></code></pre></div>
+<p>You can view the objects saved in an environment with <code>ls</code> or <code>ls.str</code>. <code>ls</code> will return just the object names, but <code>ls.str</code> will display a little about each object’s structure:</p>
+<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb207-1" data-line-number="1"><span class="kw">ls</span>(<span class="kw">emptyenv</span>())</a>
+<a class="sourceLine" id="cb207-2" data-line-number="2">## character(0)</a>
+<a class="sourceLine" id="cb207-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb207-4" data-line-number="4"><span class="kw">ls</span>(<span class="kw">globalenv</span>())</a>
+<a class="sourceLine" id="cb207-5" data-line-number="5">##  &quot;deal&quot;    &quot;deck&quot;    &quot;deck2&quot;   &quot;deck3&quot;   &quot;deck4&quot;   &quot;deck5&quot;  </a>
+<a class="sourceLine" id="cb207-6" data-line-number="6">##  &quot;die&quot;     &quot;gender&quot;  &quot;hand&quot;    &quot;lst&quot;     &quot;mat&quot;     &quot;mil&quot;    </a>
+<a class="sourceLine" id="cb207-7" data-line-number="7">##  &quot;new&quot;     &quot;now&quot;     &quot;shuffle&quot; &quot;vec&quot;  </a></code></pre></div>
+<p>The empty environment is—not surprisingly—empty; the base environment has too many objects to list here; and the global environment has some familiar faces. It is where R has saved all of the objects that you’ve created so far.</p>
+
+<div class="rmdtip">
+RStudio’s environment pane displays all of the objects in your global environment.
+</div>
+
+<p>You can use R’s <code>$</code> syntax to access an object in a specific environment. For example, you can access <code>deck</code> from the global environment:</p>
+<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb208-1" data-line-number="1"><span class="kw">head</span>(<span class="kw">globalenv</span>()<span class="op">$</span>deck, <span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb208-2" data-line-number="2">##  face   suit value</a>
+<a class="sourceLine" id="cb208-3" data-line-number="3">##  king spades    13</a>
+<a class="sourceLine" id="cb208-4" data-line-number="4">## queen spades    12</a>
+<a class="sourceLine" id="cb208-5" data-line-number="5">##  jack spades    11</a></code></pre></div>
+<p>And you can use the <code>assign</code> function to save an object into a particular environment. First give <code>assign</code> the name of the new object (as a character string). Then give <code>assign</code> the value of the new object, and finally the environment to save the object in:</p>
+<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb209-1" data-line-number="1"><span class="kw">assign</span>(<span class="st">&quot;new&quot;</span>, <span class="st">&quot;Hello Global&quot;</span>, <span class="dt">envir =</span> <span class="kw">globalenv</span>())</a>
+<a class="sourceLine" id="cb209-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb209-3" data-line-number="3"><span class="kw">globalenv</span>()<span class="op">$</span>new</a>
+<a class="sourceLine" id="cb209-4" data-line-number="4">## &quot;Hello Global&quot;</a></code></pre></div>
+<p>Notice that <code>assign</code> works similar to <code>&lt;-</code>. If an object already exists with the given name in the given environment, <code>assign</code> will overwrite it without asking for permission. This makes <code>assign</code> useful for updating objects but creates the potential for heartache.</p>
+<p>Now that you can explore R’s environment tree, let’s examine how R uses it. R works closely with the environment tree to look up objects, store objects, and evaluate functions. How R does each of these tasks will depend on the current active environment.</p>
+<div id="the-active-environment" class="section level3">
+<h3><span class="header-section-number">6.2.1</span> The Active Environment</h3>
+<p>At any moment of time, R is working closely with a single environment. R will store new objects in this environment (if you create any), and R will use this environment as a starting point to look up existing objects (if you call any). I’ll call this special environment the <em>active environment</em>. The active environment is usually the global environment, but this may change when you run a function.</p>
+<p>You can use <code>environment</code> to see the current active environment:</p>
+<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb210-1" data-line-number="1"><span class="kw">environment</span>()</a>
+<a class="sourceLine" id="cb210-2" data-line-number="2"><span class="op">&lt;</span>environment<span class="op">:</span><span class="st"> </span>R_GlobalEnv<span class="op">&gt;</span></a></code></pre></div>
+<p>The global environment plays a special role in R. It is the active environment for every command that you run at the command line. As a result, any object that you create at the command line will be saved in the global environment. You can think of the global environment as your user workspace.</p>
+<p>When you call an object at the command line, R will look for it first in the global environment. But what if the object is not there? In that case, R will follow a series of rules to look up the object.</p>
+</div>
+</div>
+<div id="scoping-rules" class="section level2">
+<h2><span class="header-section-number">6.3</span> Scoping Rules</h2>
+<p>R follows a special set of rules to look up objects. These rules are known as R’s scoping rules, and you’ve already met a couple of them:</p>
+<ol style="list-style-type: decimal">
+<li>R looks for objects in the current active environment.</li>
+<li>When you work at the command line, the active environment is the global environment. Hence, R looks up objects that you call at the command line in the global environment.</li>
+</ol>
+<p>Here is a third rule that explains how R finds objects that are not in the active environment</p>
+<ol start="3" style="list-style-type: decimal">
+<li>When R does not find an object in an environment, R looks in the environment’s parent environment, then the parent of the parent, and so on, until R finds the object or reaches the empty environment.</li>
+</ol>
+<p>So, if you call an object at the command line, R will look for it in the global environment. If R can’t find it there, R will look in the parent of the global environment, and then the parent of the parent, and so on, working its way up the environment tree until it finds the object, as in <a href="environments.html#fig:path">6.3</a>. If R cannot find the object in any environment, it will return an error that says the object is not found.</p>
+<div class="figure"><span id="fig:path"></span>
+<img src="images/hopr_0603.png" alt="R will search for an object by name in the active environment, here the global environment. If R does not find the object there, it will search in the active environment's parent, and then the parent's parent, and so on until R finds the object or runs out of environments."  />
+<p class="caption">
+Figure 6.3: R will search for an object by name in the active environment, here the global environment. If R does not find the object there, it will search in the active environment’s parent, and then the parent’s parent, and so on until R finds the object or runs out of environments.
+</p>
+</div>
+
+<div class="rmdtip">
+Remember that functions are a type of object in R. R will store and look up functions the same way it stores and looks up other objects, by searching for them by name in the environment tree.
+</div>
+
+</div>
+<div id="assignment" class="section level2">
+<h2><span class="header-section-number">6.4</span> Assignment</h2>
+<p>When you assign a value to an object, R saves the value in the active environment under the object’s name. If an object with the same name already exists in the active environment, R will overwrite it.</p>
+<p>For example, an object named <code>new</code> exists in the global environment:</p>
+<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb211-1" data-line-number="1">new</a>
+<a class="sourceLine" id="cb211-2" data-line-number="2">## &quot;Hello Global&quot;</a></code></pre></div>
+<p>You can save a new object named <code>new</code> to the global environment with this command. R will overwrite the old object as a result:</p>
+<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb212-1" data-line-number="1">new &lt;-<span class="st"> &quot;Hello Active&quot;</span></a>
+<a class="sourceLine" id="cb212-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb212-3" data-line-number="3">new</a>
+<a class="sourceLine" id="cb212-4" data-line-number="4">## &quot;Hello Active&quot;</a></code></pre></div>
+<p>This arrangement creates a quandry for R whenever R runs a function. Many functions save temporary objects that help them do their jobs. For example, the <code>roll</code> function from <a href="project-1-weighted-dice.html#project-1-weighted-dice">Project 1: Weighted Dice</a> saved an object named <code>die</code> and an object named <code>dice</code>:</p>
+<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb213-1" data-line-number="1">roll &lt;-<span class="st"> </span><span class="cf">function</span>() {</a>
+<a class="sourceLine" id="cb213-2" data-line-number="2">  die &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">6</span></a>
+<a class="sourceLine" id="cb213-3" data-line-number="3">  dice &lt;-<span class="st"> </span><span class="kw">sample</span>(die, <span class="dt">size =</span> <span class="dv">2</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb213-4" data-line-number="4">  <span class="kw">sum</span>(dice)</a>
+<a class="sourceLine" id="cb213-5" data-line-number="5">}</a></code></pre></div>
+<p>R must save these temporary objects in the active environment; but if R does that, it may overwrite existing objects. Function authors cannot guess ahead of time which names may already exist in your active environment. How does R avoid this risk? Every time R runs a function, it creates a new active environment to evaluate the function in.</p>
+</div>
+<div id="evaluation" class="section level2">
+<h2><span class="header-section-number">6.5</span> Evaluation</h2>
+<p>R creates a new environment <em>each</em> time it evaluates a function. R will use the new environment as the active environment while it runs the function, and then R will return to the environment that you called the function from, bringing the function’s result with it. Let’s call these new environments <em>runtime environments</em> because R creates them at runtime to evaluate functions.</p>
+<p>We’ll use the following function to explore R’s runtime environments. We want to know what the environments look like: what are their parent environments, and what objects do they contain? <code>show_env</code> is designed to tell us:</p>
+<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb214-1" data-line-number="1">show_env &lt;-<span class="st"> </span><span class="cf">function</span>(){</a>
+<a class="sourceLine" id="cb214-2" data-line-number="2">  <span class="kw">list</span>(<span class="dt">ran.in =</span> <span class="kw">environment</span>(), </a>
+<a class="sourceLine" id="cb214-3" data-line-number="3">    <span class="dt">parent =</span> <span class="kw">parent.env</span>(<span class="kw">environment</span>()), </a>
+<a class="sourceLine" id="cb214-4" data-line-number="4">    <span class="dt">objects =</span> <span class="kw">ls.str</span>(<span class="kw">environment</span>()))</a>
+<a class="sourceLine" id="cb214-5" data-line-number="5">}</a></code></pre></div>
+<p><code>show_env</code> is itself a function, so when we call <code>show_env()</code>, R will create a runtime environment to evaluate the function in. The results of <code>show_env</code> will tell us the name of the runtime environment, its parent, and which objects the runtime environment contains:</p>
+<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb215-1" data-line-number="1"><span class="kw">show_env</span>()</a>
+<a class="sourceLine" id="cb215-2" data-line-number="2">## $ran.in</a>
+<a class="sourceLine" id="cb215-3" data-line-number="3">## &lt;environment: 0x7ff711d12e28&gt;</a>
+<a class="sourceLine" id="cb215-4" data-line-number="4">## </a>
+<a class="sourceLine" id="cb215-5" data-line-number="5">## $parent</a>
+<a class="sourceLine" id="cb215-6" data-line-number="6">## &lt;environment: R_GlobalEnv&gt;</a>
+<a class="sourceLine" id="cb215-7" data-line-number="7">## </a>
+<a class="sourceLine" id="cb215-8" data-line-number="8">## $objects</a></code></pre></div>
+<p>The results reveal that R created a new environment named <code>0x7ff711d12e28</code> to run <code>show_env()</code> in. The environment had no objects in it, and its parent was the <code>global environment</code>. So for purposes of running <code>show_env</code>, R’s environment tree looked like <a href="environments.html#fig:tree">6.4</a>.</p>
+<p>Let’s run <code>show_env</code> again:</p>
+<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb216-1" data-line-number="1"><span class="kw">show_env</span>()</a>
+<a class="sourceLine" id="cb216-2" data-line-number="2">## $ran.in</a>
+<a class="sourceLine" id="cb216-3" data-line-number="3">## &lt;environment: 0x7ff715f49808&gt;</a>
+<a class="sourceLine" id="cb216-4" data-line-number="4">## </a>
+<a class="sourceLine" id="cb216-5" data-line-number="5">## $parent</a>
+<a class="sourceLine" id="cb216-6" data-line-number="6">## &lt;environment: R_GlobalEnv&gt;</a>
+<a class="sourceLine" id="cb216-7" data-line-number="7">## </a>
+<a class="sourceLine" id="cb216-8" data-line-number="8">## $objects</a></code></pre></div>
+<p>This time <code>show_env</code> ran in a new environment, <code>0x7ff715f49808</code>. R creates a new environment <em>each</em> time you run a function. The <code>0x7ff715f49808</code> environment looks exactly the same as <code>0x7ff711d12e28</code>. It is empty and has the same global environment as its parent.</p>
+<div class="figure"><span id="fig:tree"></span>
+<img src="images/hopr_0604.png" alt="R creates a new environment to run show_env in. The environment is a child of the global environment."  />
+<p class="caption">
+Figure 6.4: R creates a new environment to run show_env in. The environment is a child of the global environment.
+</p>
+</div>
+<p>Now let’s consider which environment R will use as the parent of the runtime environment.</p>
+<p>R will connect a function’s runtime environment to the environment that the function <em>was first created in</em>. This environment plays an important role in the function’s life—because all of the function’s runtime environments will use it as a parent. Let’s call this environment the <em>origin environment</em>. You can look up a function’s origin environment by running <code>environment</code> on the function:</p>
+<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb217-1" data-line-number="1"><span class="kw">environment</span>(show_env)</a>
+<a class="sourceLine" id="cb217-2" data-line-number="2">## &lt;environment: R_GlobalEnv&gt;</a></code></pre></div>
+<p>The origin environment of <code>show_env</code> is the global environment because we created <code>show_env</code> at the command line, but the origin environment does not need to be the global environment. For example, the environment of <code>parenvs</code> is the <code>devtools</code> package:</p>
+<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb218-1" data-line-number="1"><span class="kw">environment</span>(parenvs)</a>
+<a class="sourceLine" id="cb218-2" data-line-number="2">## &lt;environment: namespace:devtools&gt;</a></code></pre></div>
+<p>In other words, the parent of a runtime environment will not always be the global environment; it will be whichever environment the function was first created in.</p>
+<p>Finally, let’s look at the objects contained in a runtime environment. At the moment, <code>show_env</code>’s runtime environments do not contain any objects, but that is easy to fix. Just have <code>show_env</code> create some objects in its body of code. R will store any objects created by <code>show_env</code> in its runtime environment. Why? Because the runtime environment will be the active environment when those objects are created:</p>
+<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb219-1" data-line-number="1">show_env &lt;-<span class="st"> </span><span class="cf">function</span>(){</a>
+<a class="sourceLine" id="cb219-2" data-line-number="2">  a &lt;-<span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb219-3" data-line-number="3">  b &lt;-<span class="st"> </span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb219-4" data-line-number="4">  c &lt;-<span class="st"> </span><span class="dv">3</span></a>
+<a class="sourceLine" id="cb219-5" data-line-number="5">  <span class="kw">list</span>(<span class="dt">ran.in =</span> <span class="kw">environment</span>(), </a>
+<a class="sourceLine" id="cb219-6" data-line-number="6">    <span class="dt">parent =</span> <span class="kw">parent.env</span>(<span class="kw">environment</span>()), </a>
+<a class="sourceLine" id="cb219-7" data-line-number="7">    <span class="dt">objects =</span> <span class="kw">ls.str</span>(<span class="kw">environment</span>()))</a>
+<a class="sourceLine" id="cb219-8" data-line-number="8">}</a></code></pre></div>
+<p>This time when we run <code>show_env</code>, R stores <code>a</code>, <code>b</code>, and <code>c</code> in the runtime environment:</p>
+<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb220-1" data-line-number="1"><span class="kw">show_env</span>()</a>
+<a class="sourceLine" id="cb220-2" data-line-number="2">## $ran.in</a>
+<a class="sourceLine" id="cb220-3" data-line-number="3">## &lt;environment: 0x7ff712312cd0&gt;</a>
+<a class="sourceLine" id="cb220-4" data-line-number="4">## </a>
+<a class="sourceLine" id="cb220-5" data-line-number="5">## $parent</a>
+<a class="sourceLine" id="cb220-6" data-line-number="6">## &lt;environment: R_GlobalEnv&gt;</a>
+<a class="sourceLine" id="cb220-7" data-line-number="7">## </a>
+<a class="sourceLine" id="cb220-8" data-line-number="8">## $objects</a>
+<a class="sourceLine" id="cb220-9" data-line-number="9">## a :  num 1</a>
+<a class="sourceLine" id="cb220-10" data-line-number="10">## b :  num 2</a>
+<a class="sourceLine" id="cb220-11" data-line-number="11">## c :  num 3</a></code></pre></div>
+<p>This is how R ensures that a function does not overwrite anything that it shouldn’t. Any objects created by the function are stored in a safe, out-of-the-way runtime environment.</p>
+<p>R will also put a second type of object in a runtime environment. If a function has arguments, R will copy over each argument to the runtime environment. The argument will appear as an object that has the name of the argument but the value of whatever input the user provided for the argument. This ensures that a function will be able to find and use each of its arguments:</p>
+<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb221-1" data-line-number="1">foo &lt;-<span class="st"> &quot;take me to your runtime&quot;</span></a>
+<a class="sourceLine" id="cb221-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb221-3" data-line-number="3">show_env &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">x =</span> foo){</a>
+<a class="sourceLine" id="cb221-4" data-line-number="4">  <span class="kw">list</span>(<span class="dt">ran.in =</span> <span class="kw">environment</span>(), </a>
+<a class="sourceLine" id="cb221-5" data-line-number="5">    <span class="dt">parent =</span> <span class="kw">parent.env</span>(<span class="kw">environment</span>()), </a>
+<a class="sourceLine" id="cb221-6" data-line-number="6">    <span class="dt">objects =</span> <span class="kw">ls.str</span>(<span class="kw">environment</span>()))</a>
+<a class="sourceLine" id="cb221-7" data-line-number="7">}</a>
+<a class="sourceLine" id="cb221-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb221-9" data-line-number="9"><span class="kw">show_env</span>()</a>
+<a class="sourceLine" id="cb221-10" data-line-number="10">## $ran.in</a>
+<a class="sourceLine" id="cb221-11" data-line-number="11">## &lt;environment: 0x7ff712398958&gt;</a>
+<a class="sourceLine" id="cb221-12" data-line-number="12">## </a>
+<a class="sourceLine" id="cb221-13" data-line-number="13">## $parent</a>
+<a class="sourceLine" id="cb221-14" data-line-number="14">## &lt;environment: R_GlobalEnv&gt;</a>
+<a class="sourceLine" id="cb221-15" data-line-number="15">## </a>
+<a class="sourceLine" id="cb221-16" data-line-number="16">## $objects</a>
+<a class="sourceLine" id="cb221-17" data-line-number="17">## x :  chr &quot;take me to your runtime&quot;</a></code></pre></div>
+<p>Let’s put this all together to see how R evaluates a function. Before you call a function, R is working in an active environment; let’s call this the <em>calling environment</em>. It is the environment R calls the function from.</p>
+<p>Then you call the function. R responds by setting up a new runtime environment. This environment will be a child of the function’s origin enviornment. R will copy each of the function’s arguments into the runtime environment and then make the runtime environment the new active environment.</p>
+<p>Next, R runs the code in the body of the function. If the code creates any objects, R stores them in the active, that is, runtime environment. If the code calls any objects, R uses its scoping rules to look them up. R will search the runtime environment, then the parent of the runtime environment (which will be the origin environment), then the parent of the origin environment, and so on. Notice that the calling environment might not be on the search path. Usually, a function will only call its arguments, which R can find in the active runtime environment.</p>
+<p>Finally, R finishes running the function. It switches the active environment back to the calling environment. Now R executes any other commands in the line of code that called the function. So if you save the result of the function to an object with <code>&lt;-</code>, the new object will be stored in the calling environment.</p>
+<p>To recap, R stores its objects in an environment system. At any moment of time, R is working closely with a single active environment. It stores new objects in this environment, and it uses the environment as a starting point when it searches for existing objects. R’s active environment is usually the global environment, but R will adjust the active environment to do things like run functions in a safe manner.</p>
+<p>How can you use this knowledge to fix the <code>deal</code> and <code>shuffle</code> functions?</p>
+<p>First, let’s start with a warm-up question. Suppose I redefine <code>deal</code> at the command line like this:</p>
+<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb222-1" data-line-number="1">deal &lt;-<span class="st"> </span><span class="cf">function</span>() {</a>
+<a class="sourceLine" id="cb222-2" data-line-number="2">  deck[<span class="dv">1</span>, ]</a>
+<a class="sourceLine" id="cb222-3" data-line-number="3">}</a></code></pre></div>
+<p>Notice that <code>deal</code> no longer takes an argument, and it calls the <code>deck</code> object, which lives in the global environment.</p>
+
+<div class="exercise">
+<span id="exr:unnamed-chunk-43" class="exercise"><strong>Exercise 6.1  (Will deal work?)  </strong></span>Will R be able to find <code>deck</code> and return an answer when I call the new version of <code>deal</code>, such as <code>deal()</code>?
+</div>
+
+
+<div class="solution">
+ <span class="solution"><em>Solution. </em></span> Yes. <code>deal</code> will still work the same as before. R will run <code>deal</code> in a runtime environment that is a child of the global environment. Why will it be a child of the global environment? Because the global environment is the origin environment of <code>deal</code> (we defined <code>deal</code> in the global environment):
+</div>
+
+<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb223-1" data-line-number="1"><span class="kw">environment</span>(deal)</a>
+<a class="sourceLine" id="cb223-2" data-line-number="2">## &lt;environment: R_GlobalEnv&gt;</a></code></pre></div>
+<p>When <code>deal</code> calls <code>deck</code>, R will need to look up the <code>deck</code> object. R’s scoping rules will lead it to the version of <code>deck</code> in the global environment, as in <a href="environments.html#fig:deal">6.5</a>. <code>deal</code> works as expected as a result:</p>
+<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb224-1" data-line-number="1"><span class="kw">deal</span>()</a>
+<a class="sourceLine" id="cb224-2" data-line-number="2">##  face   suit value</a>
+<a class="sourceLine" id="cb224-3" data-line-number="3">##  king spades    13</a></code></pre></div>
+<div class="figure"><span id="fig:deal"></span>
+<img src="images/hopr_0605.png" alt="R finds deck by looking in the parent of deal's runtime environment. The parent is the global environment, deal's origin environment. Here, R finds the copy of deck."  />
+<p class="caption">
+Figure 6.5: R finds deck by looking in the parent of deal’s runtime environment. The parent is the global environment, deal’s origin environment. Here, R finds the copy of deck.
+</p>
+</div>
+<p>Now let’s fix the <code>deal</code> function to remove the cards it has dealt from <code>deck</code>. Recall that <code>deal</code> returns the top card of <code>deck</code> but does not remove the card from the deck. As a result, <code>deal</code> always returns the same card:</p>
+<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb225-1" data-line-number="1"><span class="kw">deal</span>()</a>
+<a class="sourceLine" id="cb225-2" data-line-number="2">##  face   suit value</a>
+<a class="sourceLine" id="cb225-3" data-line-number="3">##  king spades    13</a>
+<a class="sourceLine" id="cb225-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb225-5" data-line-number="5"><span class="kw">deal</span>()</a>
+<a class="sourceLine" id="cb225-6" data-line-number="6">##  face   suit value</a>
+<a class="sourceLine" id="cb225-7" data-line-number="7">##  king spades    13</a></code></pre></div>
+<p>You know enough R syntax to remove the top card of <code>deck</code>. The following code will save a prisitine copy of <code>deck</code> and then remove the top card:</p>
+<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb226-1" data-line-number="1">DECK &lt;-<span class="st"> </span>deck</a>
+<a class="sourceLine" id="cb226-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb226-3" data-line-number="3">deck &lt;-<span class="st"> </span>deck[<span class="op">-</span><span class="dv">1</span>, ]</a>
+<a class="sourceLine" id="cb226-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb226-5" data-line-number="5"><span class="kw">head</span>(deck, <span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb226-6" data-line-number="6">##  face   suit value</a>
+<a class="sourceLine" id="cb226-7" data-line-number="7">## queen spades    12</a>
+<a class="sourceLine" id="cb226-8" data-line-number="8">##  jack spades    11</a>
+<a class="sourceLine" id="cb226-9" data-line-number="9">##   ten spades    10</a></code></pre></div>
+<p>Now let’s add the code to <code>deal</code>. Here <code>deal</code> saves (and then returns) the top card of <code>deck</code>. In between, it removes the card from <code>deck</code>…or does it?</p>
+<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb227-1" data-line-number="1">deal &lt;-<span class="st"> </span><span class="cf">function</span>() {</a>
+<a class="sourceLine" id="cb227-2" data-line-number="2">  card &lt;-<span class="st"> </span>deck[<span class="dv">1</span>, ]</a>
+<a class="sourceLine" id="cb227-3" data-line-number="3">  deck &lt;-<span class="st"> </span>deck[<span class="op">-</span><span class="dv">1</span>, ]</a>
+<a class="sourceLine" id="cb227-4" data-line-number="4">  card</a>
+<a class="sourceLine" id="cb227-5" data-line-number="5">}</a></code></pre></div>
+<p>This code won’t work because R will be in a runtime environment when it executes <code>deck &lt;- deck[-1, ]</code>. Instead of overwriting the global copy of <code>deck</code> with <code>deck[-1, ]</code>, <code>deal</code> will just create a slightly altered copy of <code>deck</code> in its runtime environment, as in <a href="environments.html#fig:second-deck">6.6</a>.</p>
+<div class="figure"><span id="fig:second-deck"></span>
+<img src="images/hopr_0606.png" alt="The deal function looks up deck in the global environment but saves deck[-1, ] in the runtime environment as a new object named deck. "  />
+<p class="caption">
+Figure 6.6: The deal function looks up deck in the global environment but saves deck[-1, ] in the runtime environment as a new object named deck.
+</p>
+</div>
+
+<div class="exercise">
+<span id="exr:unnamed-chunk-45" class="exercise"><strong>Exercise 6.2  (Overwrite deck)  </strong></span>Rewrite the <code>deck &lt;- deck[-1, ]</code> line of <code>deal</code> to <em>assign</em> <code>deck[-1, ]</code> to an object named <code>deck</code> in the global environment. Hint: consider the <code>assign</code> function.
+</div>
+
+
+<div class="solution">
+ <span class="solution"><em>Solution. </em></span> You can assign an object to a specific environment with the <code>assign</code> function:
+</div>
+
+<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb228-1" data-line-number="1">deal &lt;-<span class="st"> </span><span class="cf">function</span>() {</a>
+<a class="sourceLine" id="cb228-2" data-line-number="2">  card &lt;-<span class="st"> </span>deck[<span class="dv">1</span>, ]</a>
+<a class="sourceLine" id="cb228-3" data-line-number="3">  <span class="kw">assign</span>(<span class="st">&quot;deck&quot;</span>, deck[<span class="op">-</span><span class="dv">1</span>, ], <span class="dt">envir =</span> <span class="kw">globalenv</span>())</a>
+<a class="sourceLine" id="cb228-4" data-line-number="4">  card</a>
+<a class="sourceLine" id="cb228-5" data-line-number="5">}</a></code></pre></div>
+<p>Now <code>deal</code> will finally clean up the global copy of <code>deck</code>, and we can <code>deal</code> cards just as we would in real life:</p>
+<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb229-1" data-line-number="1"><span class="kw">deal</span>()</a>
+<a class="sourceLine" id="cb229-2" data-line-number="2">##  face   suit value</a>
+<a class="sourceLine" id="cb229-3" data-line-number="3">## queen spades    12</a>
+<a class="sourceLine" id="cb229-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb229-5" data-line-number="5"><span class="kw">deal</span>()</a>
+<a class="sourceLine" id="cb229-6" data-line-number="6">## face   suit value</a>
+<a class="sourceLine" id="cb229-7" data-line-number="7">## jack spades    11</a>
+<a class="sourceLine" id="cb229-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb229-9" data-line-number="9"><span class="kw">deal</span>()</a>
+<a class="sourceLine" id="cb229-10" data-line-number="10">## face   suit value</a>
+<a class="sourceLine" id="cb229-11" data-line-number="11">##  ten spades    10</a></code></pre></div>
+<p>Let’s turn our attention to the <code>shuffle</code> function:</p>
+<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb230-1" data-line-number="1">shuffle &lt;-<span class="st"> </span><span class="cf">function</span>(cards) { </a>
+<a class="sourceLine" id="cb230-2" data-line-number="2">  random &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">52</span>, <span class="dt">size =</span> <span class="dv">52</span>)</a>
+<a class="sourceLine" id="cb230-3" data-line-number="3">  cards[random, ]</a>
+<a class="sourceLine" id="cb230-4" data-line-number="4">}</a></code></pre></div>
+<p><code>shuffle(deck)</code> doesn’t shuffle the <code>deck</code> object; it returns a shuffled copy of the <code>deck</code> object:</p>
+<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb231-1" data-line-number="1"><span class="kw">head</span>(deck, <span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb231-2" data-line-number="2">##  face   suit value</a>
+<a class="sourceLine" id="cb231-3" data-line-number="3">##  nine spades     9</a>
+<a class="sourceLine" id="cb231-4" data-line-number="4">## eight spades     8</a>
+<a class="sourceLine" id="cb231-5" data-line-number="5">## seven spades     7</a>
+<a class="sourceLine" id="cb231-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb231-7" data-line-number="7">a &lt;-<span class="st"> </span><span class="kw">shuffle</span>(deck)</a>
+<a class="sourceLine" id="cb231-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb231-9" data-line-number="9"><span class="kw">head</span>(deck, <span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb231-10" data-line-number="10">##  face   suit value</a>
+<a class="sourceLine" id="cb231-11" data-line-number="11">##  nine spades     9</a>
+<a class="sourceLine" id="cb231-12" data-line-number="12">## eight spades     8</a>
+<a class="sourceLine" id="cb231-13" data-line-number="13">## seven spades     7</a>
+<a class="sourceLine" id="cb231-14" data-line-number="14"></a>
+<a class="sourceLine" id="cb231-15" data-line-number="15"><span class="kw">head</span>(a, <span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb231-16" data-line-number="16">##  face     suit value</a>
+<a class="sourceLine" id="cb231-17" data-line-number="17">##   ace diamonds     1</a>
+<a class="sourceLine" id="cb231-18" data-line-number="18">## seven    clubs     7</a>
+<a class="sourceLine" id="cb231-19" data-line-number="19">##   two    clubs     2</a></code></pre></div>
+<p>This behavior is now undesirable in two ways. First, <code>shuffle</code> fails to shuffle <code>deck</code>. Second, <code>shuffle</code> returns a copy of <code>deck</code>, which may be missing the cards that have been dealt away. It would be better if <code>shuffle</code> returned the dealt cards to the deck and then shuffled. This is what happens when you shuffle a deck of cards in real life.</p>
+
+<div class="exercise">
+<span id="exr:unnamed-chunk-47" class="exercise"><strong>Exercise 6.3  (Rewrite shuffle)  </strong></span>Rewrite <code>shuffle</code> so that it replaces the copy of <code>deck</code> that lives in the global environment with a shuffled version of <code>DECK</code>, the intact copy of <code>deck</code> that also lives in the global environment. The new version of <code>shuffle</code> should have no arguments and return no output.
+</div>
+
+
+<div class="solution">
+ <span class="solution"><em>Solution. </em></span> You can update <code>shuffle</code> in the same way that you updated <code>deck</code>. The following version will do the job:
+</div>
+
+<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb232-1" data-line-number="1">shuffle &lt;-<span class="st"> </span><span class="cf">function</span>(){</a>
+<a class="sourceLine" id="cb232-2" data-line-number="2">  random &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">52</span>, <span class="dt">size =</span> <span class="dv">52</span>)</a>
+<a class="sourceLine" id="cb232-3" data-line-number="3">  <span class="kw">assign</span>(<span class="st">&quot;deck&quot;</span>, DECK[random, ], <span class="dt">envir =</span> <span class="kw">globalenv</span>())</a>
+<a class="sourceLine" id="cb232-4" data-line-number="4">}</a></code></pre></div>
+<p>Since <code>DECK</code> lives in the global environment, <code>shuffle</code>’s environment of origin, <code>shuffle</code> will be able to find <code>DECK</code> at runtime. R will search for <code>DECK</code> first in <code>shuffle</code>’s runtime environment, and then in <code>shuffle</code>’s origin environment—the global environment—which is where <code>DECK</code> is stored.</p>
+<p>The second line of <code>shuffle</code> will create a reordered copy of <code>DECK</code> and save it as <code>deck</code> in the global environment. This will overwrite the previous, nonshuffled version of <code>deck</code>.</p>
+</div>
+<div id="closures" class="section level2">
+<h2><span class="header-section-number">6.6</span> Closures</h2>
+<p>Our system finally works. For example, you can shuffle the cards and then deal a hand of blackjack:</p>
+<div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb233-1" data-line-number="1"><span class="kw">shuffle</span>()</a>
+<a class="sourceLine" id="cb233-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb233-3" data-line-number="3"><span class="kw">deal</span>()</a>
+<a class="sourceLine" id="cb233-4" data-line-number="4">##  face   suit value</a>
+<a class="sourceLine" id="cb233-5" data-line-number="5">## queen hearts    12</a>
+<a class="sourceLine" id="cb233-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb233-7" data-line-number="7"><span class="kw">deal</span>()</a>
+<a class="sourceLine" id="cb233-8" data-line-number="8">##  face   suit value</a>
+<a class="sourceLine" id="cb233-9" data-line-number="9">## eight hearts     8</a></code></pre></div>
+<p>But the system requires <code>deck</code> and <code>DECK</code> to exist in the global environment. Lots of things happen in this environment, and it is possible that <code>deck</code> may get modified or erased by accident.</p>
+<p>It would be better if we could store <code>deck</code> in a safe, out-of-the-way place, like one of those safe, out-of-the-way environments that R creates to run functions in. In fact, storing <code>deck</code> in a runtime environment is not such a bad idea.</p>
+<p>You could create a function that takes <code>deck</code> as an argument and saves a copy of <code>deck</code> as <code>DECK</code>. The function could also save its own copies of <code>deal</code> and <code>shuffle</code>:</p>
+<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb234-1" data-line-number="1">setup &lt;-<span class="st"> </span><span class="cf">function</span>(deck) {</a>
+<a class="sourceLine" id="cb234-2" data-line-number="2">  DECK &lt;-<span class="st"> </span>deck</a>
+<a class="sourceLine" id="cb234-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb234-4" data-line-number="4">  DEAL &lt;-<span class="st"> </span><span class="cf">function</span>() {</a>
+<a class="sourceLine" id="cb234-5" data-line-number="5">    card &lt;-<span class="st"> </span>deck[<span class="dv">1</span>, ]</a>
+<a class="sourceLine" id="cb234-6" data-line-number="6">    <span class="kw">assign</span>(<span class="st">&quot;deck&quot;</span>, deck[<span class="op">-</span><span class="dv">1</span>, ], <span class="dt">envir =</span> <span class="kw">globalenv</span>())</a>
+<a class="sourceLine" id="cb234-7" data-line-number="7">    card</a>
+<a class="sourceLine" id="cb234-8" data-line-number="8">  }</a>
+<a class="sourceLine" id="cb234-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb234-10" data-line-number="10">  SHUFFLE &lt;-<span class="st"> </span><span class="cf">function</span>(){</a>
+<a class="sourceLine" id="cb234-11" data-line-number="11">    random &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">52</span>, <span class="dt">size =</span> <span class="dv">52</span>)</a>
+<a class="sourceLine" id="cb234-12" data-line-number="12">    <span class="kw">assign</span>(<span class="st">&quot;deck&quot;</span>, DECK[random, ], <span class="dt">envir =</span> <span class="kw">globalenv</span>())</a>
+<a class="sourceLine" id="cb234-13" data-line-number="13"> }</a>
+<a class="sourceLine" id="cb234-14" data-line-number="14">}</a></code></pre></div>
+<p>When you run <code>setup</code>, R will create a runtime environment to store these objects in. The environment will look like <a href="environments.html#fig:closure1">6.7</a>.</p>
+<p>Now all of these things are safely out of the way in a child of the global environment. That makes them safe but hard to use. Let’s ask <code>setup</code> to return <code>DEAL</code> and <code>SHUFFLE</code> so we can use them. The best way to do this is to return the functions as a list:</p>
+<div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb235-1" data-line-number="1">setup &lt;-<span class="st"> </span><span class="cf">function</span>(deck) {</a>
+<a class="sourceLine" id="cb235-2" data-line-number="2">  DECK &lt;-<span class="st"> </span>deck</a>
+<a class="sourceLine" id="cb235-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb235-4" data-line-number="4">  DEAL &lt;-<span class="st"> </span><span class="cf">function</span>() {</a>
+<a class="sourceLine" id="cb235-5" data-line-number="5">    card &lt;-<span class="st"> </span>deck[<span class="dv">1</span>, ]</a>
+<a class="sourceLine" id="cb235-6" data-line-number="6">    <span class="kw">assign</span>(<span class="st">&quot;deck&quot;</span>, deck[<span class="op">-</span><span class="dv">1</span>, ], <span class="dt">envir =</span> <span class="kw">globalenv</span>())</a>
+<a class="sourceLine" id="cb235-7" data-line-number="7">    card</a>
+<a class="sourceLine" id="cb235-8" data-line-number="8">  }</a>
+<a class="sourceLine" id="cb235-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb235-10" data-line-number="10">  SHUFFLE &lt;-<span class="st"> </span><span class="cf">function</span>(){</a>
+<a class="sourceLine" id="cb235-11" data-line-number="11">    random &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">52</span>, <span class="dt">size =</span> <span class="dv">52</span>)</a>
+<a class="sourceLine" id="cb235-12" data-line-number="12">    <span class="kw">assign</span>(<span class="st">&quot;deck&quot;</span>, DECK[random, ], <span class="dt">envir =</span> <span class="kw">globalenv</span>())</a>
+<a class="sourceLine" id="cb235-13" data-line-number="13"> }</a>
+<a class="sourceLine" id="cb235-14" data-line-number="14"></a>
+<a class="sourceLine" id="cb235-15" data-line-number="15"> <span class="kw">list</span>(<span class="dt">deal =</span> DEAL, <span class="dt">shuffle =</span> SHUFFLE)</a>
+<a class="sourceLine" id="cb235-16" data-line-number="16">}</a>
+<a class="sourceLine" id="cb235-17" data-line-number="17"></a>
+<a class="sourceLine" id="cb235-18" data-line-number="18">cards &lt;-<span class="st"> </span><span class="kw">setup</span>(deck)</a></code></pre></div>
+<div class="figure"><span id="fig:closure1"></span>
+<img src="images/hopr_0607.png" alt="Running setup will store deck and DECK in an out-of-the-way place, and create a DEAL and SHUFFLE function. Each of these objects will be stored in an environment whose parent is the global environment."  />
+<p class="caption">
+Figure 6.7: Running setup will store deck and DECK in an out-of-the-way place, and create a DEAL and SHUFFLE function. Each of these objects will be stored in an environment whose parent is the global environment.
+</p>
+</div>
+<p>Then you can save each of the elements of the list to a dedicated object in the global environment:</p>
+<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb236-1" data-line-number="1">deal &lt;-<span class="st"> </span>cards<span class="op">$</span>deal</a>
+<a class="sourceLine" id="cb236-2" data-line-number="2">shuffle &lt;-<span class="st"> </span>cards<span class="op">$</span>shuffle</a></code></pre></div>
+<p>Now you can run <code>deal</code> and <code>shuffle</code> just as before. Each object contains the same code as the original <code>deal</code> and <code>shuffle</code>:</p>
+<div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb237-1" data-line-number="1">deal</a>
+<a class="sourceLine" id="cb237-2" data-line-number="2">## function() {</a>
+<a class="sourceLine" id="cb237-3" data-line-number="3">##     card &lt;- deck[1, ]</a>
+<a class="sourceLine" id="cb237-4" data-line-number="4">##     assign(&quot;deck&quot;, deck[-1, ], envir = globalenv())</a>
+<a class="sourceLine" id="cb237-5" data-line-number="5">##     card</a>
+<a class="sourceLine" id="cb237-6" data-line-number="6">##   }</a>
+<a class="sourceLine" id="cb237-7" data-line-number="7">## &lt;environment: 0x7ff7169c3390&gt;</a>
+<a class="sourceLine" id="cb237-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb237-9" data-line-number="9">shuffle</a>
+<a class="sourceLine" id="cb237-10" data-line-number="10">## function(){</a>
+<a class="sourceLine" id="cb237-11" data-line-number="11">##     random &lt;- sample(1:52, size = 52)</a>
+<a class="sourceLine" id="cb237-12" data-line-number="12">##     assign(&quot;deck&quot;, DECK[random, ], envir = globalenv())</a>
+<a class="sourceLine" id="cb237-13" data-line-number="13">##  }</a>
+<a class="sourceLine" id="cb237-14" data-line-number="14">## &lt;environment: 0x7ff7169c3390&gt;</a></code></pre></div>
+<p>However, the functions now have one important difference. Their origin environment is no longer the global environment (although <code>deal</code> and <code>shuffle</code> <em>are</em> currently saved there). Their origin environment is the runtime environment that R made when you ran <code>setup</code>. That’s where R created <code>DEAL</code> and <code>SHUFFLE</code>, the functions copied into the new <code>deal</code> and <code>shuffle</code>, as shown in:</p>
+<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb238-1" data-line-number="1"><span class="kw">environment</span>(deal)</a>
+<a class="sourceLine" id="cb238-2" data-line-number="2">## &lt;environment: 0x7ff7169c3390&gt;</a>
+<a class="sourceLine" id="cb238-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb238-4" data-line-number="4"><span class="kw">environment</span>(shuffle)</a>
+<a class="sourceLine" id="cb238-5" data-line-number="5">## &lt;environment: 0x7ff7169c3390&gt;</a></code></pre></div>
+<p>Why does this matter? Because now when you run <code>deal</code> or <code>shuffle</code>, R will evaluate the functions in a runtime environment that uses <code>0x7ff7169c3390</code> as its parent. <code>DECK</code> and <code>deck</code> will be in this parent environment, which means that <code>deal</code> and <code>shuffle</code> will be able to find them at runtime. <code>DECK</code> and <code>deck</code> will be in the functions’ search path but still out of the way in every other respect, as shown in <a href="environments.html#fig:closure2">6.8</a>.</p>
+<div class="figure"><span id="fig:closure2"></span>
+<img src="images/hopr_0608.png" alt="Now deal and shuffle will be run in an environment that has the protected deck and DECK in its search path."  />
+<p class="caption">
+Figure 6.8: Now deal and shuffle will be run in an environment that has the protected deck and DECK in its search path.
+</p>
+</div>
+<p>This arrangement is called a <em>closure</em>. <code>setup</code>’s runtime environment “encloses” the <code>deal</code> and <code>shuffle</code> functions. Both <code>deal</code> and <code>shuffle</code> can work closely with the objects contained in the enclosing environment, but almost nothing else can. The enclosing environment is not on the search path for any other R function or environment.</p>
+<p>You may have noticed that <code>deal</code> and <code>shuffle</code> still update the <code>deck</code> object in the global environment. Don’t worry, we’re about to change that. We want <code>deal</code> and <code>shuffle</code> to work exclusively with the objects in the parent (enclosing) environment of their runtime environments. Instead of having each function reference the global environment to update <code>deck</code>, you can have them reference their parent environment at runtime, as shown in <a href="environments.html#fig:closure3">6.9</a>:</p>
+<div class="sourceCode" id="cb239"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb239-1" data-line-number="1">setup &lt;-<span class="st"> </span><span class="cf">function</span>(deck) {</a>
+<a class="sourceLine" id="cb239-2" data-line-number="2">  DECK &lt;-<span class="st"> </span>deck</a>
+<a class="sourceLine" id="cb239-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb239-4" data-line-number="4">  DEAL &lt;-<span class="st"> </span><span class="cf">function</span>() {</a>
+<a class="sourceLine" id="cb239-5" data-line-number="5">    card &lt;-<span class="st"> </span>deck[<span class="dv">1</span>, ]</a>
+<a class="sourceLine" id="cb239-6" data-line-number="6">    <span class="kw">assign</span>(<span class="st">&quot;deck&quot;</span>, deck[<span class="op">-</span><span class="dv">1</span>, ], <span class="dt">envir =</span> <span class="kw">parent.env</span>(<span class="kw">environment</span>()))</a>
+<a class="sourceLine" id="cb239-7" data-line-number="7">    card</a>
+<a class="sourceLine" id="cb239-8" data-line-number="8">  }</a>
+<a class="sourceLine" id="cb239-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb239-10" data-line-number="10">  SHUFFLE &lt;-<span class="st"> </span><span class="cf">function</span>(){</a>
+<a class="sourceLine" id="cb239-11" data-line-number="11">    random &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">52</span>, <span class="dt">size =</span> <span class="dv">52</span>)</a>
+<a class="sourceLine" id="cb239-12" data-line-number="12">    <span class="kw">assign</span>(<span class="st">&quot;deck&quot;</span>, DECK[random, ], <span class="dt">envir =</span> <span class="kw">parent.env</span>(<span class="kw">environment</span>()))</a>
+<a class="sourceLine" id="cb239-13" data-line-number="13"> }</a>
+<a class="sourceLine" id="cb239-14" data-line-number="14"></a>
+<a class="sourceLine" id="cb239-15" data-line-number="15"> <span class="kw">list</span>(<span class="dt">deal =</span> DEAL, <span class="dt">shuffle =</span> SHUFFLE)</a>
+<a class="sourceLine" id="cb239-16" data-line-number="16">}</a>
+<a class="sourceLine" id="cb239-17" data-line-number="17"></a>
+<a class="sourceLine" id="cb239-18" data-line-number="18">cards &lt;-<span class="st"> </span><span class="kw">setup</span>(deck)</a>
+<a class="sourceLine" id="cb239-19" data-line-number="19">deal &lt;-<span class="st"> </span>cards<span class="op">$</span>deal</a>
+<a class="sourceLine" id="cb239-20" data-line-number="20">shuffle &lt;-<span class="st"> </span>cards<span class="op">$</span>shuffle</a></code></pre></div>
+<div class="figure"><span id="fig:closure3"></span>
+<img src="images/hopr_0609.png" alt="When you change your code, deal and shuffle will go from updating the global environment (left) to updating their parent environment (right)."  />
+<p class="caption">
+Figure 6.9: When you change your code, deal and shuffle will go from updating the global environment (left) to updating their parent environment (right).
+</p>
+</div>
+<p>We finally have a self-contained card game. You can delete (or modify) the global copy of <code>deck</code> as much as you want and still play cards. <code>deal</code> and <code>shuffle</code> will use the pristine, protected copy of <code>deck</code>:</p>
+<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb240-1" data-line-number="1"><span class="kw">rm</span>(deck)</a>
+<a class="sourceLine" id="cb240-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb240-3" data-line-number="3"><span class="kw">shuffle</span>()</a>
+<a class="sourceLine" id="cb240-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb240-5" data-line-number="5"><span class="kw">deal</span>()</a>
+<a class="sourceLine" id="cb240-6" data-line-number="6">## face   suit value</a>
+<a class="sourceLine" id="cb240-7" data-line-number="7">##  ace hearts     1</a>
+<a class="sourceLine" id="cb240-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb240-9" data-line-number="9"><span class="kw">deal</span>()</a>
+<a class="sourceLine" id="cb240-10" data-line-number="10">## face  suit value</a>
+<a class="sourceLine" id="cb240-11" data-line-number="11">## jack clubs    11</a></code></pre></div>
+<p>Blackjack!</p>
+</div>
+<div id="summary-5" class="section level2">
+<h2><span class="header-section-number">6.7</span> Summary</h2>
+<p>R saves its objects in an environment system that resembles your computer’s file system. If you understand this system, you can predict how R will look up objects. If you call an object at the command line, R will look for the object in the global environment and then the parents of the global environment, working its way up the environment tree one environment at a time.</p>
+<p>R will use a slightly different search path when you call an object from inside of a function. When you run a function, R creates a new environment to execute commands in. This environment will be a child of the environment where the function was originally defined. This may be the global environment, but it also may not be. You can use this behavior to create closures, which are functions linked to objects in protected environments.</p>
+<p>As you become familiar with R’s environment system, you can use it to produce elegant results, like we did here. However, the real value of understanding the environment system comes from knowing how R functions do their job. You can use this knowledge to figure out what is going wrong when a function does not perform as expected.</p>
+</div>
+<div id="project-2-wrap-up" class="section level2">
+<h2><span class="header-section-number">6.8</span> Project 2 Wrap-up</h2>
+<p>You now have full control over the data sets and values that you load into R. You can store data as R objects, you can retrieve and manipulate data values at will, and you can even predict how R will store and look up your objects in your computer’s memory.</p>
+<p>You may not realize it yet, but your expertise makes you a powerful, computer-augmented data user. You can use R to save and work with larger data sets than you could otherwise handle. So far we’ve only worked with <code>deck</code>, a small data set; but you can use the same techniques to work with any data set that fits in your computer’s memory.</p>
+<p>However, storing data is not the only logistical task that you will face as a data scientist. You will often want to do tasks with your data that are so complex or repetitive that they are difficult to do without a computer. Some of the things can be done with functions that already exist in R and its packages, but others cannot. You will be the most versatile as a data scientist if you can write your own programs for computers to follow. R can help you do this. When you are ready, <a href="project-3-slot-machine.html#project-3-slot-machine">Project 3: Slot Machine</a> will teach you the most useful skills for writing programs in R.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="modify.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="project-3-slot-machine.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": false,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio-education/hopr/edit/master/environments.rmd",
+"text": "Edit"
+},
+"download": null,
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

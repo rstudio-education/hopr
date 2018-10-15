@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Hands-On Programming with R</title>
+  <meta name="description" content="This book will teach you how to program in R, with hands-on examples. I wrote it for non-programmers to provide a friendly introduction to the R language. You’ll learn how to load data, assemble and disassemble data objects, navigate R’s environment system, write your own functions, and use all of R’s programming tools. Throughout the book, you’ll use your newfound skills to solve practical data science problems.">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Hands-On Programming with R" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="http://r4ds.had.co.nz/" />
+  <meta property="og:image" content="http://r4ds.had.co.nz/cover.png" />
+  <meta property="og:description" content="This book will teach you how to program in R, with hands-on examples. I wrote it for non-programmers to provide a friendly introduction to the R language. You’ll learn how to load data, assemble and disassemble data objects, navigate R’s environment system, write your own functions, and use all of R’s programming tools. Throughout the book, you’ll use your newfound skills to solve practical data science problems." />
+  <meta name="github-repo" content="rstudio-education/hopr" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Hands-On Programming with R" />
+  <meta name="twitter:site" content="@statgarrett" />
+  <meta name="twitter:description" content="This book will teach you how to program in R, with hands-on examples. I wrote it for non-programmers to provide a friendly introduction to the R language. You’ll learn how to load data, assemble and disassemble data objects, navigate R’s environment system, write your own functions, and use all of R’s programming tools. Throughout the book, you’ll use your newfound skills to solve practical data science problems." />
+  <meta name="twitter:image" content="http://r4ds.had.co.nz/cover.png" />
+
+<meta name="author" content="Garrett Grolemund">
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="updating.html">
+<link rel="next" href="debug.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="hopr.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><strong><a href="./">Hands-On Programming with R</a></strong></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html"><i class="fa fa-check"></i>Preface</a><ul>
+<li class="chapter" data-level="0.1" data-path="preface.html"><a href="preface.html#conventions-used-in-this-book"><i class="fa fa-check"></i><b>0.1</b> Conventions Used in This Book</a></li>
+<li class="chapter" data-level="0.2" data-path="preface.html"><a href="preface.html#acknowledgments"><i class="fa fa-check"></i><b>0.2</b> Acknowledgments</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="project-1-weighted-dice.html"><a href="project-1-weighted-dice.html"><i class="fa fa-check"></i>Project 1: Weighted Dice</a></li>
+<li class="chapter" data-level="1" data-path="basics.html"><a href="basics.html"><i class="fa fa-check"></i><b>1</b> The Very Basics</a><ul>
+<li class="chapter" data-level="1.1" data-path="basics.html"><a href="basics.html#the-r-user-interface"><i class="fa fa-check"></i><b>1.1</b> The R User Interface</a></li>
+<li class="chapter" data-level="1.2" data-path="basics.html"><a href="basics.html#objects"><i class="fa fa-check"></i><b>1.2</b> Objects</a></li>
+<li class="chapter" data-level="1.3" data-path="basics.html"><a href="basics.html#functions"><i class="fa fa-check"></i><b>1.3</b> Functions</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="basics.html"><a href="basics.html#sample-with-replacement"><i class="fa fa-check"></i><b>1.3.1</b> Sample with Replacement</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="basics.html"><a href="basics.html#write-functions"><i class="fa fa-check"></i><b>1.4</b> Writing Your Own Functions</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="basics.html"><a href="basics.html#the-function-constructor"><i class="fa fa-check"></i><b>1.4.1</b> The Function Constructor</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="basics.html"><a href="basics.html#arguments"><i class="fa fa-check"></i><b>1.5</b> Arguments</a></li>
+<li class="chapter" data-level="1.6" data-path="basics.html"><a href="basics.html#scripts"><i class="fa fa-check"></i><b>1.6</b> Scripts</a></li>
+<li class="chapter" data-level="1.7" data-path="basics.html"><a href="basics.html#summary"><i class="fa fa-check"></i><b>1.7</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="packages.html"><a href="packages.html"><i class="fa fa-check"></i><b>2</b> Packages and Help Pages</a><ul>
+<li class="chapter" data-level="2.1" data-path="packages.html"><a href="packages.html#packages-1"><i class="fa fa-check"></i><b>2.1</b> Packages</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="packages.html"><a href="packages.html#install.packages"><i class="fa fa-check"></i><b>2.1.1</b> install.packages</a></li>
+<li class="chapter" data-level="2.1.2" data-path="packages.html"><a href="packages.html#library"><i class="fa fa-check"></i><b>2.1.2</b> library</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="packages.html"><a href="packages.html#getting-help-with-help-pages"><i class="fa fa-check"></i><b>2.2</b> Getting Help with Help Pages</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="packages.html"><a href="packages.html#parts-of-a-help-page"><i class="fa fa-check"></i><b>2.2.1</b> Parts of a Help Page</a></li>
+<li class="chapter" data-level="2.2.2" data-path="packages.html"><a href="packages.html#getting-more-help"><i class="fa fa-check"></i><b>2.2.2</b> Getting More Help</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="packages.html"><a href="packages.html#summary-1"><i class="fa fa-check"></i><b>2.3</b> Summary</a></li>
+<li class="chapter" data-level="2.4" data-path="packages.html"><a href="packages.html#project-1-wrap-up"><i class="fa fa-check"></i><b>2.4</b> Project 1 Wrap-up</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="project-2-playing-cards.html"><a href="project-2-playing-cards.html"><i class="fa fa-check"></i>Project 2: Playing Cards</a></li>
+<li class="chapter" data-level="3" data-path="r-objects.html"><a href="r-objects.html"><i class="fa fa-check"></i><b>3</b> R Objects</a><ul>
+<li class="chapter" data-level="3.1" data-path="r-objects.html"><a href="r-objects.html#atomic-vectors"><i class="fa fa-check"></i><b>3.1</b> Atomic Vectors</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="r-objects.html"><a href="r-objects.html#doubles"><i class="fa fa-check"></i><b>3.1.1</b> Doubles</a></li>
+<li class="chapter" data-level="3.1.2" data-path="r-objects.html"><a href="r-objects.html#integers"><i class="fa fa-check"></i><b>3.1.2</b> Integers</a></li>
+<li class="chapter" data-level="3.1.3" data-path="r-objects.html"><a href="r-objects.html#characters"><i class="fa fa-check"></i><b>3.1.3</b> Characters</a></li>
+<li class="chapter" data-level="3.1.4" data-path="r-objects.html"><a href="r-objects.html#logicals"><i class="fa fa-check"></i><b>3.1.4</b> Logicals</a></li>
+<li class="chapter" data-level="3.1.5" data-path="r-objects.html"><a href="r-objects.html#complex-and-raw"><i class="fa fa-check"></i><b>3.1.5</b> Complex and Raw</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="r-objects.html"><a href="r-objects.html#attributes"><i class="fa fa-check"></i><b>3.2</b> Attributes</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="r-objects.html"><a href="r-objects.html#names"><i class="fa fa-check"></i><b>3.2.1</b> Names</a></li>
+<li class="chapter" data-level="3.2.2" data-path="r-objects.html"><a href="r-objects.html#dim"><i class="fa fa-check"></i><b>3.2.2</b> Dim</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="r-objects.html"><a href="r-objects.html#matrices"><i class="fa fa-check"></i><b>3.3</b> Matrices</a></li>
+<li class="chapter" data-level="3.4" data-path="r-objects.html"><a href="r-objects.html#arrays"><i class="fa fa-check"></i><b>3.4</b> Arrays</a></li>
+<li class="chapter" data-level="3.5" data-path="r-objects.html"><a href="r-objects.html#class"><i class="fa fa-check"></i><b>3.5</b> Class</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="r-objects.html"><a href="r-objects.html#dates-and-times"><i class="fa fa-check"></i><b>3.5.1</b> Dates and Times</a></li>
+<li class="chapter" data-level="3.5.2" data-path="r-objects.html"><a href="r-objects.html#factors"><i class="fa fa-check"></i><b>3.5.2</b> Factors</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="r-objects.html"><a href="r-objects.html#coercion"><i class="fa fa-check"></i><b>3.6</b> Coercion</a></li>
+<li class="chapter" data-level="3.7" data-path="r-objects.html"><a href="r-objects.html#lists"><i class="fa fa-check"></i><b>3.7</b> Lists</a></li>
+<li class="chapter" data-level="3.8" data-path="r-objects.html"><a href="r-objects.html#data-frames"><i class="fa fa-check"></i><b>3.8</b> Data Frames</a></li>
+<li class="chapter" data-level="3.9" data-path="r-objects.html"><a href="r-objects.html#loading"><i class="fa fa-check"></i><b>3.9</b> Loading Data</a></li>
+<li class="chapter" data-level="3.10" data-path="r-objects.html"><a href="r-objects.html#saving-data"><i class="fa fa-check"></i><b>3.10</b> Saving Data</a></li>
+<li class="chapter" data-level="3.11" data-path="r-objects.html"><a href="r-objects.html#summary-2"><i class="fa fa-check"></i><b>3.11</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="r-notation.html"><a href="r-notation.html"><i class="fa fa-check"></i><b>4</b> R Notation</a><ul>
+<li class="chapter" data-level="4.1" data-path="r-notation.html"><a href="r-notation.html#selecting-values"><i class="fa fa-check"></i><b>4.1</b> Selecting Values</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="r-notation.html"><a href="r-notation.html#positive-integers"><i class="fa fa-check"></i><b>4.1.1</b> Positive Integers</a></li>
+<li class="chapter" data-level="4.1.2" data-path="r-notation.html"><a href="r-notation.html#negative-integers"><i class="fa fa-check"></i><b>4.1.2</b> Negative Integers</a></li>
+<li class="chapter" data-level="4.1.3" data-path="r-notation.html"><a href="r-notation.html#zero"><i class="fa fa-check"></i><b>4.1.3</b> Zero</a></li>
+<li class="chapter" data-level="4.1.4" data-path="r-notation.html"><a href="r-notation.html#blank-spaces"><i class="fa fa-check"></i><b>4.1.4</b> Blank Spaces</a></li>
+<li class="chapter" data-level="4.1.5" data-path="r-objects.html"><a href="r-objects.html#logicals"><i class="fa fa-check"></i><b>4.1.5</b> Logical Values</a></li>
+<li class="chapter" data-level="4.1.6" data-path="r-notation.html"><a href="r-notation.html#names-1"><i class="fa fa-check"></i><b>4.1.6</b> Names</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="r-notation.html"><a href="r-notation.html#deal-a-card"><i class="fa fa-check"></i><b>4.2</b> Deal a Card</a></li>
+<li class="chapter" data-level="4.3" data-path="r-notation.html"><a href="r-notation.html#shuffle-the-deck"><i class="fa fa-check"></i><b>4.3</b> Shuffle the Deck</a></li>
+<li class="chapter" data-level="4.4" data-path="r-notation.html"><a href="r-notation.html#dollar-signs-and-double-brackets"><i class="fa fa-check"></i><b>4.4</b> Dollar Signs and Double Brackets</a></li>
+<li class="chapter" data-level="4.5" data-path="r-notation.html"><a href="r-notation.html#summary-3"><i class="fa fa-check"></i><b>4.5</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="modify.html"><a href="modify.html"><i class="fa fa-check"></i><b>5</b> Modifying Values</a><ul>
+<li class="chapter" data-level="5.0.1" data-path="modify.html"><a href="modify.html#changing-values-in-place"><i class="fa fa-check"></i><b>5.0.1</b> Changing Values in Place</a></li>
+<li class="chapter" data-level="5.0.2" data-path="modify.html"><a href="modify.html#logical-subsetting"><i class="fa fa-check"></i><b>5.0.2</b> Logical Subsetting</a></li>
+<li class="chapter" data-level="5.0.3" data-path="modify.html"><a href="modify.html#missing"><i class="fa fa-check"></i><b>5.0.3</b> Missing Information</a></li>
+<li class="chapter" data-level="5.0.4" data-path="modify.html"><a href="modify.html#summary-4"><i class="fa fa-check"></i><b>5.0.4</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="environments.html"><a href="environments.html"><i class="fa fa-check"></i><b>6</b> Environments</a><ul>
+<li class="chapter" data-level="6.1" data-path="environments.html"><a href="environments.html#environments-1"><i class="fa fa-check"></i><b>6.1</b> Environments</a></li>
+<li class="chapter" data-level="6.2" data-path="environments.html"><a href="environments.html#working-with-environments"><i class="fa fa-check"></i><b>6.2</b> Working with Environments</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="environments.html"><a href="environments.html#the-active-environment"><i class="fa fa-check"></i><b>6.2.1</b> The Active Environment</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="environments.html"><a href="environments.html#scoping-rules"><i class="fa fa-check"></i><b>6.3</b> Scoping Rules</a></li>
+<li class="chapter" data-level="6.4" data-path="environments.html"><a href="environments.html#assignment"><i class="fa fa-check"></i><b>6.4</b> Assignment</a></li>
+<li class="chapter" data-level="6.5" data-path="environments.html"><a href="environments.html#evaluation"><i class="fa fa-check"></i><b>6.5</b> Evaluation</a></li>
+<li class="chapter" data-level="6.6" data-path="environments.html"><a href="environments.html#closures"><i class="fa fa-check"></i><b>6.6</b> Closures</a></li>
+<li class="chapter" data-level="6.7" data-path="environments.html"><a href="environments.html#summary-5"><i class="fa fa-check"></i><b>6.7</b> Summary</a></li>
+<li class="chapter" data-level="6.8" data-path="environments.html"><a href="environments.html#project-2-wrap-up"><i class="fa fa-check"></i><b>6.8</b> Project 2 Wrap-up</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="project-3-slot-machine.html"><a href="project-3-slot-machine.html"><i class="fa fa-check"></i>Project 3: Slot Machine</a></li>
+<li class="chapter" data-level="7" data-path="programs.html"><a href="programs.html"><i class="fa fa-check"></i><b>7</b> Programs</a><ul>
+<li class="chapter" data-level="7.1" data-path="programs.html"><a href="programs.html#strategy"><i class="fa fa-check"></i><b>7.1</b> Strategy</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="programs.html"><a href="programs.html#sequential-steps"><i class="fa fa-check"></i><b>7.1.1</b> Sequential Steps</a></li>
+<li class="chapter" data-level="7.1.2" data-path="programs.html"><a href="programs.html#parallel-cases"><i class="fa fa-check"></i><b>7.1.2</b> Parallel Cases</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="programs.html"><a href="programs.html#if-statements"><i class="fa fa-check"></i><b>7.2</b> if Statements</a></li>
+<li class="chapter" data-level="7.3" data-path="programs.html"><a href="programs.html#else-statements"><i class="fa fa-check"></i><b>7.3</b> else Statements</a></li>
+<li class="chapter" data-level="7.4" data-path="programs.html"><a href="programs.html#lookup-tables"><i class="fa fa-check"></i><b>7.4</b> Lookup Tables</a></li>
+<li class="chapter" data-level="7.5" data-path="programs.html"><a href="programs.html#code-comments"><i class="fa fa-check"></i><b>7.5</b> Code Comments</a></li>
+<li class="chapter" data-level="7.6" data-path="programs.html"><a href="programs.html#summary-6"><i class="fa fa-check"></i><b>7.6</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="s3.html"><a href="s3.html"><i class="fa fa-check"></i><b>8</b> S3</a><ul>
+<li class="chapter" data-level="8.1" data-path="s3.html"><a href="s3.html#the-s3-system"><i class="fa fa-check"></i><b>8.1</b> The S3 System</a></li>
+<li class="chapter" data-level="8.2" data-path="s3.html"><a href="s3.html#attributes-1"><i class="fa fa-check"></i><b>8.2</b> Attributes</a></li>
+<li class="chapter" data-level="8.3" data-path="s3.html"><a href="s3.html#generic-functions"><i class="fa fa-check"></i><b>8.3</b> Generic Functions</a></li>
+<li class="chapter" data-level="8.4" data-path="s3.html"><a href="s3.html#methods"><i class="fa fa-check"></i><b>8.4</b> Methods</a><ul>
+<li class="chapter" data-level="8.4.1" data-path="s3.html"><a href="s3.html#method-dispatch"><i class="fa fa-check"></i><b>8.4.1</b> Method Dispatch</a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="s3.html"><a href="s3.html#classes"><i class="fa fa-check"></i><b>8.5</b> Classes</a></li>
+<li class="chapter" data-level="8.6" data-path="s3.html"><a href="s3.html#s3-and-debugging"><i class="fa fa-check"></i><b>8.6</b> S3 and Debugging</a></li>
+<li class="chapter" data-level="8.7" data-path="s3.html"><a href="s3.html#s4-and-r5"><i class="fa fa-check"></i><b>8.7</b> S4 and R5</a></li>
+<li class="chapter" data-level="8.8" data-path="s3.html"><a href="s3.html#summary-7"><i class="fa fa-check"></i><b>8.8</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="loops.html"><a href="loops.html"><i class="fa fa-check"></i><b>9</b> Loops</a><ul>
+<li class="chapter" data-level="9.1" data-path="loops.html"><a href="loops.html#expected-values"><i class="fa fa-check"></i><b>9.1</b> Expected Values</a></li>
+<li class="chapter" data-level="9.2" data-path="loops.html"><a href="loops.html#expand.grid"><i class="fa fa-check"></i><b>9.2</b> expand.grid</a></li>
+<li class="chapter" data-level="9.3" data-path="loops.html"><a href="loops.html#for-loops"><i class="fa fa-check"></i><b>9.3</b> for Loops</a></li>
+<li class="chapter" data-level="9.4" data-path="loops.html"><a href="loops.html#while-loops"><i class="fa fa-check"></i><b>9.4</b> while Loops</a></li>
+<li class="chapter" data-level="9.5" data-path="loops.html"><a href="loops.html#repeat-loops"><i class="fa fa-check"></i><b>9.5</b> repeat Loops</a></li>
+<li class="chapter" data-level="9.6" data-path="loops.html"><a href="loops.html#summary-8"><i class="fa fa-check"></i><b>9.6</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="speed.html"><a href="speed.html"><i class="fa fa-check"></i><b>10</b> Speed</a><ul>
+<li class="chapter" data-level="10.1" data-path="speed.html"><a href="speed.html#vectorized-code"><i class="fa fa-check"></i><b>10.1</b> Vectorized Code</a></li>
+<li class="chapter" data-level="10.2" data-path="speed.html"><a href="speed.html#how-to-write-vectorized-code"><i class="fa fa-check"></i><b>10.2</b> How to Write Vectorized Code</a></li>
+<li class="chapter" data-level="10.3" data-path="speed.html"><a href="speed.html#how-to-write-fast-for-loops-in-r"><i class="fa fa-check"></i><b>10.3</b> How to Write Fast for Loops in R</a></li>
+<li class="chapter" data-level="10.4" data-path="speed.html"><a href="speed.html#vectorized-code-in-practice"><i class="fa fa-check"></i><b>10.4</b> Vectorized Code in Practice</a><ul>
+<li class="chapter" data-level="10.4.1" data-path="speed.html"><a href="speed.html#loops-versus-vectorized-code"><i class="fa fa-check"></i><b>10.4.1</b> Loops Versus Vectorized Code</a></li>
+</ul></li>
+<li class="chapter" data-level="10.5" data-path="speed.html"><a href="speed.html#summary-9"><i class="fa fa-check"></i><b>10.5</b> Summary</a></li>
+<li class="chapter" data-level="10.6" data-path="speed.html"><a href="speed.html#project-3-wrap-up"><i class="fa fa-check"></i><b>10.6</b> Project 3 Wrap-up</a></li>
+</ul></li>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="starting.html"><a href="starting.html"><i class="fa fa-check"></i><b>A</b> Installing R and RStudio</a><ul>
+<li class="chapter" data-level="A.1" data-path="starting.html"><a href="starting.html#how-to-download-and-install-r"><i class="fa fa-check"></i><b>A.1</b> How to Download and Install R</a><ul>
+<li class="chapter" data-level="A.1.1" data-path="starting.html"><a href="starting.html#windows"><i class="fa fa-check"></i><b>A.1.1</b> Windows</a></li>
+<li class="chapter" data-level="A.1.2" data-path="starting.html"><a href="starting.html#mac"><i class="fa fa-check"></i><b>A.1.2</b> Mac</a></li>
+<li class="chapter" data-level="A.1.3" data-path="starting.html"><a href="starting.html#linux"><i class="fa fa-check"></i><b>A.1.3</b> Linux</a></li>
+</ul></li>
+<li class="chapter" data-level="A.2" data-path="starting.html"><a href="starting.html#using-r"><i class="fa fa-check"></i><b>A.2</b> Using R</a></li>
+<li class="chapter" data-level="A.3" data-path="starting.html"><a href="starting.html#rstudio"><i class="fa fa-check"></i><b>A.3</b> RStudio</a></li>
+<li class="chapter" data-level="A.4" data-path="starting.html"><a href="starting.html#opening-r"><i class="fa fa-check"></i><b>A.4</b> Opening R</a></li>
+</ul></li>
+<li class="chapter" data-level="B" data-path="packages2.html"><a href="packages2.html"><i class="fa fa-check"></i><b>B</b> R Packages</a><ul>
+<li class="chapter" data-level="B.1" data-path="packages2.html"><a href="packages2.html#installing-packages"><i class="fa fa-check"></i><b>B.1</b> Installing Packages</a></li>
+<li class="chapter" data-level="B.2" data-path="packages2.html"><a href="packages2.html#loading-packages"><i class="fa fa-check"></i><b>B.2</b> Loading Packages</a></li>
+</ul></li>
+<li class="chapter" data-level="C" data-path="updating.html"><a href="updating.html"><i class="fa fa-check"></i><b>C</b> Updating R and Its Packages</a><ul>
+<li class="chapter" data-level="C.1" data-path="updating.html"><a href="updating.html#r-packages"><i class="fa fa-check"></i><b>C.1</b> R Packages</a></li>
+</ul></li>
+<li class="chapter" data-level="D" data-path="dataio.html"><a href="dataio.html"><i class="fa fa-check"></i><b>D</b> Loading and Saving Data in R</a><ul>
+<li class="chapter" data-level="D.1" data-path="dataio.html"><a href="dataio.html#data-sets-in-base-r"><i class="fa fa-check"></i><b>D.1</b> Data Sets in Base R</a></li>
+<li class="chapter" data-level="D.2" data-path="dataio.html"><a href="dataio.html#working-directory"><i class="fa fa-check"></i><b>D.2</b> Working Directory</a></li>
+<li class="chapter" data-level="D.3" data-path="dataio.html"><a href="dataio.html#plain-text-files"><i class="fa fa-check"></i><b>D.3</b> Plain-text Files</a><ul>
+<li class="chapter" data-level="D.3.1" data-path="dataio.html"><a href="dataio.html#read.table"><i class="fa fa-check"></i><b>D.3.1</b> read.table</a></li>
+<li class="chapter" data-level="D.3.2" data-path="dataio.html"><a href="dataio.html#the-read-family"><i class="fa fa-check"></i><b>D.3.2</b> The read Family</a></li>
+<li class="chapter" data-level="D.3.3" data-path="dataio.html"><a href="dataio.html#read.fwf"><i class="fa fa-check"></i><b>D.3.3</b> read.fwf</a></li>
+<li class="chapter" data-level="D.3.4" data-path="dataio.html"><a href="dataio.html#html-links"><i class="fa fa-check"></i><b>D.3.4</b> HTML Links</a></li>
+<li class="chapter" data-level="D.3.5" data-path="dataio.html"><a href="dataio.html#saving-plain-text-files"><i class="fa fa-check"></i><b>D.3.5</b> Saving Plain-Text Files</a></li>
+<li class="chapter" data-level="D.3.6" data-path="dataio.html"><a href="dataio.html#compressing-files"><i class="fa fa-check"></i><b>D.3.6</b> Compressing Files</a></li>
+</ul></li>
+<li class="chapter" data-level="D.4" data-path="dataio.html"><a href="dataio.html#r-files"><i class="fa fa-check"></i><b>D.4</b> R Files</a><ul>
+<li class="chapter" data-level="D.4.1" data-path="dataio.html"><a href="dataio.html#saving-r-files"><i class="fa fa-check"></i><b>D.4.1</b> Saving R Files</a></li>
+</ul></li>
+<li class="chapter" data-level="D.5" data-path="dataio.html"><a href="dataio.html#excel-spreadsheets"><i class="fa fa-check"></i><b>D.5</b> Excel Spreadsheets</a><ul>
+<li class="chapter" data-level="D.5.1" data-path="dataio.html"><a href="dataio.html#export-from-excel"><i class="fa fa-check"></i><b>D.5.1</b> Export from Excel</a></li>
+<li class="chapter" data-level="D.5.2" data-path="dataio.html"><a href="dataio.html#copy-and-paste"><i class="fa fa-check"></i><b>D.5.2</b> Copy and Paste</a></li>
+<li class="chapter" data-level="D.5.3" data-path="dataio.html"><a href="dataio.html#xlconnect"><i class="fa fa-check"></i><b>D.5.3</b> XLConnect</a></li>
+<li class="chapter" data-level="D.5.4" data-path="dataio.html"><a href="dataio.html#reading-spreadsheets"><i class="fa fa-check"></i><b>D.5.4</b> Reading Spreadsheets</a></li>
+<li class="chapter" data-level="D.5.5" data-path="dataio.html"><a href="dataio.html#writing-spreadsheets"><i class="fa fa-check"></i><b>D.5.5</b> Writing Spreadsheets</a></li>
+</ul></li>
+<li class="chapter" data-level="D.6" data-path="dataio.html"><a href="dataio.html#loading-files-from-other-programs"><i class="fa fa-check"></i><b>D.6</b> Loading Files from Other Programs</a><ul>
+<li class="chapter" data-level="D.6.1" data-path="dataio.html"><a href="dataio.html#connecting-to-databases"><i class="fa fa-check"></i><b>D.6.1</b> Connecting to Databases</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="E" data-path="debug.html"><a href="debug.html"><i class="fa fa-check"></i><b>E</b> Debugging R Code</a><ul>
+<li class="chapter" data-level="E.1" data-path="debug.html"><a href="debug.html#traceback"><i class="fa fa-check"></i><b>E.1</b> traceback</a></li>
+<li class="chapter" data-level="E.2" data-path="debug.html"><a href="debug.html#browser"><i class="fa fa-check"></i><b>E.2</b> browser</a></li>
+<li class="chapter" data-level="E.3" data-path="debug.html"><a href="debug.html#break-points"><i class="fa fa-check"></i><b>E.3</b> Break Points</a></li>
+<li class="chapter" data-level="E.4" data-path="debug.html"><a href="debug.html#debug-1"><i class="fa fa-check"></i><b>E.4</b> debug</a></li>
+<li class="chapter" data-level="E.5" data-path="debug.html"><a href="debug.html#trace"><i class="fa fa-check"></i><b>E.5</b> trace</a></li>
+<li class="chapter" data-level="E.6" data-path="debug.html"><a href="debug.html#recover"><i class="fa fa-check"></i><b>E.6</b> recover</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Hands-On Programming with R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="dataio" class="section level1">
+<h1><span class="header-section-number">D</span> Loading and Saving Data in R</h1>
+<p>This appendix will show you how to load and save data into R from plain-text files, R files, and Excel spreadsheets. It will also show you the R packages that you can use to load data from databases and other common programs, like SAS and MATLAB.</p>
+<div id="data-sets-in-base-r" class="section level2">
+<h2><span class="header-section-number">D.1</span> Data Sets in Base R</h2>
+<p>R comes with many data sets preloaded in the <code>datasets</code> package, which comes with base R. These data sets are not very interesting, but they give you a chance to test code or make a point without having to load a data set from outside R. You can see a list of R’s data sets as well as a short description of each by running:</p>
+<div class="sourceCode" id="cb407"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb407-1" data-line-number="1"><span class="kw">help</span>(<span class="dt">package =</span> <span class="st">&quot;datasets&quot;</span>)</a></code></pre></div>
+<p>To use a data set, just type its name. Each data set is already presaved as an R object. For example:</p>
+<div class="sourceCode" id="cb408"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb408-1" data-line-number="1">iris</a>
+<a class="sourceLine" id="cb408-2" data-line-number="2">##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species</a>
+<a class="sourceLine" id="cb408-3" data-line-number="3">## 1          5.1         3.5          1.4         0.2  setosa</a>
+<a class="sourceLine" id="cb408-4" data-line-number="4">## 2          4.9         3.0          1.4         0.2  setosa</a>
+<a class="sourceLine" id="cb408-5" data-line-number="5">## 3          4.7         3.2          1.3         0.2  setosa</a>
+<a class="sourceLine" id="cb408-6" data-line-number="6">## 4          4.6         3.1          1.5         0.2  setosa</a>
+<a class="sourceLine" id="cb408-7" data-line-number="7">## 5          5.0         3.6          1.4         0.2  setosa</a>
+<a class="sourceLine" id="cb408-8" data-line-number="8">## 6          5.4         3.9          1.7         0.4  setosa</a></code></pre></div>
+<p>However, R’s data sets are no substitute for your own data, which you can load into R from a wide variety of file formats. But before you load any data files into R, you’ll need to determine where your <em>working directory</em> is.</p>
+</div>
+<div id="working-directory" class="section level2">
+<h2><span class="header-section-number">D.2</span> Working Directory</h2>
+<p>Each time you open R, it links itself to a directory on your computer, which R calls the working directory. This is where R will look for files when you attempt to load them, and it is where R will save files when you save them. The location of your working directory will vary on different computers. To determine which directory R is using as your working directory, run:</p>
+<div class="sourceCode" id="cb409"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb409-1" data-line-number="1"><span class="kw">getwd</span>()</a>
+<a class="sourceLine" id="cb409-2" data-line-number="2">## &quot;/Users/garrettgrolemund&quot;</a></code></pre></div>
+<p>You can place data files straight into the folder that is your working directory, or you can move your working directory to where your data files are. You can move your working directory to any folder on your computer with the function <code>setwd</code>. Just give <code>setwd</code> the file path to your new working directory. I prefer to set my working directory to a folder dedicated to whichever project I am currently working on. That way I can keep all of my data, scripts, graphs, and reports in the same place. For example:</p>
+<div class="sourceCode" id="cb410"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb410-1" data-line-number="1"><span class="kw">setwd</span>(<span class="st">&quot;~/Users/garrettgrolemund/Documents/Book_Project&quot;</span>)</a></code></pre></div>
+<p>If the file path does not begin with your root directory, R will assume that it begins at your current working directory.</p>
+<p>You can also change your working directory by clicking on Session &gt; Set Working Directory &gt; Choose Directory in the RStudio menu bar. The Windows and Mac GUIs have similar options. If you start R from a UNIX command line (as on Linux machines), the working directory will be whichever directory you were in when you called R.</p>
+<p>You can see what files are in your working directory with <code>list.files()</code>. If you see the file that you would like to open in your working directory, then you are ready to proceed. How you open files in your working directory will depend on which type of file you would like to open.</p>
+</div>
+<div id="plain-text-files" class="section level2">
+<h2><span class="header-section-number">D.3</span> Plain-text Files</h2>
+<p>Plain-text files are one of the most common ways to save data. They are very simple and can be read by many different computer programs—even the most basic text editors. For this reason, public data often comes as plain-text files. For example, the Census Bureau, the Social Security Administration, and the Bureau of Labor Statistics all make their data available as plain-text files.</p>
+<p>Here’s how the royal flush data set from <a href="r-objects.html#r-objects">R Objects</a> would appear as a plain-text file (I’ve added a value column):</p>
+<pre><code>&quot;card&quot;, &quot;suit&quot;, &quot;value&quot;
+&quot;ace&quot;, &quot;spades&quot;, 14
+&quot;king&quot;, &quot;spades&quot;, 13
+&quot;queen&quot;, &quot;spades&quot;, 12
+&quot;jack&quot;, &quot;spades&quot;, 11
+&quot;ten&quot;, &quot;spades&quot;, 10</code></pre>
+<p>A plain-text file stores a table of data in a text document. Each row of the table is saved on its own line, and a simple convention is used to separate the cells within a row. Often cells are separated by a comma, but they can also be separated by a tab, a pipe delimiter (i.e., <code>|</code> ), or any other character. Each file only uses one method of separating cells, which minimizes confusion. Within each cell, data appears as you’d expect to see it, as words and numbers.</p>
+<p>All plain-text files can be saved with the extension <em>.txt</em> (for text), but sometimes a file will receive a special extension that advertises how it separates data-cell entries. Since entries in the data set mentioned earlier are separated with a comma, this file would be a <em>comma-separated-values</em> file and would usually be saved with the extension <em>.csv</em>.</p>
+<div id="read.table" class="section level3">
+<h3><span class="header-section-number">D.3.1</span> read.table</h3>
+<p>To load a plain-text file, use <code>read.table</code>. The first argument of <code>read.table</code> should be the name of your file (if it is in your working directory), or the file path to your file (if it is not in your working directory). If the file path does not begin with your root directory, R will append it to the end of the file path that leads to your working directory.You can give <code>read.table</code> other arguments as well. The two most important are <code>sep</code> and <code>header</code>.</p>
+<p>If the royal flush data set was saved as a file named <em>poker.csv</em> in your working directory, you could load it with:</p>
+<div class="sourceCode" id="cb412"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb412-1" data-line-number="1">poker &lt;-<span class="st"> </span><span class="kw">read.table</span>(<span class="st">&quot;poker.csv&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;,&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<div id="sep" class="section level4">
+<h4><span class="header-section-number">D.3.1.1</span> sep</h4>
+<p>Use <code>sep</code> to tell <code>read.table</code> what character your file uses to separate data entries. To find this out, you might have to open your file in a text editor and look at it. If you don’t specify a <code>sep</code> argument, <code>read.table</code> will try to separate cells whenever it comes to white space, such as a tab or space. R won’t be able to tell you if <code>read.table</code> does this correctly or not, so rely on it at your own risk.</p>
+</div>
+<div id="header" class="section level4">
+<h4><span class="header-section-number">D.3.1.2</span> header</h4>
+<p>Use <code>header</code> to tell <code>read.table</code> whether the first line of the file contains variable names instead of values. If the first line of the file is a set of variable names, you should set <code>header = TRUE</code>.</p>
+</div>
+<div id="na.strings" class="section level4">
+<h4><span class="header-section-number">D.3.1.3</span> na.strings</h4>
+<p>Oftentimes data sets will use special symbols to represent missing information. If you know that your data uses a certain symbol to represent missing entries, you can tell <code>read.table</code> (and the preceding functions) what the symbol is with the <code>na.strings</code> argument. <code>read.table</code> will convert all instances of the missing information symbol to <code>NA</code>, which is R’s missing information symbol (see <a href="modify.html#missing">Missing Information</a>).</p>
+<p>For example, your poker data set contained missing values stored as a <code>.</code>, like this:</p>
+<div class="sourceCode" id="cb413"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb413-1" data-line-number="1">## &quot;card&quot;,&quot;suit&quot;,&quot;value&quot;</a>
+<a class="sourceLine" id="cb413-2" data-line-number="2">## &quot;ace&quot;,&quot; spades&quot;,&quot; 14&quot;</a>
+<a class="sourceLine" id="cb413-3" data-line-number="3">## &quot;king&quot;,&quot; spades&quot;,&quot; 13&quot;</a>
+<a class="sourceLine" id="cb413-4" data-line-number="4">## &quot;queen&quot;,&quot;.&quot;,&quot;.&quot;</a>
+<a class="sourceLine" id="cb413-5" data-line-number="5">## &quot;jack&quot;,&quot;.&quot;,&quot;.&quot;</a>
+<a class="sourceLine" id="cb413-6" data-line-number="6">## &quot;ten&quot;,&quot;.&quot;,&quot;.&quot;</a></code></pre></div>
+<p>You could read the data set into R and convert the missing values into NAs as you go with the command:</p>
+<div class="sourceCode" id="cb414"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb414-1" data-line-number="1">poker &lt;-<span class="st"> </span><span class="kw">read.table</span>(<span class="st">&quot;poker.csv&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;,&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>, <span class="dt">na.string =</span> <span class="st">&quot;.&quot;</span>)</a></code></pre></div>
+<p>R would save a version of <code>poker</code> that looks like this:</p>
+<div class="sourceCode" id="cb415"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb415-1" data-line-number="1">##  card    suit value</a>
+<a class="sourceLine" id="cb415-2" data-line-number="2">##   ace  spades    14</a>
+<a class="sourceLine" id="cb415-3" data-line-number="3">##  king  spades    13</a>
+<a class="sourceLine" id="cb415-4" data-line-number="4">## queen    &lt;NA&gt;    NA</a>
+<a class="sourceLine" id="cb415-5" data-line-number="5">##  jack    &lt;NA&gt;    NA</a>
+<a class="sourceLine" id="cb415-6" data-line-number="6">##   ten    &lt;NA&gt;    NA</a></code></pre></div>
+</div>
+<div id="skip-and-nrow" class="section level4">
+<h4><span class="header-section-number">D.3.1.4</span> skip and nrow</h4>
+<p>Sometimes a plain-text file will come with introductory text that is not part of the data set. Or, you may decide that you only wish to read in part of a data set. You can do these things with the <code>skip</code> and <code>nrow</code> arguments. Use <code>skip</code> to tell R to skip a specific number of lines before it starts reading in values from the file. Use <code>nrow</code> to tell R to stop reading in values after it has read in a certain number of lines.</p>
+<p>For example, imagine that the complete royal flush file looks like this:</p>
+<div class="sourceCode" id="cb416"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb416-1" data-line-number="1">This data was collected by the National Poker Institute. </a>
+<a class="sourceLine" id="cb416-2" data-line-number="2">We accidentally repeated the last row of data.</a>
+<a class="sourceLine" id="cb416-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb416-4" data-line-number="4"><span class="st">&quot;card&quot;</span>, <span class="st">&quot;suit&quot;</span>, <span class="st">&quot;value&quot;</span></a>
+<a class="sourceLine" id="cb416-5" data-line-number="5"><span class="st">&quot;ace&quot;</span>, <span class="st">&quot;spades&quot;</span>, <span class="dv">14</span></a>
+<a class="sourceLine" id="cb416-6" data-line-number="6"><span class="st">&quot;king&quot;</span>, <span class="st">&quot;spades&quot;</span>, <span class="dv">13</span></a>
+<a class="sourceLine" id="cb416-7" data-line-number="7"><span class="st">&quot;queen&quot;</span>, <span class="st">&quot;spades&quot;</span>, <span class="dv">12</span></a>
+<a class="sourceLine" id="cb416-8" data-line-number="8"><span class="st">&quot;jack&quot;</span>, <span class="st">&quot;spades&quot;</span>, <span class="dv">11</span></a>
+<a class="sourceLine" id="cb416-9" data-line-number="9"><span class="st">&quot;ten&quot;</span>, <span class="st">&quot;spades&quot;</span>, <span class="dv">10</span></a>
+<a class="sourceLine" id="cb416-10" data-line-number="10"><span class="st">&quot;ten&quot;</span>, <span class="st">&quot;spades&quot;</span>, <span class="dv">10</span></a></code></pre></div>
+<p>You can read just the six lines that you want (five rows plus a header) with:</p>
+<div class="sourceCode" id="cb417"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb417-1" data-line-number="1"><span class="kw">read.table</span>(<span class="st">&quot;poker.csv&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;,&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>, <span class="dt">skip =</span> <span class="dv">3</span>, <span class="dt">nrow =</span> <span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb417-2" data-line-number="2">##    card    suit value</a>
+<a class="sourceLine" id="cb417-3" data-line-number="3">## 1   ace  spades    14</a>
+<a class="sourceLine" id="cb417-4" data-line-number="4">## 2  king  spades    13</a>
+<a class="sourceLine" id="cb417-5" data-line-number="5">## 3 queen  spades    12</a>
+<a class="sourceLine" id="cb417-6" data-line-number="6">## 4  jack  spades    11</a>
+<a class="sourceLine" id="cb417-7" data-line-number="7">## 5   ten  spades    10</a></code></pre></div>
+<p>Notice that the header row doesn’t count towards the total rows allowed by <code>nrow</code>.</p>
+</div>
+<div id="stringsasfactors" class="section level4">
+<h4><span class="header-section-number">D.3.1.5</span> stringsAsFactors</h4>
+<p>R reads in numbers just as you’d expect, but when R comes across character strings (e.g., letters and words) it begins to act strangely. R wants to convert every character string into a factor. This is R’s default behavior, but I think it is a mistake. Sometimes factors are useful. At other times, they’re clearly the wrong data type for the job. Also factors cause weird behavior, especially when you want to display data. This behavior can be surprising if you didn’t realize that R converted your data to factors. In general, you’ll have a smoother R experience if you don’t let R make factors until you ask for them. Thankfully, it is easy to do this.</p>
+<p>Setting the argument <code>stringsAsFactors</code> to <code>FALSE</code> will ensure that R saves any character strings in your data set as character strings, not factors. To use <code>stringsAsFactors</code>, you’d write:</p>
+<div class="sourceCode" id="cb418"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb418-1" data-line-number="1"><span class="kw">read.table</span>(<span class="st">&quot;poker.csv&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;,&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<p>If you will be loading more than one data file, you can change the default factoring behavior at the global level with:</p>
+<div class="sourceCode" id="cb419"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb419-1" data-line-number="1"><span class="kw">options</span>(<span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<p>This will ensure that all strings will be read as strings, not as factors, until you end your R session, or rechange the global default by running:</p>
+<div class="sourceCode" id="cb420"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb420-1" data-line-number="1"><span class="kw">options</span>(<span class="dt">stringsAsFactors =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+</div>
+</div>
+<div id="the-read-family" class="section level3">
+<h3><span class="header-section-number">D.3.2</span> The read Family</h3>
+<p>R also comes with some prepackaged short cuts for <code>read.table</code>, shown in <a href="dataio.html#tab:shortcuts">D.1</a>.</p>
+<table>
+<caption><span id="tab:shortcuts">Table D.1: </span> R’s read functions. You can overwrite any of the default arguments as necessary.</caption>
+<colgroup>
+<col width="42%" />
+<col width="42%" />
+<col width="15%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Function</th>
+<th>Defaults</th>
+<th>Use</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>read.table</code></td>
+<td>sep = &quot; &quot;, header = FALSE</td>
+<td>General-purpose read function</td>
+</tr>
+<tr class="even">
+<td><code>read.csv</code></td>
+<td>sep = “,”, header = TRUE</td>
+<td>Comma-separated-variable (CSV) files</td>
+</tr>
+<tr class="odd">
+<td><code>read.delim</code></td>
+<td>sep = “”, header = TRUE</td>
+<td>Tab-delimited files</td>
+</tr>
+<tr class="even">
+<td><code>read.csv2</code></td>
+<td>sep = “;”, header = TRUE, dec = “,”</td>
+<td>CSV files with European decimal format</td>
+</tr>
+<tr class="odd">
+<td><code>read.delim2</code></td>
+<td>sep = “”, header = TRUE, dec = “,”</td>
+<td>Tab-delimited files with European decimal format</td>
+</tr>
+</tbody>
+</table>
+<p>The first shortcut, <code>read.csv</code>, behaves just like <code>read.table</code> but automatically sets <code>sep = &quot;,&quot;</code> and <code>header = TRUE</code>, which can save you some typing:</p>
+<div class="sourceCode" id="cb421"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb421-1" data-line-number="1">poker &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;poker.csv&quot;</span>)</a></code></pre></div>
+<p><code>read.delim</code> automatically sets <code>sep</code> to the tab character, which is very handy for reading tab delimited files. These are files where each cell is separated by a tab. <code>read.delim</code> also sets <code>header = TRUE</code> by default.</p>
+<p><code>read.delim2</code> and <code>read.csv2</code> exist for European R users. These functions tell R that the data uses a comma instead of a period to denote decimal places. (If you’re wondering how this works with CSV files, CSV2 files usually separate cells with a semicolon, not a comma.)</p>
+
+<div class="rmdtip">
+<p><strong>Import Dataset</strong></p>
+You can also load plain text files with RStudio’s Import Dataset button, as described in <a href="r-objects.html#loading">Loading Data</a>. Import Dataset provides a GUI version of <code>read.table</code>.
+</div>
+
+</div>
+<div id="read.fwf" class="section level3">
+<h3><span class="header-section-number">D.3.3</span> read.fwf</h3>
+<p>One type of plain-text file defies the pattern by using its layout to separate data cells. Each row is placed in its own line (as with other plain-text files), and then each column begins at a specific number of characters from the lefthand side of the document. To achieve this, an arbitrary number of character spaces is added to the end of each entry to correctly position the next entry. These documents are known as <em>fixed-width files</em> and usually end with the extension <em>.fwf</em>.</p>
+<p>Here’s one way the royal flush data set could look as a fixed-width file. In each row, the suit entry begins exactly 10 characters from the start of the line. It doesn’t matter how many characters appeared in the first cell of each row:</p>
+<pre><code>
+card      suit       value
+ace       spades     14
+king      spades     13  
+queen     spades     12  
+jack      spades     11  
+10        spades     10</code></pre>
+<p>Fixed-width files look nice to human eyes (but no better than a tab-delimited file); however, they can be difficult to work with. Perhaps because of this, R comes with a function for reading fixed-width files, but no function for saving them. Unfortunately, US government agencies seem to like fixed-width files, and you’ll likely encounter one or more during your career.</p>
+<p>You can read fixed-width files into R with the function <code>read.fwf</code>. The function takes the same arguments as <code>read.table</code> but requires an additional argument, <code>widths</code>, which should be a vector of numbers. Each _i_th entry of the <code>widths</code> vector should state the width (in characters) of the _i_th column of the data set.</p>
+<p>If the aforementioned fixed-width royal flush data was saved as <em>poker.fwf</em> in your working directory, you could read it with:</p>
+<div class="sourceCode" id="cb423"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb423-1" data-line-number="1">poker &lt;-<span class="st"> </span><span class="kw">read.fwf</span>(<span class="st">&quot;poker.fwf&quot;</span>, <span class="dt">widths =</span> <span class="kw">c</span>(<span class="dv">10</span>, <span class="dv">7</span>, <span class="dv">6</span>), <span class="dt">header =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+</div>
+<div id="html-links" class="section level3">
+<h3><span class="header-section-number">D.3.4</span> HTML Links</h3>
+<p>Many data files are made available on the Internet at their own web address. If you are connected to the Internet, you can open these files straight into R with <code>read.table</code>, <code>read.csv</code>, etc. You can pass a web address into the file name argument for any of R’s data-reading functions. As a result, you could read in the poker data set from a web address like <em><a href="http://" class="uri">http://</a>…/poker.csv</em> with:</p>
+<div class="sourceCode" id="cb424"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb424-1" data-line-number="1">poker &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;http://.../poker.csv&quot;</span>)</a></code></pre></div>
+<p>That’s obviously not a real address, but here’s something that would work—if you can manage to type it!</p>
+<div class="sourceCode" id="cb425"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb425-1" data-line-number="1">deck &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;https://gist.githubusercontent.com/garrettgman/9629323/raw/ee5dfc039fd581cb467cc69c226ea2524913c3d8/deck.csv&quot;</span>)</a></code></pre></div>
+<p>Just make sure that the web address links directly to the file and not to a web page that links to the file. Usually, when you visit a data file’s web address, the file will begin to download or the raw data will appear in your browser window.</p>
+<p>Note that websites that begin with _<a href="https://_" class="uri">https://_</a> are secure websites, which means R may not be able to access the data provided at these links.</p>
+</div>
+<div id="saving-plain-text-files" class="section level3">
+<h3><span class="header-section-number">D.3.5</span> Saving Plain-Text Files</h3>
+<p>Once your data is in R, you can save it to any file format that R supports. If you’d like to save it as a plain-text file, you can use the +write+ family of functions. The three basic write functions appear in <a href="dataio.html#tab:write">D.2</a>. Use <code>write.csv</code> to save your data as a <em>.csv</em> file and <code>write.table</code> to save your data as a tab delimited document or a document with more exotic separators.</p>
+<table>
+<caption><span id="tab:write">Table D.2: </span> R saves data sets to plain-text files with the write family of functions</caption>
+<colgroup>
+<col width="35%" />
+<col width="64%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>File format</th>
+<th>Function and syntax</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>.csv</strong></td>
+<td><code>write.csv(r_object, file = filepath, row.names = FALSE)</code></td>
+</tr>
+<tr class="even">
+<td><strong>.csv</strong> (with European decimal notation)</td>
+<td><code>write.csv2(r_object, file = filepath, row.names = FALSE)</code></td>
+</tr>
+<tr class="odd">
+<td>tab delimited</td>
+<td><code>write.table(r_object, file = filepath, sep = &quot;\t&quot;, row.names=FALSE)</code></td>
+</tr>
+</tbody>
+</table>
+<p>The first argument of each function is the R object that contains your data set. The <code>file</code> argument is the file name (including extension) that you wish to give the saved data. By default, each function will save your data into your working directory. However, you can supply a file path to the file argument. R will oblige by saving the file at the end of the file path. If the file path does not begin with your root directory, R will append it to the end of the file path that leads to your working directory.</p>
+<p>For example, you can save the (hypothetical) poker data frame to a subdirectory named <em>data</em> within your working directory with the command:</p>
+<div class="sourceCode" id="cb426"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb426-1" data-line-number="1"><span class="kw">write.csv</span>(poker, <span class="st">&quot;data/poker.csv&quot;</span>, <span class="dt">row.names =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<p>Keep in mind that <code>write.csv</code> and <code>write.table</code> cannot create new directories on your computer. Each folder in the file path must exist before you try to save a file with it.</p>
+<p>The <code>row.names</code> argument prevents R from saving the data frame’s row names as a column in the plain-text file. You might have noticed that R automatically names each row in a data frame with a number. For example, each row in our poker data frame appears with a number next to it:</p>
+<div class="sourceCode" id="cb427"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb427-1" data-line-number="1">poker</a>
+<a class="sourceLine" id="cb427-2" data-line-number="2">##    card   suit value</a>
+<a class="sourceLine" id="cb427-3" data-line-number="3">## 1   ace spades    14</a>
+<a class="sourceLine" id="cb427-4" data-line-number="4">## 2  king spades    13</a>
+<a class="sourceLine" id="cb427-5" data-line-number="5">## 3 queen spades    12</a>
+<a class="sourceLine" id="cb427-6" data-line-number="6">## 4  jack spades    11</a>
+<a class="sourceLine" id="cb427-7" data-line-number="7">## 5    10 spades    10</a></code></pre></div>
+<p>These row numbers are helpful, but can quickly accumulate if you start saving them. R will add a new set of numbers by default each time you read the file back in. Avoid this by always setting <code>row.names = FALSE</code> when you use a function in the <code>write</code> family.</p>
+</div>
+<div id="compressing-files" class="section level3">
+<h3><span class="header-section-number">D.3.6</span> Compressing Files</h3>
+<p>To compress a plain-text file, surround the file name or file path with the function <code>bzfile</code>, <code>gzfile</code>, or <code>xzfile</code>. For example:</p>
+<div class="sourceCode" id="cb428"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb428-1" data-line-number="1"><span class="kw">write.csv</span>(poker, <span class="dt">file =</span> <span class="kw">bzfile</span>(<span class="st">&quot;data/poker.csv.bz2&quot;</span>), <span class="dt">row.names =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<p>Each of these functions will compress the output with a different type of compression format, shown in <a href="dataio.html#tab:compression">D.3</a>.</p>
+<table>
+<caption><span id="tab:compression">Table D.3: </span> R comes with three helper functions for compressing files</caption>
+<thead>
+<tr class="header">
+<th>Function</th>
+<th>Compression type</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>bzfile</code></td>
+<td>bzip2</td>
+</tr>
+<tr class="even">
+<td><code>gzfile</code></td>
+<td>gnu zip (gzip)</td>
+</tr>
+<tr class="odd">
+<td><code>xzfile</code></td>
+<td>xz compression</td>
+</tr>
+</tbody>
+</table>
+<p>It is a good idea to adjust your file’s extension to reflect the compression. R’s <code>read</code> functions will open plain-text files compressed in any of these formats. For example, you could read a compressed file named <em>poker.csv.bz2</em> with:</p>
+<div class="sourceCode" id="cb429"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb429-1" data-line-number="1"><span class="kw">read.csv</span>(<span class="st">&quot;poker.csv.bz2&quot;</span>)</a></code></pre></div>
+<p>or:</p>
+<div class="sourceCode" id="cb430"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb430-1" data-line-number="1"><span class="kw">read.csv</span>(<span class="st">&quot;data/poker.csv.bz2&quot;</span>)</a></code></pre></div>
+<p>depending on where the file is saved.</p>
+</div>
+</div>
+<div id="r-files" class="section level2">
+<h2><span class="header-section-number">D.4</span> R Files</h2>
+<p>R provides two file formats of its own for storing data, <em>.RDS</em> and <em>.RData</em>. RDS files can store a single R object, and RData files can store multiple R objects.</p>
+<p>You can open a RDS file with <code>readRDS</code>. For example, if the royal flush data was saved as <em>poker.RDS</em>, you could open it with:</p>
+<div class="sourceCode" id="cb431"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb431-1" data-line-number="1">poker &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="st">&quot;poker.RDS&quot;</span>)</a></code></pre></div>
+<p>Opening RData files is even easier. Simply run the function <code>load</code> with the file:</p>
+<div class="sourceCode" id="cb432"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb432-1" data-line-number="1"><span class="kw">load</span>(<span class="st">&quot;file.RData&quot;</span>)</a></code></pre></div>
+<p>There’s no need to assign the output to an object. The R objects in your RData file will be loaded into your R session with their original names. RData files can contain multiple R objects, so loading one may read in multiple objects. <code>load</code> doesn’t tell you how many objects it is reading in, nor what their names are, so it pays to know a little about the RData file before you load it.</p>
+<p>If worse comes to worst, you can keep an eye on the environment pane in RStudio as you load an RData file. It displays all of the objects that you have created or loaded during your R session. Another useful trick is to put parentheses around your load command like so, <code>(load(&quot;poker.RData&quot;))</code>. This will cause R to print out the names of each object it loads from the file.</p>
+<p>Both <code>readRDS</code> and <code>load</code> take a file path as their first argument, just like R’s other read and write functions. If your file is in your working directory, the file path will be the file name.</p>
+<div id="saving-r-files" class="section level3">
+<h3><span class="header-section-number">D.4.1</span> Saving R Files</h3>
+<p>You can save an R object like a data frame as either an RData file or an RDS file. RData files can store multiple R objects at once, but RDS files are the better choice because they foster reproducible code.</p>
+<p>To save data as an RData object, use the <code>save</code> function. To save data as a RDS object, use the <code>saveRDS</code> function. In each case, the first argument should be the name of the R object you wish to save. You should then include a file argument that has the file name or file path you want to save the data set to.</p>
+<p>For example, if you have three R objects, <code>a</code>, <code>b</code>, and <code>c</code>, you could save them all in the same RData file and then reload them in another R session:</p>
+<div class="sourceCode" id="cb433"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb433-1" data-line-number="1">a &lt;-<span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb433-2" data-line-number="2">b &lt;-<span class="st"> </span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb433-3" data-line-number="3">c &lt;-<span class="st"> </span><span class="dv">3</span></a>
+<a class="sourceLine" id="cb433-4" data-line-number="4"><span class="kw">save</span>(a, b, c, <span class="dt">file =</span> <span class="st">&quot;stuff.RData&quot;</span>)</a>
+<a class="sourceLine" id="cb433-5" data-line-number="5"><span class="kw">load</span>(<span class="st">&quot;stuff.RData&quot;</span>)</a></code></pre></div>
+<p>However, if you forget the names of your objects or give your file to someone else to use, it will be difficult to determine what was in the file—even after you (or they) load it. The user interface for RDS files is much more clear. You can save only one object per file, and whoever loads it can decide what they want to call their new data. As a bonus, you don’t have to worry about <code>load</code> overwriting any R objects that happened to have the same name as the objects you are loading:</p>
+<div class="sourceCode" id="cb434"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb434-1" data-line-number="1"><span class="kw">saveRDS</span>(a, <span class="dt">file =</span> <span class="st">&quot;stuff.RDS&quot;</span>) </a>
+<a class="sourceLine" id="cb434-2" data-line-number="2">a &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="st">&quot;stuff.RDS&quot;</span>)</a></code></pre></div>
+<p>Saving your data as an R file offers some advantages over saving your data as a plain-text file. R automatically compresses the file and will also save any R-related metadata associated with your object. This can be handy if your data contains factors, dates and times, or class attributes. You won’t have to reparse this information into R the way you would if you converted everything to a text file.</p>
+<p>On the other hand, R files cannot be read by many other programs, which makes them inefficient for sharing. They may also create a problem for long-term storage if you don’t think you’ll have a copy of R when you reopen the files.</p>
+</div>
+</div>
+<div id="excel-spreadsheets" class="section level2">
+<h2><span class="header-section-number">D.5</span> Excel Spreadsheets</h2>
+<p>Microsoft Excel is a popular spreadsheet program that has become almost industry standard in the business world. There is a good chance that you will need to work with an Excel spreadsheet in R at least once in your career. You can read spreadsheets into R and also save R data as a spreadsheet in a variety of ways.</p>
+<div id="export-from-excel" class="section level3">
+<h3><span class="header-section-number">D.5.1</span> Export from Excel</h3>
+<p>The best method for moving data from Excel to R is to export the spreadsheet from Excel as a <em>.csv</em> or <em>.txt</em> file. Not only will R be able to read the text file, so will any other data analysis software. Text files are the lingua franca of data storage.</p>
+<p>Exporting the data solves another difficulty as well. Excel uses proprietary formats and metadata that will not easily transfer into R. For example, a single Excel file can include multiple spreadsheets, each with their own columns and macros. When Excel exports the file as a <em>.csv</em> or <em>.txt</em>, it makes sure this format is transferred into a plain-text file in the most appropriate way. R may not be able to manage the conversion as efficiently.</p>
+<p>To export data from Excel, open the Excel spreadsheet and then go to Save As in the Microsoft Office Button menu. Then choose CSV in the Save as type box that appears and save the files. You can then read the file into R with the <code>read.csv</code> function.</p>
+</div>
+<div id="copy-and-paste" class="section level3">
+<h3><span class="header-section-number">D.5.2</span> Copy and Paste</h3>
+<p>You can also copy portions of an Excel spreadsheet and paste them into R. To do this, open the spreadsheet and select the cells you wish to read into R. Then select Edit &gt; Copy in the menu bar—or use a keyboard shortcut—to copy the cells to your clipboard.</p>
+<p>On most operating systems, you can read the data stored in your clipboard into R with:</p>
+<div class="sourceCode" id="cb435"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb435-1" data-line-number="1"><span class="kw">read.table</span>(<span class="st">&quot;clipboard&quot;</span>)</a></code></pre></div>
+<p>On Macs you will need to use:</p>
+<div class="sourceCode" id="cb436"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb436-1" data-line-number="1"><span class="kw">read.table</span>(<span class="kw">pipe</span>(<span class="st">&quot;pbpaste&quot;</span>))</a></code></pre></div>
+<p>If the cells contain values with spaces in them, this will disrupt <code>read.table</code>. You can try another <code>read</code> function (or just formally export the data from Excel) before reading it into R.</p>
+</div>
+<div id="xlconnect" class="section level3">
+<h3><span class="header-section-number">D.5.3</span> XLConnect</h3>
+<p>Many packages have been written to help you read Excel files directly into R. Unfortunately, many of these packages do not work on all operating systems. Others have been made out of date by the <em>.xlsx</em> file format. One package that does work on all file systems (and gets good reviews) is the XLConnect package. To use it, you’ll need to install and load the package:</p>
+<div class="sourceCode" id="cb437"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb437-1" data-line-number="1"><span class="kw">install.packages</span>(<span class="st">&quot;XLConnect&quot;</span>)</a>
+<a class="sourceLine" id="cb437-2" data-line-number="2"><span class="kw">library</span>(XLConnect)</a></code></pre></div>
+<p>XLConnect relies on Java to be platform independent. So when you first open XLConnect, RStudio may ask to download a Java Runtime Environment if you do not already have one.</p>
+</div>
+<div id="reading-spreadsheets" class="section level3">
+<h3><span class="header-section-number">D.5.4</span> Reading Spreadsheets</h3>
+<p>You can use XLConnect to read in an Excel spreadsheet with either a one- or a two-step process. I’ll start with the two-step process. First, load an Excel workbook with <code>loadWorkbook</code>. <code>loadWorkbook</code> can load both <em>.xls</em> and <em>.xlsx</em> files. It takes one argument: the file path to your Excel workbook (this will be the name of the workbook if it is saved in your working directory):</p>
+<div class="sourceCode" id="cb438"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb438-1" data-line-number="1">wb &lt;-<span class="st"> </span><span class="kw">loadWorkbook</span>(<span class="st">&quot;file.xlsx&quot;</span>)</a></code></pre></div>
+<p>Next, read a spreadsheet from the workbook with <code>readWorksheet</code>, which takes several arguments. The first argument should be a workbook object created with <code>loadWorkbook</code>. The next argument, <code>sheet</code>, should be the name of the spreadsheet in the workbook that you would like to read into R. This will be the name that appears on the bottom tab of the spreadsheet. You can also give <code>sheet</code> a number, which specifies the sheet that you want to read in (one for the first sheet, two for the second, and so on).</p>
+<p><code>readWorksheet</code> then takes four arguments that specify a bounding box of cells to read in: <code>startRow</code>, <code>startCol</code>, <code>endRow</code>, and <code>endCol</code>. Use <code>startRow</code> and <code>startCol</code> to describe the cell in the top-left corner of the bounding box of cells that you wish to read in. Use <code>endRow</code> and <code>endCol</code> to specify the cell in the bottom-right corner of the bounding box. Each of these arguments takes a number. If you do not supply bounding arguments, <code>readWorksheet</code> will read in the rectangular region of cells in the spreadsheet that appears to contain data. <code>readWorksheet</code> will assume that this region contains a header row, but you can tell it otherwise with <code>header = FALSE</code>.</p>
+<p>So to read in the first worksheet from <code>wb</code>, you could use:</p>
+<div class="sourceCode" id="cb439"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb439-1" data-line-number="1">sheet1 &lt;-<span class="st"> </span><span class="kw">readWorksheet</span>(wb, <span class="dt">sheet =</span> <span class="dv">1</span>, <span class="dt">startRow =</span> <span class="dv">0</span>, <span class="dt">startCol =</span> <span class="dv">0</span>, </a>
+<a class="sourceLine" id="cb439-2" data-line-number="2">  <span class="dt">endRow =</span> <span class="dv">100</span>, <span class="dt">endCol =</span> <span class="dv">3</span>)</a></code></pre></div>
+<p>R will save the output as a data frame. All of the arguments in <code>readWorkbook</code> except the first are vectorized, so you can use it to read in multiple sheets from the same workbook at once (or multiple cell regions from a single worksheet). In this case, <code>readWorksheet</code> will return a list of data frames.</p>
+<p>You can combine these two steps with <code>readWorksheetFromFile</code>. It takes the file argument from <code>loadWorkbook</code> and combines it with the arguments from <code>readWorksheet</code>. You can use it to read one or more sheets straight from an Excel file:</p>
+<div class="sourceCode" id="cb440"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb440-1" data-line-number="1">sheet1 &lt;-<span class="st"> </span><span class="kw">readWorksheetFromFile</span>(<span class="st">&quot;file.xlsx&quot;</span>, <span class="dt">sheet =</span> <span class="dv">1</span>, <span class="dt">startRow =</span> <span class="dv">0</span>, </a>
+<a class="sourceLine" id="cb440-2" data-line-number="2">  <span class="dt">startCol =</span> <span class="dv">0</span>, <span class="dt">endRow =</span> <span class="dv">100</span>, <span class="dt">endCol =</span> <span class="dv">3</span>)</a></code></pre></div>
+</div>
+<div id="writing-spreadsheets" class="section level3">
+<h3><span class="header-section-number">D.5.5</span> Writing Spreadsheets</h3>
+<p>Writing to an Excel spreadsheet is a four-step process. First, you need to set up a workbook object with <code>loadWorkbook</code>. This works just as before, except if you are not using an existing Excel file, you should add the argument <code>create = TRUE</code>. XLConnect will create a blank workbook. When you save it, XLConnect will write it to the file location that you specified here with <code>loadWorkbook</code>:</p>
+<div class="sourceCode" id="cb441"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb441-1" data-line-number="1">wb &lt;-<span class="st"> </span><span class="kw">loadWorkbook</span>(<span class="st">&quot;file.xlsx&quot;</span>, <span class="dt">create =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<p>Next, you need to create a worksheet inside your workbook object with <code>createSheet</code>. Tell <code>createSheet</code> which workbook to place the sheet in and which to use for the sheet.</p>
+<div class="sourceCode" id="cb442"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb442-1" data-line-number="1"><span class="kw">createSheet</span>(wb, <span class="st">&quot;Sheet 1&quot;</span>)</a></code></pre></div>
+<p>Then you can save your data frame or matrix to the sheet with <code>writeWorksheet</code>. The first argument of <code>writeWorksheet</code>, <code>object</code>, is the workbook to write the data to. The second argument, <code>data</code>, is the data to write. The third argument, <code>sheet</code>, is the name of the sheet to write it to. The next two arguments, <code>startRow</code> and <code>startCol</code>, tell R where in the spreadsheet to place the upper-left cell of the new data. These arguments each default to 1. Finally, you can use <code>header</code> to tell R whether your column names should be written with the data:</p>
+<div class="sourceCode" id="cb443"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb443-1" data-line-number="1"><span class="kw">writeWorksheet</span>(wb, <span class="dt">data =</span> poker, <span class="dt">sheet =</span> <span class="st">&quot;Sheet 1&quot;</span>)</a></code></pre></div>
+<p>Once you have finished adding sheets and data to your workbook, you can save it by running <code>saveWorkbook</code> on the workbook object. R will save the workbook to the file name or path you provided in <code>loadWorkbook</code>. If this leads to an existing Excel file, R will overwrite it. If it leads to a new file, R will create it.</p>
+<p>You can also collapse these steps into a single call with <code>writeWorksheetToFile</code>, like this:</p>
+<div class="sourceCode" id="cb444"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb444-1" data-line-number="1"><span class="kw">writeWorksheetToFile</span>(<span class="st">&quot;file.xlsx&quot;</span>, <span class="dt">data =</span> poker, <span class="dt">sheet =</span> <span class="st">&quot;Sheet 1&quot;</span>, </a>
+<a class="sourceLine" id="cb444-2" data-line-number="2">  <span class="dt">startRow =</span> <span class="dv">1</span>, <span class="dt">startCol =</span> <span class="dv">1</span>)</a></code></pre></div>
+<p>The XLConnect package also lets you do more advanced things with Excel spreadsheets, such as writing to a named region in a spreadsheet, working with formulas, and assigning styles to cells. You can read about these features in XLConnect’s vignette, which is accessible by loading XLConnect and then running:</p>
+<div class="sourceCode" id="cb445"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb445-1" data-line-number="1"><span class="kw">vignette</span>(<span class="st">&quot;XLConnect&quot;</span>)</a></code></pre></div>
+</div>
+</div>
+<div id="loading-files-from-other-programs" class="section level2">
+<h2><span class="header-section-number">D.6</span> Loading Files from Other Programs</h2>
+<p>You should follow the same advice I gave you for Excel files whenever you wish to work with file formats native to other programs: open the file in the original program and export the data as a plain-text file, usually a CSV. This will ensure the most faithful transcription of the data in the file, and it will usually give you the most options for customizing how the data is transcribed.</p>
+<p>Sometimes, however, you may acquire a file but not the program it came from. As a result, you won’t be able to open the file in its native program and export it as a text file. In this case, you can use one of the functions in <a href="dataio.html#tab:others">D.4</a> to open the file. These functions mostly come in R’s <code>foreign</code> package. Each attempts to read in a different file format with as few hiccups as possible.</p>
+<table>
+<caption><span id="tab:others">Table D.4: </span> A number of functions will attempt to read the file types of other data-analysis programs</caption>
+<thead>
+<tr class="header">
+<th>File format</th>
+<th>Function</th>
+<th>Library</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>ERSI ArcGIS</td>
+<td><code>read.shapefile</code></td>
+<td>shapefiles</td>
+</tr>
+<tr class="even">
+<td>Matlab</td>
+<td><code>readMat</code></td>
+<td>R.matlab</td>
+</tr>
+<tr class="odd">
+<td>minitab</td>
+<td><code>read.mtp</code></td>
+<td>foreign</td>
+</tr>
+<tr class="even">
+<td>SAS (permanent data set)</td>
+<td><code>read.ssd</code></td>
+<td>foreign</td>
+</tr>
+<tr class="odd">
+<td>SAS (XPORT format)</td>
+<td><code>read.xport</code></td>
+<td>foreign</td>
+</tr>
+<tr class="even">
+<td>SPSS</td>
+<td><code>read.spss</code></td>
+<td>foreign</td>
+</tr>
+<tr class="odd">
+<td>Stata</td>
+<td><code>read.dta</code></td>
+<td>foreign</td>
+</tr>
+<tr class="even">
+<td>Systat</td>
+<td><code>read.systat</code></td>
+<td>foreign</td>
+</tr>
+</tbody>
+</table>
+<div id="connecting-to-databases" class="section level3">
+<h3><span class="header-section-number">D.6.1</span> Connecting to Databases</h3>
+<p>You can also use R to connect to a database and read in data.</p>
+<p>Use the RODBC package to connect to databases through an ODBC connection.</p>
+<p>Use the DBI package to connect to databases through individual drivers. The DBI package provides a common syntax for working with different databases. You will have to download a database-specific package to use in conjunction with DBI. These packages provide the API for the native drivers of different database programs. For MySQL use RMySQL, for SQLite use RSQLite, for Oracle use ROracle, for PostgreSQL use RPostgreSQL, and for databases that use drivers based on the Java Database Connectivity (JDBC) API use RJDBC. Once you have loaded the appropriate driver package, you can use the commands provided by DBI to access your database.</p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="updating.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="debug.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": false,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio-education/hopr/edit/master/a4-data.rmd",
+"text": "Edit"
+},
+"download": null,
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

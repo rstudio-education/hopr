@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Hands-On Programming with R</title>
+  <meta name="description" content="This book will teach you how to program in R, with hands-on examples. I wrote it for non-programmers to provide a friendly introduction to the R language. You’ll learn how to load data, assemble and disassemble data objects, navigate R’s environment system, write your own functions, and use all of R’s programming tools. Throughout the book, you’ll use your newfound skills to solve practical data science problems.">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Hands-On Programming with R" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="http://r4ds.had.co.nz/" />
+  <meta property="og:image" content="http://r4ds.had.co.nz/cover.png" />
+  <meta property="og:description" content="This book will teach you how to program in R, with hands-on examples. I wrote it for non-programmers to provide a friendly introduction to the R language. You’ll learn how to load data, assemble and disassemble data objects, navigate R’s environment system, write your own functions, and use all of R’s programming tools. Throughout the book, you’ll use your newfound skills to solve practical data science problems." />
+  <meta name="github-repo" content="rstudio-education/hopr" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Hands-On Programming with R" />
+  <meta name="twitter:site" content="@statgarrett" />
+  <meta name="twitter:description" content="This book will teach you how to program in R, with hands-on examples. I wrote it for non-programmers to provide a friendly introduction to the R language. You’ll learn how to load data, assemble and disassemble data objects, navigate R’s environment system, write your own functions, and use all of R’s programming tools. Throughout the book, you’ll use your newfound skills to solve practical data science problems." />
+  <meta name="twitter:image" content="http://r4ds.had.co.nz/cover.png" />
+
+<meta name="author" content="Garrett Grolemund">
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="s3.html">
+<link rel="next" href="speed.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="hopr.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><strong><a href="./">Hands-On Programming with R</a></strong></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html"><i class="fa fa-check"></i>Preface</a><ul>
+<li class="chapter" data-level="0.1" data-path="preface.html"><a href="preface.html#conventions-used-in-this-book"><i class="fa fa-check"></i><b>0.1</b> Conventions Used in This Book</a></li>
+<li class="chapter" data-level="0.2" data-path="preface.html"><a href="preface.html#acknowledgments"><i class="fa fa-check"></i><b>0.2</b> Acknowledgments</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="project-1-weighted-dice.html"><a href="project-1-weighted-dice.html"><i class="fa fa-check"></i>Project 1: Weighted Dice</a></li>
+<li class="chapter" data-level="1" data-path="basics.html"><a href="basics.html"><i class="fa fa-check"></i><b>1</b> The Very Basics</a><ul>
+<li class="chapter" data-level="1.1" data-path="basics.html"><a href="basics.html#the-r-user-interface"><i class="fa fa-check"></i><b>1.1</b> The R User Interface</a></li>
+<li class="chapter" data-level="1.2" data-path="basics.html"><a href="basics.html#objects"><i class="fa fa-check"></i><b>1.2</b> Objects</a></li>
+<li class="chapter" data-level="1.3" data-path="basics.html"><a href="basics.html#functions"><i class="fa fa-check"></i><b>1.3</b> Functions</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="basics.html"><a href="basics.html#sample-with-replacement"><i class="fa fa-check"></i><b>1.3.1</b> Sample with Replacement</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="basics.html"><a href="basics.html#write-functions"><i class="fa fa-check"></i><b>1.4</b> Writing Your Own Functions</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="basics.html"><a href="basics.html#the-function-constructor"><i class="fa fa-check"></i><b>1.4.1</b> The Function Constructor</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="basics.html"><a href="basics.html#arguments"><i class="fa fa-check"></i><b>1.5</b> Arguments</a></li>
+<li class="chapter" data-level="1.6" data-path="basics.html"><a href="basics.html#scripts"><i class="fa fa-check"></i><b>1.6</b> Scripts</a></li>
+<li class="chapter" data-level="1.7" data-path="basics.html"><a href="basics.html#summary"><i class="fa fa-check"></i><b>1.7</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="packages.html"><a href="packages.html"><i class="fa fa-check"></i><b>2</b> Packages and Help Pages</a><ul>
+<li class="chapter" data-level="2.1" data-path="packages.html"><a href="packages.html#packages-1"><i class="fa fa-check"></i><b>2.1</b> Packages</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="packages.html"><a href="packages.html#install.packages"><i class="fa fa-check"></i><b>2.1.1</b> install.packages</a></li>
+<li class="chapter" data-level="2.1.2" data-path="packages.html"><a href="packages.html#library"><i class="fa fa-check"></i><b>2.1.2</b> library</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="packages.html"><a href="packages.html#getting-help-with-help-pages"><i class="fa fa-check"></i><b>2.2</b> Getting Help with Help Pages</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="packages.html"><a href="packages.html#parts-of-a-help-page"><i class="fa fa-check"></i><b>2.2.1</b> Parts of a Help Page</a></li>
+<li class="chapter" data-level="2.2.2" data-path="packages.html"><a href="packages.html#getting-more-help"><i class="fa fa-check"></i><b>2.2.2</b> Getting More Help</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="packages.html"><a href="packages.html#summary-1"><i class="fa fa-check"></i><b>2.3</b> Summary</a></li>
+<li class="chapter" data-level="2.4" data-path="packages.html"><a href="packages.html#project-1-wrap-up"><i class="fa fa-check"></i><b>2.4</b> Project 1 Wrap-up</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="project-2-playing-cards.html"><a href="project-2-playing-cards.html"><i class="fa fa-check"></i>Project 2: Playing Cards</a></li>
+<li class="chapter" data-level="3" data-path="r-objects.html"><a href="r-objects.html"><i class="fa fa-check"></i><b>3</b> R Objects</a><ul>
+<li class="chapter" data-level="3.1" data-path="r-objects.html"><a href="r-objects.html#atomic-vectors"><i class="fa fa-check"></i><b>3.1</b> Atomic Vectors</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="r-objects.html"><a href="r-objects.html#doubles"><i class="fa fa-check"></i><b>3.1.1</b> Doubles</a></li>
+<li class="chapter" data-level="3.1.2" data-path="r-objects.html"><a href="r-objects.html#integers"><i class="fa fa-check"></i><b>3.1.2</b> Integers</a></li>
+<li class="chapter" data-level="3.1.3" data-path="r-objects.html"><a href="r-objects.html#characters"><i class="fa fa-check"></i><b>3.1.3</b> Characters</a></li>
+<li class="chapter" data-level="3.1.4" data-path="r-objects.html"><a href="r-objects.html#logicals"><i class="fa fa-check"></i><b>3.1.4</b> Logicals</a></li>
+<li class="chapter" data-level="3.1.5" data-path="r-objects.html"><a href="r-objects.html#complex-and-raw"><i class="fa fa-check"></i><b>3.1.5</b> Complex and Raw</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="r-objects.html"><a href="r-objects.html#attributes"><i class="fa fa-check"></i><b>3.2</b> Attributes</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="r-objects.html"><a href="r-objects.html#names"><i class="fa fa-check"></i><b>3.2.1</b> Names</a></li>
+<li class="chapter" data-level="3.2.2" data-path="r-objects.html"><a href="r-objects.html#dim"><i class="fa fa-check"></i><b>3.2.2</b> Dim</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="r-objects.html"><a href="r-objects.html#matrices"><i class="fa fa-check"></i><b>3.3</b> Matrices</a></li>
+<li class="chapter" data-level="3.4" data-path="r-objects.html"><a href="r-objects.html#arrays"><i class="fa fa-check"></i><b>3.4</b> Arrays</a></li>
+<li class="chapter" data-level="3.5" data-path="r-objects.html"><a href="r-objects.html#class"><i class="fa fa-check"></i><b>3.5</b> Class</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="r-objects.html"><a href="r-objects.html#dates-and-times"><i class="fa fa-check"></i><b>3.5.1</b> Dates and Times</a></li>
+<li class="chapter" data-level="3.5.2" data-path="r-objects.html"><a href="r-objects.html#factors"><i class="fa fa-check"></i><b>3.5.2</b> Factors</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="r-objects.html"><a href="r-objects.html#coercion"><i class="fa fa-check"></i><b>3.6</b> Coercion</a></li>
+<li class="chapter" data-level="3.7" data-path="r-objects.html"><a href="r-objects.html#lists"><i class="fa fa-check"></i><b>3.7</b> Lists</a></li>
+<li class="chapter" data-level="3.8" data-path="r-objects.html"><a href="r-objects.html#data-frames"><i class="fa fa-check"></i><b>3.8</b> Data Frames</a></li>
+<li class="chapter" data-level="3.9" data-path="r-objects.html"><a href="r-objects.html#loading"><i class="fa fa-check"></i><b>3.9</b> Loading Data</a></li>
+<li class="chapter" data-level="3.10" data-path="r-objects.html"><a href="r-objects.html#saving-data"><i class="fa fa-check"></i><b>3.10</b> Saving Data</a></li>
+<li class="chapter" data-level="3.11" data-path="r-objects.html"><a href="r-objects.html#summary-2"><i class="fa fa-check"></i><b>3.11</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="r-notation.html"><a href="r-notation.html"><i class="fa fa-check"></i><b>4</b> R Notation</a><ul>
+<li class="chapter" data-level="4.1" data-path="r-notation.html"><a href="r-notation.html#selecting-values"><i class="fa fa-check"></i><b>4.1</b> Selecting Values</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="r-notation.html"><a href="r-notation.html#positive-integers"><i class="fa fa-check"></i><b>4.1.1</b> Positive Integers</a></li>
+<li class="chapter" data-level="4.1.2" data-path="r-notation.html"><a href="r-notation.html#negative-integers"><i class="fa fa-check"></i><b>4.1.2</b> Negative Integers</a></li>
+<li class="chapter" data-level="4.1.3" data-path="r-notation.html"><a href="r-notation.html#zero"><i class="fa fa-check"></i><b>4.1.3</b> Zero</a></li>
+<li class="chapter" data-level="4.1.4" data-path="r-notation.html"><a href="r-notation.html#blank-spaces"><i class="fa fa-check"></i><b>4.1.4</b> Blank Spaces</a></li>
+<li class="chapter" data-level="4.1.5" data-path="r-objects.html"><a href="r-objects.html#logicals"><i class="fa fa-check"></i><b>4.1.5</b> Logical Values</a></li>
+<li class="chapter" data-level="4.1.6" data-path="r-notation.html"><a href="r-notation.html#names-1"><i class="fa fa-check"></i><b>4.1.6</b> Names</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="r-notation.html"><a href="r-notation.html#deal-a-card"><i class="fa fa-check"></i><b>4.2</b> Deal a Card</a></li>
+<li class="chapter" data-level="4.3" data-path="r-notation.html"><a href="r-notation.html#shuffle-the-deck"><i class="fa fa-check"></i><b>4.3</b> Shuffle the Deck</a></li>
+<li class="chapter" data-level="4.4" data-path="r-notation.html"><a href="r-notation.html#dollar-signs-and-double-brackets"><i class="fa fa-check"></i><b>4.4</b> Dollar Signs and Double Brackets</a></li>
+<li class="chapter" data-level="4.5" data-path="r-notation.html"><a href="r-notation.html#summary-3"><i class="fa fa-check"></i><b>4.5</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="modify.html"><a href="modify.html"><i class="fa fa-check"></i><b>5</b> Modifying Values</a><ul>
+<li class="chapter" data-level="5.0.1" data-path="modify.html"><a href="modify.html#changing-values-in-place"><i class="fa fa-check"></i><b>5.0.1</b> Changing Values in Place</a></li>
+<li class="chapter" data-level="5.0.2" data-path="modify.html"><a href="modify.html#logical-subsetting"><i class="fa fa-check"></i><b>5.0.2</b> Logical Subsetting</a></li>
+<li class="chapter" data-level="5.0.3" data-path="modify.html"><a href="modify.html#missing"><i class="fa fa-check"></i><b>5.0.3</b> Missing Information</a></li>
+<li class="chapter" data-level="5.0.4" data-path="modify.html"><a href="modify.html#summary-4"><i class="fa fa-check"></i><b>5.0.4</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="environments.html"><a href="environments.html"><i class="fa fa-check"></i><b>6</b> Environments</a><ul>
+<li class="chapter" data-level="6.1" data-path="environments.html"><a href="environments.html#environments-1"><i class="fa fa-check"></i><b>6.1</b> Environments</a></li>
+<li class="chapter" data-level="6.2" data-path="environments.html"><a href="environments.html#working-with-environments"><i class="fa fa-check"></i><b>6.2</b> Working with Environments</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="environments.html"><a href="environments.html#the-active-environment"><i class="fa fa-check"></i><b>6.2.1</b> The Active Environment</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="environments.html"><a href="environments.html#scoping-rules"><i class="fa fa-check"></i><b>6.3</b> Scoping Rules</a></li>
+<li class="chapter" data-level="6.4" data-path="environments.html"><a href="environments.html#assignment"><i class="fa fa-check"></i><b>6.4</b> Assignment</a></li>
+<li class="chapter" data-level="6.5" data-path="environments.html"><a href="environments.html#evaluation"><i class="fa fa-check"></i><b>6.5</b> Evaluation</a></li>
+<li class="chapter" data-level="6.6" data-path="environments.html"><a href="environments.html#closures"><i class="fa fa-check"></i><b>6.6</b> Closures</a></li>
+<li class="chapter" data-level="6.7" data-path="environments.html"><a href="environments.html#summary-5"><i class="fa fa-check"></i><b>6.7</b> Summary</a></li>
+<li class="chapter" data-level="6.8" data-path="environments.html"><a href="environments.html#project-2-wrap-up"><i class="fa fa-check"></i><b>6.8</b> Project 2 Wrap-up</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="project-3-slot-machine.html"><a href="project-3-slot-machine.html"><i class="fa fa-check"></i>Project 3: Slot Machine</a></li>
+<li class="chapter" data-level="7" data-path="programs.html"><a href="programs.html"><i class="fa fa-check"></i><b>7</b> Programs</a><ul>
+<li class="chapter" data-level="7.1" data-path="programs.html"><a href="programs.html#strategy"><i class="fa fa-check"></i><b>7.1</b> Strategy</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="programs.html"><a href="programs.html#sequential-steps"><i class="fa fa-check"></i><b>7.1.1</b> Sequential Steps</a></li>
+<li class="chapter" data-level="7.1.2" data-path="programs.html"><a href="programs.html#parallel-cases"><i class="fa fa-check"></i><b>7.1.2</b> Parallel Cases</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="programs.html"><a href="programs.html#if-statements"><i class="fa fa-check"></i><b>7.2</b> if Statements</a></li>
+<li class="chapter" data-level="7.3" data-path="programs.html"><a href="programs.html#else-statements"><i class="fa fa-check"></i><b>7.3</b> else Statements</a></li>
+<li class="chapter" data-level="7.4" data-path="programs.html"><a href="programs.html#lookup-tables"><i class="fa fa-check"></i><b>7.4</b> Lookup Tables</a></li>
+<li class="chapter" data-level="7.5" data-path="programs.html"><a href="programs.html#code-comments"><i class="fa fa-check"></i><b>7.5</b> Code Comments</a></li>
+<li class="chapter" data-level="7.6" data-path="programs.html"><a href="programs.html#summary-6"><i class="fa fa-check"></i><b>7.6</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="s3.html"><a href="s3.html"><i class="fa fa-check"></i><b>8</b> S3</a><ul>
+<li class="chapter" data-level="8.1" data-path="s3.html"><a href="s3.html#the-s3-system"><i class="fa fa-check"></i><b>8.1</b> The S3 System</a></li>
+<li class="chapter" data-level="8.2" data-path="s3.html"><a href="s3.html#attributes-1"><i class="fa fa-check"></i><b>8.2</b> Attributes</a></li>
+<li class="chapter" data-level="8.3" data-path="s3.html"><a href="s3.html#generic-functions"><i class="fa fa-check"></i><b>8.3</b> Generic Functions</a></li>
+<li class="chapter" data-level="8.4" data-path="s3.html"><a href="s3.html#methods"><i class="fa fa-check"></i><b>8.4</b> Methods</a><ul>
+<li class="chapter" data-level="8.4.1" data-path="s3.html"><a href="s3.html#method-dispatch"><i class="fa fa-check"></i><b>8.4.1</b> Method Dispatch</a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="s3.html"><a href="s3.html#classes"><i class="fa fa-check"></i><b>8.5</b> Classes</a></li>
+<li class="chapter" data-level="8.6" data-path="s3.html"><a href="s3.html#s3-and-debugging"><i class="fa fa-check"></i><b>8.6</b> S3 and Debugging</a></li>
+<li class="chapter" data-level="8.7" data-path="s3.html"><a href="s3.html#s4-and-r5"><i class="fa fa-check"></i><b>8.7</b> S4 and R5</a></li>
+<li class="chapter" data-level="8.8" data-path="s3.html"><a href="s3.html#summary-7"><i class="fa fa-check"></i><b>8.8</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="loops.html"><a href="loops.html"><i class="fa fa-check"></i><b>9</b> Loops</a><ul>
+<li class="chapter" data-level="9.1" data-path="loops.html"><a href="loops.html#expected-values"><i class="fa fa-check"></i><b>9.1</b> Expected Values</a></li>
+<li class="chapter" data-level="9.2" data-path="loops.html"><a href="loops.html#expand.grid"><i class="fa fa-check"></i><b>9.2</b> expand.grid</a></li>
+<li class="chapter" data-level="9.3" data-path="loops.html"><a href="loops.html#for-loops"><i class="fa fa-check"></i><b>9.3</b> for Loops</a></li>
+<li class="chapter" data-level="9.4" data-path="loops.html"><a href="loops.html#while-loops"><i class="fa fa-check"></i><b>9.4</b> while Loops</a></li>
+<li class="chapter" data-level="9.5" data-path="loops.html"><a href="loops.html#repeat-loops"><i class="fa fa-check"></i><b>9.5</b> repeat Loops</a></li>
+<li class="chapter" data-level="9.6" data-path="loops.html"><a href="loops.html#summary-8"><i class="fa fa-check"></i><b>9.6</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="speed.html"><a href="speed.html"><i class="fa fa-check"></i><b>10</b> Speed</a><ul>
+<li class="chapter" data-level="10.1" data-path="speed.html"><a href="speed.html#vectorized-code"><i class="fa fa-check"></i><b>10.1</b> Vectorized Code</a></li>
+<li class="chapter" data-level="10.2" data-path="speed.html"><a href="speed.html#how-to-write-vectorized-code"><i class="fa fa-check"></i><b>10.2</b> How to Write Vectorized Code</a></li>
+<li class="chapter" data-level="10.3" data-path="speed.html"><a href="speed.html#how-to-write-fast-for-loops-in-r"><i class="fa fa-check"></i><b>10.3</b> How to Write Fast for Loops in R</a></li>
+<li class="chapter" data-level="10.4" data-path="speed.html"><a href="speed.html#vectorized-code-in-practice"><i class="fa fa-check"></i><b>10.4</b> Vectorized Code in Practice</a><ul>
+<li class="chapter" data-level="10.4.1" data-path="speed.html"><a href="speed.html#loops-versus-vectorized-code"><i class="fa fa-check"></i><b>10.4.1</b> Loops Versus Vectorized Code</a></li>
+</ul></li>
+<li class="chapter" data-level="10.5" data-path="speed.html"><a href="speed.html#summary-9"><i class="fa fa-check"></i><b>10.5</b> Summary</a></li>
+<li class="chapter" data-level="10.6" data-path="speed.html"><a href="speed.html#project-3-wrap-up"><i class="fa fa-check"></i><b>10.6</b> Project 3 Wrap-up</a></li>
+</ul></li>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="starting.html"><a href="starting.html"><i class="fa fa-check"></i><b>A</b> Installing R and RStudio</a><ul>
+<li class="chapter" data-level="A.1" data-path="starting.html"><a href="starting.html#how-to-download-and-install-r"><i class="fa fa-check"></i><b>A.1</b> How to Download and Install R</a><ul>
+<li class="chapter" data-level="A.1.1" data-path="starting.html"><a href="starting.html#windows"><i class="fa fa-check"></i><b>A.1.1</b> Windows</a></li>
+<li class="chapter" data-level="A.1.2" data-path="starting.html"><a href="starting.html#mac"><i class="fa fa-check"></i><b>A.1.2</b> Mac</a></li>
+<li class="chapter" data-level="A.1.3" data-path="starting.html"><a href="starting.html#linux"><i class="fa fa-check"></i><b>A.1.3</b> Linux</a></li>
+</ul></li>
+<li class="chapter" data-level="A.2" data-path="starting.html"><a href="starting.html#using-r"><i class="fa fa-check"></i><b>A.2</b> Using R</a></li>
+<li class="chapter" data-level="A.3" data-path="starting.html"><a href="starting.html#rstudio"><i class="fa fa-check"></i><b>A.3</b> RStudio</a></li>
+<li class="chapter" data-level="A.4" data-path="starting.html"><a href="starting.html#opening-r"><i class="fa fa-check"></i><b>A.4</b> Opening R</a></li>
+</ul></li>
+<li class="chapter" data-level="B" data-path="packages2.html"><a href="packages2.html"><i class="fa fa-check"></i><b>B</b> R Packages</a><ul>
+<li class="chapter" data-level="B.1" data-path="packages2.html"><a href="packages2.html#installing-packages"><i class="fa fa-check"></i><b>B.1</b> Installing Packages</a></li>
+<li class="chapter" data-level="B.2" data-path="packages2.html"><a href="packages2.html#loading-packages"><i class="fa fa-check"></i><b>B.2</b> Loading Packages</a></li>
+</ul></li>
+<li class="chapter" data-level="C" data-path="updating.html"><a href="updating.html"><i class="fa fa-check"></i><b>C</b> Updating R and Its Packages</a><ul>
+<li class="chapter" data-level="C.1" data-path="updating.html"><a href="updating.html#r-packages"><i class="fa fa-check"></i><b>C.1</b> R Packages</a></li>
+</ul></li>
+<li class="chapter" data-level="D" data-path="dataio.html"><a href="dataio.html"><i class="fa fa-check"></i><b>D</b> Loading and Saving Data in R</a><ul>
+<li class="chapter" data-level="D.1" data-path="dataio.html"><a href="dataio.html#data-sets-in-base-r"><i class="fa fa-check"></i><b>D.1</b> Data Sets in Base R</a></li>
+<li class="chapter" data-level="D.2" data-path="dataio.html"><a href="dataio.html#working-directory"><i class="fa fa-check"></i><b>D.2</b> Working Directory</a></li>
+<li class="chapter" data-level="D.3" data-path="dataio.html"><a href="dataio.html#plain-text-files"><i class="fa fa-check"></i><b>D.3</b> Plain-text Files</a><ul>
+<li class="chapter" data-level="D.3.1" data-path="dataio.html"><a href="dataio.html#read.table"><i class="fa fa-check"></i><b>D.3.1</b> read.table</a></li>
+<li class="chapter" data-level="D.3.2" data-path="dataio.html"><a href="dataio.html#the-read-family"><i class="fa fa-check"></i><b>D.3.2</b> The read Family</a></li>
+<li class="chapter" data-level="D.3.3" data-path="dataio.html"><a href="dataio.html#read.fwf"><i class="fa fa-check"></i><b>D.3.3</b> read.fwf</a></li>
+<li class="chapter" data-level="D.3.4" data-path="dataio.html"><a href="dataio.html#html-links"><i class="fa fa-check"></i><b>D.3.4</b> HTML Links</a></li>
+<li class="chapter" data-level="D.3.5" data-path="dataio.html"><a href="dataio.html#saving-plain-text-files"><i class="fa fa-check"></i><b>D.3.5</b> Saving Plain-Text Files</a></li>
+<li class="chapter" data-level="D.3.6" data-path="dataio.html"><a href="dataio.html#compressing-files"><i class="fa fa-check"></i><b>D.3.6</b> Compressing Files</a></li>
+</ul></li>
+<li class="chapter" data-level="D.4" data-path="dataio.html"><a href="dataio.html#r-files"><i class="fa fa-check"></i><b>D.4</b> R Files</a><ul>
+<li class="chapter" data-level="D.4.1" data-path="dataio.html"><a href="dataio.html#saving-r-files"><i class="fa fa-check"></i><b>D.4.1</b> Saving R Files</a></li>
+</ul></li>
+<li class="chapter" data-level="D.5" data-path="dataio.html"><a href="dataio.html#excel-spreadsheets"><i class="fa fa-check"></i><b>D.5</b> Excel Spreadsheets</a><ul>
+<li class="chapter" data-level="D.5.1" data-path="dataio.html"><a href="dataio.html#export-from-excel"><i class="fa fa-check"></i><b>D.5.1</b> Export from Excel</a></li>
+<li class="chapter" data-level="D.5.2" data-path="dataio.html"><a href="dataio.html#copy-and-paste"><i class="fa fa-check"></i><b>D.5.2</b> Copy and Paste</a></li>
+<li class="chapter" data-level="D.5.3" data-path="dataio.html"><a href="dataio.html#xlconnect"><i class="fa fa-check"></i><b>D.5.3</b> XLConnect</a></li>
+<li class="chapter" data-level="D.5.4" data-path="dataio.html"><a href="dataio.html#reading-spreadsheets"><i class="fa fa-check"></i><b>D.5.4</b> Reading Spreadsheets</a></li>
+<li class="chapter" data-level="D.5.5" data-path="dataio.html"><a href="dataio.html#writing-spreadsheets"><i class="fa fa-check"></i><b>D.5.5</b> Writing Spreadsheets</a></li>
+</ul></li>
+<li class="chapter" data-level="D.6" data-path="dataio.html"><a href="dataio.html#loading-files-from-other-programs"><i class="fa fa-check"></i><b>D.6</b> Loading Files from Other Programs</a><ul>
+<li class="chapter" data-level="D.6.1" data-path="dataio.html"><a href="dataio.html#connecting-to-databases"><i class="fa fa-check"></i><b>D.6.1</b> Connecting to Databases</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="E" data-path="debug.html"><a href="debug.html"><i class="fa fa-check"></i><b>E</b> Debugging R Code</a><ul>
+<li class="chapter" data-level="E.1" data-path="debug.html"><a href="debug.html#traceback"><i class="fa fa-check"></i><b>E.1</b> traceback</a></li>
+<li class="chapter" data-level="E.2" data-path="debug.html"><a href="debug.html#browser"><i class="fa fa-check"></i><b>E.2</b> browser</a></li>
+<li class="chapter" data-level="E.3" data-path="debug.html"><a href="debug.html#break-points"><i class="fa fa-check"></i><b>E.3</b> Break Points</a></li>
+<li class="chapter" data-level="E.4" data-path="debug.html"><a href="debug.html#debug-1"><i class="fa fa-check"></i><b>E.4</b> debug</a></li>
+<li class="chapter" data-level="E.5" data-path="debug.html"><a href="debug.html#trace"><i class="fa fa-check"></i><b>E.5</b> trace</a></li>
+<li class="chapter" data-level="E.6" data-path="debug.html"><a href="debug.html#recover"><i class="fa fa-check"></i><b>E.6</b> recover</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Hands-On Programming with R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="loops" class="section level1">
+<h1><span class="header-section-number">9</span> Loops</h1>
+<p>Loops are R’s method for repeating a task, which makes them a useful tool for programming simulations. This chapter will teach you how to use R’s loop tools.</p>
+<p>Let’s use the <code>score</code> function to solve a real-world problem.</p>
+<p>Your slot machine is modeled after real machines that were accused of fraud. The machines appeared to pay out 40 cents on the dollar, but the manufacturer claimed that they paid out 92 cents on the dollar. You can calculate the exact payout rate of your machine with the <code>score</code> program. The payout rate will be the expected value of the slot machine’s prize.</p>
+<div id="expected-values" class="section level2">
+<h2><span class="header-section-number">9.1</span> Expected Values</h2>
+<p>The expected value of a random event is a type of weighted average; it is the sum of each possible outcome of the event, weighted by the probability that each outcome occurs:</p>
+<p><span class="math display">\[
+E(x) = \sum_{i = 1}^{n}\left( x_{i} \cdot P(x_{i}) \right)
+\]</span></p>
+<p>You can think of the expected value as the average prize that you would observe if you played the slot machine an infinite number of times. Let’s use the formula to calculate some simple expected values. Then we will apply the formula to your slot machine.</p>
+<p>Do you remember the <code>die</code> you created in <a href="project-1-weighted-dice.html#project-1-weighted-dice">Project 1: Weighted Dice</a>?</p>
+<div class="sourceCode" id="cb344"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb344-1" data-line-number="1">die &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>)</a></code></pre></div>
+<p>Each time you roll the die, it returns a value selected at random (one through six). You can find the expected value of rolling the die with the formula:</p>
+<p><span class="math display">\[
+E(\text{die}) = \sum_{i = 1}^{n}\left( \text{die}_{i} \cdot P(\text{die}_{i}) \right)
+\]</span></p>
+<p>The <span class="math inline">\(\text{die}_{i}\)</span>s are the possible outcomes of rolling the die: 1, 2, 3, 4, 5, and 6; and the <span class="math inline">\(P(\text{die}_{i})\)</span>’s are the probabilities associated with each of the outcomes. If your die is fair, each outcome will occur with the same probability: 1/6. So our equation simplifies to:</p>
+<p><span class="math display">\[
+\begin{array}{rl}
+E(\text{die}) &amp; = \sum_{i = 1}^{n}\left( \text{die}_{i} \cdot P(\text{die}_{i}) \right)\\
+&amp; = 1 \cdot \frac{1}{6} +  2 \cdot \frac{1}{6} + 3 \cdot \frac{1}{6} + 4 \cdot \frac{1}{6} + 5 \cdot \frac{1}{6} + 6 \cdot \frac{1}{6}\\
+&amp; = 3.5\\
+\end{array}
+\]</span></p>
+<p>Hence, the expected value of rolling a fair die is 3.5. You may notice that this is also the average value of the die. The expected value will equal the average if every outcome has the same chance of occurring.</p>
+<p>But what if each outcome has a different chance of occurring? For example, we weighted our dice in <a href="packages.html#packages">Packages and Help Pages</a> so that each die rolled 1, 2, 3, 4, and 5 with probability 1/8 and 6 with probability 3/8. You can use the same formula to calculate the expected value in these conditions:</p>
+<p><span class="math display">\[
+\begin{array}{rl}
+  E(die) &amp; = 1 \cdot \frac{1}{8} +  2 \cdot \frac{1}{8} + 3 \cdot \frac{1}{8} + 4 \cdot \frac{1}{8} + 5 \cdot \frac{1}{8} + 6 \cdot \frac{3}{8}\\
+  &amp; = 4.125\\
+  \end{array} 
+\]</span></p>
+<p>Hence, the expected value of a loaded die does not equal the average value of its outcomes. If you rolled a loaded die an infinite number of times, the average outcome would be 4.125, which is higher than what you would expect from a fair die.</p>
+<p>Notice that we did the same three things to calculate both of these expected values. We have:</p>
+<ul>
+<li>Listed out all of the possible outcomes</li>
+<li>Determined the <em>value</em> of each outcome (here just the value of the die)</li>
+<li>Calculated the probability that each outcome occurred</li>
+</ul>
+<p>The expected value was then just the sum of the values in step 2 multiplied by the probabilities in step 3.</p>
+<p>You can use these steps to calculate more sophisticated expected values. For example, you could calculate the expected value of rolling a pair of weighted dice. Let’s do this step by step.</p>
+<p>First, list out all of the possible outcomes. A total of 36 different outcomes can appear when you roll two dice. For example, you might roll (1, 1), which notates one on the first die and one on the second die. Or, you may roll (1, 2), one on the first die and two on the second. And so on. Listing out these combinations can be tedious, but R has a function that can help.</p>
+</div>
+<div id="expand.grid" class="section level2">
+<h2><span class="header-section-number">9.2</span> expand.grid</h2>
+<p>The <code>expand.grid</code> function in R provides a quick way to write out every combination of the elements in <em>n</em> vectors. For example, you can list every combination of two dice. To do so, run <code>expand.grid</code> on two copies of <code>die</code>:</p>
+<div class="sourceCode" id="cb345"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb345-1" data-line-number="1">rolls &lt;-<span class="st"> </span><span class="kw">expand.grid</span>(die, die)</a></code></pre></div>
+<p><code>expand.grid</code> will return a data frame that contains every way to pair an element from the first <code>die</code> vector with an element from the second <code>die</code> vector. This will capture all 36 possible combinations of values:</p>
+<div class="sourceCode" id="cb346"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb346-1" data-line-number="1">rolls</a>
+<a class="sourceLine" id="cb346-2" data-line-number="2">##    Var1 Var2</a>
+<a class="sourceLine" id="cb346-3" data-line-number="3">## 1     1    1</a>
+<a class="sourceLine" id="cb346-4" data-line-number="4">## 2     2    1</a>
+<a class="sourceLine" id="cb346-5" data-line-number="5">## 3     3    1</a>
+<a class="sourceLine" id="cb346-6" data-line-number="6">## ...</a>
+<a class="sourceLine" id="cb346-7" data-line-number="7">## 34    4    6</a>
+<a class="sourceLine" id="cb346-8" data-line-number="8">## 35    5    6</a>
+<a class="sourceLine" id="cb346-9" data-line-number="9">## 36    6    6</a></code></pre></div>
+<p>You can use <code>expand.grid</code> with more than two vectors if you like. For example, you could list every combination of rolling three dice with <code>expand.grid(die, die, die)</code> and every combination of rolling four dice with <code>expand.grid(die, die, die, die)</code>, and so on. <code>expand.grid</code> will always return a data frame that contains each possible combination of <em>n</em> elements from the <em>n</em> vectors. Each combination will contain exactly one element from each vector.</p>
+<p>You can determine the value of each roll once you’ve made your list of outcomes. This will be the sum of the two dice, which you can calculate using R’s element-wise execution:</p>
+<div class="sourceCode" id="cb347"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb347-1" data-line-number="1">rolls<span class="op">$</span>value &lt;-<span class="st"> </span>rolls<span class="op">$</span>Var1 <span class="op">+</span><span class="st"> </span>rolls<span class="op">$</span>Var2</a>
+<a class="sourceLine" id="cb347-2" data-line-number="2"><span class="kw">head</span>(rolls, <span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb347-3" data-line-number="3">## Var1 Var2 value</a>
+<a class="sourceLine" id="cb347-4" data-line-number="4">##    1    1     2</a>
+<a class="sourceLine" id="cb347-5" data-line-number="5">##    2    1     3</a>
+<a class="sourceLine" id="cb347-6" data-line-number="6">##    3    1     4</a></code></pre></div>
+<p>R will match up the elements in each vector before adding them together. As a result, each element of <code>value</code> will refer to the elements of <code>Var1</code> and <code>Var2</code> that appear in the same row.</p>
+<p>Next, you must determine the probability that each combination appears. You can calculate this with a basic rule of probability:</p>
+<p><em>The probability that</em> n <em>independent, random events all occur is equal to the product of the probabilities that each random event occurs</em>.</p>
+<p>Or more succinctly:</p>
+<p><span class="math display">\[
+P(A \&amp; B \&amp; C \&amp; ...) = P(A) \cdot P(B) \cdot P(C) \cdot ...
+\]</span></p>
+<p>So the probability that we roll a (1, 1) will be equal to the probability that we roll a one on the first die, 1/8, times the probability that we roll a one on the second die, 1/8:</p>
+<p><span class="math display">\[
+\begin{array}{rl}
+P(1 \&amp; 1) &amp; = P(1) \cdot P(1) \\
+&amp; = \frac{1}{8} \cdot \frac{1}{8}\\
+&amp; = \frac{1}{64}
+\end{array}
+\]</span></p>
+<p>And the probability that we roll a (1, 2) will be:</p>
+<p><span class="math display">\[
+\begin{array}{rl}
+P(1 \&amp; 2) &amp; = P(1) \cdot P(2) \\
+&amp; = \frac{1}{8} \cdot \frac{1}{8}\\
+&amp; = \frac{1}{64}
+\end{array}
+\]</span></p>
+<p>And so on.</p>
+<p>Let me suggest a three-step process for calculating these probabilities in R. First, we can look up the probabilities of rolling the values in <code>Var1</code>. We’ll do this with the lookup table that follows:</p>
+<div class="sourceCode" id="cb348"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb348-1" data-line-number="1">prob &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;1&quot;</span> =<span class="st"> </span><span class="dv">1</span><span class="op">/</span><span class="dv">8</span>, <span class="st">&quot;2&quot;</span> =<span class="st"> </span><span class="dv">1</span><span class="op">/</span><span class="dv">8</span>, <span class="st">&quot;3&quot;</span> =<span class="st"> </span><span class="dv">1</span><span class="op">/</span><span class="dv">8</span>, <span class="st">&quot;4&quot;</span> =<span class="st"> </span><span class="dv">1</span><span class="op">/</span><span class="dv">8</span>, <span class="st">&quot;5&quot;</span> =<span class="st"> </span><span class="dv">1</span><span class="op">/</span><span class="dv">8</span>, <span class="st">&quot;6&quot;</span> =<span class="st"> </span><span class="dv">3</span><span class="op">/</span><span class="dv">8</span>)</a>
+<a class="sourceLine" id="cb348-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb348-3" data-line-number="3">prob</a>
+<a class="sourceLine" id="cb348-4" data-line-number="4">##     1     2     3     4     5     6 </a>
+<a class="sourceLine" id="cb348-5" data-line-number="5">## 0.125 0.125 0.125 0.125 0.125 0.375 </a></code></pre></div>
+<p>If you subset this table by <code>rolls$Var1</code>, you will get a vector of probabilities perfectly keyed to the values of <code>Var1</code>:</p>
+<div class="sourceCode" id="cb349"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb349-1" data-line-number="1">rolls<span class="op">$</span>Var1</a>
+<a class="sourceLine" id="cb349-2" data-line-number="2">## 1 2 3 4 5 6 1 2 3 4 5 6 1 2 3 4 5 6 1 2 3 4 5 6 1 2 3 4 5 6 1 2 3 4 5 6</a>
+<a class="sourceLine" id="cb349-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb349-4" data-line-number="4">prob[rolls<span class="op">$</span>Var1]</a>
+<a class="sourceLine" id="cb349-5" data-line-number="5">##     1     2     3     4     5     6     1     2     3     4     5     6 </a>
+<a class="sourceLine" id="cb349-6" data-line-number="6">## 0.125 0.125 0.125 0.125 0.125 0.375 0.125 0.125 0.125 0.125 0.125 0.375 </a>
+<a class="sourceLine" id="cb349-7" data-line-number="7">##     1     2     3     4     5     6     1     2     3     4     5     6 </a>
+<a class="sourceLine" id="cb349-8" data-line-number="8">## 0.125 0.125 0.125 0.125 0.125 0.375 0.125 0.125 0.125 0.125 0.125 0.375 </a>
+<a class="sourceLine" id="cb349-9" data-line-number="9">##     1     2     3     4     5     6     1     2     3     4     5     6 </a>
+<a class="sourceLine" id="cb349-10" data-line-number="10">## 0.125 0.125 0.125 0.125 0.125 0.375 0.125 0.125 0.125 0.125 0.125 0.375 </a>
+<a class="sourceLine" id="cb349-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb349-12" data-line-number="12">rolls<span class="op">$</span>prob1 &lt;-<span class="st"> </span>prob[rolls<span class="op">$</span>Var1]</a>
+<a class="sourceLine" id="cb349-13" data-line-number="13"><span class="kw">head</span>(rolls, <span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb349-14" data-line-number="14">## Var1 Var2 value prob1</a>
+<a class="sourceLine" id="cb349-15" data-line-number="15">##    1    1     2 0.125</a>
+<a class="sourceLine" id="cb349-16" data-line-number="16">##    2    1     3 0.125</a>
+<a class="sourceLine" id="cb349-17" data-line-number="17">##    3    1     4 0.125</a></code></pre></div>
+<p>Second, we can look up the probabilities of rolling the values in <code>Var2</code>:</p>
+<div class="sourceCode" id="cb350"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb350-1" data-line-number="1">rolls<span class="op">$</span>prob2 &lt;-<span class="st"> </span>prob[rolls<span class="op">$</span>Var2]</a>
+<a class="sourceLine" id="cb350-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb350-3" data-line-number="3"><span class="kw">head</span>(rolls, <span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb350-4" data-line-number="4">## Var1 Var2 value prob1 prob2</a>
+<a class="sourceLine" id="cb350-5" data-line-number="5">##    1    1     2 0.125 0.125</a>
+<a class="sourceLine" id="cb350-6" data-line-number="6">##    2    1     3 0.125 0.125</a>
+<a class="sourceLine" id="cb350-7" data-line-number="7">##    3    1     4 0.125 0.125</a></code></pre></div>
+<p>Third, we can calculate the probability of rolling each combination by multiplying <code>prob1</code> by <code>prob2</code>:</p>
+<div class="sourceCode" id="cb351"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb351-1" data-line-number="1">rolls<span class="op">$</span>prob &lt;-<span class="st"> </span>rolls<span class="op">$</span>prob1 <span class="op">*</span><span class="st"> </span>rolls<span class="op">$</span>prob2</a>
+<a class="sourceLine" id="cb351-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb351-3" data-line-number="3"><span class="kw">head</span>(rolls, <span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb351-4" data-line-number="4">## Var1 Var2 value prob1 prob2     prob</a>
+<a class="sourceLine" id="cb351-5" data-line-number="5">##    1    1     2 0.125 0.125 0.015625</a>
+<a class="sourceLine" id="cb351-6" data-line-number="6">##    2    1     3 0.125 0.125 0.015625</a>
+<a class="sourceLine" id="cb351-7" data-line-number="7">##    3    1     4 0.125 0.125 0.015625</a></code></pre></div>
+<p>It is easy to calculate the expected value now that we have each outcome, the value of each outcome, and the probability of each outcome. The expected value will be the summation of the dice values multiplied by the dice probabilities:</p>
+<div class="sourceCode" id="cb352"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb352-1" data-line-number="1"><span class="kw">sum</span>(rolls<span class="op">$</span>value <span class="op">*</span><span class="st"> </span>rolls<span class="op">$</span>prob)</a>
+<a class="sourceLine" id="cb352-2" data-line-number="2">## 8.25</a></code></pre></div>
+<p>So the expected value of rolling two loaded dice is 8.25. If you rolled a pair of loaded dice an infinite number of times, the average sum would be 8.25. (If you are curious, the expected value of rolling a pair of fair dice is 7, which explains why 7 plays such a large role in dice games like craps.)</p>
+<p>Now that you’ve warmed up, let’s use our method to calculate the expected value of the slot machine prize. We will follow the same steps we just took:</p>
+<ul>
+<li>We will list out every possible outcome of playing the machine. This will be a list of every combination of three slot symbols.</li>
+<li>We will calculate the probability of getting each combination when you play the machine.</li>
+<li>We will determine the prize that we would win for each combination.</li>
+</ul>
+<p>When we are finished, we will have a data set that looks like this:</p>
+<div class="sourceCode" id="cb353"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb353-1" data-line-number="1">## Var1 Var2 Var3 prob1 prob2 prob3     prob prize</a>
+<a class="sourceLine" id="cb353-2" data-line-number="2">##   DD   DD   DD  0.03  0.03  0.03 0.000027   800</a>
+<a class="sourceLine" id="cb353-3" data-line-number="3">##    7   DD   DD  0.03  0.03  0.03 0.000027     0</a>
+<a class="sourceLine" id="cb353-4" data-line-number="4">##  BBB   DD   DD  0.06  0.03  0.03 0.000054     0</a>
+<a class="sourceLine" id="cb353-5" data-line-number="5">## ... and so on.</a></code></pre></div>
+<p>The expected value will then be the sum of the prizes multiplied by their probability of occuring:</p>
+<p><span class="math display">\[
+E(\text{prize}) = \sum_{i = 1}^{n}\left( \text{prize}_{i} \cdot P(\text{prize}_{i}) \right)
+\]</span></p>
+<p>Ready to begin?</p>
+
+<div class="exercise">
+<span id="exr:unnamed-chunk-75" class="exercise"><strong>Exercise 9.1  (List the Combinations)  </strong></span>Use <code>expand.grid</code> to make a data frame that contains every possible combination of <em>three</em> symbols from the <code>wheel</code> vector:
+</div>
+
+<div class="sourceCode" id="cb354"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb354-1" data-line-number="1">wheel &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;DD&quot;</span>, <span class="st">&quot;7&quot;</span>, <span class="st">&quot;BBB&quot;</span>, <span class="st">&quot;BB&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;0&quot;</span>)</a></code></pre></div>
+<p>Be sure to add the argument <code>stringsAsFactors = FALSE</code> to your <code>expand.grid</code> call; otherwise, <code>expand.grid</code> will save the combinations as factors, an unfortunate choice that will disrupt the <code>score</code> function.</p>
+
+<div class="solution">
+ <span class="solution"><em>Solution. </em></span> To create a data frame of each combination of <em>three</em> symbols, you need to run <code>expand.grid</code> and give it <em>three</em> copies of <code>wheel</code>. The result will be a data frame with 343 rows, one for each unique combination of three slot symbols:
+</div>
+
+<div class="sourceCode" id="cb355"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb355-1" data-line-number="1">combos &lt;-<span class="st"> </span><span class="kw">expand.grid</span>(wheel, wheel, wheel, <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb355-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb355-3" data-line-number="3">combos</a>
+<a class="sourceLine" id="cb355-4" data-line-number="4">##   Var1 Var2 Var3</a>
+<a class="sourceLine" id="cb355-5" data-line-number="5">## 1   DD   DD   DD</a>
+<a class="sourceLine" id="cb355-6" data-line-number="6">## 2    7   DD   DD</a>
+<a class="sourceLine" id="cb355-7" data-line-number="7">## 3  BBB   DD   DD</a>
+<a class="sourceLine" id="cb355-8" data-line-number="8">## 4   BB   DD   DD</a>
+<a class="sourceLine" id="cb355-9" data-line-number="9">## 5    B   DD   DD</a>
+<a class="sourceLine" id="cb355-10" data-line-number="10">## 6    C   DD   DD</a>
+<a class="sourceLine" id="cb355-11" data-line-number="11">## ...</a>
+<a class="sourceLine" id="cb355-12" data-line-number="12">## 341    B    0    0</a>
+<a class="sourceLine" id="cb355-13" data-line-number="13">## 342    C    0    0</a>
+<a class="sourceLine" id="cb355-14" data-line-number="14">## 343    0    0    0</a></code></pre></div>
+<p>Now, let’s calculate the probability of getting each combination. You can use the probabilities contained in the <code>prob</code> argument of <code>get_symbols</code> to do this. These probabilities determine how frequently each symbol is chosen when your slot machine generates symbols. They were calculated after observing 345 plays of the Manitoba video lottery terminals. Zeroes have the largest chance of being selected (0.52) and cherries the least (0.01):</p>
+<div class="sourceCode" id="cb356"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb356-1" data-line-number="1">get_symbols &lt;-<span class="st"> </span><span class="cf">function</span>() {</a>
+<a class="sourceLine" id="cb356-2" data-line-number="2">  wheel &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;DD&quot;</span>, <span class="st">&quot;7&quot;</span>, <span class="st">&quot;BBB&quot;</span>, <span class="st">&quot;BB&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;0&quot;</span>)</a>
+<a class="sourceLine" id="cb356-3" data-line-number="3">  <span class="kw">sample</span>(wheel, <span class="dt">size =</span> <span class="dv">3</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>, </a>
+<a class="sourceLine" id="cb356-4" data-line-number="4">    <span class="dt">prob =</span> <span class="kw">c</span>(<span class="fl">0.03</span>, <span class="fl">0.03</span>, <span class="fl">0.06</span>, <span class="fl">0.1</span>, <span class="fl">0.25</span>, <span class="fl">0.01</span>, <span class="fl">0.52</span>)</a>
+<a class="sourceLine" id="cb356-5" data-line-number="5"><span class="er">}</span></a></code></pre></div>
+
+<div class="exercise">
+<span id="exr:unnamed-chunk-77" class="exercise"><strong>Exercise 9.2  (Make a Lookup Table)  </strong></span>Isolate the previous probabilities in a lookup table. What names will you use in your table?
+</div>
+
+
+<div class="solution">
+ <span class="solution"><em>Solution. </em></span> Your names should match the input that you want to look up. In this case, the input will be the character strings that appear in <code>Var1</code>, <code>Var2</code>, and <code>Var3</code>. So your lookup table should look like this:
+</div>
+
+<div class="sourceCode" id="cb357"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb357-1" data-line-number="1">prob &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;DD&quot;</span> =<span class="st"> </span><span class="fl">0.03</span>, <span class="st">&quot;7&quot;</span> =<span class="st"> </span><span class="fl">0.03</span>, <span class="st">&quot;BBB&quot;</span> =<span class="st"> </span><span class="fl">0.06</span>, </a>
+<a class="sourceLine" id="cb357-2" data-line-number="2">  <span class="st">&quot;BB&quot;</span> =<span class="st"> </span><span class="fl">0.1</span>, <span class="st">&quot;B&quot;</span> =<span class="st"> </span><span class="fl">0.25</span>, <span class="st">&quot;C&quot;</span> =<span class="st"> </span><span class="fl">0.01</span>, <span class="st">&quot;0&quot;</span> =<span class="st"> </span><span class="fl">0.52</span>)</a></code></pre></div>
+<p>Now let’s look up our probabilities.</p>
+
+<div class="exercise">
+<span id="exr:unnamed-chunk-79" class="exercise"><strong>Exercise 9.3  (Lookup the Probabilities)  </strong></span>Look up the probabilities of getting the values in <code>Var1</code>. Then add them to <code>combos</code> as a column named <code>prob1</code>. Then do the same for <code>Var2</code> (<code>prob2</code>) and <code>Var3</code> (<code>prob3</code>).
+</div>
+
+
+<div class="solution">
+ <span class="solution"><em>Solution. </em></span> Remember that you use R’s selection notation to look up values in a lookup table. The values that result will be keyed to the index that you use:
+</div>
+
+<div class="sourceCode" id="cb358"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb358-1" data-line-number="1">combos<span class="op">$</span>prob1 &lt;-<span class="st"> </span>prob[combos<span class="op">$</span>Var1]</a>
+<a class="sourceLine" id="cb358-2" data-line-number="2">combos<span class="op">$</span>prob2 &lt;-<span class="st"> </span>prob[combos<span class="op">$</span>Var2]</a>
+<a class="sourceLine" id="cb358-3" data-line-number="3">combos<span class="op">$</span>prob3 &lt;-<span class="st"> </span>prob[combos<span class="op">$</span>Var3]</a>
+<a class="sourceLine" id="cb358-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb358-5" data-line-number="5"><span class="kw">head</span>(combos, <span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb358-6" data-line-number="6">## Var1 Var2 Var3 prob1 prob2 prob3</a>
+<a class="sourceLine" id="cb358-7" data-line-number="7">##   DD   DD   DD  0.03  0.03  0.03</a>
+<a class="sourceLine" id="cb358-8" data-line-number="8">##    7   DD   DD  0.03  0.03  0.03</a>
+<a class="sourceLine" id="cb358-9" data-line-number="9">##  BBB   DD   DD  0.06  0.03  0.03</a></code></pre></div>
+<p>Now how should we calculate the total probability of each combination? Our three slot symbols are all chosen independently, which means that the same rule that governed our dice probabilities governs our symbol probabilities:</p>
+<p><span class="math display">\[
+P(A \&amp; B \&amp; C \&amp; ...) = P(A) \cdot P(B) \cdot P(C) \cdot ...
+\]</span></p>
+
+<div class="exercise">
+<p><span id="exr:unnamed-chunk-81" class="exercise"><strong>Exercise 9.4  (Calculate Probabilities for Each Combination)  </strong></span>Calculate the overall probabilities for each combination. Save them as a column named <code>prob</code> in <code>combos</code>, then check your work.</p>
+You can check that the math worked by summing the probabilities. The probabilities should add up to one, because one of the combinations <em>must</em> appear when you play the slot machine. In other words, a combination will appear, with probability of one.
+</div>
+
+<p>You can calculate the probabilities of every possible combination in one fell swoop with some element-wise execution:</p>
+<div class="sourceCode" id="cb359"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb359-1" data-line-number="1">combos<span class="op">$</span>prob &lt;-<span class="st"> </span>combos<span class="op">$</span>prob1 <span class="op">*</span><span class="st"> </span>combos<span class="op">$</span>prob2 <span class="op">*</span><span class="st"> </span>combos<span class="op">$</span>prob3</a>
+<a class="sourceLine" id="cb359-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb359-3" data-line-number="3"><span class="kw">head</span>(combos, <span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb359-4" data-line-number="4">## Var1 Var2 Var3 prob1 prob2 prob3     prob</a>
+<a class="sourceLine" id="cb359-5" data-line-number="5">##   DD   DD   DD  0.03  0.03  0.03 0.000027</a>
+<a class="sourceLine" id="cb359-6" data-line-number="6">##    7   DD   DD  0.03  0.03  0.03 0.000027</a>
+<a class="sourceLine" id="cb359-7" data-line-number="7">##  BBB   DD   DD  0.06  0.03  0.03 0.000054</a></code></pre></div>
+<p>The sum of the probabilities is one, which suggests that our math is correct:</p>
+<div class="sourceCode" id="cb360"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb360-1" data-line-number="1"><span class="kw">sum</span>(combos<span class="op">$</span>prob)</a>
+<a class="sourceLine" id="cb360-2" data-line-number="2">## 1</a></code></pre></div>
+<p>You only need to do one more thing before you can calculate the expected value: you must determine the prize for each combination in <code>combos</code>. You can calculate the prize with <code>score</code>. For example, we can calculate the prize for the first row of <code>combos</code> like this:</p>
+<div class="sourceCode" id="cb361"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb361-1" data-line-number="1">symbols &lt;-<span class="st"> </span><span class="kw">c</span>(combos[<span class="dv">1</span>, <span class="dv">1</span>], combos[<span class="dv">1</span>, <span class="dv">2</span>], combos[<span class="dv">1</span>, <span class="dv">3</span>])</a>
+<a class="sourceLine" id="cb361-2" data-line-number="2">## &quot;DD&quot; &quot;DD&quot; &quot;DD&quot;</a>
+<a class="sourceLine" id="cb361-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb361-4" data-line-number="4"><span class="kw">score</span>(symbols)</a>
+<a class="sourceLine" id="cb361-5" data-line-number="5">## 800</a></code></pre></div>
+<p>However there are 343 rows, which makes for tedious work if you plan to calculate the scores manually. It will be quicker to automate this task and have R do it for you, which you can do with a <code>for</code> loop.</p>
+</div>
+<div id="for-loops" class="section level2">
+<h2><span class="header-section-number">9.3</span> for Loops</h2>
+<p>A <code>for</code> loop repeats a chunk of code many times, once for each element in a set of input. <code>for</code> loops provide a way to tell R, “Do this for every value of that.” In R syntax, this looks like:</p>
+<div class="sourceCode" id="cb362"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb362-1" data-line-number="1"><span class="cf">for</span> (value <span class="cf">in</span> that) {</a>
+<a class="sourceLine" id="cb362-2" data-line-number="2">  this</a>
+<a class="sourceLine" id="cb362-3" data-line-number="3">}</a></code></pre></div>
+<p>The <code>that</code> object should be a set of objects (often a vector of numbers or character strings). The for loop will run the code in that appears between the braces once for each member of <code>that</code>. For example, the for loop below runs <code>print(&quot;one run&quot;)</code> once for each element in a vector of character strings:</p>
+<div class="sourceCode" id="cb363"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb363-1" data-line-number="1"><span class="cf">for</span> (value <span class="cf">in</span> <span class="kw">c</span>(<span class="st">&quot;My&quot;</span>, <span class="st">&quot;first&quot;</span>, <span class="st">&quot;for&quot;</span>, <span class="st">&quot;loop&quot;</span>)) {</a>
+<a class="sourceLine" id="cb363-2" data-line-number="2">  <span class="kw">print</span>(<span class="st">&quot;one run&quot;</span>)</a>
+<a class="sourceLine" id="cb363-3" data-line-number="3">}</a>
+<a class="sourceLine" id="cb363-4" data-line-number="4">## &quot;one run&quot;</a>
+<a class="sourceLine" id="cb363-5" data-line-number="5">## &quot;one run&quot;</a>
+<a class="sourceLine" id="cb363-6" data-line-number="6">## &quot;one run&quot;</a>
+<a class="sourceLine" id="cb363-7" data-line-number="7">## &quot;one run&quot;</a></code></pre></div>
+<p>The <code>value</code> symbol in a for loop acts like an argument in a function. The for loop will create an object named <code>value</code> and assign it a new value on each run of the loop. The code in your loop can access this value by calling the <code>value</code> object.</p>
+<p>What values will the for loop assign to <code>value</code>? It will use the elements in the set that you run the loop on. <code>for</code> starts with the first element and then assigns a different element to <code>value</code> on each run of the for loop, until all of the elements have been assigned to <code>value</code>. For example, the for loop below will run <code>print(value)</code> four times and will print out one element of <code>c(&quot;My&quot;, &quot;second&quot;, &quot;for&quot;, &quot;loop&quot;)</code> each time:</p>
+<div class="sourceCode" id="cb364"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb364-1" data-line-number="1"><span class="cf">for</span> (value <span class="cf">in</span> <span class="kw">c</span>(<span class="st">&quot;My&quot;</span>, <span class="st">&quot;second&quot;</span>, <span class="st">&quot;for&quot;</span>, <span class="st">&quot;loop&quot;</span>)) {</a>
+<a class="sourceLine" id="cb364-2" data-line-number="2">  <span class="kw">print</span>(value)</a>
+<a class="sourceLine" id="cb364-3" data-line-number="3">}</a>
+<a class="sourceLine" id="cb364-4" data-line-number="4">## &quot;My&quot;</a>
+<a class="sourceLine" id="cb364-5" data-line-number="5">## &quot;second&quot;</a>
+<a class="sourceLine" id="cb364-6" data-line-number="6">## &quot;for&quot;</a>
+<a class="sourceLine" id="cb364-7" data-line-number="7">## &quot;loop&quot;</a></code></pre></div>
+<p>On the first run, the for loop substituted <code>&quot;My&quot;</code> for <code>value</code> in <code>print(value)</code>. On the second run it substituted <code>&quot;second&quot;</code>, and so on until <code>for</code> had run <code>print(value)</code> once with every element in the set:</p>
+<p>If you look at <code>value</code> after the loop runs, you will see that it still contains the value of the last element in the set:</p>
+<div class="sourceCode" id="cb365"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb365-1" data-line-number="1">value</a>
+<a class="sourceLine" id="cb365-2" data-line-number="2">## &quot;loop&quot;</a></code></pre></div>
+<p>I’ve been using the symbol <code>value</code> in my for loops, but there is nothing special about it. You can use any symbol you like in your loop to do the same thing as long as the symbol appears before <code>in</code> in the parentheses that follow <code>for</code>. For example, you could rewrite the previous loop with any of the following:</p>
+<div class="sourceCode" id="cb366"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb366-1" data-line-number="1"><span class="cf">for</span> (word <span class="cf">in</span> <span class="kw">c</span>(<span class="st">&quot;My&quot;</span>, <span class="st">&quot;second&quot;</span>, <span class="st">&quot;for&quot;</span>, <span class="st">&quot;loop&quot;</span>)) {</a>
+<a class="sourceLine" id="cb366-2" data-line-number="2">  <span class="kw">print</span>(word)</a>
+<a class="sourceLine" id="cb366-3" data-line-number="3">}</a>
+<a class="sourceLine" id="cb366-4" data-line-number="4"><span class="cf">for</span> (string <span class="cf">in</span> <span class="kw">c</span>(<span class="st">&quot;My&quot;</span>, <span class="st">&quot;second&quot;</span>, <span class="st">&quot;for&quot;</span>, <span class="st">&quot;loop&quot;</span>)) {</a>
+<a class="sourceLine" id="cb366-5" data-line-number="5">  <span class="kw">print</span>(string)</a>
+<a class="sourceLine" id="cb366-6" data-line-number="6">}</a>
+<a class="sourceLine" id="cb366-7" data-line-number="7"><span class="cf">for</span> (i <span class="cf">in</span> <span class="kw">c</span>(<span class="st">&quot;My&quot;</span>, <span class="st">&quot;second&quot;</span>, <span class="st">&quot;for&quot;</span>, <span class="st">&quot;loop&quot;</span>)) {</a>
+<a class="sourceLine" id="cb366-8" data-line-number="8">  <span class="kw">print</span>(i)</a>
+<a class="sourceLine" id="cb366-9" data-line-number="9">}</a></code></pre></div>
+
+<div class="rmdwarning">
+<p><strong>Choose your symbols carefully</strong></p>
+R will run your loop in whichever environment you call it from. This is bad news if your loop uses object names that already exist in the environment. Your loop will overwrite the existing objects with the objects that it creates. This applies to the value symbol as well.
+</div>
+
+
+<div class="rmdtip">
+<p><strong>For loops run on sets</strong></p>
+<p>In many programming languages, <code>for</code> loops are designed to work with integers, not sets. You give the loop a starting value and an ending value, as well as an increment to advance the value by between loops. The <code>for</code> loop then runs until the loop value exceeds the ending value.</p>
+You can recreate this effect in R by having a <code>for</code> loop execute on a set of integers, but don’t lose track of the fact that R’s <code>for</code> loops execute on members of a set, not sequences of integers.
+</div>
+
+<p><code>for</code> loops are very useful in programming because they help you connect a piece of code with each element in a set. For example, we could use a <code>for</code> loop to run <code>score</code> once for each row in <code>combos</code>. However, R’s <code>for</code> loops have a shortcoming that you’ll want to know about before you start using them: <code>for</code> loops do not return output.</p>
+<p><code>for</code> loops are like Las Vegas: what happens in a <code>for</code> loop stays in a <code>for</code> loop. If you want to use the products of a <code>for</code> loop, you must write the <code>for</code> loop so that it saves its own output as it goes.</p>
+<p>Our previous examples appeared to return output, but this was misleading. The examples worked because we called <code>print</code>, which always prints its arguments in the console (even if it is called from a function, a <code>for</code> loop, or anything else). Our <code>for</code> loops won’t return anything if you remove the <code>print</code> call:</p>
+<div class="sourceCode" id="cb367"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb367-1" data-line-number="1"><span class="cf">for</span> (value <span class="cf">in</span> <span class="kw">c</span>(<span class="st">&quot;My&quot;</span>, <span class="st">&quot;third&quot;</span>, <span class="st">&quot;for&quot;</span>, <span class="st">&quot;loop&quot;</span>)) {</a>
+<a class="sourceLine" id="cb367-2" data-line-number="2">  value</a>
+<a class="sourceLine" id="cb367-3" data-line-number="3">}</a>
+<a class="sourceLine" id="cb367-4" data-line-number="4">##</a></code></pre></div>
+<p>To save output from a <code>for</code> loop, you must write the loop so that it saves its own output as it runs. You can do this by creating an empty vector or list before you run the <code>for</code> loop. Then use the <code>for</code> loop to fill up the vector or list. When the <code>for</code> loop is finished, you’ll be able to access the vector or list, which will now have all of your results.</p>
+<p>Let’s see this in action. The following code creates an empty vector of length 4:</p>
+<div class="sourceCode" id="cb368"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb368-1" data-line-number="1">chars &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="dt">length =</span> <span class="dv">4</span>)</a></code></pre></div>
+<p>The next loop will fill it with strings:</p>
+<div class="sourceCode" id="cb369"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb369-1" data-line-number="1">words &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;My&quot;</span>, <span class="st">&quot;fourth&quot;</span>, <span class="st">&quot;for&quot;</span>, <span class="st">&quot;loop&quot;</span>)</a>
+<a class="sourceLine" id="cb369-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb369-3" data-line-number="3"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>) {</a>
+<a class="sourceLine" id="cb369-4" data-line-number="4">  chars[i] &lt;-<span class="st"> </span>words[i]</a>
+<a class="sourceLine" id="cb369-5" data-line-number="5">}</a>
+<a class="sourceLine" id="cb369-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb369-7" data-line-number="7">chars</a>
+<a class="sourceLine" id="cb369-8" data-line-number="8">## &quot;My&quot;    &quot;fourth&quot; &quot;for&quot;   &quot;loop&quot;</a></code></pre></div>
+<p>This approach will usually require you to change the sets that you execute your <code>for</code> loop on. Instead of executing on a set of objects, execute on a set of integers that you can use to index both your object and your storage vector. This approach is very common in R. You’ll find in practice that you use <code>for</code> loops not so much to run code, but to fill up vectors and lists with the results of code.</p>
+<p>Let’s use a <code>for</code> loop to calculate the prize for each row in <code>combos</code>. To begin, create a new column in <code>combos</code> to store the results of the <code>for</code> loop:</p>
+<div class="sourceCode" id="cb370"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb370-1" data-line-number="1">combos<span class="op">$</span>prize &lt;-<span class="st"> </span><span class="ot">NA</span></a>
+<a class="sourceLine" id="cb370-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb370-3" data-line-number="3"><span class="kw">head</span>(combos, <span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb370-4" data-line-number="4">##  Var1 Var2 Var3 prob1 prob2 prob3     prob prize</a>
+<a class="sourceLine" id="cb370-5" data-line-number="5">##    DD   DD   DD  0.03  0.03  0.03 0.000027    NA</a>
+<a class="sourceLine" id="cb370-6" data-line-number="6">##     7   DD   DD  0.03  0.03  0.03 0.000027    NA</a>
+<a class="sourceLine" id="cb370-7" data-line-number="7">##   BBB   DD   DD  0.06  0.03  0.03 0.000054    NA</a></code></pre></div>
+<p>The code creates a new column named prize and fills it with <code>NA</code>s. R uses its recycling rules to populate every value of the column with <code>NA</code>.</p>
+
+<div class="exercise">
+<span id="exr:unnamed-chunk-84" class="exercise"><strong>Exercise 9.5  (Build a Loop)  </strong></span>Construct a <code>for</code> loop that will run <code>score</code> on all 343 rows of <code>combos</code>. The loop should run <code>score</code> on the first three entries of the _i_th row of <code>combos</code> and should store the results in the _i_th entry of <code>combos$prize</code>.
+</div>
+
+
+<div class="solution">
+ <span class="solution"><em>Solution. </em></span> You can score the rows in <code>combos</code> with:
+</div>
+
+<div class="sourceCode" id="cb371"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb371-1" data-line-number="1"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(combos)) {</a>
+<a class="sourceLine" id="cb371-2" data-line-number="2">  symbols &lt;-<span class="st"> </span><span class="kw">c</span>(combos[i, <span class="dv">1</span>], combos[i, <span class="dv">2</span>], combos[i, <span class="dv">3</span>])</a>
+<a class="sourceLine" id="cb371-3" data-line-number="3">  combos<span class="op">$</span>prize[i] &lt;-<span class="st"> </span><span class="kw">score</span>(symbols)</a>
+<a class="sourceLine" id="cb371-4" data-line-number="4">}</a></code></pre></div>
+<p>After you run the for loop, <code>combos$prize</code> will contain the correct prize for each row. This exercise also tests the <code>score</code> function; <code>score</code> appears to work correctly for every possible slot combination:</p>
+<div class="sourceCode" id="cb372"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb372-1" data-line-number="1"><span class="kw">head</span>(combos, <span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb372-2" data-line-number="2">## Var1 Var2 Var3 prob1 prob2 prob3     prob prize</a>
+<a class="sourceLine" id="cb372-3" data-line-number="3">##   DD   DD   DD  0.03  0.03  0.03 0.000027   800</a>
+<a class="sourceLine" id="cb372-4" data-line-number="4">##    7   DD   DD  0.03  0.03  0.03 0.000027     0</a>
+<a class="sourceLine" id="cb372-5" data-line-number="5">##  BBB   DD   DD  0.06  0.03  0.03 0.000054     0</a></code></pre></div>
+<p>We’re now ready to calculate the expected value of the prize. The expected value is the sum of <code>combos$prize</code> weighted by <code>combos$prob</code>. This is also the payout rate of the slot machine:</p>
+<div class="sourceCode" id="cb373"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb373-1" data-line-number="1"><span class="kw">sum</span>(combos<span class="op">$</span>prize <span class="op">*</span><span class="st"> </span>combos<span class="op">$</span>prob)</a>
+<a class="sourceLine" id="cb373-2" data-line-number="2">## 0.538014</a></code></pre></div>
+<p>Uh oh. The expected prize is about 0.54, which means our slot machine only pays 54 cents on the dollar over the long run. Does this mean that the manufacturer of the Manitoba slot machines <em>was</em> lying?</p>
+<p>No, because we ignored an important feature of the slot machine when we wrote <code>score</code>: a diamond is wild. You can treat a <code>DD</code> as any other symbol if it increases your prize, with one exception. You cannot make a <code>DD</code> a <code>C</code> unless you already have another <code>C</code> in your symbols (it’d be too easy if every <code>DD</code> automatically earned you $2).</p>
+<p>The best thing about <code>DD</code>s is that their effects are cumulative. For example, consider the combination <code>B</code>, <code>DD</code>, <code>B</code>. Not only does the <code>DD</code> count as a <code>B</code>, which would earn a prize of $10; the <code>DD</code> also doubles the prize to $20.</p>
+<p>Adding this behavior to our code is a little tougher than what we have done so far, but it involves all of the same principles. You can decide that your slot machine doesn’t use wilds and keep the code that we have. In that case, your slot machine will have a payout rate of about 54 percent. Or, you could rewrite your code to use wilds. If you do, you will find that your slot machine has a payout rate of 93 percent, one percent higher than the manufacturer’s claim. You can calculate this rate with the same method that we used in this section.</p>
+
+<div class="exercise">
+<p><span id="exr:unnamed-chunk-86" class="exercise"><strong>Exercise 9.6  (Challenge)  </strong></span>There are many ways to modify <code>score</code> that would count <code>DD</code>s as wild. If you would like to test your skill as an R programmer, try to write your own version of <code>score</code> that correctly handles diamonds.</p>
+If you would like a more modest challenge, study the following <code>score</code> code. It accounts for wild diamonds in a way that I find elegant and succinct. See if you can understand each step in the code and how it achieves its result.
+</div>
+
+
+<div class="solution">
+ <span class="solution"><em>Solution. </em></span> Here is a version of score that handles wild diamonds:
+</div>
+
+<div class="sourceCode" id="cb374"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb374-1" data-line-number="1">score &lt;-<span class="st"> </span><span class="cf">function</span>(symbols) {</a>
+<a class="sourceLine" id="cb374-2" data-line-number="2">  </a>
+<a class="sourceLine" id="cb374-3" data-line-number="3">  diamonds &lt;-<span class="st"> </span><span class="kw">sum</span>(symbols <span class="op">==</span><span class="st"> &quot;DD&quot;</span>)</a>
+<a class="sourceLine" id="cb374-4" data-line-number="4">  cherries &lt;-<span class="st"> </span><span class="kw">sum</span>(symbols <span class="op">==</span><span class="st"> &quot;C&quot;</span>)</a>
+<a class="sourceLine" id="cb374-5" data-line-number="5">  </a>
+<a class="sourceLine" id="cb374-6" data-line-number="6">  <span class="co"># identify case</span></a>
+<a class="sourceLine" id="cb374-7" data-line-number="7">  <span class="co"># since diamonds are wild, only nondiamonds </span></a>
+<a class="sourceLine" id="cb374-8" data-line-number="8">  <span class="co"># matter for three of a kind and all bars</span></a>
+<a class="sourceLine" id="cb374-9" data-line-number="9">  slots &lt;-<span class="st"> </span>symbols[symbols <span class="op">!=</span><span class="st"> &quot;DD&quot;</span>]</a>
+<a class="sourceLine" id="cb374-10" data-line-number="10">  same &lt;-<span class="st"> </span><span class="kw">length</span>(<span class="kw">unique</span>(slots)) <span class="op">==</span><span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb374-11" data-line-number="11">  bars &lt;-<span class="st"> </span>slots <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;B&quot;</span>, <span class="st">&quot;BB&quot;</span>, <span class="st">&quot;BBB&quot;</span>)</a>
+<a class="sourceLine" id="cb374-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb374-13" data-line-number="13">  <span class="co"># assign prize</span></a>
+<a class="sourceLine" id="cb374-14" data-line-number="14">  <span class="cf">if</span> (diamonds <span class="op">==</span><span class="st"> </span><span class="dv">3</span>) {</a>
+<a class="sourceLine" id="cb374-15" data-line-number="15">    prize &lt;-<span class="st"> </span><span class="dv">100</span></a>
+<a class="sourceLine" id="cb374-16" data-line-number="16">  } <span class="cf">else</span> <span class="cf">if</span> (same) {</a>
+<a class="sourceLine" id="cb374-17" data-line-number="17">    payouts &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;7&quot;</span> =<span class="st"> </span><span class="dv">80</span>, <span class="st">&quot;BBB&quot;</span> =<span class="st"> </span><span class="dv">40</span>, <span class="st">&quot;BB&quot;</span> =<span class="st"> </span><span class="dv">25</span>,</a>
+<a class="sourceLine" id="cb374-18" data-line-number="18">      <span class="st">&quot;B&quot;</span> =<span class="st"> </span><span class="dv">10</span>, <span class="st">&quot;C&quot;</span> =<span class="st"> </span><span class="dv">10</span>, <span class="st">&quot;0&quot;</span> =<span class="st"> </span><span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb374-19" data-line-number="19">    prize &lt;-<span class="st"> </span><span class="kw">unname</span>(payouts[slots[<span class="dv">1</span>]])</a>
+<a class="sourceLine" id="cb374-20" data-line-number="20">  } <span class="cf">else</span> <span class="cf">if</span> (<span class="kw">all</span>(bars)) {</a>
+<a class="sourceLine" id="cb374-21" data-line-number="21">    prize &lt;-<span class="st"> </span><span class="dv">5</span></a>
+<a class="sourceLine" id="cb374-22" data-line-number="22">  } <span class="cf">else</span> <span class="cf">if</span> (cherries <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) {</a>
+<a class="sourceLine" id="cb374-23" data-line-number="23">    <span class="co"># diamonds count as cherries</span></a>
+<a class="sourceLine" id="cb374-24" data-line-number="24">    <span class="co"># so long as there is one real cherry</span></a>
+<a class="sourceLine" id="cb374-25" data-line-number="25">    prize &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">5</span>)[cherries <span class="op">+</span><span class="st"> </span>diamonds <span class="op">+</span><span class="st"> </span><span class="dv">1</span>]</a>
+<a class="sourceLine" id="cb374-26" data-line-number="26">  } <span class="cf">else</span> {</a>
+<a class="sourceLine" id="cb374-27" data-line-number="27">    prize &lt;-<span class="st"> </span><span class="dv">0</span></a>
+<a class="sourceLine" id="cb374-28" data-line-number="28">  }</a>
+<a class="sourceLine" id="cb374-29" data-line-number="29">  </a>
+<a class="sourceLine" id="cb374-30" data-line-number="30">  <span class="co"># double for each diamond</span></a>
+<a class="sourceLine" id="cb374-31" data-line-number="31">  prize <span class="op">*</span><span class="st"> </span><span class="dv">2</span><span class="op">^</span>diamonds</a>
+<a class="sourceLine" id="cb374-32" data-line-number="32">}</a></code></pre></div>
+
+<div class="exercise">
+<span id="exr:unnamed-chunk-88" class="exercise"><strong>Exercise 9.7  (Calculate the Expected Value)  </strong></span>Calculate the expected value of the slot machine when it uses the new <code>score</code> function. You can use the existing <code>combos</code> data frame, but you will need to build a <code>for</code> loop to recalculate <code>combos$prize</code>.
+</div>
+
+<p>To update the expected value, just update <code>combos$prize</code>:</p>
+<div class="sourceCode" id="cb375"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb375-1" data-line-number="1"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(combos)) {</a>
+<a class="sourceLine" id="cb375-2" data-line-number="2">  symbols &lt;-<span class="st"> </span><span class="kw">c</span>(combos[i, <span class="dv">1</span>], combos[i, <span class="dv">2</span>], combos[i, <span class="dv">3</span>])</a>
+<a class="sourceLine" id="cb375-3" data-line-number="3">  combos<span class="op">$</span>prize[i] &lt;-<span class="st"> </span><span class="kw">score</span>(symbols)</a>
+<a class="sourceLine" id="cb375-4" data-line-number="4">}</a></code></pre></div>
+<p>Then recompute the expected value:</p>
+<div class="sourceCode" id="cb376"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb376-1" data-line-number="1"><span class="kw">sum</span>(combos<span class="op">$</span>prize <span class="op">*</span><span class="st"> </span>combos<span class="op">$</span>prob)</a>
+<a class="sourceLine" id="cb376-2" data-line-number="2">## 0.934356</a></code></pre></div>
+<p>This result vindicates the manufacturer’s claim. If anything, the slot machines seem more generous than the manufacturer stated.</p>
+</div>
+<div id="while-loops" class="section level2">
+<h2><span class="header-section-number">9.4</span> while Loops</h2>
+<p>R has two companions to the <code>for</code> loop: the <code>while</code> loop and the <code>repeat</code> loop. A <code>while</code> loop reruns a chunk <em>while</em> a certain condition remains <code>TRUE</code>. To create a <code>while</code> loop, follow <code>while</code> by a condition and a chunk of code, like this:</p>
+<div class="sourceCode" id="cb377"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb377-1" data-line-number="1"><span class="cf">while</span> (condition) {</a>
+<a class="sourceLine" id="cb377-2" data-line-number="2">  code</a>
+<a class="sourceLine" id="cb377-3" data-line-number="3">}</a></code></pre></div>
+<p><code>while</code> will rerun <code>condition</code>, which should be a logical test, at the start of each loop. If <code>condition</code> evaluates to <code>TRUE</code>, <code>while</code> will run the code between its braces. If <code>condition</code> evaluates to <code>FALSE</code>, <code>while</code> will finish the loop.</p>
+<p>Why might <code>condition</code> change from <code>TRUE</code> to <code>FALSE</code>? Presumably because the code inside your loop has changed whether the condition is still <code>TRUE</code>. If the code has no relationship to the condition, a <code>while</code> loop will run until you stop it. So be careful. You can stop a <code>while</code> loop by hitting Escape or by clicking on the stop-sign icon at the top of the RStudio console pane. The icon will appear once the loop begins to run.</p>
+<p>Like <code>for</code> loops, <code>while</code> loops do not return a result, so you must think about what you want the loop to return and save it to an object during the loop.</p>
+<p>You can use <code>while</code> loops to do things that take a varying number of iterations, like calculating how long it takes to go broke playing slots (as follows). However, in practice, <code>while</code> loops are much less common than <code>for</code> loops in R:</p>
+<div class="sourceCode" id="cb378"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb378-1" data-line-number="1">plays_till_broke &lt;-<span class="st"> </span><span class="cf">function</span>(start_with) {</a>
+<a class="sourceLine" id="cb378-2" data-line-number="2">  cash &lt;-<span class="st"> </span>start_with</a>
+<a class="sourceLine" id="cb378-3" data-line-number="3">  n &lt;-<span class="st"> </span><span class="dv">0</span></a>
+<a class="sourceLine" id="cb378-4" data-line-number="4">  <span class="cf">while</span> (cash <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) {</a>
+<a class="sourceLine" id="cb378-5" data-line-number="5">    cash &lt;-<span class="st"> </span>cash <span class="op">-</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="kw">play</span>()</a>
+<a class="sourceLine" id="cb378-6" data-line-number="6">    n &lt;-<span class="st"> </span>n <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb378-7" data-line-number="7">  }</a>
+<a class="sourceLine" id="cb378-8" data-line-number="8">  n</a>
+<a class="sourceLine" id="cb378-9" data-line-number="9">}</a>
+<a class="sourceLine" id="cb378-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb378-11" data-line-number="11"><span class="kw">plays_till_broke</span>(<span class="dv">100</span>)</a>
+<a class="sourceLine" id="cb378-12" data-line-number="12">## 260</a></code></pre></div>
+</div>
+<div id="repeat-loops" class="section level2">
+<h2><span class="header-section-number">9.5</span> repeat Loops</h2>
+<p><code>repeat</code> loops are even more basic than <code>while</code> loops. They will repeat a chunk of code until you tell them to stop (by hitting Escape) or until they encounter the command <code>break</code>, which will stop the loop.</p>
+<p>You can use a <code>repeat</code> loop to recreate <code>plays_till_broke</code>, my function that simulates how long it takes to lose money while playing slots:</p>
+<div class="sourceCode" id="cb379"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb379-1" data-line-number="1">plays_till_broke &lt;-<span class="st"> </span><span class="cf">function</span>(start_with) {</a>
+<a class="sourceLine" id="cb379-2" data-line-number="2">  cash &lt;-<span class="st"> </span>start_with</a>
+<a class="sourceLine" id="cb379-3" data-line-number="3">  n &lt;-<span class="st"> </span><span class="dv">0</span></a>
+<a class="sourceLine" id="cb379-4" data-line-number="4">  <span class="cf">repeat</span> {</a>
+<a class="sourceLine" id="cb379-5" data-line-number="5">    cash &lt;-<span class="st"> </span>cash <span class="op">-</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="kw">play</span>()</a>
+<a class="sourceLine" id="cb379-6" data-line-number="6">    n &lt;-<span class="st"> </span>n <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb379-7" data-line-number="7">    <span class="cf">if</span> (cash <span class="op">&lt;=</span><span class="st"> </span><span class="dv">0</span>) {</a>
+<a class="sourceLine" id="cb379-8" data-line-number="8">      <span class="cf">break</span></a>
+<a class="sourceLine" id="cb379-9" data-line-number="9">    }</a>
+<a class="sourceLine" id="cb379-10" data-line-number="10">  }</a>
+<a class="sourceLine" id="cb379-11" data-line-number="11">  n</a>
+<a class="sourceLine" id="cb379-12" data-line-number="12">}</a>
+<a class="sourceLine" id="cb379-13" data-line-number="13"></a>
+<a class="sourceLine" id="cb379-14" data-line-number="14"><span class="kw">plays_till_broke</span>(<span class="dv">100</span>)</a>
+<a class="sourceLine" id="cb379-15" data-line-number="15">## 237</a></code></pre></div>
+</div>
+<div id="summary-8" class="section level2">
+<h2><span class="header-section-number">9.6</span> Summary</h2>
+<p>You can repeat tasks in R with <code>for</code>, <code>while</code>, and <code>repeat</code> loops. To use <code>for</code>, give it a chunk of code to run and a set of objects to loop through. <code>for</code> will run the code chunk once for each object. If you wish to save the output of your loop, you can assign it to an object that exists outside of the loop.</p>
+<p>Repetition plays an important role in data science. It is the basis for simulation, as well as for estimates of variance and probability. Loops are not the only way to create repetition in R (consider <code>replicate</code> for example), but they are one of the most popular ways.</p>
+<p>Unfortunately, loops in R can sometimes be slower than loops in other languages. As a result, R’s loops get a bad rap. This reputation is not entirely deserved, but it does highlight an important issue. Speed is essential to data analysis. When your code runs fast, you can work with bigger data and do more to it before you run out of time or computational power. <a href="speed.html#speed">Speed</a> will teach you how to write fast <code>for</code> loops and fast code in general with R. There, you will learn to write vectorized code, a style of lightning-fast code that takes advantage of all of R’s strengths.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="s3.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="speed.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": false,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio-education/hopr/edit/master/loops.rmd",
+"text": "Edit"
+},
+"download": null,
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
