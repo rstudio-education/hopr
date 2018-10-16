@@ -167,7 +167,7 @@ deck[1, ]
 ## king spades    13
 ```
 
-### Logical Values {#logicals}
+### Logical Values {#logic}
 
 If you supply a vector of `TRUE`s and `FALSE`s as your index, R will match each `TRUE` and `FALSE` to a row in your data frame (or a column depending on where you place the index). R will then return each row that corresponds to a `TRUE`, \@ref(fig:logicals). 
 

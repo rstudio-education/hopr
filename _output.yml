@@ -9,6 +9,3 @@ bookdown::gitbook:
       text: "Edit"
     sharing: no
   css: hopr.css
-
-bookdown::pdf_book:
-  latex_engine: "xelatex"
