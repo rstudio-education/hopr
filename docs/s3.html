@@ -7,12 +7,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Hands-On Programming with R</title>
   <meta name="description" content="This book will teach you how to program in R, with hands-on examples. I wrote it for non-programmers to provide a friendly introduction to the R language. You’ll learn how to load data, assemble and disassemble data objects, navigate R’s environment system, write your own functions, and use all of R’s programming tools. Throughout the book, you’ll use your newfound skills to solve practical data science problems.">
-  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
   <meta property="og:title" content="Hands-On Programming with R" />
   <meta property="og:type" content="book" />
-  <meta property="og:url" content="http://r4ds.had.co.nz/" />
-  <meta property="og:image" content="http://r4ds.had.co.nz/cover.png" />
+  <meta property="og:url" content="https://rstudio-education.github.io/hopr/" />
+  <meta property="og:image" content="https://rstudio-education.github.io/hopr/cover.png" />
   <meta property="og:description" content="This book will teach you how to program in R, with hands-on examples. I wrote it for non-programmers to provide a friendly introduction to the R language. You’ll learn how to load data, assemble and disassemble data objects, navigate R’s environment system, write your own functions, and use all of R’s programming tools. Throughout the book, you’ll use your newfound skills to solve practical data science problems." />
   <meta name="github-repo" content="rstudio-education/hopr" />
 
@@ -20,7 +20,7 @@
   <meta name="twitter:title" content="Hands-On Programming with R" />
   <meta name="twitter:site" content="@statgarrett" />
   <meta name="twitter:description" content="This book will teach you how to program in R, with hands-on examples. I wrote it for non-programmers to provide a friendly introduction to the R language. You’ll learn how to load data, assemble and disassemble data objects, navigate R’s environment system, write your own functions, and use all of R’s programming tools. Throughout the book, you’ll use your newfound skills to solve practical data science problems." />
-  <meta name="twitter:image" content="http://r4ds.had.co.nz/cover.png" />
+  <meta name="twitter:image" content="https://rstudio-education.github.io/hopr/cover.png" />
 
 <meta name="author" content="Garrett Grolemund">
 
@@ -35,6 +35,7 @@
 <link rel="next" href="loops.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
@@ -193,7 +194,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.1.2" data-path="r-notation.html"><a href="r-notation.html#negative-integers"><i class="fa fa-check"></i><b>4.1.2</b> Negative Integers</a></li>
 <li class="chapter" data-level="4.1.3" data-path="r-notation.html"><a href="r-notation.html#zero"><i class="fa fa-check"></i><b>4.1.3</b> Zero</a></li>
 <li class="chapter" data-level="4.1.4" data-path="r-notation.html"><a href="r-notation.html#blank-spaces"><i class="fa fa-check"></i><b>4.1.4</b> Blank Spaces</a></li>
-<li class="chapter" data-level="4.1.5" data-path="r-objects.html"><a href="r-objects.html#logicals"><i class="fa fa-check"></i><b>4.1.5</b> Logical Values</a></li>
+<li class="chapter" data-level="4.1.5" data-path="r-notation.html"><a href="r-notation.html#logic"><i class="fa fa-check"></i><b>4.1.5</b> Logical Values</a></li>
 <li class="chapter" data-level="4.1.6" data-path="r-notation.html"><a href="r-notation.html#names-1"><i class="fa fa-check"></i><b>4.1.6</b> Names</a></li>
 </ul></li>
 <li class="chapter" data-level="4.2" data-path="r-notation.html"><a href="r-notation.html#deal-a-card"><i class="fa fa-check"></i><b>4.2</b> Deal a Card</a></li>
@@ -332,31 +333,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="s3" class="section level1">
 <h1><span class="header-section-number">8</span> S3</h1>
 <p>You may have noticed that your slot machine results do not look the way I promised they would. I suggested that the slot machine would display its results like this:</p>
-<div class="sourceCode" id="cb300"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb300-1" data-line-number="1"><span class="kw">play</span>()</a>
-<a class="sourceLine" id="cb300-2" data-line-number="2">## 0 0 DD</a>
-<a class="sourceLine" id="cb300-3" data-line-number="3">## $0</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">play</span>()
+## 0 0 DD
+## $0</code></pre>
 <p>But the current machine displays its results in a less pretty format:</p>
-<div class="sourceCode" id="cb301"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb301-1" data-line-number="1"><span class="kw">play</span>()</a>
-<a class="sourceLine" id="cb301-2" data-line-number="2">## &quot;0&quot;  &quot;0&quot; &quot;DD&quot; </a>
-<a class="sourceLine" id="cb301-3" data-line-number="3">## 0</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">play</span>()
+## &quot;0&quot;  &quot;0&quot; &quot;DD&quot; 
+## 0</code></pre>
 <p>Moreover, the slot machine uses a hack to display symbols (we call <code>print</code> from within <code>play</code>). As a result, the symbols do not follow your prize output if you save it:</p>
-<div class="sourceCode" id="cb302"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb302-1" data-line-number="1">one_play &lt;-<span class="st"> </span><span class="kw">play</span>()</a>
-<a class="sourceLine" id="cb302-2" data-line-number="2">## &quot;B&quot; &quot;0&quot; &quot;B&quot; </a>
-<a class="sourceLine" id="cb302-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb302-4" data-line-number="4">one_play</a>
-<a class="sourceLine" id="cb302-5" data-line-number="5">## 0</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">one_play &lt;-<span class="st"> </span><span class="kw">play</span>()
+## &quot;B&quot; &quot;0&quot; &quot;B&quot; 
+
+one_play
+## 0</code></pre>
 <p>You can fix both of these problems with R’s S3 system.</p>
 <div id="the-s3-system" class="section level2">
 <h2><span class="header-section-number">8.1</span> The S3 System</h2>
 <p>S3 refers to a class system built into R. The system governs how R handles objects of different classes. Certain R functions will look up an object’s S3 class, and then behave differently in response.</p>
 <p>The <code>print</code> function is like this. When you print a numeric vector, <code>print</code> will display a number:</p>
-<div class="sourceCode" id="cb303"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb303-1" data-line-number="1">num &lt;-<span class="st"> </span><span class="dv">1000000000</span></a>
-<a class="sourceLine" id="cb303-2" data-line-number="2"><span class="kw">print</span>(num)</a>
-<a class="sourceLine" id="cb303-3" data-line-number="3">## 1000000000</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">num &lt;-<span class="st"> </span><span class="dv">1000000000</span>
+<span class="kw">print</span>(num)
+## 1000000000</code></pre>
 <p>But if you give that number the S3 class <code>POSIXct</code> followed by <code>POSIXt</code>, <code>print</code> will display a time:</p>
-<div class="sourceCode" id="cb304"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb304-1" data-line-number="1"><span class="kw">class</span>(num) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;POSIXct&quot;</span>, <span class="st">&quot;POSIXt&quot;</span>)</a>
-<a class="sourceLine" id="cb304-2" data-line-number="2"><span class="kw">print</span>(num)</a>
-<a class="sourceLine" id="cb304-3" data-line-number="3">## &quot;2001-09-08 19:46:40 CST&quot;</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(num) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;POSIXct&quot;</span>, <span class="st">&quot;POSIXt&quot;</span>)
+<span class="kw">print</span>(num)
+## &quot;2001-09-08 19:46:40 CST&quot;</code></pre>
 <p>If you use objects with classes—and you do—you will run into R’s S3 system. S3 behavior can seem odd at first, but is easy to predict once you are familiar with it.</p>
 <p>R’s S3 system is built around three components: attributes (especially the <code>class</code> attribute), generic functions, and methods.</p>
 </div>
@@ -364,269 +365,269 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">8.2</span> Attributes</h2>
 <p>In <a href="r-objects.html#attributes">Attributes</a>, you learned that many R objects come with attributes, pieces of extra information that are given a name and appended to the object. Attributes do not affect the values of the object, but stick to the object as a type of metadata that R can use to handle the object. For example, a data frame stores its row and column names as attributes. Data frames also store their class, <code>&quot;data.frame&quot;</code>, as an attribute.</p>
 <p>You can see an object’s attributes with <code>attribute</code>. If you run <code>attribute</code> on the <code>DECK</code> data frame that you created in <a href="project-2-playing-cards.html#project-2-playing-cards">Project 2: Playing Cards</a>, you will see:</p>
-<div class="sourceCode" id="cb305"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb305-1" data-line-number="1"><span class="kw">attributes</span>(DECK)</a>
-<a class="sourceLine" id="cb305-2" data-line-number="2">## $names</a>
-<a class="sourceLine" id="cb305-3" data-line-number="3">## [1] &quot;face&quot;  &quot;suit&quot;  &quot;value&quot;</a>
-<a class="sourceLine" id="cb305-4" data-line-number="4">## </a>
-<a class="sourceLine" id="cb305-5" data-line-number="5">## $class</a>
-<a class="sourceLine" id="cb305-6" data-line-number="6">## [1] &quot;data.frame&quot;</a>
-<a class="sourceLine" id="cb305-7" data-line-number="7">## </a>
-<a class="sourceLine" id="cb305-8" data-line-number="8">## $row.names</a>
-<a class="sourceLine" id="cb305-9" data-line-number="9">##  [1]  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 </a>
-<a class="sourceLine" id="cb305-10" data-line-number="10">## [20] 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36</a>
-<a class="sourceLine" id="cb305-11" data-line-number="11">## [37] 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">attributes</span>(DECK)
+## $names
+## [1] &quot;face&quot;  &quot;suit&quot;  &quot;value&quot;
+## 
+## $class
+## [1] &quot;data.frame&quot;
+## 
+## $row.names
+##  [1]  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 
+## [20] 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36
+## [37] 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52</code></pre>
 <p>R comes with many helper functions that let you set and access the most common attributes used in R. You’ve already met the <code>names</code>, <code>dim</code>, and <code>class</code> functions, which each work with an eponymously named attribute. However, R also has <code>row.names</code>, <code>levels</code>, and many other attribute-based helper functions. You can use any of these functions to retrieve an attribute’s value:</p>
-<div class="sourceCode" id="cb306"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb306-1" data-line-number="1"><span class="kw">row.names</span>(DECK)</a>
-<a class="sourceLine" id="cb306-2" data-line-number="2">##  [1] &quot;1&quot;  &quot;2&quot;  &quot;3&quot;  &quot;4&quot;  &quot;5&quot;  &quot;6&quot;  &quot;7&quot;  &quot;8&quot;  &quot;9&quot;  &quot;10&quot; &quot;11&quot; &quot;12&quot; &quot;13&quot;</a>
-<a class="sourceLine" id="cb306-3" data-line-number="3">## [14] &quot;14&quot; &quot;15&quot; &quot;16&quot; &quot;17&quot; &quot;18&quot; &quot;19&quot; &quot;20&quot; &quot;21&quot; &quot;22&quot; &quot;23&quot; &quot;24&quot; &quot;25&quot; &quot;26&quot;</a>
-<a class="sourceLine" id="cb306-4" data-line-number="4">## [27] &quot;27&quot; &quot;28&quot; &quot;29&quot; &quot;30&quot; &quot;31&quot; &quot;32&quot; &quot;33&quot; &quot;34&quot; &quot;35&quot; &quot;36&quot; &quot;37&quot; &quot;38&quot; &quot;39&quot;</a>
-<a class="sourceLine" id="cb306-5" data-line-number="5">## [40] &quot;40&quot; &quot;41&quot; &quot;42&quot; &quot;43&quot; &quot;44&quot; &quot;45&quot; &quot;46&quot; &quot;47&quot; &quot;48&quot; &quot;49&quot; &quot;50&quot; &quot;51&quot; &quot;52&quot;</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">row.names</span>(DECK)
+##  [1] &quot;1&quot;  &quot;2&quot;  &quot;3&quot;  &quot;4&quot;  &quot;5&quot;  &quot;6&quot;  &quot;7&quot;  &quot;8&quot;  &quot;9&quot;  &quot;10&quot; &quot;11&quot; &quot;12&quot; &quot;13&quot;
+## [14] &quot;14&quot; &quot;15&quot; &quot;16&quot; &quot;17&quot; &quot;18&quot; &quot;19&quot; &quot;20&quot; &quot;21&quot; &quot;22&quot; &quot;23&quot; &quot;24&quot; &quot;25&quot; &quot;26&quot;
+## [27] &quot;27&quot; &quot;28&quot; &quot;29&quot; &quot;30&quot; &quot;31&quot; &quot;32&quot; &quot;33&quot; &quot;34&quot; &quot;35&quot; &quot;36&quot; &quot;37&quot; &quot;38&quot; &quot;39&quot;
+## [40] &quot;40&quot; &quot;41&quot; &quot;42&quot; &quot;43&quot; &quot;44&quot; &quot;45&quot; &quot;46&quot; &quot;47&quot; &quot;48&quot; &quot;49&quot; &quot;50&quot; &quot;51&quot; &quot;52&quot;</code></pre>
 <p>or to change an attribute’s value:</p>
-<div class="sourceCode" id="cb307"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb307-1" data-line-number="1"><span class="kw">row.names</span>(DECK) &lt;-<span class="st"> </span><span class="dv">101</span><span class="op">:</span><span class="dv">152</span></a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">row.names</span>(DECK) &lt;-<span class="st"> </span><span class="dv">101</span><span class="op">:</span><span class="dv">152</span></code></pre>
 <p>or to give an object a new attribute altogether:</p>
-<div class="sourceCode" id="cb308"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb308-1" data-line-number="1"><span class="kw">levels</span>(DECK) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;level 1&quot;</span>, <span class="st">&quot;level 2&quot;</span>, <span class="st">&quot;level 3&quot;</span>)</a>
-<a class="sourceLine" id="cb308-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb308-3" data-line-number="3"><span class="kw">attributes</span>(DECK)</a>
-<a class="sourceLine" id="cb308-4" data-line-number="4">## $names</a>
-<a class="sourceLine" id="cb308-5" data-line-number="5">## [1] &quot;face&quot;  &quot;suit&quot;  &quot;value&quot;</a>
-<a class="sourceLine" id="cb308-6" data-line-number="6">## </a>
-<a class="sourceLine" id="cb308-7" data-line-number="7">## $class</a>
-<a class="sourceLine" id="cb308-8" data-line-number="8">## [1] &quot;data.frame&quot;</a>
-<a class="sourceLine" id="cb308-9" data-line-number="9">## </a>
-<a class="sourceLine" id="cb308-10" data-line-number="10">## $row.names</a>
-<a class="sourceLine" id="cb308-11" data-line-number="11">##  [1] 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117</a>
-<a class="sourceLine" id="cb308-12" data-line-number="12">## [18] 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134</a>
-<a class="sourceLine" id="cb308-13" data-line-number="13">## [35] 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151</a>
-<a class="sourceLine" id="cb308-14" data-line-number="14">## [52] 152</a>
-<a class="sourceLine" id="cb308-15" data-line-number="15">## </a>
-<a class="sourceLine" id="cb308-16" data-line-number="16">## $levels</a>
-<a class="sourceLine" id="cb308-17" data-line-number="17">## [1] &quot;level 1&quot; &quot;level 2&quot; &quot;level 3&quot;</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">levels</span>(DECK) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;level 1&quot;</span>, <span class="st">&quot;level 2&quot;</span>, <span class="st">&quot;level 3&quot;</span>)
+
+<span class="kw">attributes</span>(DECK)
+## $names
+## [1] &quot;face&quot;  &quot;suit&quot;  &quot;value&quot;
+## 
+## $class
+## [1] &quot;data.frame&quot;
+## 
+## $row.names
+##  [1] 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117
+## [18] 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134
+## [35] 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151
+## [52] 152
+## 
+## $levels
+## [1] &quot;level 1&quot; &quot;level 2&quot; &quot;level 3&quot;</code></pre>
 <p>R is very laissez faire when it comes to attributes. It will let you add any attributes that you like to an object (and then it will usually ignore them). The only time R will complain is when a function needs to find an attribute and it is not there.</p>
 <p>You can add any general attribute to an object with <code>attr</code>; you can also use <code>attr</code> to look up the value of any attribute of an object. Let’s see how this works with <code>one_play</code>, the result of playing our slot machine one time:</p>
-<div class="sourceCode" id="cb309"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb309-1" data-line-number="1">one_play &lt;-<span class="st"> </span><span class="kw">play</span>()</a>
-<a class="sourceLine" id="cb309-2" data-line-number="2">one_play</a>
-<a class="sourceLine" id="cb309-3" data-line-number="3">## 0</a>
-<a class="sourceLine" id="cb309-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb309-5" data-line-number="5"><span class="kw">attributes</span>(one_play)</a>
-<a class="sourceLine" id="cb309-6" data-line-number="6">## NULL</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">one_play &lt;-<span class="st"> </span><span class="kw">play</span>()
+one_play
+## 0
+
+<span class="kw">attributes</span>(one_play)
+## NULL</code></pre>
 <p><code>attr</code> takes two arguments: an R object and the name of an attribute (as a character string). To give the R object an attribute of the specified name, save a value to the output of <code>attr</code>. Let’s give <code>one_play</code> an attribute named <code>symbols</code> that contains a vector of character strings:</p>
-<div class="sourceCode" id="cb310"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb310-1" data-line-number="1"><span class="kw">attr</span>(one_play, <span class="st">&quot;symbols&quot;</span>) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;B&quot;</span>, <span class="st">&quot;0&quot;</span>, <span class="st">&quot;B&quot;</span>)</a>
-<a class="sourceLine" id="cb310-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb310-3" data-line-number="3"><span class="kw">attributes</span>(one_play)</a>
-<a class="sourceLine" id="cb310-4" data-line-number="4">## $symbols</a>
-<a class="sourceLine" id="cb310-5" data-line-number="5">## [1] &quot;B&quot; &quot;0&quot; &quot;B&quot;</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">attr</span>(one_play, <span class="st">&quot;symbols&quot;</span>) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;B&quot;</span>, <span class="st">&quot;0&quot;</span>, <span class="st">&quot;B&quot;</span>)
+
+<span class="kw">attributes</span>(one_play)
+## $symbols
+## [1] &quot;B&quot; &quot;0&quot; &quot;B&quot;</code></pre>
 <p>To look up the value of any attribute, give <code>attr</code> an R object and the name of the attribute you would like to look up:</p>
-<div class="sourceCode" id="cb311"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb311-1" data-line-number="1"><span class="kw">attr</span>(one_play, <span class="st">&quot;symbols&quot;</span>)</a>
-<a class="sourceLine" id="cb311-2" data-line-number="2">## &quot;B&quot; &quot;0&quot; &quot;B&quot;</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">attr</span>(one_play, <span class="st">&quot;symbols&quot;</span>)
+## &quot;B&quot; &quot;0&quot; &quot;B&quot;</code></pre>
 <p>If you give an attribute to an atomic vector, like <code>one_play</code>, R will usually display the attribute beneath the vector’s values. However, if the attribute changes the vector’s class, R may display all of the information in the vector in a new way (as we saw with <code>POSIXct</code> objects):</p>
-<div class="sourceCode" id="cb312"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb312-1" data-line-number="1">one_play</a>
-<a class="sourceLine" id="cb312-2" data-line-number="2">## [1] 0</a>
-<a class="sourceLine" id="cb312-3" data-line-number="3">## attr(,&quot;symbols&quot;)</a>
-<a class="sourceLine" id="cb312-4" data-line-number="4">## [1] &quot;B&quot; &quot;0&quot; &quot;B&quot;</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">one_play
+## [1] 0
+## attr(,&quot;symbols&quot;)
+## [1] &quot;B&quot; &quot;0&quot; &quot;B&quot;</code></pre>
 <p>R will generally ignore an object’s attributes unless you give them a name that an R function looks for, like <code>names</code> or <code>class</code>. For example, R will ignore the <code>symbols</code> attribute of <code>one_play</code> as you manipulate <code>one_play</code>:</p>
-<div class="sourceCode" id="cb313"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb313-1" data-line-number="1">one_play <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb313-2" data-line-number="2">##  1</a>
-<a class="sourceLine" id="cb313-3" data-line-number="3">## attr(,&quot;symbols&quot;)</a>
-<a class="sourceLine" id="cb313-4" data-line-number="4">##  &quot;B&quot; &quot;0&quot; &quot;B&quot;</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">one_play <span class="op">+</span><span class="st"> </span><span class="dv">1</span>
+##  1
+## attr(,&quot;symbols&quot;)
+##  &quot;B&quot; &quot;0&quot; &quot;B&quot;</code></pre>
 
 <div class="exercise">
 <span id="exr:unnamed-chunk-69" class="exercise"><strong>Exercise 8.1  (Add an Attribute)  </strong></span>Modify <code>play</code> to return a prize that contains the symbols associated with it as an attribute named <code>symbols</code>. Remove the redundant call to <code>print(symbols)</code>:
 </div>
 
-<div class="sourceCode" id="cb314"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb314-1" data-line-number="1">play &lt;-<span class="st"> </span><span class="cf">function</span>() {</a>
-<a class="sourceLine" id="cb314-2" data-line-number="2">  symbols &lt;-<span class="st"> </span><span class="kw">get_symbols</span>()</a>
-<a class="sourceLine" id="cb314-3" data-line-number="3">  <span class="kw">print</span>(symbols)</a>
-<a class="sourceLine" id="cb314-4" data-line-number="4">  <span class="kw">score</span>(symbols)</a>
-<a class="sourceLine" id="cb314-5" data-line-number="5">}</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">play &lt;-<span class="st"> </span><span class="cf">function</span>() {
+  symbols &lt;-<span class="st"> </span><span class="kw">get_symbols</span>()
+  <span class="kw">print</span>(symbols)
+  <span class="kw">score</span>(symbols)
+}</code></pre>
 
 <div class="solution">
  <span class="solution"><em>Solution. </em></span> You can create a new version of <code>play</code> by capturing the output of <code>score(symbols)</code> and assigning an attribute to it. <code>play</code> can then return the enhanced version of the output:
 </div>
 
-<div class="sourceCode" id="cb315"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb315-1" data-line-number="1">play &lt;-<span class="st"> </span><span class="cf">function</span>() {</a>
-<a class="sourceLine" id="cb315-2" data-line-number="2">  symbols &lt;-<span class="st"> </span><span class="kw">get_symbols</span>()</a>
-<a class="sourceLine" id="cb315-3" data-line-number="3">  prize &lt;-<span class="st"> </span><span class="kw">score</span>(symbols)</a>
-<a class="sourceLine" id="cb315-4" data-line-number="4">  <span class="kw">attr</span>(prize, <span class="st">&quot;symbols&quot;</span>) &lt;-<span class="st"> </span>symbols</a>
-<a class="sourceLine" id="cb315-5" data-line-number="5">  prize</a>
-<a class="sourceLine" id="cb315-6" data-line-number="6">}</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">play &lt;-<span class="st"> </span><span class="cf">function</span>() {
+  symbols &lt;-<span class="st"> </span><span class="kw">get_symbols</span>()
+  prize &lt;-<span class="st"> </span><span class="kw">score</span>(symbols)
+  <span class="kw">attr</span>(prize, <span class="st">&quot;symbols&quot;</span>) &lt;-<span class="st"> </span>symbols
+  prize
+}</code></pre>
 <p>Now <code>play</code> returns both the prize and the symbols associated with the prize. The results may not look pretty, but the symbols stick with the prize when we copy it to a new object. We can work on tidying up the display in a minute:</p>
-<div class="sourceCode" id="cb316"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb316-1" data-line-number="1"><span class="kw">play</span>()</a>
-<a class="sourceLine" id="cb316-2" data-line-number="2">## [1] 0</a>
-<a class="sourceLine" id="cb316-3" data-line-number="3">## attr(,&quot;symbols&quot;)</a>
-<a class="sourceLine" id="cb316-4" data-line-number="4">## [1] &quot;B&quot;  &quot;BB&quot; &quot;0&quot; </a>
-<a class="sourceLine" id="cb316-5" data-line-number="5"> </a>
-<a class="sourceLine" id="cb316-6" data-line-number="6">two_play &lt;-<span class="st"> </span><span class="kw">play</span>()</a>
-<a class="sourceLine" id="cb316-7" data-line-number="7"> </a>
-<a class="sourceLine" id="cb316-8" data-line-number="8">two_play</a>
-<a class="sourceLine" id="cb316-9" data-line-number="9">## [1] 0</a>
-<a class="sourceLine" id="cb316-10" data-line-number="10">## attr(,&quot;symbols&quot;)</a>
-<a class="sourceLine" id="cb316-11" data-line-number="11">## [1] &quot;0&quot; &quot;B&quot; &quot;0&quot;</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">play</span>()
+## [1] 0
+## attr(,&quot;symbols&quot;)
+## [1] &quot;B&quot;  &quot;BB&quot; &quot;0&quot; 
+ 
+two_play &lt;-<span class="st"> </span><span class="kw">play</span>()
+ 
+two_play
+## [1] 0
+## attr(,&quot;symbols&quot;)
+## [1] &quot;0&quot; &quot;B&quot; &quot;0&quot;</code></pre>
 <p>You can also generate a prize and set its attributes in one step with the <code>structure</code> function. <code>structure</code> creates an object with a set of attributes. The first argument of <code>structure</code> should be an R object or set of values, and the remaining arguments should be named attributes for <code>structure</code> to add to the object. You can give these arguments any argument names you like. <code>structure</code> will add the attributes to the object under the names that you provide as argument names:</p>
-<div class="sourceCode" id="cb317"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb317-1" data-line-number="1">play &lt;-<span class="st"> </span><span class="cf">function</span>() {</a>
-<a class="sourceLine" id="cb317-2" data-line-number="2">  symbols &lt;-<span class="st"> </span><span class="kw">get_symbols</span>()</a>
-<a class="sourceLine" id="cb317-3" data-line-number="3">  <span class="kw">structure</span>(<span class="kw">score</span>(symbols), <span class="dt">symbols =</span> symbols)</a>
-<a class="sourceLine" id="cb317-4" data-line-number="4">}</a>
-<a class="sourceLine" id="cb317-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb317-6" data-line-number="6">three_play &lt;-<span class="st"> </span><span class="kw">play</span>()</a>
-<a class="sourceLine" id="cb317-7" data-line-number="7">three_play</a>
-<a class="sourceLine" id="cb317-8" data-line-number="8">##  0</a>
-<a class="sourceLine" id="cb317-9" data-line-number="9">##  attr(,&quot;symbols&quot;)</a>
-<a class="sourceLine" id="cb317-10" data-line-number="10">##  &quot;0&quot;  &quot;BB&quot; &quot;B&quot; </a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">play &lt;-<span class="st"> </span><span class="cf">function</span>() {
+  symbols &lt;-<span class="st"> </span><span class="kw">get_symbols</span>()
+  <span class="kw">structure</span>(<span class="kw">score</span>(symbols), <span class="dt">symbols =</span> symbols)
+}
+
+three_play &lt;-<span class="st"> </span><span class="kw">play</span>()
+three_play
+##  0
+##  attr(,&quot;symbols&quot;)
+##  &quot;0&quot;  &quot;BB&quot; &quot;B&quot; </code></pre>
 <p>Now that your <code>play</code> output contains a <code>symbols</code> attribute, what can you do with it? You can write your own functions that lookup and use the attribute. For example, the following function will look up <code>one_play</code>’s <code>symbols</code> attribute and use it to display <code>one_play</code> in a pretty manner. We will use this function to display our slot results, so let’s take a moment to study what it does:</p>
-<div class="sourceCode" id="cb318"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb318-1" data-line-number="1">slot_display &lt;-<span class="st"> </span><span class="cf">function</span>(prize){</a>
-<a class="sourceLine" id="cb318-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb318-3" data-line-number="3">  <span class="co"># extract symbols</span></a>
-<a class="sourceLine" id="cb318-4" data-line-number="4">  symbols &lt;-<span class="st"> </span><span class="kw">attr</span>(prize, <span class="st">&quot;symbols&quot;</span>)</a>
-<a class="sourceLine" id="cb318-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb318-6" data-line-number="6">  <span class="co"># collapse symbols into single string</span></a>
-<a class="sourceLine" id="cb318-7" data-line-number="7">  symbols &lt;-<span class="st"> </span><span class="kw">paste</span>(symbols, <span class="dt">collapse =</span> <span class="st">&quot; &quot;</span>)</a>
-<a class="sourceLine" id="cb318-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb318-9" data-line-number="9">  <span class="co"># combine symbol with prize as a regular expression</span></a>
-<a class="sourceLine" id="cb318-10" data-line-number="10">  <span class="co"># \n is regular expression for new line (i.e. return or enter)</span></a>
-<a class="sourceLine" id="cb318-11" data-line-number="11">  string &lt;-<span class="st"> </span><span class="kw">paste</span>(symbols, prize, <span class="dt">sep =</span> <span class="st">&quot;</span><span class="ch">\n</span><span class="st">$&quot;</span>)</a>
-<a class="sourceLine" id="cb318-12" data-line-number="12"></a>
-<a class="sourceLine" id="cb318-13" data-line-number="13">  <span class="co"># display regular expression in console without quotes</span></a>
-<a class="sourceLine" id="cb318-14" data-line-number="14">  <span class="kw">cat</span>(string)</a>
-<a class="sourceLine" id="cb318-15" data-line-number="15">}</a>
-<a class="sourceLine" id="cb318-16" data-line-number="16"></a>
-<a class="sourceLine" id="cb318-17" data-line-number="17"><span class="kw">slot_display</span>(one_play)</a>
-<a class="sourceLine" id="cb318-18" data-line-number="18">## B 0 B</a>
-<a class="sourceLine" id="cb318-19" data-line-number="19">## $0</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">slot_display &lt;-<span class="st"> </span><span class="cf">function</span>(prize){
+
+  <span class="co"># extract symbols</span>
+  symbols &lt;-<span class="st"> </span><span class="kw">attr</span>(prize, <span class="st">&quot;symbols&quot;</span>)
+
+  <span class="co"># collapse symbols into single string</span>
+  symbols &lt;-<span class="st"> </span><span class="kw">paste</span>(symbols, <span class="dt">collapse =</span> <span class="st">&quot; &quot;</span>)
+
+  <span class="co"># combine symbol with prize as a regular expression</span>
+  <span class="co"># \n is regular expression for new line (i.e. return or enter)</span>
+  string &lt;-<span class="st"> </span><span class="kw">paste</span>(symbols, prize, <span class="dt">sep =</span> <span class="st">&quot;</span><span class="ch">\n</span><span class="st">$&quot;</span>)
+
+  <span class="co"># display regular expression in console without quotes</span>
+  <span class="kw">cat</span>(string)
+}
+
+<span class="kw">slot_display</span>(one_play)
+## B 0 B
+## $0</code></pre>
 <p>The function expects an object like <code>one_play</code> that has both a numerical value and a <code>symbols</code> attribute. The first line of the function will look up the value of the <code>symbols</code> attribute and save it as an object named <code>symbols</code>. Let’s make an example <code>symbols</code> object so we can see what the rest of the function does. We can use <code>one_play</code>’s <code>symbols</code> attribute to do the job. <code>symbols</code> will be a vector of three-character strings:</p>
-<div class="sourceCode" id="cb319"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb319-1" data-line-number="1">symbols &lt;-<span class="st"> </span><span class="kw">attr</span>(one_play, <span class="st">&quot;symbols&quot;</span>)</a>
-<a class="sourceLine" id="cb319-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb319-3" data-line-number="3">symbols</a>
-<a class="sourceLine" id="cb319-4" data-line-number="4">## &quot;B&quot; &quot;0&quot; &quot;B&quot;</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">symbols &lt;-<span class="st"> </span><span class="kw">attr</span>(one_play, <span class="st">&quot;symbols&quot;</span>)
+
+symbols
+## &quot;B&quot; &quot;0&quot; &quot;B&quot;</code></pre>
 <p>Next, <code>slot_display</code> uses <code>paste</code> to collapse the three strings in <code>symbols</code> into a single-character string. <code>paste</code> collapses a vector of character strings into a single string when you give it the <code>collapse</code> argument. <code>paste</code> will use the value of <code>collapse</code> to separate the formerly distinct strings. Hence, <code>symbols</code> becomes <code>B 0 B</code> the three strings separated by a space:</p>
-<div class="sourceCode" id="cb320"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb320-1" data-line-number="1">symbols &lt;-<span class="st"> </span><span class="kw">paste</span>(symbols, <span class="dt">collapse =</span> <span class="st">&quot; &quot;</span>)</a>
-<a class="sourceLine" id="cb320-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb320-3" data-line-number="3">symbols</a>
-<a class="sourceLine" id="cb320-4" data-line-number="4">## &quot;B 0 B&quot;</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">symbols &lt;-<span class="st"> </span><span class="kw">paste</span>(symbols, <span class="dt">collapse =</span> <span class="st">&quot; &quot;</span>)
+
+symbols
+## &quot;B 0 B&quot;</code></pre>
 <p>Our function then uses <code>paste</code> in a new way to combine <code>symbols</code> with the value of <code>prize</code>. <code>paste</code> combines separate objects into a character string when you give it a <code>sep</code> argument. For example, here <code>paste</code> will combine the string in <code>symbols</code>, <code>B 0 B</code>, with the number in <code>prize</code>, 0. <code>paste</code> will use the value of <code>sep</code> argument to separate the inputs in the new string. Here, that value is <code>\n$</code>, so our result will look like <code>&quot;B 0 B\n$0&quot;</code>:</p>
-<div class="sourceCode" id="cb321"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb321-1" data-line-number="1">prize &lt;-<span class="st"> </span>one_play</a>
-<a class="sourceLine" id="cb321-2" data-line-number="2">string &lt;-<span class="st"> </span><span class="kw">paste</span>(symbols, prize, <span class="dt">sep =</span> <span class="st">&quot;</span><span class="ch">\n</span><span class="st">$&quot;</span>)</a>
-<a class="sourceLine" id="cb321-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb321-4" data-line-number="4">string</a>
-<a class="sourceLine" id="cb321-5" data-line-number="5">## &quot;B 0 B\n$0&quot;</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">prize &lt;-<span class="st"> </span>one_play
+string &lt;-<span class="st"> </span><span class="kw">paste</span>(symbols, prize, <span class="dt">sep =</span> <span class="st">&quot;</span><span class="ch">\n</span><span class="st">$&quot;</span>)
+
+string
+## &quot;B 0 B\n$0&quot;</code></pre>
 <p>The last line of <code>slot_display</code> calls <code>cat</code> on the new string. <code>cat</code> is like <code>print</code>; it displays its input at the command line. However, <code>cat</code> does not surround its output with quotation marks. <code>cat</code> also replaces every <code>\n</code> with a new line or line break. The result is what we see. Notice that it looks just how I suggested that our <code>play</code> output should look in <a href="programs.html#programs">Programs</a>:</p>
-<div class="sourceCode" id="cb322"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb322-1" data-line-number="1"><span class="kw">cat</span>(string)</a>
-<a class="sourceLine" id="cb322-2" data-line-number="2">## B 0 B</a>
-<a class="sourceLine" id="cb322-3" data-line-number="3">## $0</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cat</span>(string)
+## B 0 B
+## $0</code></pre>
 <p>You can use <code>slot_display</code> to manually clean up the output of <code>play</code>:</p>
-<div class="sourceCode" id="cb323"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb323-1" data-line-number="1"><span class="kw">slot_display</span>(<span class="kw">play</span>())</a>
-<a class="sourceLine" id="cb323-2" data-line-number="2">## C B 0</a>
-<a class="sourceLine" id="cb323-3" data-line-number="3">## $2</a>
-<a class="sourceLine" id="cb323-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb323-5" data-line-number="5"><span class="kw">slot_display</span>(<span class="kw">play</span>())</a>
-<a class="sourceLine" id="cb323-6" data-line-number="6">## 7 0 BB</a>
-<a class="sourceLine" id="cb323-7" data-line-number="7">## $0</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">slot_display</span>(<span class="kw">play</span>())
+## C B 0
+## $2
+
+<span class="kw">slot_display</span>(<span class="kw">play</span>())
+## 7 0 BB
+## $0</code></pre>
 <p>This method of cleaning the output requires you to manually intervene in your R session (to call <code>slot_display</code>). There is a function that you can use to automatically clean up the output of <code>play</code> <em>each</em> time it is displayed. This function is <code>print</code>, and it is a <em>generic function</em>.</p>
 </div>
 <div id="generic-functions" class="section level2">
 <h2><span class="header-section-number">8.3</span> Generic Functions</h2>
 <p>R uses <code>print</code> more often than you may think; R calls <code>print</code> each time it displays a result in your console window. This call happens in the background, so you do not notice it; but the call explains how output makes it to the console window (recall that <code>print</code> always prints its argument in the console window). This <code>print</code> call also explains why the output of <code>print</code> always matches what you see when you display an object at the command line:</p>
-<div class="sourceCode" id="cb324"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb324-1" data-line-number="1"><span class="kw">print</span>(pi)</a>
-<a class="sourceLine" id="cb324-2" data-line-number="2">## 3.141593</a>
-<a class="sourceLine" id="cb324-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb324-4" data-line-number="4">pi</a>
-<a class="sourceLine" id="cb324-5" data-line-number="5">## 3.141593</a>
-<a class="sourceLine" id="cb324-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb324-7" data-line-number="7"></a>
-<a class="sourceLine" id="cb324-8" data-line-number="8"><span class="kw">print</span>(<span class="kw">head</span>(deck))</a>
-<a class="sourceLine" id="cb324-9" data-line-number="9">##  face   suit value</a>
-<a class="sourceLine" id="cb324-10" data-line-number="10">##  king spades    13</a>
-<a class="sourceLine" id="cb324-11" data-line-number="11">## queen spades    12</a>
-<a class="sourceLine" id="cb324-12" data-line-number="12">##  jack spades    11</a>
-<a class="sourceLine" id="cb324-13" data-line-number="13">##   ten spades    10</a>
-<a class="sourceLine" id="cb324-14" data-line-number="14">##  nine spades     9</a>
-<a class="sourceLine" id="cb324-15" data-line-number="15">## eight spades     8</a>
-<a class="sourceLine" id="cb324-16" data-line-number="16"></a>
-<a class="sourceLine" id="cb324-17" data-line-number="17"><span class="kw">head</span>(deck)</a>
-<a class="sourceLine" id="cb324-18" data-line-number="18">##  face   suit value</a>
-<a class="sourceLine" id="cb324-19" data-line-number="19">##  king spades    13</a>
-<a class="sourceLine" id="cb324-20" data-line-number="20">## queen spades    12</a>
-<a class="sourceLine" id="cb324-21" data-line-number="21">##  jack spades    11</a>
-<a class="sourceLine" id="cb324-22" data-line-number="22">##   ten spades    10</a>
-<a class="sourceLine" id="cb324-23" data-line-number="23">##  nine spades     9</a>
-<a class="sourceLine" id="cb324-24" data-line-number="24">## eight spades     8</a>
-<a class="sourceLine" id="cb324-25" data-line-number="25"></a>
-<a class="sourceLine" id="cb324-26" data-line-number="26"></a>
-<a class="sourceLine" id="cb324-27" data-line-number="27"><span class="kw">print</span>(<span class="kw">play</span>())</a>
-<a class="sourceLine" id="cb324-28" data-line-number="28">##  5</a>
-<a class="sourceLine" id="cb324-29" data-line-number="29">## attr(,&quot;symbols&quot;)</a>
-<a class="sourceLine" id="cb324-30" data-line-number="30">##  &quot;B&quot;  &quot;BB&quot; &quot;B&quot; </a>
-<a class="sourceLine" id="cb324-31" data-line-number="31"></a>
-<a class="sourceLine" id="cb324-32" data-line-number="32"><span class="kw">play</span>()</a>
-<a class="sourceLine" id="cb324-33" data-line-number="33">##  5</a>
-<a class="sourceLine" id="cb324-34" data-line-number="34">## attr(,&quot;symbols&quot;)</a>
-<a class="sourceLine" id="cb324-35" data-line-number="35">##  &quot;B&quot;  &quot;BB&quot; &quot;B&quot; </a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(pi)
+## 3.141593
+
+pi
+## 3.141593
+
+
+<span class="kw">print</span>(<span class="kw">head</span>(deck))
+##  face   suit value
+##  king spades    13
+## queen spades    12
+##  jack spades    11
+##   ten spades    10
+##  nine spades     9
+## eight spades     8
+
+<span class="kw">head</span>(deck)
+##  face   suit value
+##  king spades    13
+## queen spades    12
+##  jack spades    11
+##   ten spades    10
+##  nine spades     9
+## eight spades     8
+
+
+<span class="kw">print</span>(<span class="kw">play</span>())
+##  5
+## attr(,&quot;symbols&quot;)
+##  &quot;B&quot;  &quot;BB&quot; &quot;B&quot; 
+
+<span class="kw">play</span>()
+##  5
+## attr(,&quot;symbols&quot;)
+##  &quot;B&quot;  &quot;BB&quot; &quot;B&quot; </code></pre>
 <p>You can change how R displays your slot output by rewriting <code>print</code> to look like <code>slot_display</code>. Then R would print the output in our tidy format. However, this method would have negative side effects. You do not want R to call <code>slot_display</code> when it prints a data frame, a numerical vector, or any other object.</p>
 <p>Fortunately, <code>print</code> is not a normal function; it is a <em>generic</em> function. This means that <code>print</code> is written in a way that lets it do different things in different cases. You’ve already seen this behavior in action (although you may not have realized it). <code>print</code> did one thing when we looked at the unclassed version of <code>num</code>:</p>
-<div class="sourceCode" id="cb325"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb325-1" data-line-number="1">num &lt;-<span class="st"> </span><span class="dv">1000000000</span></a>
-<a class="sourceLine" id="cb325-2" data-line-number="2"><span class="kw">print</span>(num)</a>
-<a class="sourceLine" id="cb325-3" data-line-number="3">## 1000000000</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">num &lt;-<span class="st"> </span><span class="dv">1000000000</span>
+<span class="kw">print</span>(num)
+## 1000000000</code></pre>
 <p>and a different thing when we gave <code>num</code> a class:</p>
-<div class="sourceCode" id="cb326"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb326-1" data-line-number="1"><span class="kw">class</span>(num) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;POSIXct&quot;</span>, <span class="st">&quot;POSIXt&quot;</span>)</a>
-<a class="sourceLine" id="cb326-2" data-line-number="2"><span class="kw">print</span>(num)</a>
-<a class="sourceLine" id="cb326-3" data-line-number="3">## &quot;2001-09-08 19:46:40 CST&quot;</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(num) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;POSIXct&quot;</span>, <span class="st">&quot;POSIXt&quot;</span>)
+<span class="kw">print</span>(num)
+## &quot;2001-09-08 19:46:40 CST&quot;</code></pre>
 <p>Take a look at the code inside <code>print</code> to see how it does this. You may imagine that print looks up the class attribute of its input and then uses an +if+ tree to pick which output to display. If this occurred to you, great job! <code>print</code> does something very similar, but much more simple.</p>
 </div>
 <div id="methods" class="section level2">
 <h2><span class="header-section-number">8.4</span> Methods</h2>
 <p>When you call <code>print</code>, <code>print</code> calls a special function, <code>UseMethod</code>:</p>
-<div class="sourceCode" id="cb327"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb327-1" data-line-number="1">print</a>
-<a class="sourceLine" id="cb327-2" data-line-number="2">## function (x, ...) </a>
-<a class="sourceLine" id="cb327-3" data-line-number="3">## UseMethod(&quot;print&quot;)</a>
-<a class="sourceLine" id="cb327-4" data-line-number="4">## &lt;bytecode: 0x7ffee4c62f80&gt;</a>
-<a class="sourceLine" id="cb327-5" data-line-number="5">## &lt;environment: namespace:base&gt;</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">print
+## function (x, ...) 
+## UseMethod(&quot;print&quot;)
+## &lt;bytecode: 0x7ffee4c62f80&gt;
+## &lt;environment: namespace:base&gt;</code></pre>
 <p><code>UseMethod</code> examines the class of the input that you provide for the first argument of <code>print</code>, and then passes all of your arguments to a new function designed to handle that class of input. For example, when you give <code>print</code> a POSIXct object, <code>UseMethod</code> will pass all of <code>print</code>’s arguments to <code>print.POSIXct</code>. R will then run <code>print.POSIXct</code> and return the results:</p>
-<div class="sourceCode" id="cb328"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb328-1" data-line-number="1">print.POSIXct</a>
-<a class="sourceLine" id="cb328-2" data-line-number="2">## function (x, ...) </a>
-<a class="sourceLine" id="cb328-3" data-line-number="3">## {</a>
-<a class="sourceLine" id="cb328-4" data-line-number="4">##     max.print &lt;- getOption(&quot;max.print&quot;, 9999L)</a>
-<a class="sourceLine" id="cb328-5" data-line-number="5">##     if (max.print &lt; length(x)) {</a>
-<a class="sourceLine" id="cb328-6" data-line-number="6">##         print(format(x[seq_len(max.print)], usetz = TRUE), ...)</a>
-<a class="sourceLine" id="cb328-7" data-line-number="7">##         cat(&quot; [ reached getOption(\&quot;max.print\&quot;) -- omitted&quot;, </a>
-<a class="sourceLine" id="cb328-8" data-line-number="8">##             length(x) - max.print, &quot;entries ]\n&quot;)</a>
-<a class="sourceLine" id="cb328-9" data-line-number="9">##     }</a>
-<a class="sourceLine" id="cb328-10" data-line-number="10">##     else print(format(x, usetz = TRUE), ...)</a>
-<a class="sourceLine" id="cb328-11" data-line-number="11">##     invisible(x)</a>
-<a class="sourceLine" id="cb328-12" data-line-number="12">## }</a>
-<a class="sourceLine" id="cb328-13" data-line-number="13">## &lt;bytecode: 0x7fa948f3d008&gt;</a>
-<a class="sourceLine" id="cb328-14" data-line-number="14">## &lt;environment: namespace:base&gt;</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">print.POSIXct
+## function (x, ...) 
+## {
+##     max.print &lt;- getOption(&quot;max.print&quot;, 9999L)
+##     if (max.print &lt; length(x)) {
+##         print(format(x[seq_len(max.print)], usetz = TRUE), ...)
+##         cat(&quot; [ reached getOption(\&quot;max.print\&quot;) -- omitted&quot;, 
+##             length(x) - max.print, &quot;entries ]\n&quot;)
+##     }
+##     else print(format(x, usetz = TRUE), ...)
+##     invisible(x)
+## }
+## &lt;bytecode: 0x7fa948f3d008&gt;
+## &lt;environment: namespace:base&gt;</code></pre>
 <p>If you give <code>print</code> a factor object, <code>UseMethod</code> will pass all of <code>print</code>’s arguments to <code>print.factor</code>. R will then run <code>print.factor</code> and return the results:</p>
-<div class="sourceCode" id="cb329"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb329-1" data-line-number="1">print.factor</a>
-<a class="sourceLine" id="cb329-2" data-line-number="2">## function (x, quote = FALSE, max.levels = NULL, width = getOption(&quot;width&quot;), </a>
-<a class="sourceLine" id="cb329-3" data-line-number="3">##     ...) </a>
-<a class="sourceLine" id="cb329-4" data-line-number="4">## {</a>
-<a class="sourceLine" id="cb329-5" data-line-number="5">##     ord &lt;- is.ordered(x)</a>
-<a class="sourceLine" id="cb329-6" data-line-number="6">##     if (length(x) == 0L) </a>
-<a class="sourceLine" id="cb329-7" data-line-number="7">##         cat(if (ord) </a>
-<a class="sourceLine" id="cb329-8" data-line-number="8">##             &quot;ordered&quot;</a>
-<a class="sourceLine" id="cb329-9" data-line-number="9">## ...</a>
-<a class="sourceLine" id="cb329-10" data-line-number="10">##         drop &lt;- n &gt; maxl</a>
-<a class="sourceLine" id="cb329-11" data-line-number="11">##         cat(if (drop) </a>
-<a class="sourceLine" id="cb329-12" data-line-number="12">##             paste(format(n), &quot;&quot;), T0, paste(if (drop) </a>
-<a class="sourceLine" id="cb329-13" data-line-number="13">##             c(lev[1L:max(1, maxl - 1)], &quot;...&quot;, if (maxl &gt; 1) lev[n])</a>
-<a class="sourceLine" id="cb329-14" data-line-number="14">##         else lev, collapse = colsep), &quot;\n&quot;, sep = &quot;&quot;)</a>
-<a class="sourceLine" id="cb329-15" data-line-number="15">##     }</a>
-<a class="sourceLine" id="cb329-16" data-line-number="16">##     invisible(x)</a>
-<a class="sourceLine" id="cb329-17" data-line-number="17">## }</a>
-<a class="sourceLine" id="cb329-18" data-line-number="18">## &lt;bytecode: 0x7fa94a64d470&gt;</a>
-<a class="sourceLine" id="cb329-19" data-line-number="19">## &lt;environment: namespace:base&gt;</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">print.factor
+## function (x, quote = FALSE, max.levels = NULL, width = getOption(&quot;width&quot;), 
+##     ...) 
+## {
+##     ord &lt;- is.ordered(x)
+##     if (length(x) == 0L) 
+##         cat(if (ord) 
+##             &quot;ordered&quot;
+## ...
+##         drop &lt;- n &gt; maxl
+##         cat(if (drop) 
+##             paste(format(n), &quot;&quot;), T0, paste(if (drop) 
+##             c(lev[1L:max(1, maxl - 1)], &quot;...&quot;, if (maxl &gt; 1) lev[n])
+##         else lev, collapse = colsep), &quot;\n&quot;, sep = &quot;&quot;)
+##     }
+##     invisible(x)
+## }
+## &lt;bytecode: 0x7fa94a64d470&gt;
+## &lt;environment: namespace:base&gt;</code></pre>
 <p><code>print.POSIXct</code> and <code>print.factor</code> are called <em>methods</em> of <code>print</code>. By themselves, <code>print.POSIXct</code> and <code>print.factor</code> work like regular R functions. However, each was written specifically so <code>UseMethod</code> could call it to handle a specific class of <code>print</code> input.</p>
 <p>Notice that <code>print.POSIXct</code> and <code>print.factor</code> do two different things (also notice that I abridged the middle of <code>print.factor</code>—it is a long function). This is how <code>print</code> manages to do different things in different cases. <code>print</code> calls <code>UseMethod</code>, which calls a specialized method based on the class of <code>print</code>’s first argument.</p>
 <p>You can see which methods exist for a generic function by calling <code>methods</code> on the function. For example, <code>print</code> has almost 200 methods (which gives you an idea of how many classes exist in R):</p>
-<div class="sourceCode" id="cb330"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb330-1" data-line-number="1"><span class="kw">methods</span>(print)</a>
-<a class="sourceLine" id="cb330-2" data-line-number="2">##   [1] print.acf*                                   </a>
-<a class="sourceLine" id="cb330-3" data-line-number="3">##   [2] print.anova                                  </a>
-<a class="sourceLine" id="cb330-4" data-line-number="4">##   [3] print.aov*                                   </a>
-<a class="sourceLine" id="cb330-5" data-line-number="5">##  ...                      </a>
-<a class="sourceLine" id="cb330-6" data-line-number="6">## [176] print.xgettext*                              </a>
-<a class="sourceLine" id="cb330-7" data-line-number="7">## [177] print.xngettext*                             </a>
-<a class="sourceLine" id="cb330-8" data-line-number="8">## [178] print.xtabs*</a>
-<a class="sourceLine" id="cb330-9" data-line-number="9">##</a>
-<a class="sourceLine" id="cb330-10" data-line-number="10">##   Nonvisible functions are asterisked</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">methods</span>(print)
+##   [1] print.acf*                                   
+##   [2] print.anova                                  
+##   [3] print.aov*                                   
+##  ...                      
+## [176] print.xgettext*                              
+## [177] print.xngettext*                             
+## [178] print.xtabs*
+##
+##   Nonvisible functions are asterisked</code></pre>
 <p>This system of generic functions, methods, and class-based dispatch is known as S3 because it originated in the third version of S, the programming language that would evolve into S-PLUS and R. Many common R functions are S3 generics that work with a set of class methods. For example, <code>summary</code> and <code>head</code> also call <code>UseMethod</code>. More basic functions, like <code>c</code>, <code>+</code>, <code>-</code>, <code>&lt;</code> and others also behave like generic functions, although they call <code>.primitive</code> instead of <code>UseMethod</code>.</p>
 <p>The S3 system allows R functions to behave in different ways for different classes. You can use S3 to format your slot output. First, give your output its own class. Then write a print method for that class. To do this efficiently, you will need to know a little about how <code>UseMethod</code> selects a method function to use.</p>
 <div id="method-dispatch" class="section level3">
@@ -635,28 +636,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Every S3 method has a two-part name. The first part of the name will refer to the function that the method works with. The second part will refer to the class. These two parts will be separated by a period. So for example, the print method that works with functions will be called <code>print.function</code>. The summary method that works with matrices will be called <code>summary.matrix</code>. And so on.</p>
 <p>When <code>UseMethod</code> needs to call a method, it searches for an R function with the correct S3-style name. The function does not have to be special in any way; it just needs to have the correct name.</p>
 <p>You can participate in this system by writing your own function and giving it a valid S3-style name. For example, let’s give <code>one_play</code> a class of its own. It doesn’t matter what you call the class; R will store any character string in the class attribute:</p>
-<div class="sourceCode" id="cb331"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb331-1" data-line-number="1"><span class="kw">class</span>(one_play) &lt;-<span class="st"> &quot;slots&quot;</span></a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(one_play) &lt;-<span class="st"> &quot;slots&quot;</span></code></pre>
 <p>Now let’s write an S3 print method for the +slots+ class. The method doesn’t need to do anything special—it doesn’t even need to print <code>one_play</code>. But it <em>does</em> need to be named <code>print.slots</code>; otherwise <code>UseMethod</code> will not find it. The method should also take the same arguments as <code>print</code>; otherwise, R will give an error when it tries to pass the arguments to <code>print.slots</code>:</p>
-<div class="sourceCode" id="cb332"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb332-1" data-line-number="1"><span class="kw">args</span>(print)</a>
-<a class="sourceLine" id="cb332-2" data-line-number="2">## function (x, ...) </a>
-<a class="sourceLine" id="cb332-3" data-line-number="3">## NULL</a>
-<a class="sourceLine" id="cb332-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb332-5" data-line-number="5">print.slots &lt;-<span class="st"> </span><span class="cf">function</span>(x, ...) {</a>
-<a class="sourceLine" id="cb332-6" data-line-number="6">  <span class="kw">cat</span>(<span class="st">&quot;I&#39;m using the print.slots method&quot;</span>)</a>
-<a class="sourceLine" id="cb332-7" data-line-number="7">}</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">args</span>(print)
+## function (x, ...) 
+## NULL
+
+print.slots &lt;-<span class="st"> </span><span class="cf">function</span>(x, ...) {
+  <span class="kw">cat</span>(<span class="st">&quot;I&#39;m using the print.slots method&quot;</span>)
+}</code></pre>
 <p>Does our method work? Yes, and not only that; R uses the print method to display the contents of <code>one_play</code>. This method isn’t very useful, so I’m going to remove it. You’ll have a chance to write a better one in a minute:</p>
-<div class="sourceCode" id="cb333"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb333-1" data-line-number="1"><span class="kw">print</span>(one_play)</a>
-<a class="sourceLine" id="cb333-2" data-line-number="2">## I&#39;m using the print.slots method</a>
-<a class="sourceLine" id="cb333-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb333-4" data-line-number="4">one_play</a>
-<a class="sourceLine" id="cb333-5" data-line-number="5">## I&#39;m using the print.slots method</a>
-<a class="sourceLine" id="cb333-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb333-7" data-line-number="7"><span class="kw">rm</span>(print.slots)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(one_play)
+## I&#39;m using the print.slots method
+
+one_play
+## I&#39;m using the print.slots method
+
+<span class="kw">rm</span>(print.slots)</code></pre>
 <p>Some R objects have multiple classes. For example, the output of <code>Sys.time</code> has two classes. Which class will <code>UseMethod</code> use to find a print method?</p>
-<div class="sourceCode" id="cb334"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb334-1" data-line-number="1">now &lt;-<span class="st"> </span><span class="kw">Sys.time</span>()</a>
-<a class="sourceLine" id="cb334-2" data-line-number="2"><span class="kw">attributes</span>(now)</a>
-<a class="sourceLine" id="cb334-3" data-line-number="3">## $class</a>
-<a class="sourceLine" id="cb334-4" data-line-number="4">## [1] &quot;POSIXct&quot; &quot;POSIXt&quot; </a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">now &lt;-<span class="st"> </span><span class="kw">Sys.time</span>()
+<span class="kw">attributes</span>(now)
+## $class
+## [1] &quot;POSIXct&quot; &quot;POSIXt&quot; </code></pre>
 <p><code>UseMethod</code> will first look for a method that matches the first class listed in the object’s class vector. If <code>UseMethod</code> cannot find one, it will then look for the method that matches the second class (and so on if there are more classes in an object’s class vector).</p>
 <p>If you give <code>print</code> an object whose class or classes do not have a print method, <code>UseMethod</code> will call <code>print.default</code>, a special method written to handle general cases.</p>
 <p>Let’s use this system to write a better print method for the slot machine output.</p>
@@ -671,43 +672,43 @@ What name must you use for this method?
  <span class="solution"><em>Solution. </em></span> It is surprisingly easy to write a good <code>print.slots</code> method because we’ve already done all of the hard work when we wrote <code>slot_display</code>. For example, the following method will work. Just make sure the method is named <code>print.slots</code> so <code>UseMethod</code> can find it, and make sure that it takes the same arguments as <code>print</code> so <code>UseMethod</code> can pass those arguments to <code>print.slots</code> without any trouble:
 </div>
 
-<div class="sourceCode" id="cb335"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb335-1" data-line-number="1">print.slots &lt;-<span class="st"> </span><span class="cf">function</span>(x, ...) {</a>
-<a class="sourceLine" id="cb335-2" data-line-number="2">  <span class="kw">slot_display</span>(x)</a>
-<a class="sourceLine" id="cb335-3" data-line-number="3">}</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">print.slots &lt;-<span class="st"> </span><span class="cf">function</span>(x, ...) {
+  <span class="kw">slot_display</span>(x)
+}</code></pre>
 <p>Now R will automatically use <code>slot_display</code> to display objects of class +slots+ (and only objects of class “slots”):</p>
-<div class="sourceCode" id="cb336"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb336-1" data-line-number="1">one_play</a>
-<a class="sourceLine" id="cb336-2" data-line-number="2">## B 0 B</a>
-<a class="sourceLine" id="cb336-3" data-line-number="3">## $0</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">one_play
+## B 0 B
+## $0</code></pre>
 <p>Let’s ensure that every piece of slot machine output has the <code>slots</code> class.</p>
 
 <div class="exercise">
 <span id="exr:unnamed-chunk-73" class="exercise"><strong>Exercise 8.3  (Add a Class)  </strong></span>Modify the <code>play</code> function so it assigns <code>slots</code> to the <code>class</code> attribute of its output:
 </div>
 
-<div class="sourceCode" id="cb337"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb337-1" data-line-number="1">play &lt;-<span class="st"> </span><span class="cf">function</span>() {</a>
-<a class="sourceLine" id="cb337-2" data-line-number="2">  symbols &lt;-<span class="st"> </span><span class="kw">get_symbols</span>()</a>
-<a class="sourceLine" id="cb337-3" data-line-number="3">  <span class="kw">structure</span>(<span class="kw">score</span>(symbols), <span class="dt">symbols =</span> symbols)</a>
-<a class="sourceLine" id="cb337-4" data-line-number="4">}</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">play &lt;-<span class="st"> </span><span class="cf">function</span>() {
+  symbols &lt;-<span class="st"> </span><span class="kw">get_symbols</span>()
+  <span class="kw">structure</span>(<span class="kw">score</span>(symbols), <span class="dt">symbols =</span> symbols)
+}</code></pre>
 
 <div class="solution">
  <span class="solution"><em>Solution. </em></span> You can set the <code>class</code> attribute of the output at the same time that you set the +symbols+ attribute. Just add <code>class = &quot;slots&quot;</code> to the <code>structure</code> call:
 </div>
 
-<div class="sourceCode" id="cb338"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb338-1" data-line-number="1">play &lt;-<span class="st"> </span><span class="cf">function</span>() {</a>
-<a class="sourceLine" id="cb338-2" data-line-number="2">  symbols &lt;-<span class="st"> </span><span class="kw">get_symbols</span>()</a>
-<a class="sourceLine" id="cb338-3" data-line-number="3">  <span class="kw">structure</span>(<span class="kw">score</span>(symbols), <span class="dt">symbols =</span> symbols, <span class="dt">class =</span> <span class="st">&quot;slots&quot;</span>)</a>
-<a class="sourceLine" id="cb338-4" data-line-number="4">}</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">play &lt;-<span class="st"> </span><span class="cf">function</span>() {
+  symbols &lt;-<span class="st"> </span><span class="kw">get_symbols</span>()
+  <span class="kw">structure</span>(<span class="kw">score</span>(symbols), <span class="dt">symbols =</span> symbols, <span class="dt">class =</span> <span class="st">&quot;slots&quot;</span>)
+}</code></pre>
 <p>Now each of our slot machine plays will have the class <code>slots</code>:</p>
-<div class="sourceCode" id="cb339"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb339-1" data-line-number="1"><span class="kw">class</span>(<span class="kw">play</span>())</a>
-<a class="sourceLine" id="cb339-2" data-line-number="2">## &quot;slots&quot;</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(<span class="kw">play</span>())
+## &quot;slots&quot;</code></pre>
 <p>As a result, R will display them in the correct slot-machine format:</p>
-<div class="sourceCode" id="cb340"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb340-1" data-line-number="1"><span class="kw">play</span>()</a>
-<a class="sourceLine" id="cb340-2" data-line-number="2">## BB BB BBB</a>
-<a class="sourceLine" id="cb340-3" data-line-number="3">## $5</a>
-<a class="sourceLine" id="cb340-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb340-5" data-line-number="5"><span class="kw">play</span>()</a>
-<a class="sourceLine" id="cb340-6" data-line-number="6">## BB 0 0</a>
-<a class="sourceLine" id="cb340-7" data-line-number="7">## $0</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">play</span>()
+## BB BB BBB
+## $5
+
+<span class="kw">play</span>()
+## BB 0 0
+## $0</code></pre>
 </div>
 </div>
 <div id="classes" class="section level2">
@@ -720,41 +721,41 @@ What name must you use for this method?
 </ul>
 <p>Many R packages are based on classes that have been built in a similar manner. While this work is simple, it may not be easy. For example, consider how many methods exist for predefined classes.</p>
 <p>You can call <code>methods</code> on a class with the <code>class</code> argument, which takes a character string. <code>methods</code> will return every method written for the class. Notice that <code>methods</code> will not be able to show you methods that come in an unloaded R package:</p>
-<div class="sourceCode" id="cb341"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb341-1" data-line-number="1"><span class="kw">methods</span>(<span class="dt">class =</span> <span class="st">&quot;factor&quot;</span>)</a>
-<a class="sourceLine" id="cb341-2" data-line-number="2">##  [1] [.factor             [[.factor           </a>
-<a class="sourceLine" id="cb341-3" data-line-number="3">##  [3] [[&lt;-.factor          [&lt;-.factor          </a>
-<a class="sourceLine" id="cb341-4" data-line-number="4">##  [5] all.equal.factor     as.character.factor </a>
-<a class="sourceLine" id="cb341-5" data-line-number="5">##  [7] as.data.frame.factor as.Date.factor      </a>
-<a class="sourceLine" id="cb341-6" data-line-number="6">##  [9] as.list.factor       as.logical.factor   </a>
-<a class="sourceLine" id="cb341-7" data-line-number="7">## [11] as.POSIXlt.factor    as.vector.factor    </a>
-<a class="sourceLine" id="cb341-8" data-line-number="8">## [13] droplevels.factor    format.factor       </a>
-<a class="sourceLine" id="cb341-9" data-line-number="9">## [15] is.na&lt;-.factor       length&lt;-.factor     </a>
-<a class="sourceLine" id="cb341-10" data-line-number="10">## [17] levels&lt;-.factor      Math.factor         </a>
-<a class="sourceLine" id="cb341-11" data-line-number="11">## [19] Ops.factor           plot.factor*        </a>
-<a class="sourceLine" id="cb341-12" data-line-number="12">## [21] print.factor         relevel.factor*     </a>
-<a class="sourceLine" id="cb341-13" data-line-number="13">## [23] relist.factor*       rep.factor          </a>
-<a class="sourceLine" id="cb341-14" data-line-number="14">## [25] summary.factor       Summary.factor      </a>
-<a class="sourceLine" id="cb341-15" data-line-number="15">## [27] xtfrm.factor        </a>
-<a class="sourceLine" id="cb341-16" data-line-number="16">## </a>
-<a class="sourceLine" id="cb341-17" data-line-number="17">##    Nonvisible functions are asterisked</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">methods</span>(<span class="dt">class =</span> <span class="st">&quot;factor&quot;</span>)
+##  [1] [.factor             [[.factor           
+##  [3] [[&lt;-.factor          [&lt;-.factor          
+##  [5] all.equal.factor     as.character.factor 
+##  [7] as.data.frame.factor as.Date.factor      
+##  [9] as.list.factor       as.logical.factor   
+## [11] as.POSIXlt.factor    as.vector.factor    
+## [13] droplevels.factor    format.factor       
+## [15] is.na&lt;-.factor       length&lt;-.factor     
+## [17] levels&lt;-.factor      Math.factor         
+## [19] Ops.factor           plot.factor*        
+## [21] print.factor         relevel.factor*     
+## [23] relist.factor*       rep.factor          
+## [25] summary.factor       Summary.factor      
+## [27] xtfrm.factor        
+## 
+##    Nonvisible functions are asterisked</code></pre>
 <p>This output indicates how much work is required to create a robust, well-behaved class. You will usually need to write a <code>class</code> method for every basic R operation.</p>
 <p>Consider two challenges that you will face right away. First, R drops attributes (like <code>class</code>) when it combines objects into a vector:</p>
-<div class="sourceCode" id="cb342"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb342-1" data-line-number="1">play1 &lt;-<span class="st"> </span><span class="kw">play</span>()</a>
-<a class="sourceLine" id="cb342-2" data-line-number="2">play1</a>
-<a class="sourceLine" id="cb342-3" data-line-number="3">## B BBB BBB</a>
-<a class="sourceLine" id="cb342-4" data-line-number="4">## $5</a>
-<a class="sourceLine" id="cb342-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb342-6" data-line-number="6">play2 &lt;-<span class="st"> </span><span class="kw">play</span>()</a>
-<a class="sourceLine" id="cb342-7" data-line-number="7">play2</a>
-<a class="sourceLine" id="cb342-8" data-line-number="8">## 0 B 0</a>
-<a class="sourceLine" id="cb342-9" data-line-number="9">## $0</a>
-<a class="sourceLine" id="cb342-10" data-line-number="10"></a>
-<a class="sourceLine" id="cb342-11" data-line-number="11"><span class="kw">c</span>(play1, play2)</a>
-<a class="sourceLine" id="cb342-12" data-line-number="12">## [1] 5 0</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">play1 &lt;-<span class="st"> </span><span class="kw">play</span>()
+play1
+## B BBB BBB
+## $5
+
+play2 &lt;-<span class="st"> </span><span class="kw">play</span>()
+play2
+## 0 B 0
+## $0
+
+<span class="kw">c</span>(play1, play2)
+## [1] 5 0</code></pre>
 <p>Here, R stops using <code>print.slots</code> to display the vector because the vector <code>c(play1, play2)</code> no longer has a “slots” +class+ attribute.</p>
 <p>Next, R will drop the attributes of an object (like <code>class</code>) when you subset the object:</p>
-<div class="sourceCode" id="cb343"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb343-1" data-line-number="1">play1[<span class="dv">1</span>]</a>
-<a class="sourceLine" id="cb343-2" data-line-number="2">## [1] 5</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">play1[<span class="dv">1</span>]
+## [1] 5</code></pre>
 <p>You can avoid this behavior by writing a <code>c.slots</code> method and a <code>[.slots</code> method, but then difficulties will quickly accrue. How would you combine the <code>symbols</code> attributes of multiple plays into a vector of symbols attributes? How would you change <code>print.slots</code> to handle vectors of outputs? These challenges are open for you to explore. However, you will usually not have to attempt this type of large-scale programming as a data scientist.</p>
 <p>In our case, it is very handy to let <code>slots</code> objects revert to single prize values when we combine groups of them together into a vector.</p>
 </div>
@@ -800,7 +801,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio-education/hopr/edit/master/S3.rmd",
+"link": "https://github.com/rstudio-education/hopr/edit/master/s3.rmd",
 "text": "Edit"
 },
 "download": null,
@@ -817,7 +818,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');
     script.src = src;

@@ -7,12 +7,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Hands-On Programming with R</title>
   <meta name="description" content="This book will teach you how to program in R, with hands-on examples. I wrote it for non-programmers to provide a friendly introduction to the R language. You’ll learn how to load data, assemble and disassemble data objects, navigate R’s environment system, write your own functions, and use all of R’s programming tools. Throughout the book, you’ll use your newfound skills to solve practical data science problems.">
-  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
   <meta property="og:title" content="Hands-On Programming with R" />
   <meta property="og:type" content="book" />
-  <meta property="og:url" content="http://r4ds.had.co.nz/" />
-  <meta property="og:image" content="http://r4ds.had.co.nz/cover.png" />
+  <meta property="og:url" content="https://rstudio-education.github.io/hopr/" />
+  <meta property="og:image" content="https://rstudio-education.github.io/hopr/cover.png" />
   <meta property="og:description" content="This book will teach you how to program in R, with hands-on examples. I wrote it for non-programmers to provide a friendly introduction to the R language. You’ll learn how to load data, assemble and disassemble data objects, navigate R’s environment system, write your own functions, and use all of R’s programming tools. Throughout the book, you’ll use your newfound skills to solve practical data science problems." />
   <meta name="github-repo" content="rstudio-education/hopr" />
 
@@ -20,7 +20,7 @@
   <meta name="twitter:title" content="Hands-On Programming with R" />
   <meta name="twitter:site" content="@statgarrett" />
   <meta name="twitter:description" content="This book will teach you how to program in R, with hands-on examples. I wrote it for non-programmers to provide a friendly introduction to the R language. You’ll learn how to load data, assemble and disassemble data objects, navigate R’s environment system, write your own functions, and use all of R’s programming tools. Throughout the book, you’ll use your newfound skills to solve practical data science problems." />
-  <meta name="twitter:image" content="http://r4ds.had.co.nz/cover.png" />
+  <meta name="twitter:image" content="https://rstudio-education.github.io/hopr/cover.png" />
 
 <meta name="author" content="Garrett Grolemund">
 
@@ -35,6 +35,7 @@
 <link rel="next" href="project-2-playing-cards.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
@@ -193,7 +194,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.1.2" data-path="r-notation.html"><a href="r-notation.html#negative-integers"><i class="fa fa-check"></i><b>4.1.2</b> Negative Integers</a></li>
 <li class="chapter" data-level="4.1.3" data-path="r-notation.html"><a href="r-notation.html#zero"><i class="fa fa-check"></i><b>4.1.3</b> Zero</a></li>
 <li class="chapter" data-level="4.1.4" data-path="r-notation.html"><a href="r-notation.html#blank-spaces"><i class="fa fa-check"></i><b>4.1.4</b> Blank Spaces</a></li>
-<li class="chapter" data-level="4.1.5" data-path="r-objects.html"><a href="r-objects.html#logicals"><i class="fa fa-check"></i><b>4.1.5</b> Logical Values</a></li>
+<li class="chapter" data-level="4.1.5" data-path="r-notation.html"><a href="r-notation.html#logic"><i class="fa fa-check"></i><b>4.1.5</b> Logical Values</a></li>
 <li class="chapter" data-level="4.1.6" data-path="r-notation.html"><a href="r-notation.html#names-1"><i class="fa fa-check"></i><b>4.1.6</b> Names</a></li>
 </ul></li>
 <li class="chapter" data-level="4.2" data-path="r-notation.html"><a href="r-notation.html#deal-a-card"><i class="fa fa-check"></i><b>4.2</b> Deal a Card</a></li>
@@ -352,27 +353,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">2.1.2</span> library</h3>
 <p>Installing a package doesn’t place its functions at your fingertips just yet: it simply places them in your hard drive. To use an R package, you next have to load it in your R session with the command <em><code>library(&quot;ggplot2&quot;)</code></em>. If you would like to load a different package, replace ggplot2 with your package name in the code.</p>
 <p>To see what this does, try an experiment. First, ask R to show you the <code>qplot</code> function. R won’t be able to find <code>qplot</code> because <code>qplot</code> lives in the ggplot2 package, which you haven’t loaded:</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" data-line-number="1">qplot</a>
-<a class="sourceLine" id="cb45-2" data-line-number="2">## Error: object &#39;qplot&#39; not found</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">qplot
+## Error: object &#39;qplot&#39; not found</code></pre>
 <p>Now load the ggplot2 package:</p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" data-line-number="1"><span class="kw">library</span>(<span class="st">&quot;ggplot2&quot;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;ggplot2&quot;</span>)</code></pre>
 <p>If you installed the package with <code>install.packages</code> as instructed, everything should go fine. Don’t worry if you don’t see any results or messages. No news is fine news when loading a package. Don’t worry if you do see a message either; ggplot2 sometimes displays helpful start up messages. As long as you do not see anything that says “Error,” you are doing fine.</p>
 <p>Now if you ask to see <code>qplot</code>, R will show you quite a bit of code (<code>qplot</code> is a long function):</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" data-line-number="1">qplot</a>
-<a class="sourceLine" id="cb47-2" data-line-number="2">## (quite a bit of code)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">qplot
+## (quite a bit of code)</code></pre>
 <p><a href="packages2.html#packages2">Appendix 2: R Packages</a> contains many more details about acquiring and using packages. I recommend that you read it if you are unfamiliar with R’s package system. The main thing to remember is that you only need to install a package once, but you need to load it with <code>library</code> each time you wish to use it in a new R session. R will unload all of its packages each time you close RStudio.</p>
 <p>Now that you’ve loaded <code>qplot</code>, let’s take it for a spin. <code>qplot</code> makes “quick plots.” If you give <code>qplot</code> two vectors of equal lengths, <code>qplot</code> will draw a scatterplot for you. <code>qplot</code> will use the first vector as a set of x values and the second vector as a set of y values. Look for the plot to appear in the Plots tab of the bottom-right pane in your RStudio window.</p>
 <p>The following code will make the plot that appears in <a href="packages.html#fig:qplot">2.1</a>. Until now, we’ve been creating sequences of numbers with the <code>:</code> operator; but you can also create vectors of numbers with the <code>c</code> function. Give <code>c</code> all of the numbers that you want to appear in the vector, separated by a comma. <code>c</code> stands for <em>concatenate</em>, but you can think of it as “collect” or “combine”:</p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="fl">-0.8</span>, <span class="fl">-0.6</span>, <span class="fl">-0.4</span>, <span class="fl">-0.2</span>, <span class="dv">0</span>, <span class="fl">0.2</span>, <span class="fl">0.4</span>, <span class="fl">0.6</span>, <span class="fl">0.8</span>, <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb48-2" data-line-number="2">x</a>
-<a class="sourceLine" id="cb48-3" data-line-number="3">## -1.0 -0.8 -0.6 -0.4 -0.2  0.0  0.2  0.4  0.6  0.8  1.0</a>
-<a class="sourceLine" id="cb48-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb48-5" data-line-number="5">y &lt;-<span class="st"> </span>x<span class="op">^</span><span class="dv">3</span></a>
-<a class="sourceLine" id="cb48-6" data-line-number="6">y</a>
-<a class="sourceLine" id="cb48-7" data-line-number="7">## -1.000 -0.512 -0.216 -0.064 -0.008  0.000  0.008</a>
-<a class="sourceLine" id="cb48-8" data-line-number="8">##  0.064  0.216  0.512  1.000</a>
-<a class="sourceLine" id="cb48-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb48-10" data-line-number="10"><span class="kw">qplot</span>(x, y)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="fl">-0.8</span>, <span class="fl">-0.6</span>, <span class="fl">-0.4</span>, <span class="fl">-0.2</span>, <span class="dv">0</span>, <span class="fl">0.2</span>, <span class="fl">0.4</span>, <span class="fl">0.6</span>, <span class="fl">0.8</span>, <span class="dv">1</span>)
+x
+## -1.0 -0.8 -0.6 -0.4 -0.2  0.0  0.2  0.4  0.6  0.8  1.0
+
+y &lt;-<span class="st"> </span>x<span class="op">^</span><span class="dv">3</span>
+y
+## -1.000 -0.512 -0.216 -0.064 -0.008  0.000  0.008
+##  0.064  0.216  0.512  1.000
+
+<span class="kw">qplot</span>(x, y)</code></pre>
 <div class="figure"><span id="fig:qplot"></span>
 <img src="images/hopr_0201.png" alt="qplot makes a scatterplot when you give it two vectors."  />
 <p class="caption">
@@ -382,8 +383,8 @@ Figure 2.1: qplot makes a scatterplot when you give it two vectors.
 <p>You don’t need to name your vectors <code>x</code> and <code>y</code>. I just did that to make the example clear. As you can see in <a href="packages.html#fig:qplot">2.1</a>, a scatterplot is a set of points, each plotted according to its x and y values. Together, the vectors <code>x</code> and <code>y</code> describe a set of 10 points. How did R match up the values in <code>x</code> and <code>y</code> to make these points? With element-wise execution, as we saw in <a href="basics.html#fig:elementwise">1.3</a>.</p>
 <p>Scatterplots are useful for visualizing the relationship between two variables. However, we’re going to use a different type of graph, a <em>histogram</em>. A histogram visualizes the distribution of a single variable; it displays how many data points appear at each value of x.</p>
 <p>Let’s take a look at a histogram to see if this makes sense. <code>qplot</code> will make a histogram whenever you give it only <em>one</em> vector to plot. The following code makes the left-hand plot in <a href="packages.html#fig:hist">2.2</a> (we’ll worry about the right-hand plot in just second). To make sure our graphs look the same, use the extra argument <em><code>binwidth = 1</code></em>:</p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">3</span>)</a>
-<a class="sourceLine" id="cb49-2" data-line-number="2"><span class="kw">qplot</span>(x, <span class="dt">binwidth =</span> <span class="dv">1</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">3</span>)
+<span class="kw">qplot</span>(x, <span class="dt">binwidth =</span> <span class="dv">1</span>)</code></pre>
 <div class="figure"><span id="fig:hist"></span>
 <img src="images/hopr_0202.png" alt="qplot makes a histogram when you give it a single vector."  />
 <p class="caption">
@@ -392,8 +393,8 @@ Figure 2.2: qplot makes a histogram when you give it a single vector.
 </div>
 <p>This plot shows that our vector contains one value in the interval <code>[1, 2)</code> by placing a bar of height 1 above that interval. Similarly, the plot shows that the vector contains three values in the interval <code>[2, 3)</code> by placing a bar of height 3 in that interval. It shows that the vector contains two values in the interval <code>[3, 4)</code> by placing a bar of height 2 in that interval. In these intervals, the hard bracket, <code>[</code>, means that the first number is included in the interval. The parenthesis, <code>)</code>, means that the last number is <em>not</em> included.</p>
 <p>Let’s try another histogram. This code makes the right-hand plot in <a href="packages.html#fig:hist">2.2</a>. Notice that there are five points with a value of 1 in <code>x2</code>. The histogram displays this by plotting a bar of height 5 above the interval x2 = [1, 2):</p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" data-line-number="1">x2 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">4</span>)</a>
-<a class="sourceLine" id="cb50-2" data-line-number="2"><span class="kw">qplot</span>(x2, <span class="dt">binwidth =</span> <span class="dv">1</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">x2 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">4</span>)
+<span class="kw">qplot</span>(x2, <span class="dt">binwidth =</span> <span class="dv">1</span>)</code></pre>
 
 <div class="exercise">
 <span id="exr:unnamed-chunk-3" class="exercise"><strong>Exercise 2.1  (Visualize a Histogram)  </strong></span>Let <code>x3</code> be the following vector:
@@ -412,11 +413,11 @@ Figure 2.2: qplot makes a histogram when you give it a single vector.
 <p>Well, if you roll your dice many times and keep track of the results, you would expect some numbers to occur more than others. This is because there are more ways to get some numbers by adding two dice together than to get other numbers, as shown in <a href="packages.html#fig:probs">2.3</a>.</p>
 <p>If you roll your dice many times and plot the results with <code>qplot</code>, the histogram will show you how often each sum appeared. The sums that occurred most often will have the highest bars. The histogram should look like the pattern in <a href="packages.html#fig:probs">2.3</a> if the dice are fairly weighted.</p>
 <p>This is where <code>replicate</code> comes in. <code>replicate</code> provides an easy way to repeat an R command many times. To use it, first give <code>replicate</code> the number of times you wish to repeat an R command, and then give it the command you wish to repeat. <code>replicate</code> will run the command multiple times and store the results as a vector:</p>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" data-line-number="1"><span class="kw">replicate</span>(<span class="dv">3</span>, <span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb51-2" data-line-number="2">## 2 2 2</a>
-<a class="sourceLine" id="cb51-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb51-4" data-line-number="4"><span class="kw">replicate</span>(<span class="dv">10</span>, <span class="kw">roll</span>())</a>
-<a class="sourceLine" id="cb51-5" data-line-number="5">## 3  7  5  3  6  2  3  8 11  7</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">replicate</span>(<span class="dv">3</span>, <span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="dv">1</span>)
+## 2 2 2
+
+<span class="kw">replicate</span>(<span class="dv">10</span>, <span class="kw">roll</span>())
+## 3  7  5  3  6  2  3  8 11  7</code></pre>
 <div class="figure"><span id="fig:probs"></span>
 <img src="images/hopr_0203.png" alt="Each individual dice combination should occur with the same frequency. As a result, some sums will occur more often than others. With fair dice, each sum should appear in proportion to the number of combinations that make it."  />
 <p class="caption">
@@ -424,8 +425,8 @@ Figure 2.3: Each individual dice combination should occur with the same frequenc
 </p>
 </div>
 <p>A histogram of your first 10 rolls probably won’t look like the pattern shown in <a href="packages.html#fig:probs">2.3</a>. Why not? There is too much randomness involved. Remember that we use dice in real life because they are effective random number generators. Patterns of long run frequencies will only appear <em>over the long run</em>. So let’s simulate 10,000 dice rolls and plot the results. Don’t worry; <code>qplot</code> and <code>replicate</code> can handle it. The results appear in <a href="packages.html#fig:fair">2.4</a>:</p>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" data-line-number="1">rolls &lt;-<span class="st"> </span><span class="kw">replicate</span>(<span class="dv">10000</span>, <span class="kw">roll</span>())</a>
-<a class="sourceLine" id="cb52-2" data-line-number="2"><span class="kw">qplot</span>(rolls, <span class="dt">binwidth =</span> <span class="dv">1</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">rolls &lt;-<span class="st"> </span><span class="kw">replicate</span>(<span class="dv">10000</span>, <span class="kw">roll</span>())
+<span class="kw">qplot</span>(rolls, <span class="dt">binwidth =</span> <span class="dv">1</span>)</code></pre>
 <p>The results suggest that the dice are fair. Over the long run, each number occurs in proportion to the number of combinations that generate it.</p>
 <p>Now how can you bias these results? The previous pattern occurs because each underlying combination of dice (e.g., (3,4)) occurs with the same frequency. If you could increase the probability that a 6 is rolled on either die, then any combination with a six in it will occur more often than any combination without a six in it. The combination (6, 6) would occur most of all. This won’t make the dice add up to 12 more often than they add up to seven, but it will skew the results toward the higher numbers.</p>
 <div class="figure"><span id="fig:fair"></span>
@@ -482,9 +483,9 @@ Figure 2.4: The behavior of our dice suggests that they are fair. Seven occurs m
 <div id="getting-help-with-help-pages" class="section level2">
 <h2><span class="header-section-number">2.2</span> Getting Help with Help Pages</h2>
 <p>There are over 1,000 functions at the core of R, and new R functions are created all of the time. This can be a lot of material to memorize and learn! Luckily, each R function comes with its own help page, which you can access by typing the function’s name after a question mark. For example, each of these commands will open a help page. Look for the pages to appear in the Help tab of RStudio’s bottom-right pane:</p>
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" data-line-number="1">?sqrt</a>
-<a class="sourceLine" id="cb53-2" data-line-number="2">?log10</a>
-<a class="sourceLine" id="cb53-3" data-line-number="3">?sample</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">?sqrt
+?log10
+?sample</code></pre>
 <p>Help pages contain useful information about what each function does. These help pages also serve as code documentation, so reading them can be bittersweet. They often seem to be written for people who already understand the function and do not need help.</p>
 <p>Don’t let this bother you—you can gain a lot from a help page by scanning it for information that makes sense and glossing over the rest. This technique will inevitably bring you to the most helpful part of each help page: the bottom. Here, almost every help page includes some example code that puts the function in action. Running this code is a great way to learn by example.</p>
 
@@ -503,10 +504,10 @@ If a function comes in an R package, R won’t be able to find its help page unl
 <p><strong>See Also</strong> - A short list of related R functions.</p>
 <p><strong>Examples</strong> - Example code that uses the function and is guaranteed to work. The examples section of a help page usually demonstrates a couple different ways to use a function. This helps give you an idea of what the function is capable of.</p>
 <p>If you’d like to look up the help page for a function but have forgotten the function’s name, you can search by keyword. To do this, type two question marks followed by a keyword in R’s command line. R will pull up a list of links to help pages related to the keyword. You can think of this as the help page for the help page:</p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb54-1" data-line-number="1">??log</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">??log</code></pre>
 <p>Let’s take a stroll through <code>sample</code>’s help page. Remember: we’re searching for anything that could help you change the probabilities involved in the sampling process. I’m not going to reproduce the whole help page here (just the juiciest parts), so you should follow along on your computer.</p>
 <p>First, open the help page. It will appear in the same pane in RStudio as your plots did (but in the Help tab, not the Plots tab):</p>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb55-1" data-line-number="1">?sample</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">?sample</code></pre>
 <p>What do you see? Starting from the top:</p>
 <pre><code>
 Random Samples and Permutations
@@ -533,11 +534,11 @@ should be nonnegative and not all zero.</code></pre>
 <span id="exr:unnamed-chunk-6" class="exercise"><strong>Exercise 2.2  (Roll a Pair of Dice)  </strong></span>Rewrite the <code>roll</code> function below to roll a pair of weighted dice:
 </div>
 
-<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb61-1" data-line-number="1">roll &lt;-<span class="st"> </span><span class="cf">function</span>() {</a>
-<a class="sourceLine" id="cb61-2" data-line-number="2">  die &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">6</span></a>
-<a class="sourceLine" id="cb61-3" data-line-number="3">  dice &lt;-<span class="st"> </span><span class="kw">sample</span>(die, <span class="dt">size =</span> <span class="dv">2</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb61-4" data-line-number="4">  <span class="kw">sum</span>(dice)</a>
-<a class="sourceLine" id="cb61-5" data-line-number="5">}</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">roll &lt;-<span class="st"> </span><span class="cf">function</span>() {
+  die &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">6</span>
+  dice &lt;-<span class="st"> </span><span class="kw">sample</span>(die, <span class="dt">size =</span> <span class="dv">2</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>)
+  <span class="kw">sum</span>(dice)
+}</code></pre>
 <p>You will need to add a <code>prob</code> argument to the <code>sample</code> function inside of <code>roll</code>. This argument should tell <code>sample</code> to sample the numbers one through five with probability 1/8 and the number 6 with probability 3/8.</p>
 <p>When you are finished, read on for a model answer.</p>
 
@@ -545,16 +546,16 @@ should be nonnegative and not all zero.</code></pre>
  <span class="solution"><em>Solution. </em></span> To weight your dice, you need to add a <code>prob</code> argument with a vector of weights to <code>sample</code>, like this:
 </div>
 
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" data-line-number="1">roll &lt;-<span class="st"> </span><span class="cf">function</span>() {</a>
-<a class="sourceLine" id="cb62-2" data-line-number="2">  die &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">6</span></a>
-<a class="sourceLine" id="cb62-3" data-line-number="3">  dice &lt;-<span class="st"> </span><span class="kw">sample</span>(die, <span class="dt">size =</span> <span class="dv">2</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>, </a>
-<a class="sourceLine" id="cb62-4" data-line-number="4">    <span class="dt">prob =</span> <span class="kw">c</span>(<span class="dv">1</span><span class="op">/</span><span class="dv">8</span>, <span class="dv">1</span><span class="op">/</span><span class="dv">8</span>, <span class="dv">1</span><span class="op">/</span><span class="dv">8</span>, <span class="dv">1</span><span class="op">/</span><span class="dv">8</span>, <span class="dv">1</span><span class="op">/</span><span class="dv">8</span>, <span class="dv">3</span><span class="op">/</span><span class="dv">8</span>))</a>
-<a class="sourceLine" id="cb62-5" data-line-number="5">  <span class="kw">sum</span>(dice)</a>
-<a class="sourceLine" id="cb62-6" data-line-number="6">}</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">roll &lt;-<span class="st"> </span><span class="cf">function</span>() {
+  die &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">6</span>
+  dice &lt;-<span class="st"> </span><span class="kw">sample</span>(die, <span class="dt">size =</span> <span class="dv">2</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>, 
+    <span class="dt">prob =</span> <span class="kw">c</span>(<span class="dv">1</span><span class="op">/</span><span class="dv">8</span>, <span class="dv">1</span><span class="op">/</span><span class="dv">8</span>, <span class="dv">1</span><span class="op">/</span><span class="dv">8</span>, <span class="dv">1</span><span class="op">/</span><span class="dv">8</span>, <span class="dv">1</span><span class="op">/</span><span class="dv">8</span>, <span class="dv">3</span><span class="op">/</span><span class="dv">8</span>))
+  <span class="kw">sum</span>(dice)
+}</code></pre>
 <p>This will cause <code>roll</code> to pick 1 through 5 with probability 1/8 and 6 with probability 3/8.</p>
 <p>Overwrite your previous version of <code>roll</code> with the new function (by running the previous code snippet in your command line). Then visualize the new long-term behavior of your dice. I’ve put the results in <a href="packages.html#fig:weighted">2.5</a> next to our original results:</p>
-<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb63-1" data-line-number="1">rolls &lt;-<span class="st"> </span><span class="kw">replicate</span>(<span class="dv">10000</span>, <span class="kw">roll</span>())</a>
-<a class="sourceLine" id="cb63-2" data-line-number="2"><span class="kw">qplot</span>(rolls, <span class="dt">binwidth =</span> <span class="dv">1</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">rolls &lt;-<span class="st"> </span><span class="kw">replicate</span>(<span class="dv">10000</span>, <span class="kw">roll</span>())
+<span class="kw">qplot</span>(rolls, <span class="dt">binwidth =</span> <span class="dv">1</span>)</code></pre>
 <p>This confirms that we’ve effectively weighted the dice. High numbers occur much more often than low numbers. The remarkable thing is that this behavior will only be apparent when you examine long-term frequencies. On any single roll, the dice will appear to behave randomly. This is great news if you play Settlers of Catan (just tell your friends you lost the dice), but it should be disturbing if you analyze data, because it means that bias can easily occur without anyone noticing it in the short run.</p>
 <div class="figure"><span id="fig:weighted"></span>
 <img src="images/hopr_0205.png" alt="The dice are now clearly biased towards high numbers, since high sums occur much more often than low sums."  />
@@ -630,7 +631,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');
     script.src = src;

@@ -7,12 +7,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Hands-On Programming with R</title>
   <meta name="description" content="This book will teach you how to program in R, with hands-on examples. I wrote it for non-programmers to provide a friendly introduction to the R language. You’ll learn how to load data, assemble and disassemble data objects, navigate R’s environment system, write your own functions, and use all of R’s programming tools. Throughout the book, you’ll use your newfound skills to solve practical data science problems.">
-  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
   <meta property="og:title" content="Hands-On Programming with R" />
   <meta property="og:type" content="book" />
-  <meta property="og:url" content="http://r4ds.had.co.nz/" />
-  <meta property="og:image" content="http://r4ds.had.co.nz/cover.png" />
+  <meta property="og:url" content="https://rstudio-education.github.io/hopr/" />
+  <meta property="og:image" content="https://rstudio-education.github.io/hopr/cover.png" />
   <meta property="og:description" content="This book will teach you how to program in R, with hands-on examples. I wrote it for non-programmers to provide a friendly introduction to the R language. You’ll learn how to load data, assemble and disassemble data objects, navigate R’s environment system, write your own functions, and use all of R’s programming tools. Throughout the book, you’ll use your newfound skills to solve practical data science problems." />
   <meta name="github-repo" content="rstudio-education/hopr" />
 
@@ -20,7 +20,7 @@
   <meta name="twitter:title" content="Hands-On Programming with R" />
   <meta name="twitter:site" content="@statgarrett" />
   <meta name="twitter:description" content="This book will teach you how to program in R, with hands-on examples. I wrote it for non-programmers to provide a friendly introduction to the R language. You’ll learn how to load data, assemble and disassemble data objects, navigate R’s environment system, write your own functions, and use all of R’s programming tools. Throughout the book, you’ll use your newfound skills to solve practical data science problems." />
-  <meta name="twitter:image" content="http://r4ds.had.co.nz/cover.png" />
+  <meta name="twitter:image" content="https://rstudio-education.github.io/hopr/cover.png" />
 
 <meta name="author" content="Garrett Grolemund">
 
@@ -35,6 +35,7 @@
 <link rel="next" href="packages.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
@@ -193,7 +194,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.1.2" data-path="r-notation.html"><a href="r-notation.html#negative-integers"><i class="fa fa-check"></i><b>4.1.2</b> Negative Integers</a></li>
 <li class="chapter" data-level="4.1.3" data-path="r-notation.html"><a href="r-notation.html#zero"><i class="fa fa-check"></i><b>4.1.3</b> Zero</a></li>
 <li class="chapter" data-level="4.1.4" data-path="r-notation.html"><a href="r-notation.html#blank-spaces"><i class="fa fa-check"></i><b>4.1.4</b> Blank Spaces</a></li>
-<li class="chapter" data-level="4.1.5" data-path="r-objects.html"><a href="r-objects.html#logicals"><i class="fa fa-check"></i><b>4.1.5</b> Logical Values</a></li>
+<li class="chapter" data-level="4.1.5" data-path="r-notation.html"><a href="r-notation.html#logic"><i class="fa fa-check"></i><b>4.1.5</b> Logical Values</a></li>
 <li class="chapter" data-level="4.1.6" data-path="r-notation.html"><a href="r-notation.html#names-1"><i class="fa fa-check"></i><b>4.1.6</b> Names</a></li>
 </ul></li>
 <li class="chapter" data-level="4.2" data-path="r-notation.html"><a href="r-notation.html#deal-a-card"><i class="fa fa-check"></i><b>4.2</b> Deal a Card</a></li>
@@ -387,14 +388,14 @@ In some languages, like C, Java, and FORTRAN, you have to compile your human-rea
 Error: unexpected input in &quot;3 % 5&quot;
 &gt;</code></pre>
 <p>Once you get the hang of the command line, you can easily do anything in R that you would do with a calculator. For example, you could do some basic arithmetic:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="dv">3</span>   </a>
-<a class="sourceLine" id="cb5-2" data-line-number="2">## 6</a>
-<a class="sourceLine" id="cb5-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="dv">4</span> <span class="op">-</span><span class="st"> </span><span class="dv">1</span>   </a>
-<a class="sourceLine" id="cb5-5" data-line-number="5">## 3</a>
-<a class="sourceLine" id="cb5-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb5-7" data-line-number="7"><span class="dv">6</span> <span class="op">/</span><span class="st"> </span>(<span class="dv">4</span> <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)   </a>
-<a class="sourceLine" id="cb5-8" data-line-number="8">## 2</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="dv">3</span>   
+## 6
+
+<span class="dv">4</span> <span class="op">-</span><span class="st"> </span><span class="dv">1</span>   
+## 3
+
+<span class="dv">6</span> <span class="op">/</span><span class="st"> </span>(<span class="dv">4</span> <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)   
+## 2</code></pre>
 <p>Did you notice something different about this code? I’ve left out the <code>&gt;</code>’s and <code>[1]</code>’s. This will make the code easier to copy and paste if you want to put it in your own console.</p>
 <p>R treats the hashtag character, <code>#</code>, in a special way; R will not run anything that follows a hashtag on a line. This makes hashtags very useful for adding comments and annotations to your code. Humans will be able to read the comments, but your computer will pass over them. The hashtag is known as the <em>commenting symbol</em> in R.</p>
 <p>For the remainder of the book, I’ll use hashtags to display the output of R code. I’ll use a single hashtag to add my own comments and a double hashtag, <code>##</code>, to display the results of code. I’ll avoid showing <code>&gt;</code>s and <code>[1]</code>s unless I want you to look at them.</p>
@@ -420,31 +421,31 @@ Some R commands may take a long time to run. You can cancel a command once it ha
  <span class="solution"><em>Solution. </em></span> You could start with the number 10, and then do the following steps:
 </div>
 
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="dv">10</span> <span class="op">+</span><span class="st"> </span><span class="dv">2</span></a>
-<a class="sourceLine" id="cb6-2" data-line-number="2">## 12</a>
-<a class="sourceLine" id="cb6-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb6-4" data-line-number="4"><span class="dv">12</span> <span class="op">*</span><span class="st"> </span><span class="dv">3</span></a>
-<a class="sourceLine" id="cb6-5" data-line-number="5">## 36</a>
-<a class="sourceLine" id="cb6-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb6-7" data-line-number="7"><span class="dv">36</span> <span class="op">-</span><span class="st"> </span><span class="dv">6</span></a>
-<a class="sourceLine" id="cb6-8" data-line-number="8">## 30</a>
-<a class="sourceLine" id="cb6-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb6-10" data-line-number="10"><span class="dv">30</span> <span class="op">/</span><span class="st"> </span><span class="dv">3</span></a>
-<a class="sourceLine" id="cb6-11" data-line-number="11">## 10</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="dv">10</span> <span class="op">+</span><span class="st"> </span><span class="dv">2</span>
+## 12
+
+<span class="dv">12</span> <span class="op">*</span><span class="st"> </span><span class="dv">3</span>
+## 36
+
+<span class="dv">36</span> <span class="op">-</span><span class="st"> </span><span class="dv">6</span>
+## 30
+
+<span class="dv">30</span> <span class="op">/</span><span class="st"> </span><span class="dv">3</span>
+## 10</code></pre>
 </div>
 <div id="objects" class="section level2">
 <h2><span class="header-section-number">1.2</span> Objects</h2>
 <p>Now that you know how to use R, let’s use it to make a virtual die. The <code>:</code> operator from a couple of pages ago gives you a nice way to create a group of numbers from one to six. The <code>:</code> operator returns its results as a <strong>vector</strong>, a one-dimensional set of numbers:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="dv">1</span><span class="op">:</span><span class="dv">6</span></a>
-<a class="sourceLine" id="cb7-2" data-line-number="2">## 1 2 3 4 5 6</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="dv">1</span><span class="op">:</span><span class="dv">6</span>
+## 1 2 3 4 5 6</code></pre>
 <p>That’s all there is to how a virtual die looks! But you are not done yet. Running <code>1:6</code> generated a vector of numbers for you to see, but it didn’t save that vector anywhere in your computer’s memory. What you are looking at is basically the footprints of six numbers that existed briefly and then melted back into your computer’s RAM. If you want to use those numbers again, you’ll have to ask your computer to save them somewhere. You can do that by creating an R <em>object</em>.</p>
 <p>R lets you save data by storing it inside an R object. What is an object? Just a name that you can use to call up stored data. For example, you can save data into an object like <em><code>a</code></em> or <em><code>b</code></em>. Wherever R encounters the object, it will replace it with the data saved inside, like so:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">a &lt;-<span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb8-2" data-line-number="2">a</a>
-<a class="sourceLine" id="cb8-3" data-line-number="3">## 1</a>
-<a class="sourceLine" id="cb8-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb8-5" data-line-number="5">a <span class="op">+</span><span class="st"> </span><span class="dv">2</span></a>
-<a class="sourceLine" id="cb8-6" data-line-number="6">## 3</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="dv">1</span>
+a
+## 1
+
+a <span class="op">+</span><span class="st"> </span><span class="dv">2</span>
+## 3</code></pre>
 
 <div class="rmdnote">
 <p><strong>What just happened?</strong></p>
@@ -455,10 +456,10 @@ Some R commands may take a long time to run. You can cancel a command once it ha
 </div></li>
 </ol>
 <p>So, for another example, the following code would create an object named <code>die</code> that contains the numbers one through six. To see what is stored in an object, just type the object’s name by itself:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">die &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">6</span></a>
-<a class="sourceLine" id="cb9-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb9-3" data-line-number="3">die</a>
-<a class="sourceLine" id="cb9-4" data-line-number="4">## 1 2 3 4 5 6</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">die &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">6</span>
+
+die
+## 1 2 3 4 5 6</code></pre>
 <p>When you create an object, the object will appear in the environment pane of RStudio, as shown in <a href="basics.html#fig:environment">1.2</a>. This pane will show you all of the objects you’ve created since opening RStudio.</p>
 <div class="figure"><span id="fig:environment"></span>
 <img src="images/hopr_0102.png" alt="The RStudio environment pane keeps track of the R objects you create."  />
@@ -485,26 +486,26 @@ Figure 1.2: The RStudio environment pane keeps track of the R objects you create
 </div>
 
 <p>Finally, R will overwrite any previous information stored in an object without asking you for permission. So, it is a good idea to <em>not</em> use names that are already taken:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">my_number &lt;-<span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb10-2" data-line-number="2">my_number </a>
-<a class="sourceLine" id="cb10-3" data-line-number="3">## 1</a>
-<a class="sourceLine" id="cb10-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb10-5" data-line-number="5">my_number &lt;-<span class="st"> </span><span class="dv">999</span></a>
-<a class="sourceLine" id="cb10-6" data-line-number="6">my_number</a>
-<a class="sourceLine" id="cb10-7" data-line-number="7">## 999</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">my_number &lt;-<span class="st"> </span><span class="dv">1</span>
+my_number 
+## 1
+
+my_number &lt;-<span class="st"> </span><span class="dv">999</span>
+my_number
+## 999</code></pre>
 <p>You can see which object names you have already used with the function <code>ls</code>:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw">ls</span>()</a>
-<a class="sourceLine" id="cb11-2" data-line-number="2">## &quot;a&quot;         &quot;die&quot;       &quot;my_number&quot; &quot;name&quot;     &quot;Name&quot;     </a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ls</span>()
+## &quot;a&quot;         &quot;die&quot;       &quot;my_number&quot; &quot;name&quot;     &quot;Name&quot;     </code></pre>
 <p>You can also see which names you have used by examining RStudio’s environment pane.</p>
 <p>You now have a virtual die that is stored in your computer’s memory. You can access it whenever you like by typing the word <em><code>die</code></em>. So what can you do with this die? Quite a lot. R will replace an object with its contents whenever the object’s name appears in a command. So, for example, you can do all sorts of math with the die. Math isn’t so helpful for rolling dice, but manipulating sets of numbers will be your stock and trade as a data scientist. So let’s take a look at how to do that:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">die <span class="op">-</span><span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb12-2" data-line-number="2">## 0 1 2 3 4 5</a>
-<a class="sourceLine" id="cb12-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb12-4" data-line-number="4">die <span class="op">/</span><span class="st"> </span><span class="dv">2</span></a>
-<a class="sourceLine" id="cb12-5" data-line-number="5">## 0.5 1.0 1.5 2.0 2.5 3.0</a>
-<a class="sourceLine" id="cb12-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb12-7" data-line-number="7">die <span class="op">*</span><span class="st"> </span>die</a>
-<a class="sourceLine" id="cb12-8" data-line-number="8">## 1  4  9 16 25 36</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">die <span class="op">-</span><span class="st"> </span><span class="dv">1</span>
+## 0 1 2 3 4 5
+
+die <span class="op">/</span><span class="st"> </span><span class="dv">2</span>
+## 0.5 1.0 1.5 2.0 2.5 3.0
+
+die <span class="op">*</span><span class="st"> </span>die
+## 1  4  9 16 25 36</code></pre>
 <p>If you are a big fan of linear algebra (and who isn’t?), you may notice that R does not always follow the rules of matrix multiplication. Instead, R uses <em>element-wise execution</em>. When you manipulate a set of numbers, R will apply the same operation to each element in the set. So for example, when you run <em><code>die - 1</code></em>, R subtracts one from each element of <code>die</code>.</p>
 <p>When you use two or more vectors in an operation, R will line up the vectors and perform a sequence of individual operations. For example, when you run <em><code>die * die</code></em>, R lines up the two <code>die</code> vectors and then multiplies the first element of vector 1 by the first element of vector 2. R then multiplies the second element of vector 1 by the second element of vector 2, and so on, until every element has been multiplied. The result will be a new vector the same length as the first two, as shown in <a href="basics.html#fig:elementwise">1.3</a>.</p>
 <div class="figure"><span id="fig:elementwise"></span>
@@ -514,23 +515,23 @@ Figure 1.3: When R performs element-wise execution, it matches up vectors and th
 </p>
 </div>
 <p>If you give R two vectors of unequal lengths, R will repeat the shorter vector until it is as long as the longer vector, and then do the math, as shown in <a href="basics.html#fig:recycle">1.4</a>. This isn’t a permanent change–the shorter vector will be its original size after R does the math. If the length of the short vector does not divide evenly into the length of the long vector, R will return a warning message. This behavior is known as <em>vector recycling</em>, and it helps R do element-wise operations:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="dv">1</span><span class="op">:</span><span class="dv">2</span></a>
-<a class="sourceLine" id="cb13-2" data-line-number="2">## 1 2</a>
-<a class="sourceLine" id="cb13-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb13-4" data-line-number="4"><span class="dv">1</span><span class="op">:</span><span class="dv">4</span></a>
-<a class="sourceLine" id="cb13-5" data-line-number="5">## 1 2 3 4</a>
-<a class="sourceLine" id="cb13-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb13-7" data-line-number="7">die</a>
-<a class="sourceLine" id="cb13-8" data-line-number="8">## 1 2 3 4 5 6</a>
-<a class="sourceLine" id="cb13-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb13-10" data-line-number="10">die <span class="op">+</span><span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">2</span></a>
-<a class="sourceLine" id="cb13-11" data-line-number="11">## 2 4 4 6 6 8</a>
-<a class="sourceLine" id="cb13-12" data-line-number="12"></a>
-<a class="sourceLine" id="cb13-13" data-line-number="13">die <span class="op">+</span><span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">4</span></a>
-<a class="sourceLine" id="cb13-14" data-line-number="14">## 2 4 6 8 6 8</a>
-<a class="sourceLine" id="cb13-15" data-line-number="15">Warning message<span class="op">:</span></a>
-<a class="sourceLine" id="cb13-16" data-line-number="16">In die <span class="op">+</span><span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">4</span> <span class="op">:</span></a>
-<a class="sourceLine" id="cb13-17" data-line-number="17"><span class="st">  </span>longer object length is not a multiple of shorter object length</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="dv">1</span><span class="op">:</span><span class="dv">2</span>
+## 1 2
+
+<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>
+## 1 2 3 4
+
+die
+## 1 2 3 4 5 6
+
+die <span class="op">+</span><span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">2</span>
+## 2 4 4 6 6 8
+
+die <span class="op">+</span><span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">4</span>
+## 2 4 6 8 6 8
+Warning message<span class="op">:</span>
+In die <span class="op">+</span><span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">4</span> <span class="op">:</span>
+<span class="st">  </span>longer object length is not a multiple of shorter object length</code></pre>
 <div class="figure"><span id="fig:recycle"></span>
 <img src="images/hopr_0104.png" alt="R will repeat a short vector to do element-wise operations with two vectors of uneven lengths."  />
 <p class="caption">
@@ -539,17 +540,17 @@ Figure 1.4: R will repeat a short vector to do element-wise operations with two 
 </div>
 <p>Element-wise operations are a very useful feature in R because they manipulate groups of values in an orderly way. When you start working with data sets, element-wise operations will ensure that values from one observation or case are only paired with values from the same observation or case. Element-wise operations also make it easier to write your own programs and functions in R.</p>
 <p>But don’t think that R has given up on traditional matrix multiplication. You just have to ask for it when you want it. You can do inner multiplication with the <code>%*%</code> operator and outer multiplication with the <code>%o%</code> operator:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1">die <span class="op">%*%</span><span class="st"> </span>die</a>
-<a class="sourceLine" id="cb14-2" data-line-number="2">## 91</a>
-<a class="sourceLine" id="cb14-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb14-4" data-line-number="4">die <span class="op">%o%</span><span class="st"> </span>die</a>
-<a class="sourceLine" id="cb14-5" data-line-number="5">##      [,1] [,2] [,3] [,4] [,5] [,6]</a>
-<a class="sourceLine" id="cb14-6" data-line-number="6">## [1,]    1    2    3    4    5    6</a>
-<a class="sourceLine" id="cb14-7" data-line-number="7">## [2,]    2    4    6    8   10   12</a>
-<a class="sourceLine" id="cb14-8" data-line-number="8">## [3,]    3    6    9   12   15   18</a>
-<a class="sourceLine" id="cb14-9" data-line-number="9">## [4,]    4    8   12   16   20   24</a>
-<a class="sourceLine" id="cb14-10" data-line-number="10">## [5,]    5   10   15   20   25   30</a>
-<a class="sourceLine" id="cb14-11" data-line-number="11">## [6,]    6   12   18   24   30   36</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">die <span class="op">%*%</span><span class="st"> </span>die
+## 91
+
+die <span class="op">%o%</span><span class="st"> </span>die
+##      [,1] [,2] [,3] [,4] [,5] [,6]
+## [1,]    1    2    3    4    5    6
+## [2,]    2    4    6    8   10   12
+## [3,]    3    6    9   12   15   18
+## [4,]    4    8   12   16   20   24
+## [5,]    5   10   15   20   25   30
+## [6,]    6   12   18   24   30   36</code></pre>
 <p>You can also do things like transpose a matrix with <code>t</code> and take its determinant with <code>det</code>.</p>
 <p>Don’t worry if you’re not familiar with these operations. They are easy to look up, and you won’t need them for this book.</p>
 <p>Now that you can do math with your <code>die</code> object, let’s look at how you could “roll” it. Rolling your die will require something more sophisticated than basic arithmetic; you’ll need to randomly select one of the die’s values. And for that, you will need a <em>function</em>.</p>
@@ -557,23 +558,23 @@ Figure 1.4: R will repeat a short vector to do element-wise operations with two 
 <div id="functions" class="section level2">
 <h2><span class="header-section-number">1.3</span> Functions</h2>
 <p>R comes with many functions that you can use to do sophisticated tasks like random sampling. For example, you can round a number with the <code>round</code> function, or calculate its factorial with the <code>factorial</code> function. Using a function is pretty simple. Just write the name of the function and then the data you want the function to operate on in parentheses:</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw">round</span>(<span class="fl">3.1415</span>)</a>
-<a class="sourceLine" id="cb15-2" data-line-number="2">## 3</a>
-<a class="sourceLine" id="cb15-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb15-4" data-line-number="4"><span class="kw">factorial</span>(<span class="dv">3</span>)</a>
-<a class="sourceLine" id="cb15-5" data-line-number="5">## 6</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">round</span>(<span class="fl">3.1415</span>)
+## 3
+
+<span class="kw">factorial</span>(<span class="dv">3</span>)
+## 6</code></pre>
 <p>The data that you pass into the function is called the function’s <em>argument</em>. The argument can be raw data, an R object, or even the results of another R function. In this last case, R will work from the innermost function to the outermost, as in <a href="basics.html#fig:pemdas">1.5</a>.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw">mean</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">6</span>)</a>
-<a class="sourceLine" id="cb16-2" data-line-number="2">## 3.5</a>
-<a class="sourceLine" id="cb16-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb16-4" data-line-number="4"><span class="kw">mean</span>(die)</a>
-<a class="sourceLine" id="cb16-5" data-line-number="5">## 3.5</a>
-<a class="sourceLine" id="cb16-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb16-7" data-line-number="7"><span class="kw">round</span>(<span class="kw">mean</span>(die))</a>
-<a class="sourceLine" id="cb16-8" data-line-number="8">## 4</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">6</span>)
+## 3.5
+
+<span class="kw">mean</span>(die)
+## 3.5
+
+<span class="kw">round</span>(<span class="kw">mean</span>(die))
+## 4</code></pre>
 <p>Lucky for us, there is an R function that can help “roll” the die. You can simulate a roll of the die with R’s <code>sample</code> function. <code>sample</code> takes <em>two</em> arguments: a vector named <code>x</code> and a number named <code>size</code>. <code>sample</code> will return <code>size</code> elements from the vector:</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="kw">sample</span>(<span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dt">size =</span> <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb17-2" data-line-number="2">## 3 2</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sample</span>(<span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dt">size =</span> <span class="dv">2</span>)
+## 3 2</code></pre>
 <div class="figure"><span id="fig:pemdas"></span>
 <img src="images/hopr_0105.png" alt="When you link functions together, R will resolve them from the innermost operation to the outermost. Here R first looks up die, then calculates the mean of one through six, then rounds the mean."  />
 <p class="caption">
@@ -581,66 +582,66 @@ Figure 1.5: When you link functions together, R will resolve them from the inner
 </p>
 </div>
 <p>To roll your die and get a number back, set <code>x</code> to <code>die</code> and sample one element from it. You’ll get a new (maybe different) number each time you roll it:</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="kw">sample</span>(<span class="dt">x =</span> die, <span class="dt">size =</span> <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb18-2" data-line-number="2">## 2</a>
-<a class="sourceLine" id="cb18-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb18-4" data-line-number="4"><span class="kw">sample</span>(<span class="dt">x =</span> die, <span class="dt">size =</span> <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb18-5" data-line-number="5">## 1</a>
-<a class="sourceLine" id="cb18-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb18-7" data-line-number="7"><span class="kw">sample</span>(<span class="dt">x =</span> die, <span class="dt">size =</span> <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb18-8" data-line-number="8">## 6</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sample</span>(<span class="dt">x =</span> die, <span class="dt">size =</span> <span class="dv">1</span>)
+## 2
+
+<span class="kw">sample</span>(<span class="dt">x =</span> die, <span class="dt">size =</span> <span class="dv">1</span>)
+## 1
+
+<span class="kw">sample</span>(<span class="dt">x =</span> die, <span class="dt">size =</span> <span class="dv">1</span>)
+## 6</code></pre>
 <p>Many R functions take multiple arguments that help them do their job. You can give a function as many arguments as you like as long as you separate each argument with a comma.</p>
 <p>You may have noticed that I set <code>die</code> and <code>1</code> equal to the names of the arguments in <code>sample</code>, <code>x</code> and <code>size</code>. Every argument in every R function has a name. You can specify which data should be assigned to which argument by setting a name equal to data, as in the preceding code. This becomes important as you begin to pass multiple arguments to the same function; names help you avoid passing the wrong data to the wrong argument. However, using names is optional. You will notice that R users do not often use the name of the first argument in a function. So you might see the previous code written as:</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="kw">sample</span>(die, <span class="dt">size =</span> <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb19-2" data-line-number="2">## 2</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sample</span>(die, <span class="dt">size =</span> <span class="dv">1</span>)
+## 2</code></pre>
 <p>Often, the name of the first argument is not very descriptive, and it is usually obvious what the first piece of data refers to anyways.</p>
 <p>But how do you know which argument names to use?(((errors/error messages, when naming arguments))) If you try to use a name that a function does not expect, you will likely get an error:</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="kw">round</span>(<span class="fl">3.1415</span>, <span class="dt">corners =</span> <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb20-2" data-line-number="2">## Error in round(3.1415, corners = 2) : unused argument(s) (corners = 2)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">round</span>(<span class="fl">3.1415</span>, <span class="dt">corners =</span> <span class="dv">2</span>)
+## Error in round(3.1415, corners = 2) : unused argument(s) (corners = 2)</code></pre>
 <p>If you’re not sure which names to use with a function, you can look up the function’s arguments with <code>args</code>. To do this, place the name of the function in the parentheses behind <code>args</code>. For example, you can see that the <code>round</code> function takes two arguments, one named <code>x</code> and one named <code>digits</code>:</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="kw">args</span>(round)</a>
-<a class="sourceLine" id="cb21-2" data-line-number="2">## function (x, digits = 0) </a>
-<a class="sourceLine" id="cb21-3" data-line-number="3">## NULL</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">args</span>(round)
+## function (x, digits = 0) 
+## NULL</code></pre>
 <p>Did you notice that <code>args</code> shows that the <code>digits</code> argument of <code>round</code> is already set to 0? Frequently, an R function will take optional arguments like <code>digits</code>. These arguments are considered optional because they come with a default value. You can pass a new value to an optional argument if you want, and R will use the default value if you do not. For example, <code>round</code> will round your number to 0 digits past the decimal point by default. To override the default, supply your own value for <code>digits</code>:</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1"><span class="kw">round</span>(<span class="fl">3.1415</span>, <span class="dt">digits =</span> <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb22-2" data-line-number="2">## 3.14</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">round</span>(<span class="fl">3.1415</span>, <span class="dt">digits =</span> <span class="dv">2</span>)
+## 3.14</code></pre>
 <p>You should write out the names of each argument after the first one or two when you call a function with multiple arguments. Why? First, this will help you and others understand your code. It is usually obvious which argument your first input refers to (and sometimes the second input as well). However, you’d need a large memory to remember the third and fourth arguments of every R function. Second, and more importantly, writing out argument names prevents errors.</p>
 <p>If you do not write out the names of your arguments, R will match your values to the arguments in your function by order. For example, in the following code, the first value, <code>die</code>, will be matched to the first argument of <code>sample</code>, which is named <code>x</code>. The next value, <code>1</code>, will be matched to the next argument, <code>size</code>:</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1"><span class="kw">sample</span>(die, <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb23-2" data-line-number="2">## 2</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sample</span>(die, <span class="dv">1</span>)
+## 2</code></pre>
 <p>As you provide more arguments, it becomes more likely that your order and R’s order may not align. As a result, values may get passed to the wrong argument. Argument names prevent this. R will always match a value to its argument name, no matter where it appears in the order of arguments:</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1"><span class="kw">sample</span>(<span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">x =</span> die)</a>
-<a class="sourceLine" id="cb24-2" data-line-number="2">## 2</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sample</span>(<span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">x =</span> die)
+## 2</code></pre>
 <div id="sample-with-replacement" class="section level3">
 <h3><span class="header-section-number">1.3.1</span> Sample with Replacement</h3>
 <p>If you set <code>size = 2</code>, you can <em>almost</em> simulate a pair of dice. Before we run that code, think for a minute why that might be the case. <code>sample</code> will return two numbers, one for each die:</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1"><span class="kw">sample</span>(die, <span class="dt">size =</span> <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb25-2" data-line-number="2">## 3 4</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sample</span>(die, <span class="dt">size =</span> <span class="dv">2</span>)
+## 3 4</code></pre>
 <p>I said this “almost” works because this method does something funny. If you use it many times, you’ll notice that the second die never has the same value as the first die, which means you’ll never roll something like a pair of threes or snake eyes. What is going on?</p>
 <p>By default, <code>sample</code> builds a sample <em>without replacement</em>. To see what this means, imagine that <code>sample</code> places all of the values of <code>die</code> in a jar or urn. Then imagine that <code>sample</code> reaches into the jar and pulls out values one by one to build its sample. Once a value has been drawn from the jar, <code>sample</code> sets it aside. The value doesn’t go back into the jar, so it cannot be drawn again. So if <code>sample</code> selects a six on its first draw, it will not be able to select a six on the second draw; six is no longer in the jar to be selected. Although <code>sample</code> creates its sample electronically, it follows this seemingly physical behavior.</p>
 <p>One side effect of this behavior is that each draw depends on the draws that come before it. In the real world, however, when you roll a pair of dice, each die is independent of the other. If the first die comes up six, it does not prevent the second die from coming up six. In fact, it doesn’t influence the second die in any way whatsoever. You can recreate this behavior in <code>sample</code> by adding the argument <code>replace = TRUE</code>:</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" data-line-number="1"><span class="kw">sample</span>(die, <span class="dt">size =</span> <span class="dv">2</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb26-2" data-line-number="2">## 5 5</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sample</span>(die, <span class="dt">size =</span> <span class="dv">2</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>)
+## 5 5</code></pre>
 <p>The argument <code>replace = TRUE</code> causes <code>sample</code> to sample <em>with replacement</em>. Our jar example provides a good way to understand the difference between sampling with replacement and without. When <code>sample</code> uses replacement, it draws a value from the jar and records the value. Then it puts the value back into the jar. In other words, <code>sample</code> <em>replaces</em> each value after each draw. As a result, <code>sample</code> may select the same value on the second draw. Each value has a chance of being selected each time. It is as if every draw were the first draw.</p>
 <p>Sampling with replacement is an easy way to create <em>independent random samples</em>. Each value in your sample will be a sample of size one that is independent of the other values. This is the correct way to simulate a pair of dice:</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" data-line-number="1"><span class="kw">sample</span>(die, <span class="dt">size =</span> <span class="dv">2</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb27-2" data-line-number="2">## 2 4</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sample</span>(die, <span class="dt">size =</span> <span class="dv">2</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>)
+## 2 4</code></pre>
 <p>Congratulate yourself; you’ve just run your first simulation in R! You now have a method for simulating the result of rolling a pair of dice. If you want to add up the dice, you can feed your result straight into the <code>sum</code> function:</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" data-line-number="1">dice &lt;-<span class="st"> </span><span class="kw">sample</span>(die, <span class="dt">size =</span> <span class="dv">2</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb28-2" data-line-number="2">dice</a>
-<a class="sourceLine" id="cb28-3" data-line-number="3">## 2 4</a>
-<a class="sourceLine" id="cb28-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb28-5" data-line-number="5"><span class="kw">sum</span>(dice)</a>
-<a class="sourceLine" id="cb28-6" data-line-number="6">## 6</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">dice &lt;-<span class="st"> </span><span class="kw">sample</span>(die, <span class="dt">size =</span> <span class="dv">2</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>)
+dice
+## 2 4
+
+<span class="kw">sum</span>(dice)
+## 6</code></pre>
 <p>What would happen if you call <code>dice</code> multiple times? Would R generate a new pair of dice values each time? Let’s give it a try:</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" data-line-number="1">dice</a>
-<a class="sourceLine" id="cb29-2" data-line-number="2">## 2 4</a>
-<a class="sourceLine" id="cb29-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb29-4" data-line-number="4">dice</a>
-<a class="sourceLine" id="cb29-5" data-line-number="5">## 2 4</a>
-<a class="sourceLine" id="cb29-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb29-7" data-line-number="7">dice</a>
-<a class="sourceLine" id="cb29-8" data-line-number="8">## 2 4</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">dice
+## 2 4
+
+dice
+## 2 4
+
+dice
+## 2 4</code></pre>
 <p>Nope. Each time you call <code>dice</code>, R will show you the result of that one time you called <code>sample</code> and saved the output to <code>dice</code>. R won’t rerun <code>sample(die, 2, replace = TRUE)</code> to create a new roll of the dice. This is a relief in a way. Once you save a set of results to an R object, those results do not change. Programming would be quite hard if the values of your objects changed each time you called them.</p>
 <p>However, it <em>would</em> be convenient to have an object that can re-roll the dice whenever you call it. You can make such an object by writing your own R function.</p>
 </div>
@@ -648,29 +649,29 @@ Figure 1.5: When you link functions together, R will resolve them from the inner
 <div id="write-functions" class="section level2">
 <h2><span class="header-section-number">1.4</span> Writing Your Own Functions</h2>
 <p>To recap, you already have working R code that simulates rolling a pair of(((weighted dice project, re-rolling the dice))) dice:</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" data-line-number="1">die &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">6</span></a>
-<a class="sourceLine" id="cb30-2" data-line-number="2">dice &lt;-<span class="st"> </span><span class="kw">sample</span>(die, <span class="dt">size =</span> <span class="dv">2</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb30-3" data-line-number="3"><span class="kw">sum</span>(dice)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">die &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">6</span>
+dice &lt;-<span class="st"> </span><span class="kw">sample</span>(die, <span class="dt">size =</span> <span class="dv">2</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>)
+<span class="kw">sum</span>(dice)</code></pre>
 <p>You can retype this code into the console anytime you want to re-roll your dice. However, this is an awkward way to work with the code. It would be easier to use your code if you wrapped it into its own function, which is exactly what we’ll do now. We’re going to write a function named <code>roll</code> that you can use to roll your virtual dice. When you’re finished, the function will work like this: each time you call <code>roll()</code>, R will return the sum of rolling two dice:</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" data-line-number="1"><span class="kw">roll</span>()</a>
-<a class="sourceLine" id="cb31-2" data-line-number="2">## 8 </a>
-<a class="sourceLine" id="cb31-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb31-4" data-line-number="4"><span class="kw">roll</span>()</a>
-<a class="sourceLine" id="cb31-5" data-line-number="5">## 3</a>
-<a class="sourceLine" id="cb31-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb31-7" data-line-number="7"><span class="kw">roll</span>()</a>
-<a class="sourceLine" id="cb31-8" data-line-number="8">## 7</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">roll</span>()
+## 8 
+
+<span class="kw">roll</span>()
+## 3
+
+<span class="kw">roll</span>()
+## 7</code></pre>
 <p>Functions may seem mysterious or fancy, but they are just another type of R object. Instead of containing data, they contain code. This code is stored in a special format that makes it easy to reuse the code in new situations. You can write your own functions by recreating this format.</p>
 <div id="the-function-constructor" class="section level3">
 <h3><span class="header-section-number">1.4.1</span> The Function Constructor</h3>
 <p>Every function in R has three basic parts: a name, a body of code, and a set of arguments. To make your own function, you need to replicate these parts and store them in an R object, which you can do with the <code>function</code> function. To do this, call <code>function()</code> and follow it with a pair of braces, <code>{}</code>:</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" data-line-number="1">my_function &lt;-<span class="st"> </span><span class="cf">function</span>() {}</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">my_function &lt;-<span class="st"> </span><span class="cf">function</span>() {}</code></pre>
 <p><code>function</code> will build a function out of whatever R code you place between the braces. For example, you can turn your dice code into a function by calling:</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" data-line-number="1">roll &lt;-<span class="st"> </span><span class="cf">function</span>() {</a>
-<a class="sourceLine" id="cb33-2" data-line-number="2">  die &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">6</span></a>
-<a class="sourceLine" id="cb33-3" data-line-number="3">  dice &lt;-<span class="st"> </span><span class="kw">sample</span>(die, <span class="dt">size =</span> <span class="dv">2</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb33-4" data-line-number="4">  <span class="kw">sum</span>(dice)</a>
-<a class="sourceLine" id="cb33-5" data-line-number="5">}</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">roll &lt;-<span class="st"> </span><span class="cf">function</span>() {
+  die &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">6</span>
+  dice &lt;-<span class="st"> </span><span class="kw">sample</span>(die, <span class="dt">size =</span> <span class="dv">2</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>)
+  <span class="kw">sum</span>(dice)
+}</code></pre>
 
 <div class="rmdnote">
 Notice that I indented each line of code between the braces. This makes the code easier for you and me to read but has no impact on how the code runs. R ignores spaces and line breaks and executes one complete expression at a time.
@@ -678,68 +679,68 @@ Notice that I indented each line of code between the braces. This makes the code
 
 <p>Just hit the Enter key between each line after the first brace, <code>{</code>. R will wait for you to type the last brace, <code>}</code>, before it responds.</p>
 <p>Don’t forget to save the output of <code>function</code> to an R object. This object will become your new function. To use it, write the object’s name followed by an open and closed parenthesis:</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" data-line-number="1"><span class="kw">roll</span>()</a>
-<a class="sourceLine" id="cb34-2" data-line-number="2">## 9</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">roll</span>()
+## 9</code></pre>
 <p>You can think of the parentheses as the “trigger” that causes R to run the function. If you type in a function’s name <em>without</em> the parentheses, R will show you the code that is stored inside the function. If you type in the name <em>with</em> the parentheses, R will run that code:</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" data-line-number="1">roll</a>
-<a class="sourceLine" id="cb35-2" data-line-number="2">## function() {</a>
-<a class="sourceLine" id="cb35-3" data-line-number="3">##   die &lt;- 1:6</a>
-<a class="sourceLine" id="cb35-4" data-line-number="4">##   dice &lt;- sample(die, size = 2, replace = TRUE)</a>
-<a class="sourceLine" id="cb35-5" data-line-number="5">##   sum(dice)</a>
-<a class="sourceLine" id="cb35-6" data-line-number="6">## }</a>
-<a class="sourceLine" id="cb35-7" data-line-number="7"></a>
-<a class="sourceLine" id="cb35-8" data-line-number="8"><span class="kw">roll</span>()</a>
-<a class="sourceLine" id="cb35-9" data-line-number="9">## 6</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">roll
+## function() {
+##   die &lt;- 1:6
+##   dice &lt;- sample(die, size = 2, replace = TRUE)
+##   sum(dice)
+## }
+
+<span class="kw">roll</span>()
+## 6</code></pre>
 <p>The code that you place inside your function is known as the <em>body</em> of the function. When you run a function in R, R will execute all of the code in the body and then return the result of the last line of code. If the last line of code doesn’t return a value, neither will your function, so you want to ensure that your final line of code returns a value. One way to check this is to think about what would happen if you ran the body of code line by line in the command line. Would R display a result after the last line, or would it not?</p>
 <p>Here’s some code that would display a result:</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" data-line-number="1">dice</a>
-<a class="sourceLine" id="cb36-2" data-line-number="2"><span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb36-3" data-line-number="3"><span class="kw">sqrt</span>(<span class="dv">2</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">dice
+<span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="dv">1</span>
+<span class="kw">sqrt</span>(<span class="dv">2</span>)</code></pre>
 <p>And here’s some code that would not:</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" data-line-number="1">dice &lt;-<span class="st"> </span><span class="kw">sample</span>(die, <span class="dt">size =</span> <span class="dv">2</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb37-2" data-line-number="2">two &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb37-3" data-line-number="3">a &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="dv">2</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">dice &lt;-<span class="st"> </span><span class="kw">sample</span>(die, <span class="dt">size =</span> <span class="dv">2</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>)
+two &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="dv">1</span>
+a &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="dv">2</span>)</code></pre>
 <p>Do you notice the pattern? These lines of code do not return a value to the command line; they save a value to an object.</p>
 </div>
 </div>
 <div id="arguments" class="section level2">
 <h2><span class="header-section-number">1.5</span> Arguments</h2>
 <p>What if we removed one line of code from our function and changed the name <code>die</code> to <code>bones</code>, like this?</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" data-line-number="1">roll2 &lt;-<span class="st"> </span><span class="cf">function</span>() {</a>
-<a class="sourceLine" id="cb38-2" data-line-number="2">  dice &lt;-<span class="st"> </span><span class="kw">sample</span>(bones, <span class="dt">size =</span> <span class="dv">2</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb38-3" data-line-number="3">  <span class="kw">sum</span>(dice)</a>
-<a class="sourceLine" id="cb38-4" data-line-number="4">}</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">roll2 &lt;-<span class="st"> </span><span class="cf">function</span>() {
+  dice &lt;-<span class="st"> </span><span class="kw">sample</span>(bones, <span class="dt">size =</span> <span class="dv">2</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>)
+  <span class="kw">sum</span>(dice)
+}</code></pre>
 <p>Now I’ll get an error when I run the function. The function needs the object <code>bones</code> to do its job, but there is no object named <code>bones</code> to be found:</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" data-line-number="1"><span class="kw">roll2</span>()</a>
-<a class="sourceLine" id="cb39-2" data-line-number="2">## Error in sample(bones, size = 2, replace = TRUE) : </a>
-<a class="sourceLine" id="cb39-3" data-line-number="3">##   object &#39;bones&#39; not found</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">roll2</span>()
+## Error in sample(bones, size = 2, replace = TRUE) : 
+##   object &#39;bones&#39; not found</code></pre>
 <p>You can supply <code>bones</code> when you call <code>roll2</code> if you make <code>bones</code> an argument of the function. To do this, put the name <code>bones</code> in the parentheses that follow <code>function</code> when you define <code>roll2</code>:</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" data-line-number="1">roll2 &lt;-<span class="st"> </span><span class="cf">function</span>(bones) {</a>
-<a class="sourceLine" id="cb40-2" data-line-number="2">  dice &lt;-<span class="st"> </span><span class="kw">sample</span>(bones, <span class="dt">size =</span> <span class="dv">2</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb40-3" data-line-number="3">  <span class="kw">sum</span>(dice)</a>
-<a class="sourceLine" id="cb40-4" data-line-number="4">}</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">roll2 &lt;-<span class="st"> </span><span class="cf">function</span>(bones) {
+  dice &lt;-<span class="st"> </span><span class="kw">sample</span>(bones, <span class="dt">size =</span> <span class="dv">2</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>)
+  <span class="kw">sum</span>(dice)
+}</code></pre>
 <p>Now <code>roll2</code> will work as long as you supply <code>bones</code> when you call the function. You can take advantage of this to roll different types of dice each time you call <code>roll2</code>. Dungeons and Dragons, here we come!</p>
 <p>Remember, we’re rolling pairs of dice:</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" data-line-number="1"><span class="kw">roll2</span>(<span class="dt">bones =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>)</a>
-<a class="sourceLine" id="cb41-2" data-line-number="2">##  3</a>
-<a class="sourceLine" id="cb41-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb41-4" data-line-number="4"><span class="kw">roll2</span>(<span class="dt">bones =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">6</span>)</a>
-<a class="sourceLine" id="cb41-5" data-line-number="5">## 10</a>
-<a class="sourceLine" id="cb41-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb41-7" data-line-number="7"><span class="kw">roll2</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">20</span>)</a>
-<a class="sourceLine" id="cb41-8" data-line-number="8">## 31</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">roll2</span>(<span class="dt">bones =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>)
+##  3
+
+<span class="kw">roll2</span>(<span class="dt">bones =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">6</span>)
+## 10
+
+<span class="kw">roll2</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">20</span>)
+## 31</code></pre>
 <p>Notice that <code>roll2</code> will still give an error if you do not supply a value for the <code>bones</code> argument when you call <code>roll2</code>:</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" data-line-number="1"><span class="kw">roll2</span>()</a>
-<a class="sourceLine" id="cb42-2" data-line-number="2">## Error in sample(bones, size = 2, replace = TRUE) : </a>
-<a class="sourceLine" id="cb42-3" data-line-number="3">##   argument &quot;bones&quot; is missing, with no default</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">roll2</span>()
+## Error in sample(bones, size = 2, replace = TRUE) : 
+##   argument &quot;bones&quot; is missing, with no default</code></pre>
 <p>You can prevent this error by giving the <code>bones</code> argument a default value. To do this, set <code>bones</code> equal to a value when you define <code>roll2</code>:</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" data-line-number="1">roll2 &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">bones =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">6</span>) {</a>
-<a class="sourceLine" id="cb43-2" data-line-number="2">  dice &lt;-<span class="st"> </span><span class="kw">sample</span>(bones, <span class="dt">size =</span> <span class="dv">2</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb43-3" data-line-number="3">  <span class="kw">sum</span>(dice)</a>
-<a class="sourceLine" id="cb43-4" data-line-number="4">}</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">roll2 &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">bones =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">6</span>) {
+  dice &lt;-<span class="st"> </span><span class="kw">sample</span>(bones, <span class="dt">size =</span> <span class="dv">2</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>)
+  <span class="kw">sum</span>(dice)
+}</code></pre>
 <p>Now you can supply a new value for <code>bones</code> if you like, and <code>roll2</code> will use the default if you do not:</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" data-line-number="1"><span class="kw">roll2</span>()</a>
-<a class="sourceLine" id="cb44-2" data-line-number="2">## 9</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">roll2</span>()
+## 9</code></pre>
 <p>You can give your functions as many arguments as you like. Just list their names, separated by commas, in the parentheses that follow <code>function</code>. When the function is run, R will replace each argument name in the function body with the value that the user supplies for the argument. If the user does not supply a value, R will replace the argument name with the argument’s default value (if you defined one).</p>
 <p>To summarize, <code>function</code> helps you construct your own R functions. You create a body of code for your function to run by writing code between the braces that follow <code>function</code>. You create arguments for your function to use by supplying their names in the parentheses that follow <code>function</code>. Finally, you give your function a name by saving its output to an R object, as shown in <a href="basics.html#fig:functions">1.6</a>.</p>
 <p>Once you’ve created your function, R will treat it like every other function in R. Think about how useful this is. Have you ever tried to create a new Excel option and add it to Microsoft’s menu bar? Or a new slide animation and add it to Powerpoint’s options? When you work with a programming language, you can do these types of things. As you learn to program in R, you will be able to create new, customized, reproducible tools for yourself whenever you like. <a href="#slots">Project 3: Slot Machine</a> will teach you much more about writing functions in R.</p>
@@ -829,7 +830,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');
     script.src = src;
