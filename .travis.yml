@@ -1,9 +1,11 @@
 language: r
-
 sudo: false
+cache: packages
 
-cache:
-  packages: true
+before_script:
+  - chmod +x ./_build.sh
+  - chmod +x ./_deploy.sh
 
 script:
-  - Rscript -e 'bookdown::render_book("index.rmd")'
+  - ./_build.sh
+  - ./_deploy.sh
