@@ -299,7 +299,7 @@ factorial(3)
 ## 6
 ```
 
-The data that you pass into the function is called the function's _argument_. The argument can be raw data, an R object, or even the results of another R function. In this last case, R will work from the innermost function to the outermost, as in \@ref(fig:pemdas).
+The data that you pass into the function is called the function's _argument_. The argument can be raw data, an R object, or even the results of another R function. In this last case, R will work from the innermost function to the outermost, as in figure \@ref(fig:pemdas).
 
 ```r
 mean(1:6)
@@ -312,14 +312,15 @@ round(mean(die))
 ## 4
 ```
 
+```{r, pemdas, echo = FALSE, fig.cap = "When you link functions together, R will resolve them from the innermost operation to the outermost. Here R first looks up die, then calculates the mean of one through six, then rounds the mean."}
+knitr::include_graphics("images/hopr_0105.png")
+```
+
 Lucky for us, there is an R function that can help "roll" the die. You can simulate a roll of the die with R's `sample` function. `sample` takes _two_ arguments: a vector named `x` and a number named `size`. `sample` will return `size` elements from the vector:
 
 ```r
 sample(x = 1:4, size = 2)
 ## 3 2
-```
-```{r, pemdas, echo = FALSE, fig.cap = "When you link functions together, R will resolve them from the innermost operation to the outermost. Here R first looks up die, then calculates the mean of one through six, then rounds the mean."}
-knitr::include_graphics("images/hopr_0105.png")
 ```
 
 To roll your die and get a number back, set `x` to `die` and sample one element from it. You'll get a new (maybe different) number each time you roll it:
