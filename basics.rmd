@@ -175,7 +175,7 @@ knitr::include_graphics("images/hopr_0102.png")
 You can name an object in R almost anything you want, but there are a few rules. First, a name cannot start with a number. Second, a name cannot use some special symbols, like `^`, `!`, `$`, `@`, `+`, `-`, `/`, or `*`:
 
 |Good names|Names that cause errors
-|``````--|```````````````---
+|----------|----------
 |a         | 1trial
 |b         | $
 |FOO       | ^mean
