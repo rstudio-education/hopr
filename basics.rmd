@@ -365,6 +365,9 @@ args(round)
 Did you notice that `args` shows that the `digits` argument of `round` is already set to 0? Frequently, an R function will take optional arguments like `digits`. These arguments are considered optional because they come with a default value. You can pass a new value to an optional argument if you want, and R will use the default value if you do not. For example, `round` will round your number to 0 digits past the decimal point by default. To override the default, supply your own value for `digits`:
 
 ```r
+round(3.1415)
+## 3
+
 round(3.1415, digits = 2)
 ## 3.14
 ```
