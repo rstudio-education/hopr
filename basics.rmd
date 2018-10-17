@@ -347,7 +347,7 @@ sample(die, size = 1)
 
 Often, the name of the first argument is not very descriptive, and it is usually obvious what the first piece of data refers to anyways.
 
-But how do you know which argument names to use?(((errors/error messages, when naming arguments))) If you try to use a name that a function does not expect, you will likely get an error:
+But how do you know which argument names to use? If you try to use a name that a function does not expect, you will likely get an error:
 
 ```r
 round(3.1415, corners = 2)
@@ -447,7 +447,7 @@ However, it _would_ be convenient to have an object that can re-roll the dice wh
 
 ## Writing Your Own Functions {#write-functions}
 
-To recap, you already have working R code that simulates rolling a pair of(((weighted dice project, re-rolling the dice))) dice:
+To recap, you already have working R code that simulates rolling a pair of dice:
 
 ```r
 die <- 1:6
