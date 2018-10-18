@@ -4,7 +4,7 @@ Computers let you assemble, manipulate, and visualize data sets, all at speeds t
 
 As a data scientist who knows how to program, you will improve your ability to:
 
-* Memorize (store) entire data sets
+* Memoize (store) entire data sets
 * Recall data values on demand
 * Perform complex calculations with large amounts of data
 * Do repetitive tasks without becoming careless or bored
