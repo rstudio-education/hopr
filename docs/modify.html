@@ -444,7 +444,7 @@ vec[<span class="kw">c</span>(<span class="ot">FALSE</span>, <span class="ot">FA
 <p>At first glance, this system might seem impractical. Who wants to type out long vectors of TRUEs and FALSEs? No one. But you don’t have to. You can let a logical test create a vector of TRUEs and FALSEs for you.</p>
 <div id="logical-tests" class="section level4">
 <h4><span class="header-section-number">5.0.2.1</span> Logical Tests</h4>
-<p>A logical test is a comparison like “is one less than two?”, <code>1 &lt; 2</code>, or “is three greater than four?”, <code>3 &gt; 4</code>. R provides seven logical operators that you can use to make comparisons, shown in <a href="modify.html#tab:logop">5.1</a>.</p>
+<p>A logical test is a comparison like “is one less than two?”, <code>1 &lt; 2</code>, or “is three greater than four?”, <code>3 &gt; 4</code>. R provides seven logical operators that you can use to make comparisons, shown in Table <a href="modify.html#tab:logop">5.1</a>.</p>
 <table>
 <caption><span id="tab:logop">Table 5.1: </span> R’s Logical Operators</caption>
 <thead>
@@ -477,7 +477,7 @@ vec[<span class="kw">c</span>(<span class="ot">FALSE</span>, <span class="ot">FA
 </tr>
 <tr class="odd">
 <td><code>==</code></td>
-<td><code>a ## b</code></td>
+<td><code>a == b</code></td>
 <td>Is a equal to b?</td>
 </tr>
 <tr class="even">
@@ -499,7 +499,7 @@ vec[<span class="kw">c</span>(<span class="ot">FALSE</span>, <span class="ot">FA
 <span class="dv">1</span> <span class="op">&gt;</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>)
 ## TRUE FALSE FALSE
 
-<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>) ## c(3, 2, 1)
+<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>) <span class="op">==</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">1</span>)
 ## FALSE  TRUE FALSE</code></pre>
 <p><code>%in%</code> is the only operator that does not do normal element-wise execution. <code>%in%</code> tests whether the value(s) on the left side are in the vector on the right side. If you provide a vector on the left side, <code>%in%</code> will <em>not</em> pair up the values on the left with the values on the right and then do element-wise tests. Instead, <code>%in%</code> will independently test whether each value on the left is <em>somewhere</em> in the vector on the right:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="dv">1</span> <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>)
@@ -544,7 +544,7 @@ Be careful not to confuse <code>=</code> with <code>==</code>. <code>=</code> do
 ##  &quot;seven&quot; &quot;six&quot;   &quot;five&quot;  &quot;four&quot;  &quot;three&quot;
 ##  &quot;two&quot;   &quot;ace&quot;</code></pre>
 <p>Next, you can use the <code>==</code> operator to test whether each value is equal to <code>ace</code>. In the following code, R will use its recycling rules to indivuidually compare every value of <code>deck2$face</code> to <code>&quot;ace&quot;</code>. Notice that the quotation marks are important. If you leave them out, R will try to find an object named <code>ace</code> to compare against <code>deck2$face</code>:</p>
-<pre class="sourceCode r"><code class="sourceCode r">deck2<span class="op">$</span>face ## &quot;ace&quot;
+<pre class="sourceCode r"><code class="sourceCode r">deck2<span class="op">$</span>face <span class="op">==</span><span class="st"> &quot;ace&quot;</span>
 ##  FALSE FALSE FALSE FALSE FALSE FALSE FALSE
 ##  FALSE FALSE FALSE FALSE FALSE  TRUE FALSE
 ##  FALSE FALSE FALSE FALSE FALSE FALSE FALSE
@@ -554,15 +554,15 @@ Be careful not to confuse <code>=</code> with <code>==</code>. <code>=</code> do
 ##  FALSE FALSE FALSE FALSE FALSE FALSE FALSE
 ##  FALSE FALSE  TRUE</code></pre>
 <p>You can use <code>sum</code> to quickly count the number of <code>TRUE</code>s in the previous vector. Remember that R will coerce logicals to numerics when you do math with them. R will turn <code>TRUE</code>s into ones and <code>FALSE</code>s into zeroes. As a result, sum will count the number of <code>TRUE</code>s:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(deck2<span class="op">$</span>face ## &quot;ace&quot;)
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(deck2<span class="op">$</span>face <span class="op">==</span><span class="st"> &quot;ace&quot;</span>)
 ## 4</code></pre>
 <p>You can use this method to spot and then change the aces in your deck—even if you’ve shuffled your cards. First, build a logical test that identifies the aces in your shuffled deck:</p>
-<pre class="sourceCode r"><code class="sourceCode r">deck3<span class="op">$</span>face ## &quot;ace&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">deck3<span class="op">$</span>face <span class="op">==</span><span class="st"> &quot;ace&quot;</span></code></pre>
 <p>Then use the test to single out the ace point values. Since the test returns a logical vector, you can use it as an index:</p>
-<pre class="sourceCode r"><code class="sourceCode r">deck3<span class="op">$</span>value[deck3<span class="op">$</span>face ## &quot;ace&quot;]
+<pre class="sourceCode r"><code class="sourceCode r">deck3<span class="op">$</span>value[deck3<span class="op">$</span>face <span class="op">==</span><span class="st"> &quot;ace&quot;</span>]
 ##  1 1 1 1</code></pre>
 <p>Finally, use assignment to change the ace values in <code>deck3</code>:</p>
-<pre class="sourceCode r"><code class="sourceCode r">deck3<span class="op">$</span>value[deck3<span class="op">$</span>face ## &quot;ace&quot;] &lt;- 14
+<pre class="sourceCode r"><code class="sourceCode r">deck3<span class="op">$</span>value[deck3<span class="op">$</span>face <span class="op">==</span><span class="st"> &quot;ace&quot;</span>] &lt;-<span class="st"> </span><span class="dv">14</span>
 
 <span class="kw">head</span>(deck3)
 ##  face     suit value
@@ -605,7 +605,7 @@ deck4<span class="op">$</span>value &lt;-<span class="st"> </span><span class="d
  <span class="solution"><em>Solution. </em></span> To do this, first write a test that identifies cards in the <code>hearts</code> suit:
 </div>
 
-<pre class="sourceCode r"><code class="sourceCode r">deck4<span class="op">$</span>suit ## &quot;hearts&quot;
+<pre class="sourceCode r"><code class="sourceCode r">deck4<span class="op">$</span>suit <span class="op">==</span><span class="st"> &quot;hearts&quot;</span>
 ##  FALSE FALSE FALSE FALSE FALSE FALSE FALSE
 ##  FALSE FALSE FALSE FALSE FALSE FALSE FALSE
 ##  FALSE FALSE FALSE FALSE FALSE FALSE FALSE
@@ -615,22 +615,22 @@ deck4<span class="op">$</span>value &lt;-<span class="st"> </span><span class="d
 ##   TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
 ##   TRUE  TRUE  TRUE</code></pre>
 <p>Then use your test to select the values of these cards:</p>
-<pre class="sourceCode r"><code class="sourceCode r">deck4<span class="op">$</span>value[deck4<span class="op">$</span>suit ## &quot;hearts&quot;]
+<pre class="sourceCode r"><code class="sourceCode r">deck4<span class="op">$</span>value[deck4<span class="op">$</span>suit <span class="op">==</span><span class="st"> &quot;hearts&quot;</span>]
 ## 0 0 0 0 0 0 0 0 0 0 0 0 0</code></pre>
 <p>Finally, assign a new number to these values:</p>
-<pre class="sourceCode r"><code class="sourceCode r">deck4<span class="op">$</span>value[deck4<span class="op">$</span>suit ## &quot;hearts&quot;] &lt;- 1</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">deck4<span class="op">$</span>value[deck4<span class="op">$</span>suit <span class="op">==</span><span class="st"> &quot;hearts&quot;</span>] &lt;-<span class="st"> </span><span class="dv">1</span></code></pre>
 <p>Now all of your <code>hearts</code> cards have been updated:</p>
-<pre class="sourceCode r"><code class="sourceCode r">deck4<span class="op">$</span>value[deck4<span class="op">$</span>suit ## &quot;hearts&quot;]
+<pre class="sourceCode r"><code class="sourceCode r">deck4<span class="op">$</span>value[deck4<span class="op">$</span>suit <span class="op">==</span><span class="st"> &quot;hearts&quot;</span>]
 ## 1 1 1 1 1 1 1 1 1 1 1 1 1</code></pre>
 <p>In hearts, the queen of spades has the most unusual value of all: she’s worth 13 points. It should be simple to change her value, but she’s surprisingly hard to find. You could find all of the <em>queens</em>:</p>
-<pre class="sourceCode r"><code class="sourceCode r">deck4[deck4<span class="op">$</span>face ## &quot;queen&quot;, ]
+<pre class="sourceCode r"><code class="sourceCode r">deck4[deck4<span class="op">$</span>face <span class="op">==</span><span class="st"> &quot;queen&quot;</span>, ]
 ##   face     suit value
 ##  queen   spades     0
 ##  queen    clubs     0
 ##  queen diamonds     0
 ##  queen   hearts     1</code></pre>
 <p>But that’s three cards too many. On the other hand, you could find all of the cards in <em>spades</em>:</p>
-<pre class="sourceCode r"><code class="sourceCode r">deck4[deck4<span class="op">$</span>suit ## &quot;spades&quot;, ]
+<pre class="sourceCode r"><code class="sourceCode r">deck4[deck4<span class="op">$</span>suit <span class="op">==</span><span class="st"> &quot;spades&quot;</span>, ]
 ##   face   suit value
 ##   king spades     0
 ##  queen spades     0
@@ -649,7 +649,7 @@ deck4<span class="op">$</span>value &lt;-<span class="st"> </span><span class="d
 </div>
 <div id="boolean-operators" class="section level4">
 <h4><span class="header-section-number">5.0.2.2</span> Boolean Operators</h4>
-<p>Boolean operators are things like <em>and</em> (<code>&amp;</code>) and <em>or</em> (<code>|</code>). They collapse the results of multiple logical tests into a single <code>TRUE</code> or <code>FALSE</code>. R has six boolean operators, shown in <a href="modify.html#tab:boole">5.2</a>.</p>
+<p>Boolean operators are things like <em>and</em> (<code>&amp;</code>) and <em>or</em> (<code>|</code>). They collapse the results of multiple logical tests into a single <code>TRUE</code> or <code>FALSE</code>. R has six boolean operators, shown in Table <a href="modify.html#tab:boole">5.2</a>.</p>
 <table>
 <caption><span id="tab:boole">Table 5.2: </span> Boolean operators</caption>
 <thead>
@@ -692,11 +692,11 @@ deck4<span class="op">$</span>value &lt;-<span class="st"> </span><span class="d
 </tr>
 </tbody>
 </table>
-<p>To use a Boolean operator, place it between two <em>complete</em> logical tests. R will execute each logical test and then use the Boolean operator to combine the results into a single <code>TRUE</code> or <code>FALSE</code>, <a href="modify.html#fig:boolean">5.1</a>.</p>
+<p>To use a Boolean operator, place it between two <em>complete</em> logical tests. R will execute each logical test and then use the Boolean operator to combine the results into a single <code>TRUE</code> or <code>FALSE</code>, Figure <a href="modify.html#fig:boolean">5.1</a>.</p>
 
 <div class="rmdwarning">
 <p><strong>The most common mistake with Boolean operators</strong></p>
-It is easy to forget to put a complete test on either side of a Boolean operator. In English, it is efficient to say “Is <em>x</em> greater than two and less than nine?” But in R, you need to write the equivalent of “Is <em>x</em> greater than two and <em>is x</em> less than nine?” This is shown in <a href="modify.html#fig:boolean">5.1</a>.
+It is easy to forget to put a complete test on either side of a Boolean operator. In English, it is efficient to say “Is <em>x</em> greater than two and less than nine?” But in R, you need to write the equivalent of “Is <em>x</em> greater than two and <em>is x</em> less than nine?” This is shown in Figure <a href="modify.html#fig:boolean">5.1</a>.
 </div>
 
 <div class="figure"><span id="fig:boolean"></span>
@@ -710,16 +710,16 @@ Figure 5.1: R will evaluate the expressions on each side of a Boolean operator s
 b &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)
 c &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">4</span>)
 
-a ## b
+a <span class="op">==</span><span class="st"> </span>b
 ##  TRUE TRUE TRUE
 
-b ## c
+b <span class="op">==</span><span class="st"> </span>c
 ##  TRUE  TRUE FALSE
 
-a ## b &amp; b ## c
+a <span class="op">==</span><span class="st"> </span>b <span class="op">&amp;</span><span class="st"> </span>b <span class="op">==</span><span class="st"> </span>c
 ##  TRUE  TRUE FALSE</code></pre>
 <p>Could you use a Boolean operator to locate the queen of spades in your deck? Of course you can. You want to test each card to see if it is both a queen <em>and</em> a spade. You can write this test in R with:</p>
-<pre class="sourceCode r"><code class="sourceCode r">deck4<span class="op">$</span>face ## &quot;queen&quot; &amp; deck4$suit ## &quot;spades&quot;
+<pre class="sourceCode r"><code class="sourceCode r">deck4<span class="op">$</span>face <span class="op">==</span><span class="st"> &quot;queen&quot;</span> <span class="op">&amp;</span><span class="st"> </span>deck4<span class="op">$</span>suit <span class="op">==</span><span class="st"> &quot;spades&quot;</span>
 ##  FALSE  TRUE FALSE FALSE FALSE FALSE FALSE
 ##  FALSE FALSE FALSE FALSE FALSE FALSE FALSE
 ##  FALSE FALSE FALSE FALSE FALSE FALSE FALSE
@@ -729,7 +729,7 @@ a ## b &amp; b ## c
 ##  FALSE FALSE FALSE FALSE FALSE FALSE FALSE
 ##  FALSE FALSE FALSE</code></pre>
 <p>I’ll save the results of this test to its own object. That will make the results easier to work with:</p>
-<pre class="sourceCode r"><code class="sourceCode r">queenOfSpades &lt;-<span class="st"> </span>deck4<span class="op">$</span>face ## &quot;queen&quot; &amp; deck4$suit ## &quot;spades&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">queenOfSpades &lt;-<span class="st"> </span>deck4<span class="op">$</span>face <span class="op">==</span><span class="st"> &quot;queen&quot;</span> <span class="op">&amp;</span><span class="st"> </span>deck4<span class="op">$</span>suit <span class="op">==</span><span class="st"> &quot;spades&quot;</span></code></pre>
 <p>Next, you can use the test as an index to select the value of the queen of spades. Make sure the test actually selects the correct value:</p>
 <pre class="sourceCode r"><code class="sourceCode r">deck4[queenOfSpades, ]
 ##  face   suit value
@@ -765,7 +765,7 @@ z &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot
 
 <pre class="sourceCode r"><code class="sourceCode r">w <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>
 <span class="dv">10</span> <span class="op">&lt;</span><span class="st"> </span>x <span class="op">&amp;</span><span class="st"> </span>x <span class="op">&lt;</span><span class="st"> </span><span class="dv">20</span>
-y ## &quot;February&quot;
+y <span class="op">==</span><span class="st"> &quot;February&quot;</span>
 <span class="kw">all</span>(z <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Monday&quot;</span>, <span class="st">&quot;Tuesday&quot;</span>, <span class="st">&quot;Wednesday&quot;</span>, <span class="st">&quot;Thursday&quot;</span>, <span class="st">&quot;Friday&quot;</span>, 
   <span class="st">&quot;Saturday&quot;</span>, <span class="st">&quot;Sunday&quot;</span>))</code></pre>
 <p>Let’s consider one last game, blackjack. In blackjack, each number card has a value equal to its face value. Each face card (king, queen, or jack) has a value of 10. Finally, each ace has a value of 11 or 1, depending on the final results of the game.</p>
@@ -832,7 +832,7 @@ deck5<span class="op">$</span>value[facecard] &lt;-<span class="st"> </span><spa
 ## NA</code></pre>
 <p>R will return a second piece of missing information. It would not be correct to say that <code>1 + NA = 1</code> because there is a good chance that the missing quantity is not zero. You do not have enough information to determine the result.</p>
 <p>What if you tested whether a piece of missing information is equal to 1?</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="ot">NA</span> ## 1
+<pre class="sourceCode r"><code class="sourceCode r"><span class="ot">NA</span> <span class="op">==</span><span class="st"> </span><span class="dv">1</span>
 ## NA</code></pre>
 <p>Again, your answer would be something like “I do not know if this is equal to one,” that is, <code>NA</code>. Generally, <code>NA</code>s will propagate whenever you use them in an R operation or function. This can save you from making errors based on missing data.</p>
 <div id="na.rm" class="section level4">
@@ -852,10 +852,10 @@ deck5<span class="op">$</span>value[facecard] &lt;-<span class="st"> </span><spa
 <div id="is.na" class="section level4">
 <h4><span class="header-section-number">5.0.3.2</span> is.na</h4>
 <p>On occasion, you may want to identify the <code>NA</code>s in your data set with a logical test, but that too creates a problem. How would you go about it? If something is a missing value, any logical test that uses it will return a missing value, even this test:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="ot">NA</span> ## NA
+<pre class="sourceCode r"><code class="sourceCode r"><span class="ot">NA</span> <span class="op">==</span><span class="st"> </span><span class="ot">NA</span>
 ## NA</code></pre>
 <p>Which means that tests like this won’t help you find missing values:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="ot">NA</span>) ## NA
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="ot">NA</span>) <span class="op">==</span><span class="st"> </span><span class="ot">NA</span>
 ## NA NA NA NA</code></pre>
 <p>But don’t worry too hard; R supplies a special function that can test whether a value is an <code>NA</code>. The function is sensibly named <code>is.na</code>:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">is.na</span>(<span class="ot">NA</span>)
@@ -866,7 +866,7 @@ vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</
 ## FALSE FALSE FALSE  TRUE</code></pre>
 <p>Let’s set all of your ace values to <code>NA</code>. This will accomplish two things. First, it will remind you that you do not know the final value of each ace. Second, it will prevent you from accidentally scoring a hand that has an ace before you determine the ace’s final value.</p>
 <p>You can set your ace values to <code>NA</code> in the same way that you would set them to a number:</p>
-<pre class="sourceCode r"><code class="sourceCode r">deck5<span class="op">$</span>value[deck5<span class="op">$</span>face ## &quot;ace&quot;] &lt;- NA
+<pre class="sourceCode r"><code class="sourceCode r">deck5<span class="op">$</span>value[deck5<span class="op">$</span>face <span class="op">==</span><span class="st"> &quot;ace&quot;</span>] &lt;-<span class="st"> </span><span class="ot">NA</span>
 
 <span class="kw">head</span>(deck5, <span class="dv">13</span>)
 ##   face   suit value

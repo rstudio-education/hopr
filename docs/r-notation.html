@@ -355,7 +355,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The simplest of these to use is positive integers.</p>
 <div id="positive-integers" class="section level3">
 <h3><span class="header-section-number">4.1.1</span> Positive Integers</h3>
-<p>R treats positive integers just like <em>ij</em> notation in linear algebra: <code>deck[i,j]</code> will return the value of <code>deck</code> that is in the <em>ith</em> row and the <em>jth</em> column, <a href="r-notation.html#fig:positive">4.1</a>. Notice that <em>i</em> and <em>j</em> only need to be integers in the mathematical sense. They can be saved as numerics in R</p>
+<p>R treats positive integers just like <em>ij</em> notation in linear algebra: <code>deck[i,j]</code> will return the value of <code>deck</code> that is in the <em>ith</em> row and the <em>jth</em> column, Figure <a href="r-notation.html#fig:positive">4.1</a>. Notice that <em>i</em> and <em>j</em> only need to be integers in the mathematical sense. They can be saved as numerics in R</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(deck)
 ##  face   suit value
 ##  king spades    13
@@ -451,7 +451,7 @@ This method also works for selecting a single column from a matrix or an array.
 </div>
 <div id="logic" class="section level3">
 <h3><span class="header-section-number">4.1.5</span> Logical Values</h3>
-<p>If you supply a vector of <code>TRUE</code>s and <code>FALSE</code>s as your index, R will match each <code>TRUE</code> and <code>FALSE</code> to a row in your data frame (or a column depending on where you place the index). R will then return each row that corresponds to a <code>TRUE</code>, <a href="r-notation.html#fig:logicals">4.2</a>.</p>
+<p>If you supply a vector of <code>TRUE</code>s and <code>FALSE</code>s as your index, R will match each <code>TRUE</code> and <code>FALSE</code> to a row in your data frame (or a column depending on where you place the index). R will then return each row that corresponds to a <code>TRUE</code>, Figure <a href="r-notation.html#fig:logicals">4.2</a>.</p>
 <p>It may help to imagine R reading through the data frame and asking, &quot;Should I return the _i_th row of the data structure?&quot; and then consulting the _i_th value of the index for its answer. For this system to work, your vector must be as long as the dimension you are trying to subset:</p>
 <pre class="sourceCode r"><code class="sourceCode r">deck[<span class="dv">1</span>, <span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>)]
 ## face   suit 
@@ -635,7 +635,7 @@ lst
 
 lst[[<span class="st">&quot;numbers&quot;</span>]]
 ## 1 2</code></pre>
-<p>This difference is subtle but important. In the R community, there is a popular, and helpful, way to think about it, <a href="r-notation.html#fig:trains">4.3</a>. Imagine that each list is a train and each element is a train car. When you use single brackets, R selects individual train cars and returns them as a new train. Each car keeps its contents, but those contents are still inside a train car (i.e., a list). When you use double brackets, R actually unloads the car and gives you back the contents.</p>
+<p>This difference is subtle but important. In the R community, there is a popular, and helpful, way to think about it, Figure <a href="r-notation.html#fig:trains">4.3</a>. Imagine that each list is a train and each element is a train car. When you use single brackets, R selects individual train cars and returns them as a new train. Each car keeps its contents, but those contents are still inside a train car (i.e., a list). When you use double brackets, R actually unloads the car and gives you back the contents.</p>
 <div class="figure"><span id="fig:trains"></span>
 <img src="images/hopr_0403.png" alt="It can be helpful to think of your list as a train. Use single brackets to select train cars, double brackets to select the contents inside of a car."  />
 <p class="caption">

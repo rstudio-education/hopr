@@ -349,7 +349,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="environments-1" class="section level2">
 <h2><span class="header-section-number">6.1</span> Environments</h2>
 <p>Consider for a moment how your computer stores files. Every file is saved in a folder, and each folder is saved in another folder, which forms a hierarchical file system. If your computer wants to open up a file, it must first look up the file in this file system.</p>
-<p>You can see your file system by opening a finder window. For example, <a href="environments.html#fig:folders">6.1</a> shows part of the file system on my computer. I have tons of folders. Inside one of them is a subfolder named <em>Documents</em>, inside of that subfolder is a sub-subfolder named <em>ggsubplot</em>, inside of that folder is a folder named <em>inst</em>, inside of that is a folder named <em>doc</em>, and inside of that is a file named <em>manual.pdf</em>.</p>
+<p>You can see your file system by opening a finder window. For example, Figure <a href="environments.html#fig:folders">6.1</a> shows part of the file system on my computer. I have tons of folders. Inside one of them is a subfolder named <em>Documents</em>, inside of that subfolder is a sub-subfolder named <em>ggsubplot</em>, inside of that folder is a folder named <em>inst</em>, inside of that is a folder named <em>doc</em>, and inside of that is a file named <em>manual.pdf</em>.</p>
 <div class="figure"><span id="fig:folders"></span>
 <img src="images/hopr_0601.png" alt="Your computer arranges files into a hierarchy of folders and subfolders. To look at a file, you need to find where it is saved in the file system."  />
 <p class="caption">
@@ -357,12 +357,12 @@ Figure 6.1: Your computer arranges files into a hierarchy of folders and subfold
 </p>
 </div>
 <p>R uses a similar system to save R objects. Each object is saved inside of an environment, a list-like object that resembles a folder on your computer. Each environment is connected to a <em>parent environment</em>, a higher-level environment, which creates a hierarchy of environments.</p>
-<p>You can see R’s environment system with the <code>parenvs</code> function in the devtools package. <code>parenvs(all = TRUE)</code> will return a list of the environments that your R session is using. The actual output will vary from session to session depending on which packages you have loaded. Here’s the output from my current session:</p>
+<p>You can see R’s environment system with the <code>parenvs</code> function in the pryr package (note <code>parenvs</code> came in the pryr package when this book was first published). <code>parenvs(all = TRUE)</code> will return a list of the environments that your R session is using. The actual output will vary from session to session depending on which packages you have loaded. Here’s the output from my current session:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(pryr)
 <span class="kw">parenvs</span>(<span class="dt">all =</span> <span class="ot">TRUE</span>)
 ##    label                            name               
 ## 1  &lt;environment: R_GlobalEnv&gt;       &quot;&quot;                 
-## 2  &lt;environment: package:devtools&gt;  &quot;package:devtools&quot; 
+## 2  &lt;environment: package:pryr&gt;  &quot;package:pryr&quot; 
 ## 3  &lt;environment: 0x7fff3321c388&gt;    &quot;tools:rstudio&quot;    
 ## 4  &lt;environment: package:stats&gt;     &quot;package:stats&quot;    
 ## 5  &lt;environment: package:graphics&gt;  &quot;package:graphics&quot; 
@@ -373,7 +373,7 @@ Figure 6.1: Your computer arranges files into a hierarchy of folders and subfold
 ## 10 &lt;environment: 0x7fff3193dab0&gt;    &quot;Autoloads&quot;        
 ## 11 &lt;environment: base&gt;              &quot;&quot;                 
 ## 12 &lt;environment: R_EmptyEnv&gt;        &quot;&quot;                 </code></pre>
-<p>It takes some imagination to interpret this output, so let’s visualize the environments as a system of folders, <a href="environments.html#fig:environments">6.2</a>. You can think of the environment tree like this. The lowest-level environment is named <code>R_GlobalEnv</code> and is saved inside an environment named <code>package:devtools</code>, which is saved inside the environment named <code>0x7fff3321c388</code>, and so on, until you get to the final, highest-level environment, <code>R_EmptyEnv</code>. <code>R_EmptyEnv</code> is the only R environment that does not have a parent environment.</p>
+<p>It takes some imagination to interpret this output, so let’s visualize the environments as a system of folders, Figure <a href="environments.html#fig:environments">6.2</a>. You can think of the environment tree like this. The lowest-level environment is named <code>R_GlobalEnv</code> and is saved inside an environment named <code>package:pryr</code>, which is saved inside the environment named <code>0x7fff3321c388</code>, and so on, until you get to the final, highest-level environment, <code>R_EmptyEnv</code>. <code>R_EmptyEnv</code> is the only R environment that does not have a parent environment.</p>
 <div class="figure"><span id="fig:environments"></span>
 <img src="images/hopr_0602.png" alt="R stores R objects in an environment tree that resembles your computer's folder system."  />
 <p class="caption">
@@ -402,11 +402,11 @@ Figure 6.2: R stores R objects in an environment tree that resembles your comput
 ##&lt;environment: R_EmptyEnv&gt;</code></pre>
 <p>Next, you can look up an environment’s parent with <code>parent.env</code>:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">parent.env</span>(<span class="kw">globalenv</span>())
-## &lt;environment: package:devtools&gt;
+## &lt;environment: package:pryr&gt;
 ## attr(,&quot;name&quot;)
-## [1] &quot;package:devtools&quot;
+## [1] &quot;package:pryr&quot;
 ## attr(,&quot;path&quot;)
-## [1] &quot;/Library/Frameworks/R.framework/Versions/3.0/Resources/library/devtools&quot;</code></pre>
+## [1] &quot;/Library/Frameworks/R.framework/Versions/3.0/Resources/library/pryr&quot;</code></pre>
 <p>Notice that the empty environment is the only R environment without a parent:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">parent.env</span>(<span class="kw">emptyenv</span>())
 ## Error in parent.env(emptyenv()) : the empty environment has no parent</code></pre>
@@ -458,7 +458,7 @@ RStudio’s environment pane displays all of the objects in your global environm
 <ol start="3" style="list-style-type: decimal">
 <li>When R does not find an object in an environment, R looks in the environment’s parent environment, then the parent of the parent, and so on, until R finds the object or reaches the empty environment.</li>
 </ol>
-<p>So, if you call an object at the command line, R will look for it in the global environment. If R can’t find it there, R will look in the parent of the global environment, and then the parent of the parent, and so on, working its way up the environment tree until it finds the object, as in <a href="environments.html#fig:path">6.3</a>. If R cannot find the object in any environment, it will return an error that says the object is not found.</p>
+<p>So, if you call an object at the command line, R will look for it in the global environment. If R can’t find it there, R will look in the parent of the global environment, and then the parent of the parent, and so on, working its way up the environment tree until it finds the object, as in Figure <a href="environments.html#fig:path">6.3</a>. If R cannot find the object in any environment, it will return an error that says the object is not found.</p>
 <div class="figure"><span id="fig:path"></span>
 <img src="images/hopr_0603.png" alt="R will search for an object by name in the active environment, here the global environment. If R does not find the object there, it will search in the active environment's parent, and then the parent's parent, and so on until R finds the object or runs out of environments."  />
 <p class="caption">
@@ -508,7 +508,7 @@ new
 ## &lt;environment: R_GlobalEnv&gt;
 ## 
 ## $objects</code></pre>
-<p>The results reveal that R created a new environment named <code>0x7ff711d12e28</code> to run <code>show_env()</code> in. The environment had no objects in it, and its parent was the <code>global environment</code>. So for purposes of running <code>show_env</code>, R’s environment tree looked like <a href="environments.html#fig:tree">6.4</a>.</p>
+<p>The results reveal that R created a new environment named <code>0x7ff711d12e28</code> to run <code>show_env()</code> in. The environment had no objects in it, and its parent was the <code>global environment</code>. So for purposes of running <code>show_env</code>, R’s environment tree looked like Figure <a href="environments.html#fig:tree">6.4</a>.</p>
 <p>Let’s run <code>show_env</code> again:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">show_env</span>()
 ## $ran.in
@@ -529,9 +529,9 @@ Figure 6.4: R creates a new environment to run show_env in. The environment is a
 <p>R will connect a function’s runtime environment to the environment that the function <em>was first created in</em>. This environment plays an important role in the function’s life—because all of the function’s runtime environments will use it as a parent. Let’s call this environment the <em>origin environment</em>. You can look up a function’s origin environment by running <code>environment</code> on the function:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">environment</span>(show_env)
 ## &lt;environment: R_GlobalEnv&gt;</code></pre>
-<p>The origin environment of <code>show_env</code> is the global environment because we created <code>show_env</code> at the command line, but the origin environment does not need to be the global environment. For example, the environment of <code>parenvs</code> is the <code>devtools</code> package:</p>
+<p>The origin environment of <code>show_env</code> is the global environment because we created <code>show_env</code> at the command line, but the origin environment does not need to be the global environment. For example, the environment of <code>parenvs</code> is the <code>pryr</code> package:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">environment</span>(parenvs)
-## &lt;environment: namespace:devtools&gt;</code></pre>
+## &lt;environment: namespace:pryr&gt;</code></pre>
 <p>In other words, the parent of a runtime environment will not always be the global environment; it will be whichever environment the function was first created in.</p>
 <p>Finally, let’s look at the objects contained in a runtime environment. At the moment, <code>show_env</code>’s runtime environments do not contain any objects, but that is easy to fix. Just have <code>show_env</code> create some objects in its body of code. R will store any objects created by <code>show_env</code> in its runtime environment. Why? Because the runtime environment will be the active environment when those objects are created:</p>
 <pre class="sourceCode r"><code class="sourceCode r">show_env &lt;-<span class="st"> </span><span class="cf">function</span>(){
@@ -596,7 +596,7 @@ show_env &lt;-<span class="st"> </span><span class="cf">function</span>(<span cl
 
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">environment</span>(deal)
 ## &lt;environment: R_GlobalEnv&gt;</code></pre>
-<p>When <code>deal</code> calls <code>deck</code>, R will need to look up the <code>deck</code> object. R’s scoping rules will lead it to the version of <code>deck</code> in the global environment, as in <a href="environments.html#fig:deal">6.5</a>. <code>deal</code> works as expected as a result:</p>
+<p>When <code>deal</code> calls <code>deck</code>, R will need to look up the <code>deck</code> object. R’s scoping rules will lead it to the version of <code>deck</code> in the global environment, as in Figure <a href="environments.html#fig:deal">6.5</a>. <code>deal</code> works as expected as a result:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">deal</span>()
 ##  face   suit value
 ##  king spades    13</code></pre>
@@ -630,7 +630,7 @@ deck &lt;-<span class="st"> </span>deck[<span class="op">-</span><span class="dv
   deck &lt;-<span class="st"> </span>deck[<span class="op">-</span><span class="dv">1</span>, ]
   card
 }</code></pre>
-<p>This code won’t work because R will be in a runtime environment when it executes <code>deck &lt;- deck[-1, ]</code>. Instead of overwriting the global copy of <code>deck</code> with <code>deck[-1, ]</code>, <code>deal</code> will just create a slightly altered copy of <code>deck</code> in its runtime environment, as in <a href="environments.html#fig:second-deck">6.6</a>.</p>
+<p>This code won’t work because R will be in a runtime environment when it executes <code>deck &lt;- deck[-1, ]</code>. Instead of overwriting the global copy of <code>deck</code> with <code>deck[-1, ]</code>, <code>deal</code> will just create a slightly altered copy of <code>deck</code> in its runtime environment, as in Figure <a href="environments.html#fig:second-deck">6.6</a>.</p>
 <div class="figure"><span id="fig:second-deck"></span>
 <img src="images/hopr_0606.png" alt="The deal function looks up deck in the global environment but saves deck[-1, ] in the runtime environment as a new object named deck. "  />
 <p class="caption">
@@ -736,7 +736,7 @@ a &lt;-<span class="st"> </span><span class="kw">shuffle</span>(deck)
     <span class="kw">assign</span>(<span class="st">&quot;deck&quot;</span>, DECK[random, ], <span class="dt">envir =</span> <span class="kw">globalenv</span>())
  }
 }</code></pre>
-<p>When you run <code>setup</code>, R will create a runtime environment to store these objects in. The environment will look like <a href="environments.html#fig:closure1">6.7</a>.</p>
+<p>When you run <code>setup</code>, R will create a runtime environment to store these objects in. The environment will look like Figure <a href="environments.html#fig:closure1">6.7</a>.</p>
 <p>Now all of these things are safely out of the way in a child of the global environment. That makes them safe but hard to use. Let’s ask <code>setup</code> to return <code>DEAL</code> and <code>SHUFFLE</code> so we can use them. The best way to do this is to return the functions as a list:</p>
 <pre class="sourceCode r"><code class="sourceCode r">setup &lt;-<span class="st"> </span><span class="cf">function</span>(deck) {
   DECK &lt;-<span class="st"> </span>deck
@@ -786,7 +786,7 @@ shuffle
 
 <span class="kw">environment</span>(shuffle)
 ## &lt;environment: 0x7ff7169c3390&gt;</code></pre>
-<p>Why does this matter? Because now when you run <code>deal</code> or <code>shuffle</code>, R will evaluate the functions in a runtime environment that uses <code>0x7ff7169c3390</code> as its parent. <code>DECK</code> and <code>deck</code> will be in this parent environment, which means that <code>deal</code> and <code>shuffle</code> will be able to find them at runtime. <code>DECK</code> and <code>deck</code> will be in the functions’ search path but still out of the way in every other respect, as shown in <a href="environments.html#fig:closure2">6.8</a>.</p>
+<p>Why does this matter? Because now when you run <code>deal</code> or <code>shuffle</code>, R will evaluate the functions in a runtime environment that uses <code>0x7ff7169c3390</code> as its parent. <code>DECK</code> and <code>deck</code> will be in this parent environment, which means that <code>deal</code> and <code>shuffle</code> will be able to find them at runtime. <code>DECK</code> and <code>deck</code> will be in the functions’ search path but still out of the way in every other respect, as shown in Figure <a href="environments.html#fig:closure2">6.8</a>.</p>
 <div class="figure"><span id="fig:closure2"></span>
 <img src="images/hopr_0608.png" alt="Now deal and shuffle will be run in an environment that has the protected deck and DECK in its search path."  />
 <p class="caption">
@@ -794,7 +794,7 @@ Figure 6.8: Now deal and shuffle will be run in an environment that has the prot
 </p>
 </div>
 <p>This arrangement is called a <em>closure</em>. <code>setup</code>’s runtime environment “encloses” the <code>deal</code> and <code>shuffle</code> functions. Both <code>deal</code> and <code>shuffle</code> can work closely with the objects contained in the enclosing environment, but almost nothing else can. The enclosing environment is not on the search path for any other R function or environment.</p>
-<p>You may have noticed that <code>deal</code> and <code>shuffle</code> still update the <code>deck</code> object in the global environment. Don’t worry, we’re about to change that. We want <code>deal</code> and <code>shuffle</code> to work exclusively with the objects in the parent (enclosing) environment of their runtime environments. Instead of having each function reference the global environment to update <code>deck</code>, you can have them reference their parent environment at runtime, as shown in <a href="environments.html#fig:closure3">6.9</a>:</p>
+<p>You may have noticed that <code>deal</code> and <code>shuffle</code> still update the <code>deck</code> object in the global environment. Don’t worry, we’re about to change that. We want <code>deal</code> and <code>shuffle</code> to work exclusively with the objects in the parent (enclosing) environment of their runtime environments. Instead of having each function reference the global environment to update <code>deck</code>, you can have them reference their parent environment at runtime, as shown in Figure <a href="environments.html#fig:closure3">6.9</a>:</p>
 <pre class="sourceCode r"><code class="sourceCode r">setup &lt;-<span class="st"> </span><span class="cf">function</span>(deck) {
   DECK &lt;-<span class="st"> </span>deck
 

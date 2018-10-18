@@ -397,7 +397,7 @@ Don’t confuse <code>system.time</code> with <code>Sys.time</code>, which retur
 <li>Use vectorized functions to complete the sequential steps in your program.</li>
 <li>Use logical subsetting to handle parallel cases. Try to manipulate every element in a case at once.</li>
 </ol>
-<p><code>abs_loop</code> and <code>abs_set</code> illustrate these rules. The functions both handle two cases and perform one sequential step, <a href="speed.html#fig:abs">10.1</a>. If a number is positive, the functions leave it alone. If a number is negative, the functions multiply it by negative one.</p>
+<p><code>abs_loop</code> and <code>abs_set</code> illustrate these rules. The functions both handle two cases and perform one sequential step, Figure <a href="speed.html#fig:abs">10.1</a>. If a number is positive, the functions leave it alone. If a number is negative, the functions multiply it by negative one.</p>
 <div class="figure"><span id="fig:abs"></span>
 <img src="images/hopr_1001.png" alt="abs_loop uses a for loop to sift data into one of two cases: negative numbers and nonnegative numbers."  />
 <p class="caption">
@@ -411,10 +411,10 @@ vec <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</spa
 
 vec[vec <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>]
 ## -2  -4  -6  -8 -10</code></pre>
-<p>The plan in <a href="speed.html#fig:abs">10.1</a> now requires a sequential step: you must multiply each of the negative values by negative one. All of R’s arithmetic operators are vectorized, so you can use <code>*</code> to complete this step in vectorized fashion. <code>*</code> will multiply each number in <code>vec[vec &lt; 0]</code> by negative one at the same time:</p>
+<p>The plan in Figure <a href="speed.html#fig:abs">10.1</a> now requires a sequential step: you must multiply each of the negative values by negative one. All of R’s arithmetic operators are vectorized, so you can use <code>*</code> to complete this step in vectorized fashion. <code>*</code> will multiply each number in <code>vec[vec &lt; 0]</code> by negative one at the same time:</p>
 <pre class="sourceCode r"><code class="sourceCode r">vec[vec <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>] <span class="op">*</span><span class="st"> </span><span class="dv">-1</span>
 ## 2  4  6  8 10</code></pre>
-<p>Finally, you can use R’s assignment operator, which is also vectorized, to save the new set over the old set in the original <code>vec</code> object. Since <code>&lt;-</code> is vectorized, the elements of the new set will be paired up to the elements of the old set, in order, and then element-wise assignment will occur. As a result, each negative value will be replaced by its positive partner, as in <a href="speed.html#fig:assignment">10.2</a>.</p>
+<p>Finally, you can use R’s assignment operator, which is also vectorized, to save the new set over the old set in the original <code>vec</code> object. Since <code>&lt;-</code> is vectorized, the elements of the new set will be paired up to the elements of the old set, in order, and then element-wise assignment will occur. As a result, each negative value will be replaced by its positive partner, as in Figure <a href="speed.html#fig:assignment">10.2</a>.</p>
 <div class="figure"><span id="fig:assignment"></span>
 <img src="images/hopr_1002.png" alt="Use logical subsetting to modify groups of values in place. R's arithmetic and assignment operators are vectorized, which lets you manipulate and update multiple values at once."  />
 <p class="caption">
@@ -459,7 +459,7 @@ many &lt;-<span class="st"> </span><span class="kw">rep</span>(vec, <span class=
 ##  30.057   0.031  30.079</code></pre>
 
 <div class="solution">
- <span class="solution"><em>Solution. </em></span> <code>change_symbols</code> uses a <code>for</code> loop to sort values into seven different cases, as demonstrated in <a href="speed.html#fig:change">10.3</a>.
+ <span class="solution"><em>Solution. </em></span> <code>change_symbols</code> uses a <code>for</code> loop to sort values into seven different cases, as demonstrated in Figure <a href="speed.html#fig:change">10.3</a>.
 </div>
 
 <p>To vectorize <code>change_symbols</code>, create a logical test that can identify each case:</p>
@@ -734,7 +734,7 @@ score_many &lt;-<span class="st"> </span><span class="cf">function</span>(symbol
 <li>Instruct your computer to do tedious, or complex, tasks on your behalf</li>
 </ul>
 <p>These skills solve an important logistical problem faced by every data scientist: <em>how can you store and manipulate data without making errors?</em> However, this is not the only problem that you will face as a data scientist. The next problem will appear when you try to understand the information contained in your data. It is nearly impossible to spot insights or to discover patterns in raw data. A third problem will appear when you try to use your data set to reason about reality, which includes things not contained in your data set. What exactly does your data imply about things outside of the data set? How certain can you be?</p>
-<p>I refer to these problems as the logistical, tactical, and strategic problems of data science, as shown in <a href="speed.html#fig:venn">10.4</a>. You’ll face them whenever you try to learn from data:</p>
+<p>I refer to these problems as the logistical, tactical, and strategic problems of data science, as shown in Figure <a href="speed.html#fig:venn">10.4</a>. You’ll face them whenever you try to learn from data:</p>
 <ul>
 <li><strong>A logistical problem:</strong> - How can you store and manipulate data without making errors?</li>
 <li><strong>A tactical problem</strong> - How can you discover the information contained in your data?</li>

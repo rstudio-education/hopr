@@ -357,7 +357,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span class="kw">get_symbols</span>()
 ## &quot;7&quot; &quot;0&quot; &quot;B&quot;</code></pre>
 <p><code>get_symbols</code> uses the probabilities observed in a group of video lottery terminals from Manitoba, Canada. These slot machines became briefly controversial in the 1990s, when a reporter decided to test their payout rate. The machines appeared to pay out only 40 cents on the dollar, even though the manufacturer claimed they would pay out 92 cents on the dollar. The original data collected on the machines and a description of the controversy is available online in <a href="http://bit.ly/jse_Braun">a journal article by W. John Braun</a>. The controversy died down when additional testing showed that the manufacturer was correct.</p>
-<p>The Manitoba slot machines use the complicated payout scheme shown in <a href="programs.html#tab:prizes">7.1</a>. A player will win a prize if he gets:</p>
+<p>The Manitoba slot machines use the complicated payout scheme shown in Table <a href="programs.html#tab:prizes">7.1</a>. A player will win a prize if he gets:</p>
 <ul>
 <li>Three of the same type of symbol (except for three zeroes)</li>
 <li>Three bars (of mixed variety)</li>
@@ -429,7 +429,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tr>
 </tbody>
 </table>
-<p>To create your <code>play</code> function, you will need to write a program that can take the output of <code>get_symbols</code> and calculate the correct prize based on <a href="programs.html#tab:prizes">7.1</a>.</p>
+<p>To create your <code>play</code> function, you will need to write a program that can take the output of <code>get_symbols</code> and calculate the correct prize based on Table <a href="programs.html#tab:prizes">7.1</a>.</p>
 <p>In R, programs are saved either as R scripts or as functions. We’ll save your program as a function named <code>score</code>. When you are finished, you will be able to use <code>score</code> to calculate a prize like this:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">score</span>(<span class="kw">c</span>(<span class="st">&quot;DD&quot;</span>, <span class="st">&quot;DD&quot;</span>, <span class="st">&quot;DD&quot;</span>))
 ## 800</code></pre>
@@ -460,7 +460,7 @@ The <code>print</code> command prints its output to the console window, which ma
 <p>R programs contain two types of subtasks: sequential steps and parallel cases.</p>
 <div id="sequential-steps" class="section level3">
 <h3><span class="header-section-number">7.1.1</span> Sequential Steps</h3>
-<p>One way to subdivide a program is into a series of sequential steps. The <code>play</code> function takes the approach, shown in <a href="programs.html#fig:subdivide1">7.1</a>. First, it generates three symbols (step 1), then it displays them in the console window (step 2), and then it scores them (step 3):</p>
+<p>One way to subdivide a program is into a series of sequential steps. The <code>play</code> function takes the approach, shown in Figure <a href="programs.html#fig:subdivide1">7.1</a>. First, it generates three symbols (step 1), then it displays them in the console window (step 2), and then it scores them (step 3):</p>
 <pre class="sourceCode r"><code class="sourceCode r">play &lt;-<span class="st"> </span><span class="cf">function</span>() {
 
   <span class="co"># step 1: generate symbols</span>
@@ -484,8 +484,8 @@ Figure 7.1: The play function uses a series of steps.
 <h3><span class="header-section-number">7.1.2</span> Parallel Cases</h3>
 <p>Another way to divide a task is to spot groups of similar cases within the task. Some tasks require different algorithms for different groups of input. If you can identify those groups, you can work out their algorithms one at a time.</p>
 <p>For example, <code>score</code> will need to calculate the prize one way if <code>symbols</code> contains three of a kind (In that case, <code>score</code> will need to match the common symbol to a prize). <code>score</code> will need to calculate the prize a second way if the symbols are all bars (In that case, <code>score</code> can just assign a prize of $5). And, finally, <code>score</code> will need to calculate the prize in a third way if the symbols do not contain three of a kind or all bars (In that case, <code>score</code> must count the number of cherries present). <code>score</code> will never use all three of these algorithms at once; it will always choose just one algorithm to run based on the combination of symbols.</p>
-<p>Diamonds complicate all of this because diamonds can be treated as wild cards. Let’s ignore that for now and focus on the simpler case where diamonds double the prize but are not wilds. <code>score</code> can double the prize as necessary after it runs one of the following algorithms, as shown in <a href="programs.html#fig:subdivide2">7.2</a>.</p>
-<p>Adding the <code>score</code> cases to the <code>play</code> steps reveals a strategy for the complete slot machine program, as shown in <a href="programs.html#fig:subdivide3">7.3</a>.</p>
+<p>Diamonds complicate all of this because diamonds can be treated as wild cards. Let’s ignore that for now and focus on the simpler case where diamonds double the prize but are not wilds. <code>score</code> can double the prize as necessary after it runs one of the following algorithms, as shown in Figure <a href="programs.html#fig:subdivide2">7.2</a>.</p>
+<p>Adding the <code>score</code> cases to the <code>play</code> steps reveals a strategy for the complete slot machine program, as shown in Figure <a href="programs.html#fig:subdivide3">7.3</a>.</p>
 <p>We’ve already solved the first few steps in this strategy. Our program can get three slot machine symbols with the <code>get_symbols</code> function. Then it can display the symbols with the <code>print</code> function. Now let’s examine how the program can handle the parallel score cases.</p>
 <div class="figure"><span id="fig:subdivide2"></span>
 <img src="images/hopr_0702.png" alt="The score function must distinguish between parallel cases."  />
@@ -645,7 +645,7 @@ b &lt;-<span class="st"> </span><span class="dv">1</span>
 ## &quot;Tie.&quot;</code></pre>
 <p>R will work through the <code>if</code> conditions until one evaluates to <code>TRUE</code>, then R will ignore any remaining <code>if</code> and <code>else</code> clauses in the tree. If no conditions evaluate to <code>TRUE</code>, R will run the final <code>else</code> statement.</p>
 <p>If two <code>if</code> statements describe mutually exclusive events, it is better to join the <code>if</code> statements with an <code>else if</code> than to list them separately. This lets R ignore the second <code>if</code> statement whenever the first returns a <code>TRUE</code>, which saves work.</p>
-<p>You can use <code>if</code> and <code>else</code> to link the subtasks in your slot-machine function. Open a fresh R script, and copy this code into it. The code will be the skeleton of our final <code>score</code> function. Compare it to the flow chart for <code>score</code> in <a href="programs.html#fig:subdivide2">7.2</a>:</p>
+<p>You can use <code>if</code> and <code>else</code> to link the subtasks in your slot-machine function. Open a fresh R script, and copy this code into it. The code will be the skeleton of our final <code>score</code> function. Compare it to the flow chart for <code>score</code> in Figure <a href="programs.html#fig:subdivide2">7.2</a>:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="cf">if</span> ( <span class="co"># Case 1: all the same &lt;1&gt;) {</span>
   prize &lt;-<span class="st"> </span><span class="co"># look up the prize &lt;3&gt;</span>
 <span class="er">}</span> <span class="cf">else</span> <span class="cf">if</span> ( <span class="co"># Case 2: all bars &lt;2&gt; ) {</span>
@@ -666,7 +666,7 @@ b &lt;-<span class="st"> </span><span class="dv">1</span>
 <strong>&lt;6&gt;</strong> - Count the number of diamonds.<br />
 <strong>&lt;7&gt;</strong> - Calculate a prize based on the number of cherries.<br />
 <strong>&lt;8&gt;</strong> - Adjust the prize for diamonds.</p>
-<p>If you like, you can reorganize your flow chart around these tasks, as in <a href="programs.html#fig:subdivide4">7.4</a>. The chart will describe the same strategy, but in a more precise way. I’ll use a diamond shape to symbolize an <code>if else</code> decision.</p>
+<p>If you like, you can reorganize your flow chart around these tasks, as in Figure <a href="programs.html#fig:subdivide4">7.4</a>. The chart will describe the same strategy, but in a more precise way. I’ll use a diamond shape to symbolize an <code>if else</code> decision.</p>
 <div class="figure"><span id="fig:subdivide4"></span>
 <img src="images/hopr_0704.png" alt="score can navigate three cases with two if else decisions. We can also break some of our tasks into two steps."  />
 <p class="caption">
