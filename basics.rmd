@@ -299,7 +299,7 @@ factorial(3)
 ## 6
 ```
 
-The data that you pass into the function is called the function's _argument_. The argument can be raw data, an R object, or even the results of another R function. In this last case, R will work from the innermost function to the outermost, as in \@ref(fig:pemdas).
+The data that you pass into the function is called the function's _argument_. The argument can be raw data, an R object, or even the results of another R function. In this last case, R will work from the innermost function to the outermost, as in figure \@ref(fig:pemdas).
 
 ```r
 mean(1:6)
@@ -312,14 +312,15 @@ round(mean(die))
 ## 4
 ```
 
+```{r, pemdas, echo = FALSE, fig.cap = "When you link functions together, R will resolve them from the innermost operation to the outermost. Here R first looks up die, then calculates the mean of one through six, then rounds the mean."}
+knitr::include_graphics("images/hopr_0105.png")
+```
+
 Lucky for us, there is an R function that can help "roll" the die. You can simulate a roll of the die with R's `sample` function. `sample` takes _two_ arguments: a vector named `x` and a number named `size`. `sample` will return `size` elements from the vector:
 
 ```r
 sample(x = 1:4, size = 2)
 ## 3 2
-```
-```{r, pemdas, echo = FALSE, fig.cap = "When you link functions together, R will resolve them from the innermost operation to the outermost. Here R first looks up die, then calculates the mean of one through six, then rounds the mean."}
-knitr::include_graphics("images/hopr_0105.png")
 ```
 
 To roll your die and get a number back, set `x` to `die` and sample one element from it. You'll get a new (maybe different) number each time you roll it:
@@ -346,7 +347,7 @@ sample(die, size = 1)
 
 Often, the name of the first argument is not very descriptive, and it is usually obvious what the first piece of data refers to anyways.
 
-But how do you know which argument names to use?(((errors/error messages, when naming arguments))) If you try to use a name that a function does not expect, you will likely get an error:
+But how do you know which argument names to use? If you try to use a name that a function does not expect, you will likely get an error:
 
 ```r
 round(3.1415, corners = 2)
@@ -364,6 +365,9 @@ args(round)
 Did you notice that `args` shows that the `digits` argument of `round` is already set to 0? Frequently, an R function will take optional arguments like `digits`. These arguments are considered optional because they come with a default value. You can pass a new value to an optional argument if you want, and R will use the default value if you do not. For example, `round` will round your number to 0 digits past the decimal point by default. To override the default, supply your own value for `digits`:
 
 ```r
+round(3.1415)
+## 3
+
 round(3.1415, digits = 2)
 ## 3.14
 ```
@@ -443,7 +447,7 @@ However, it _would_ be convenient to have an object that can re-roll the dice wh
 
 ## Writing Your Own Functions {#write-functions}
 
-To recap, you already have working R code that simulates rolling a pair of(((weighted dice project, re-rolling the dice))) dice:
+To recap, you already have working R code that simulates rolling a pair of dice:
 
 ```r
 die <- 1:6
@@ -614,13 +618,13 @@ What if you want to edit `roll2` again? You could go back and retype each line o
 
 I strongly encourage you to write and edit all of your R code in a script before you run it in the console. Why? This habit creates a reproducible record of your work. When you're finished for the day, you can save your script and then use it to rerun your entire analysis the next day. Scripts are also very handy for editing and proofreading your code, and they make a nice copy of your work to share with others. To save a script, click the scripts pane, and then go to `File > Save As` in the menu bar.
 
-RStudio comes with many built-in features that make it easy to work with scripts. First, you can automatically execute a line of code in a script by clicking the Run button, as shown in \@ref(fig:run).
-
-R will run whichever line of code your cursor is on. If you have a whole section highlighted, R will run the highlighted code. Alternatively, you can run the entire script by clicking the Source button. Don't like clicking buttons? You can use Control + Return as a shortcut for the Run button. On Macs, that would be Command + Return.
-
 ```{r script, echo = FALSE, fig.cap = "When you open an R Script (File > New File > R Script in the menu bar), RStudio creates a fourth pane above the console where you can write and edit your code."}
 knitr::include_graphics("images/hopr_0107.png")
 ```
+
+RStudio comes with many built-in features that make it easy to work with scripts. First, you can automatically execute a line of code in a script by clicking the Run button, as shown in \@ref(fig:run).
+
+R will run whichever line of code your cursor is on. If you have a whole section highlighted, R will run the highlighted code. Alternatively, you can run the entire script by clicking the Source button. Don't like clicking buttons? You can use Control + Return as a shortcut for the Run button. On Macs, that would be Command + Return.
 
 ```{r run, echo = FALSE, fig.cap = "You can run a highlighted portion of code in your script if you click the Run button at the top of the scripts pane. You can run the entire script by clicking the Source button."}
 knitr::include_graphics("images/hopr_0108.png")
