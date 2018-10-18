@@ -7,12 +7,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Hands-On Programming with R</title>
   <meta name="description" content="This book will teach you how to program in R, with hands-on examples. I wrote it for non-programmers to provide a friendly introduction to the R language. You’ll learn how to load data, assemble and disassemble data objects, navigate R’s environment system, write your own functions, and use all of R’s programming tools. Throughout the book, you’ll use your newfound skills to solve practical data science problems.">
-  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
   <meta property="og:title" content="Hands-On Programming with R" />
   <meta property="og:type" content="book" />
-  <meta property="og:url" content="http://r4ds.had.co.nz/" />
-  <meta property="og:image" content="http://r4ds.had.co.nz/cover.png" />
+  <meta property="og:url" content="https://rstudio-education.github.io/hopr/" />
+  <meta property="og:image" content="https://rstudio-education.github.io/hopr/cover.png" />
   <meta property="og:description" content="This book will teach you how to program in R, with hands-on examples. I wrote it for non-programmers to provide a friendly introduction to the R language. You’ll learn how to load data, assemble and disassemble data objects, navigate R’s environment system, write your own functions, and use all of R’s programming tools. Throughout the book, you’ll use your newfound skills to solve practical data science problems." />
   <meta name="github-repo" content="rstudio-education/hopr" />
 
@@ -20,7 +20,7 @@
   <meta name="twitter:title" content="Hands-On Programming with R" />
   <meta name="twitter:site" content="@statgarrett" />
   <meta name="twitter:description" content="This book will teach you how to program in R, with hands-on examples. I wrote it for non-programmers to provide a friendly introduction to the R language. You’ll learn how to load data, assemble and disassemble data objects, navigate R’s environment system, write your own functions, and use all of R’s programming tools. Throughout the book, you’ll use your newfound skills to solve practical data science problems." />
-  <meta name="twitter:image" content="http://r4ds.had.co.nz/cover.png" />
+  <meta name="twitter:image" content="https://rstudio-education.github.io/hopr/cover.png" />
 
 <meta name="author" content="Garrett Grolemund">
 
@@ -35,6 +35,7 @@
 <link rel="next" href="environments.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
@@ -193,7 +194,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.1.2" data-path="r-notation.html"><a href="r-notation.html#negative-integers"><i class="fa fa-check"></i><b>4.1.2</b> Negative Integers</a></li>
 <li class="chapter" data-level="4.1.3" data-path="r-notation.html"><a href="r-notation.html#zero"><i class="fa fa-check"></i><b>4.1.3</b> Zero</a></li>
 <li class="chapter" data-level="4.1.4" data-path="r-notation.html"><a href="r-notation.html#blank-spaces"><i class="fa fa-check"></i><b>4.1.4</b> Blank Spaces</a></li>
-<li class="chapter" data-level="4.1.5" data-path="r-objects.html"><a href="r-objects.html#logicals"><i class="fa fa-check"></i><b>4.1.5</b> Logical Values</a></li>
+<li class="chapter" data-level="4.1.5" data-path="r-notation.html"><a href="r-notation.html#logic"><i class="fa fa-check"></i><b>4.1.5</b> Logical Values</a></li>
 <li class="chapter" data-level="4.1.6" data-path="r-notation.html"><a href="r-notation.html#names-1"><i class="fa fa-check"></i><b>4.1.6</b> Names</a></li>
 </ul></li>
 <li class="chapter" data-level="4.2" data-path="r-notation.html"><a href="r-notation.html#deal-a-card"><i class="fa fa-check"></i><b>4.2</b> Deal a Card</a></li>
@@ -333,113 +334,113 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">5</span> Modifying Values</h1>
 <p>Are you ready to play some games with your virtual deck? Not so fast! The point system in your deck of cards doesn’t align well with many card games. For example, in war and poker, aces are usually scored higher than kings. They’d have a point value of 14, not 1.</p>
 <p>In this task, you will change the point system of your deck three times to match three different games: war, hearts, and blackjack. Each of these games will teach you something different about modifying the values inside of a data set. Start by making a copy of <code>deck</code> that you can manipulate. This will ensure that you always have a pristine copy of <code>deck</code> to fall back on (should things go awry):</p>
-<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb154-1" data-line-number="1">deck2 &lt;-<span class="st"> </span>deck</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">deck2 &lt;-<span class="st"> </span>deck</code></pre>
 <div id="changing-values-in-place" class="section level3">
 <h3><span class="header-section-number">5.0.1</span> Changing Values in Place</h3>
 <p>You can use R’s notation system to modify values within an R object. First, describe the value (or values) you wish to modify. Then use the assignment operator <code>&lt;-</code> to overwrite those values. R will update the selected values <em>in the original object</em>. Let’s put this into action with a real example:</p>
-<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb155-1" data-line-number="1">vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb155-2" data-line-number="2">vec</a>
-<a class="sourceLine" id="cb155-3" data-line-number="3">##  0 0 0 0 0 0</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>)
+vec
+##  0 0 0 0 0 0</code></pre>
 <p>Here’s how you can select the first value of <code>vec</code>:</p>
-<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb156-1" data-line-number="1">vec[<span class="dv">1</span>]</a>
-<a class="sourceLine" id="cb156-2" data-line-number="2">##  0</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">vec[<span class="dv">1</span>]
+##  0</code></pre>
 <p>And here is how you can modify it:</p>
-<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb157-1" data-line-number="1">vec[<span class="dv">1</span>] &lt;-<span class="st"> </span><span class="dv">1000</span></a>
-<a class="sourceLine" id="cb157-2" data-line-number="2">vec</a>
-<a class="sourceLine" id="cb157-3" data-line-number="3">## 1000    0    0    0    0    0</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">vec[<span class="dv">1</span>] &lt;-<span class="st"> </span><span class="dv">1000</span>
+vec
+## 1000    0    0    0    0    0</code></pre>
 <p>You can replace multiple values at once as long as the number of new values equals the number of selected values:</p>
-<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb158-1" data-line-number="1">vec[<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>)] &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb158-2" data-line-number="2">vec</a>
-<a class="sourceLine" id="cb158-3" data-line-number="3">##  1 0 1 0 1 0</a>
-<a class="sourceLine" id="cb158-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb158-5" data-line-number="5">vec[<span class="dv">4</span><span class="op">:</span><span class="dv">6</span>] &lt;-<span class="st"> </span>vec[<span class="dv">4</span><span class="op">:</span><span class="dv">6</span>] <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb158-6" data-line-number="6">vec</a>
-<a class="sourceLine" id="cb158-7" data-line-number="7">## 1 0 1 1 2 1</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">vec[<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>)] &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>)
+vec
+##  1 0 1 0 1 0
+
+vec[<span class="dv">4</span><span class="op">:</span><span class="dv">6</span>] &lt;-<span class="st"> </span>vec[<span class="dv">4</span><span class="op">:</span><span class="dv">6</span>] <span class="op">+</span><span class="st"> </span><span class="dv">1</span>
+vec
+## 1 0 1 1 2 1</code></pre>
 <p>You can also create values that do not yet exist in your object. R will expand the object to accommodate the new values:</p>
-<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb159-1" data-line-number="1">vec[<span class="dv">7</span>] &lt;-<span class="st"> </span><span class="dv">0</span></a>
-<a class="sourceLine" id="cb159-2" data-line-number="2">vec</a>
-<a class="sourceLine" id="cb159-3" data-line-number="3">## 1 0 1 1 2 1 0</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">vec[<span class="dv">7</span>] &lt;-<span class="st"> </span><span class="dv">0</span>
+vec
+## 1 0 1 1 2 1 0</code></pre>
 <p>This provides a great way to add new variables to your data set:</p>
-<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb160-1" data-line-number="1">deck2<span class="op">$</span>new &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">52</span></a>
-<a class="sourceLine" id="cb160-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb160-3" data-line-number="3"><span class="kw">head</span>(deck2)</a>
-<a class="sourceLine" id="cb160-4" data-line-number="4">##   face   suit value new</a>
-<a class="sourceLine" id="cb160-5" data-line-number="5">##   king spades    13   1</a>
-<a class="sourceLine" id="cb160-6" data-line-number="6">##  queen spades    12   2</a>
-<a class="sourceLine" id="cb160-7" data-line-number="7">##   jack spades    11   3</a>
-<a class="sourceLine" id="cb160-8" data-line-number="8">##    ten spades    10   4</a>
-<a class="sourceLine" id="cb160-9" data-line-number="9">##   nine spades     9   5</a>
-<a class="sourceLine" id="cb160-10" data-line-number="10">##  eight spades     8   6</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">deck2<span class="op">$</span>new &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">52</span>
+
+<span class="kw">head</span>(deck2)
+##   face   suit value new
+##   king spades    13   1
+##  queen spades    12   2
+##   jack spades    11   3
+##    ten spades    10   4
+##   nine spades     9   5
+##  eight spades     8   6</code></pre>
 <p>You can also remove columns from a data frame (and elements from a list) by assigning them the symbol <code>NULL</code>:</p>
-<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb161-1" data-line-number="1">deck2<span class="op">$</span>new &lt;-<span class="st"> </span><span class="ot">NULL</span></a>
-<a class="sourceLine" id="cb161-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb161-3" data-line-number="3"><span class="kw">head</span>(deck2)</a>
-<a class="sourceLine" id="cb161-4" data-line-number="4">##   face   suit value</a>
-<a class="sourceLine" id="cb161-5" data-line-number="5">##   king spades    13</a>
-<a class="sourceLine" id="cb161-6" data-line-number="6">##  queen spades    12</a>
-<a class="sourceLine" id="cb161-7" data-line-number="7">##   jack spades    11</a>
-<a class="sourceLine" id="cb161-8" data-line-number="8">##    ten spades    10</a>
-<a class="sourceLine" id="cb161-9" data-line-number="9">##   nine spades     9</a>
-<a class="sourceLine" id="cb161-10" data-line-number="10">##  eight spades     8</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">deck2<span class="op">$</span>new &lt;-<span class="st"> </span><span class="ot">NULL</span>
+
+<span class="kw">head</span>(deck2)
+##   face   suit value
+##   king spades    13
+##  queen spades    12
+##   jack spades    11
+##    ten spades    10
+##   nine spades     9
+##  eight spades     8</code></pre>
 <p>In the game of war, aces are king (figuratively speaking). They receive the highest value of all the cards, which would be something like 14. Every other card gets the value that it already has in <code>deck</code>. To play war, you just need to change the values of your aces from 1 to 14.</p>
 <p>As long as you haven’t shuffled your deck, you know just where the aces are. They appear every 13 cards. Hence, you can describe them with R’s notation system:</p>
-<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb162-1" data-line-number="1">deck2[<span class="kw">c</span>(<span class="dv">13</span>, <span class="dv">26</span>, <span class="dv">39</span>, <span class="dv">52</span>), ]</a>
-<a class="sourceLine" id="cb162-2" data-line-number="2">##  face     suit value</a>
-<a class="sourceLine" id="cb162-3" data-line-number="3">##   ace   spades     1</a>
-<a class="sourceLine" id="cb162-4" data-line-number="4">##   ace    clubs     1</a>
-<a class="sourceLine" id="cb162-5" data-line-number="5">##   ace diamonds     1</a>
-<a class="sourceLine" id="cb162-6" data-line-number="6">##   ace   hearts     1</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">deck2[<span class="kw">c</span>(<span class="dv">13</span>, <span class="dv">26</span>, <span class="dv">39</span>, <span class="dv">52</span>), ]
+##  face     suit value
+##   ace   spades     1
+##   ace    clubs     1
+##   ace diamonds     1
+##   ace   hearts     1</code></pre>
 <p>You can single out just the <em>values</em> of the aces by subsetting the columns dimension of <code>deck2</code>. Or, even better, you can subset the column vector <code>deck2$value</code>:</p>
-<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb163-1" data-line-number="1">deck2[<span class="kw">c</span>(<span class="dv">13</span>, <span class="dv">26</span>, <span class="dv">39</span>, <span class="dv">52</span>), <span class="dv">3</span>]</a>
-<a class="sourceLine" id="cb163-2" data-line-number="2">## 1 1 1 1</a>
-<a class="sourceLine" id="cb163-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb163-4" data-line-number="4">deck2<span class="op">$</span>value[<span class="kw">c</span>(<span class="dv">13</span>, <span class="dv">26</span>, <span class="dv">39</span>, <span class="dv">52</span>)]</a>
-<a class="sourceLine" id="cb163-5" data-line-number="5">## 1 1 1 1</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">deck2[<span class="kw">c</span>(<span class="dv">13</span>, <span class="dv">26</span>, <span class="dv">39</span>, <span class="dv">52</span>), <span class="dv">3</span>]
+## 1 1 1 1
+
+deck2<span class="op">$</span>value[<span class="kw">c</span>(<span class="dv">13</span>, <span class="dv">26</span>, <span class="dv">39</span>, <span class="dv">52</span>)]
+## 1 1 1 1</code></pre>
 <p>Now all you have to do is assign a new set of values to these old values. The set of new values will have to be the same size as the set of values that you are replacing. So you could save <code>c(14, 14, 14, 14)</code> into the ace values, or you could just save <em><code>14</code></em> and rely on R’s recycling rules to expand <code>14</code> to <code>c(14, 14, 14, 14)</code>:</p>
-<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb164-1" data-line-number="1">deck2<span class="op">$</span>value[<span class="kw">c</span>(<span class="dv">13</span>, <span class="dv">26</span>, <span class="dv">39</span>, <span class="dv">52</span>)] &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">14</span>, <span class="dv">14</span>, <span class="dv">14</span>, <span class="dv">14</span>)</a>
-<a class="sourceLine" id="cb164-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb164-3" data-line-number="3"><span class="co"># or</span></a>
-<a class="sourceLine" id="cb164-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb164-5" data-line-number="5">deck2<span class="op">$</span>value[<span class="kw">c</span>(<span class="dv">13</span>, <span class="dv">26</span>, <span class="dv">39</span>, <span class="dv">52</span>)] &lt;-<span class="st"> </span><span class="dv">14</span></a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">deck2<span class="op">$</span>value[<span class="kw">c</span>(<span class="dv">13</span>, <span class="dv">26</span>, <span class="dv">39</span>, <span class="dv">52</span>)] &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">14</span>, <span class="dv">14</span>, <span class="dv">14</span>, <span class="dv">14</span>)
+
+<span class="co"># or</span>
+
+deck2<span class="op">$</span>value[<span class="kw">c</span>(<span class="dv">13</span>, <span class="dv">26</span>, <span class="dv">39</span>, <span class="dv">52</span>)] &lt;-<span class="st"> </span><span class="dv">14</span></code></pre>
 <p>Notice that the values change <em>in place</em>. You don’t end up with a modified <em>copy</em> of <code>deck2</code>; the new values will appear inside <code>deck2</code>:</p>
-<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb165-1" data-line-number="1"><span class="kw">head</span>(deck2, <span class="dv">13</span>)</a>
-<a class="sourceLine" id="cb165-2" data-line-number="2">##   face   suit value</a>
-<a class="sourceLine" id="cb165-3" data-line-number="3">##   king spades    13</a>
-<a class="sourceLine" id="cb165-4" data-line-number="4">##  queen spades    12</a>
-<a class="sourceLine" id="cb165-5" data-line-number="5">##   jack spades    11</a>
-<a class="sourceLine" id="cb165-6" data-line-number="6">##    ten spades    10</a>
-<a class="sourceLine" id="cb165-7" data-line-number="7">##   nine spades     9</a>
-<a class="sourceLine" id="cb165-8" data-line-number="8">##  eight spades     8</a>
-<a class="sourceLine" id="cb165-9" data-line-number="9">##  seven spades     7</a>
-<a class="sourceLine" id="cb165-10" data-line-number="10">##    six spades     6</a>
-<a class="sourceLine" id="cb165-11" data-line-number="11">##   five spades     5</a>
-<a class="sourceLine" id="cb165-12" data-line-number="12">##   four spades     4</a>
-<a class="sourceLine" id="cb165-13" data-line-number="13">##  three spades     3</a>
-<a class="sourceLine" id="cb165-14" data-line-number="14">##    two spades     2</a>
-<a class="sourceLine" id="cb165-15" data-line-number="15">##    ace spades    14</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(deck2, <span class="dv">13</span>)
+##   face   suit value
+##   king spades    13
+##  queen spades    12
+##   jack spades    11
+##    ten spades    10
+##   nine spades     9
+##  eight spades     8
+##  seven spades     7
+##    six spades     6
+##   five spades     5
+##   four spades     4
+##  three spades     3
+##    two spades     2
+##    ace spades    14</code></pre>
 <p>The same technique will work whether you store your data in a vector, matrix, array, list, or data frame. Just describe the values that you want to change with R’s notation system, then assign over those values with R’s assignment operator.</p>
 <p>Things worked very easily in this example because you knew exactly where each ace was. The cards were sorted in an orderly manner and an ace appeared every 13 rows.</p>
 <p>But what if the deck had been shuffled? You could look through all the cards and note the locations of the aces, but that would be tedious. If your data frame were larger, it might be impossible:</p>
-<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb166-1" data-line-number="1">deck3 &lt;-<span class="st"> </span><span class="kw">shuffle</span>(deck)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">deck3 &lt;-<span class="st"> </span><span class="kw">shuffle</span>(deck)</code></pre>
 <p>Where are the aces now?</p>
-<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb167-1" data-line-number="1"><span class="kw">head</span>(deck3)</a>
-<a class="sourceLine" id="cb167-2" data-line-number="2">##  face     suit value</a>
-<a class="sourceLine" id="cb167-3" data-line-number="3">## queen    clubs    12</a>
-<a class="sourceLine" id="cb167-4" data-line-number="4">##  king    clubs    13</a>
-<a class="sourceLine" id="cb167-5" data-line-number="5">##   ace   spades     1   # an ace</a>
-<a class="sourceLine" id="cb167-6" data-line-number="6">##  nine    clubs     9</a>
-<a class="sourceLine" id="cb167-7" data-line-number="7">## seven   spades     7</a>
-<a class="sourceLine" id="cb167-8" data-line-number="8">## queen diamonds    12</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(deck3)
+##  face     suit value
+## queen    clubs    12
+##  king    clubs    13
+##   ace   spades     1   # an ace
+##  nine    clubs     9
+## seven   spades     7
+## queen diamonds    12</code></pre>
 <p>Why not ask R to find the aces for you? You can do this with logical subsetting. Logical subsetting provides a way to do targeted extraction and modification with R objects, a sort of search-and-destroy mission inside your own data sets.</p>
 </div>
 <div id="logical-subsetting" class="section level3">
 <h3><span class="header-section-number">5.0.2</span> Logical Subsetting</h3>
 <p>Do you remember R’s logical index system, <a href="r-objects.html#logicals">logicals</a>? To recap, you can select values with a vector of <code>TRUE</code>s and <code>FALSE</code>s. The vector must be the same length as the dimension that you wish to subset. R will return every element that matches a TRUE:</p>
-<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb168-1" data-line-number="1">vec</a>
-<a class="sourceLine" id="cb168-2" data-line-number="2">## 1 0 1 1 2 1 0</a>
-<a class="sourceLine" id="cb168-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb168-4" data-line-number="4">vec[<span class="kw">c</span>(<span class="ot">FALSE</span>, <span class="ot">FALSE</span>, <span class="ot">FALSE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">FALSE</span>)]</a>
-<a class="sourceLine" id="cb168-5" data-line-number="5">## 2</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">vec
+## 1 0 1 1 2 1 0
+
+vec[<span class="kw">c</span>(<span class="ot">FALSE</span>, <span class="ot">FALSE</span>, <span class="ot">FALSE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">FALSE</span>)]
+## 2</code></pre>
 <p>At first glance, this system might seem impractical. Who wants to type out long vectors of TRUEs and FALSEs? No one. But you don’t have to. You can let a logical test create a vector of TRUEs and FALSEs for you.</p>
 <div id="logical-tests" class="section level4">
 <h4><span class="header-section-number">5.0.2.1</span> Logical Tests</h4>
@@ -492,26 +493,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tbody>
 </table>
 <p>Each operator returns a <code>TRUE</code> or a <code>FALSE</code>. If you use an operator to compare vectors, R will do element-wise comparisons—just like it does with the arithmetic operators:</p>
-<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb169-1" data-line-number="1"><span class="dv">1</span> <span class="op">&gt;</span><span class="st"> </span><span class="dv">2</span></a>
-<a class="sourceLine" id="cb169-2" data-line-number="2">## FALSE</a>
-<a class="sourceLine" id="cb169-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb169-4" data-line-number="4"><span class="dv">1</span> <span class="op">&gt;</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb169-5" data-line-number="5">## TRUE FALSE FALSE</a>
-<a class="sourceLine" id="cb169-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb169-7" data-line-number="7"><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>) ## c(3, 2, 1)</a>
-<a class="sourceLine" id="cb169-8" data-line-number="8">## FALSE  TRUE FALSE</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="dv">1</span> <span class="op">&gt;</span><span class="st"> </span><span class="dv">2</span>
+## FALSE
+
+<span class="dv">1</span> <span class="op">&gt;</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>)
+## TRUE FALSE FALSE
+
+<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>) ## c(3, 2, 1)
+## FALSE  TRUE FALSE</code></pre>
 <p><code>%in%</code> is the only operator that does not do normal element-wise execution. <code>%in%</code> tests whether the value(s) on the left side are in the vector on the right side. If you provide a vector on the left side, <code>%in%</code> will <em>not</em> pair up the values on the left with the values on the right and then do element-wise tests. Instead, <code>%in%</code> will independently test whether each value on the left is <em>somewhere</em> in the vector on the right:</p>
-<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb170-1" data-line-number="1"><span class="dv">1</span> <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>)</a>
-<a class="sourceLine" id="cb170-2" data-line-number="2">## FALSE</a>
-<a class="sourceLine" id="cb170-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb170-4" data-line-number="4"><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>) <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>)</a>
-<a class="sourceLine" id="cb170-5" data-line-number="5">## FALSE FALSE</a>
-<a class="sourceLine" id="cb170-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb170-7" data-line-number="7"><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>) <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>)</a>
-<a class="sourceLine" id="cb170-8" data-line-number="8">## FALSE FALSE  TRUE</a>
-<a class="sourceLine" id="cb170-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb170-10" data-line-number="10"><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>) <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>)</a>
-<a class="sourceLine" id="cb170-11" data-line-number="11">## FALSE FALSE  TRUE  TRUE</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="dv">1</span> <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>)
+## FALSE
+
+<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>) <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>)
+## FALSE FALSE
+
+<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>) <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>)
+## FALSE FALSE  TRUE
+
+<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>) <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>)
+## FALSE FALSE  TRUE  TRUE</code></pre>
 <p>Notice that you test for equality with a double equals sign, <code>==</code>, and not a single equals sign, <code>=</code>, which is another way to write <code>&lt;-</code>. It is easy to forget and use <code>a = b</code> to test if <code>a</code> equals <code>b</code>. Unfortunately, you’ll be in for a nasty surprise. R won’t return a <code>TRUE</code> or <code>FALSE</code>, because it won’t have to: <code>a</code> <em>will</em> equal <code>b</code>, because you just ran the equivalent of <code>a &lt;- b</code>.</p>
 
 <div class="rmdwarning">
@@ -530,69 +531,69 @@ Be careful not to confuse <code>=</code> with <code>==</code>. <code>=</code> do
  <span class="solution"><em>Solution. </em></span> You can extract the <code>face</code> column with R’s <code>$</code> notation:
 </div>
 
-<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb171-1" data-line-number="1">deck2<span class="op">$</span>face</a>
-<a class="sourceLine" id="cb171-2" data-line-number="2">##  &quot;king&quot;  &quot;queen&quot; &quot;jack&quot;  &quot;ten&quot;   &quot;nine&quot; </a>
-<a class="sourceLine" id="cb171-3" data-line-number="3">##  &quot;eight&quot; &quot;seven&quot; &quot;six&quot;   &quot;five&quot;  &quot;four&quot; </a>
-<a class="sourceLine" id="cb171-4" data-line-number="4">##  &quot;three&quot; &quot;two&quot;   &quot;ace&quot;   &quot;king&quot;  &quot;queen&quot;</a>
-<a class="sourceLine" id="cb171-5" data-line-number="5">##  &quot;jack&quot;  &quot;ten&quot;   &quot;nine&quot;  &quot;eight&quot; &quot;seven&quot;</a>
-<a class="sourceLine" id="cb171-6" data-line-number="6">##  &quot;six&quot;   &quot;five&quot;  &quot;four&quot;  &quot;three&quot; &quot;two&quot;  </a>
-<a class="sourceLine" id="cb171-7" data-line-number="7">##  &quot;ace&quot;   &quot;king&quot;  &quot;queen&quot; &quot;jack&quot;  &quot;ten&quot;  </a>
-<a class="sourceLine" id="cb171-8" data-line-number="8">##  &quot;nine&quot;  &quot;eight&quot; &quot;seven&quot; &quot;six&quot;   &quot;five&quot; </a>
-<a class="sourceLine" id="cb171-9" data-line-number="9">##  &quot;four&quot;  &quot;three&quot; &quot;two&quot;   &quot;ace&quot;   &quot;king&quot; </a>
-<a class="sourceLine" id="cb171-10" data-line-number="10">##  &quot;queen&quot; &quot;jack&quot;  &quot;ten&quot;   &quot;nine&quot;  &quot;eight&quot;</a>
-<a class="sourceLine" id="cb171-11" data-line-number="11">##  &quot;seven&quot; &quot;six&quot;   &quot;five&quot;  &quot;four&quot;  &quot;three&quot;</a>
-<a class="sourceLine" id="cb171-12" data-line-number="12">##  &quot;two&quot;   &quot;ace&quot;</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">deck2<span class="op">$</span>face
+##  &quot;king&quot;  &quot;queen&quot; &quot;jack&quot;  &quot;ten&quot;   &quot;nine&quot; 
+##  &quot;eight&quot; &quot;seven&quot; &quot;six&quot;   &quot;five&quot;  &quot;four&quot; 
+##  &quot;three&quot; &quot;two&quot;   &quot;ace&quot;   &quot;king&quot;  &quot;queen&quot;
+##  &quot;jack&quot;  &quot;ten&quot;   &quot;nine&quot;  &quot;eight&quot; &quot;seven&quot;
+##  &quot;six&quot;   &quot;five&quot;  &quot;four&quot;  &quot;three&quot; &quot;two&quot;  
+##  &quot;ace&quot;   &quot;king&quot;  &quot;queen&quot; &quot;jack&quot;  &quot;ten&quot;  
+##  &quot;nine&quot;  &quot;eight&quot; &quot;seven&quot; &quot;six&quot;   &quot;five&quot; 
+##  &quot;four&quot;  &quot;three&quot; &quot;two&quot;   &quot;ace&quot;   &quot;king&quot; 
+##  &quot;queen&quot; &quot;jack&quot;  &quot;ten&quot;   &quot;nine&quot;  &quot;eight&quot;
+##  &quot;seven&quot; &quot;six&quot;   &quot;five&quot;  &quot;four&quot;  &quot;three&quot;
+##  &quot;two&quot;   &quot;ace&quot;</code></pre>
 <p>Next, you can use the <code>==</code> operator to test whether each value is equal to <code>ace</code>. In the following code, R will use its recycling rules to indivuidually compare every value of <code>deck2$face</code> to <code>&quot;ace&quot;</code>. Notice that the quotation marks are important. If you leave them out, R will try to find an object named <code>ace</code> to compare against <code>deck2$face</code>:</p>
-<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb172-1" data-line-number="1">deck2<span class="op">$</span>face ## &quot;ace&quot;</a>
-<a class="sourceLine" id="cb172-2" data-line-number="2">##  FALSE FALSE FALSE FALSE FALSE FALSE FALSE</a>
-<a class="sourceLine" id="cb172-3" data-line-number="3">##  FALSE FALSE FALSE FALSE FALSE  TRUE FALSE</a>
-<a class="sourceLine" id="cb172-4" data-line-number="4">##  FALSE FALSE FALSE FALSE FALSE FALSE FALSE</a>
-<a class="sourceLine" id="cb172-5" data-line-number="5">##  FALSE FALSE FALSE FALSE  TRUE FALSE FALSE</a>
-<a class="sourceLine" id="cb172-6" data-line-number="6">##  FALSE FALSE FALSE FALSE FALSE FALSE FALSE</a>
-<a class="sourceLine" id="cb172-7" data-line-number="7">##  FALSE FALSE FALSE  TRUE FALSE FALSE FALSE</a>
-<a class="sourceLine" id="cb172-8" data-line-number="8">##  FALSE FALSE FALSE FALSE FALSE FALSE FALSE</a>
-<a class="sourceLine" id="cb172-9" data-line-number="9">##  FALSE FALSE  TRUE</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">deck2<span class="op">$</span>face ## &quot;ace&quot;
+##  FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  FALSE FALSE FALSE FALSE FALSE  TRUE FALSE
+##  FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  FALSE FALSE FALSE FALSE  TRUE FALSE FALSE
+##  FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  FALSE FALSE FALSE  TRUE FALSE FALSE FALSE
+##  FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  FALSE FALSE  TRUE</code></pre>
 <p>You can use <code>sum</code> to quickly count the number of <code>TRUE</code>s in the previous vector. Remember that R will coerce logicals to numerics when you do math with them. R will turn <code>TRUE</code>s into ones and <code>FALSE</code>s into zeroes. As a result, sum will count the number of <code>TRUE</code>s:</p>
-<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb173-1" data-line-number="1"><span class="kw">sum</span>(deck2<span class="op">$</span>face ## &quot;ace&quot;)</a>
-<a class="sourceLine" id="cb173-2" data-line-number="2">## 4</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(deck2<span class="op">$</span>face ## &quot;ace&quot;)
+## 4</code></pre>
 <p>You can use this method to spot and then change the aces in your deck—even if you’ve shuffled your cards. First, build a logical test that identifies the aces in your shuffled deck:</p>
-<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb174-1" data-line-number="1">deck3<span class="op">$</span>face ## &quot;ace&quot;</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">deck3<span class="op">$</span>face ## &quot;ace&quot;</code></pre>
 <p>Then use the test to single out the ace point values. Since the test returns a logical vector, you can use it as an index:</p>
-<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb175-1" data-line-number="1">deck3<span class="op">$</span>value[deck3<span class="op">$</span>face ## &quot;ace&quot;]</a>
-<a class="sourceLine" id="cb175-2" data-line-number="2">##  1 1 1 1</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">deck3<span class="op">$</span>value[deck3<span class="op">$</span>face ## &quot;ace&quot;]
+##  1 1 1 1</code></pre>
 <p>Finally, use assignment to change the ace values in <code>deck3</code>:</p>
-<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb176-1" data-line-number="1">deck3<span class="op">$</span>value[deck3<span class="op">$</span>face ## &quot;ace&quot;] &lt;- 14</a>
-<a class="sourceLine" id="cb176-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb176-3" data-line-number="3"><span class="kw">head</span>(deck3)</a>
-<a class="sourceLine" id="cb176-4" data-line-number="4">##  face     suit value</a>
-<a class="sourceLine" id="cb176-5" data-line-number="5">## queen    clubs    12</a>
-<a class="sourceLine" id="cb176-6" data-line-number="6">##  king    clubs    13</a>
-<a class="sourceLine" id="cb176-7" data-line-number="7">##   ace   spades    14  # an ace</a>
-<a class="sourceLine" id="cb176-8" data-line-number="8">##  nine    clubs     9</a>
-<a class="sourceLine" id="cb176-9" data-line-number="9">## seven   spades     7</a>
-<a class="sourceLine" id="cb176-10" data-line-number="10">## queen diamonds    12</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">deck3<span class="op">$</span>value[deck3<span class="op">$</span>face ## &quot;ace&quot;] &lt;- 14
+
+<span class="kw">head</span>(deck3)
+##  face     suit value
+## queen    clubs    12
+##  king    clubs    13
+##   ace   spades    14  # an ace
+##  nine    clubs     9
+## seven   spades     7
+## queen diamonds    12</code></pre>
 <p>To summarize, you can use a logical test to select values within an object.</p>
 <p>Logical subsetting is a powerful technique because it lets you quickly identify, extract, and modify individual values in your data set. When you work with logical subsetting, you do not need to know <em>where</em> in your data set a value exists. You only need to know how to describe the value with a logical test.</p>
 <p>Logical subsetting is one of the things R does best. In fact, logical subsetting is a key component of vectorized programming, a coding style that lets you write fast and efficient R code, which we will study in <a href="speed.html#speed">Speed</a>.</p>
 <p>Let’s put logical subsetting to use with a new game: hearts. In hearts, every card has a value of zero:</p>
-<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb177-1" data-line-number="1">deck4 &lt;-<span class="st"> </span>deck</a>
-<a class="sourceLine" id="cb177-2" data-line-number="2">deck4<span class="op">$</span>value &lt;-<span class="st"> </span><span class="dv">0</span></a>
-<a class="sourceLine" id="cb177-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb177-4" data-line-number="4"><span class="kw">head</span>(deck4, <span class="dv">13</span>)</a>
-<a class="sourceLine" id="cb177-5" data-line-number="5">##   face   suit value</a>
-<a class="sourceLine" id="cb177-6" data-line-number="6">##   king spades     0</a>
-<a class="sourceLine" id="cb177-7" data-line-number="7">##  queen spades     0</a>
-<a class="sourceLine" id="cb177-8" data-line-number="8">##   jack spades     0</a>
-<a class="sourceLine" id="cb177-9" data-line-number="9">##    ten spades     0</a>
-<a class="sourceLine" id="cb177-10" data-line-number="10">##   nine spades     0</a>
-<a class="sourceLine" id="cb177-11" data-line-number="11">##  eight spades     0</a>
-<a class="sourceLine" id="cb177-12" data-line-number="12">##  seven spades     0</a>
-<a class="sourceLine" id="cb177-13" data-line-number="13">##    six spades     0</a>
-<a class="sourceLine" id="cb177-14" data-line-number="14">##   five spades     0</a>
-<a class="sourceLine" id="cb177-15" data-line-number="15">##   four spades     0</a>
-<a class="sourceLine" id="cb177-16" data-line-number="16">##  three spades     0</a>
-<a class="sourceLine" id="cb177-17" data-line-number="17">##    two spades     0</a>
-<a class="sourceLine" id="cb177-18" data-line-number="18">##    ace spades     0</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">deck4 &lt;-<span class="st"> </span>deck
+deck4<span class="op">$</span>value &lt;-<span class="st"> </span><span class="dv">0</span>
+
+<span class="kw">head</span>(deck4, <span class="dv">13</span>)
+##   face   suit value
+##   king spades     0
+##  queen spades     0
+##   jack spades     0
+##    ten spades     0
+##   nine spades     0
+##  eight spades     0
+##  seven spades     0
+##    six spades     0
+##   five spades     0
+##   four spades     0
+##  three spades     0
+##    two spades     0
+##    ace spades     0</code></pre>
 <p>except cards in the suit of hearts and the queen of spades. Each card in the suit of hearts has a value of 1. Can you find these cards and replace their values? Give it a try.</p>
 
 <div class="exercise">
@@ -604,46 +605,46 @@ Be careful not to confuse <code>=</code> with <code>==</code>. <code>=</code> do
  <span class="solution"><em>Solution. </em></span> To do this, first write a test that identifies cards in the <code>hearts</code> suit:
 </div>
 
-<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb178-1" data-line-number="1">deck4<span class="op">$</span>suit ## &quot;hearts&quot;</a>
-<a class="sourceLine" id="cb178-2" data-line-number="2">##  FALSE FALSE FALSE FALSE FALSE FALSE FALSE</a>
-<a class="sourceLine" id="cb178-3" data-line-number="3">##  FALSE FALSE FALSE FALSE FALSE FALSE FALSE</a>
-<a class="sourceLine" id="cb178-4" data-line-number="4">##  FALSE FALSE FALSE FALSE FALSE FALSE FALSE</a>
-<a class="sourceLine" id="cb178-5" data-line-number="5">##  FALSE FALSE FALSE FALSE FALSE FALSE FALSE</a>
-<a class="sourceLine" id="cb178-6" data-line-number="6">##  FALSE FALSE FALSE FALSE FALSE FALSE FALSE</a>
-<a class="sourceLine" id="cb178-7" data-line-number="7">##  FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE</a>
-<a class="sourceLine" id="cb178-8" data-line-number="8">##   TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE</a>
-<a class="sourceLine" id="cb178-9" data-line-number="9">##   TRUE  TRUE  TRUE</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">deck4<span class="op">$</span>suit ## &quot;hearts&quot;
+##  FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE
+##   TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+##   TRUE  TRUE  TRUE</code></pre>
 <p>Then use your test to select the values of these cards:</p>
-<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb179-1" data-line-number="1">deck4<span class="op">$</span>value[deck4<span class="op">$</span>suit ## &quot;hearts&quot;]</a>
-<a class="sourceLine" id="cb179-2" data-line-number="2">## 0 0 0 0 0 0 0 0 0 0 0 0 0</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">deck4<span class="op">$</span>value[deck4<span class="op">$</span>suit ## &quot;hearts&quot;]
+## 0 0 0 0 0 0 0 0 0 0 0 0 0</code></pre>
 <p>Finally, assign a new number to these values:</p>
-<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb180-1" data-line-number="1">deck4<span class="op">$</span>value[deck4<span class="op">$</span>suit ## &quot;hearts&quot;] &lt;- 1</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">deck4<span class="op">$</span>value[deck4<span class="op">$</span>suit ## &quot;hearts&quot;] &lt;- 1</code></pre>
 <p>Now all of your <code>hearts</code> cards have been updated:</p>
-<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb181-1" data-line-number="1">deck4<span class="op">$</span>value[deck4<span class="op">$</span>suit ## &quot;hearts&quot;]</a>
-<a class="sourceLine" id="cb181-2" data-line-number="2">## 1 1 1 1 1 1 1 1 1 1 1 1 1</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">deck4<span class="op">$</span>value[deck4<span class="op">$</span>suit ## &quot;hearts&quot;]
+## 1 1 1 1 1 1 1 1 1 1 1 1 1</code></pre>
 <p>In hearts, the queen of spades has the most unusual value of all: she’s worth 13 points. It should be simple to change her value, but she’s surprisingly hard to find. You could find all of the <em>queens</em>:</p>
-<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb182-1" data-line-number="1">deck4[deck4<span class="op">$</span>face ## &quot;queen&quot;, ]</a>
-<a class="sourceLine" id="cb182-2" data-line-number="2">##   face     suit value</a>
-<a class="sourceLine" id="cb182-3" data-line-number="3">##  queen   spades     0</a>
-<a class="sourceLine" id="cb182-4" data-line-number="4">##  queen    clubs     0</a>
-<a class="sourceLine" id="cb182-5" data-line-number="5">##  queen diamonds     0</a>
-<a class="sourceLine" id="cb182-6" data-line-number="6">##  queen   hearts     1</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">deck4[deck4<span class="op">$</span>face ## &quot;queen&quot;, ]
+##   face     suit value
+##  queen   spades     0
+##  queen    clubs     0
+##  queen diamonds     0
+##  queen   hearts     1</code></pre>
 <p>But that’s three cards too many. On the other hand, you could find all of the cards in <em>spades</em>:</p>
-<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb183-1" data-line-number="1">deck4[deck4<span class="op">$</span>suit ## &quot;spades&quot;, ]</a>
-<a class="sourceLine" id="cb183-2" data-line-number="2">##   face   suit value</a>
-<a class="sourceLine" id="cb183-3" data-line-number="3">##   king spades     0</a>
-<a class="sourceLine" id="cb183-4" data-line-number="4">##  queen spades     0</a>
-<a class="sourceLine" id="cb183-5" data-line-number="5">##   jack spades     0</a>
-<a class="sourceLine" id="cb183-6" data-line-number="6">##    ten spades     0</a>
-<a class="sourceLine" id="cb183-7" data-line-number="7">##   nine spades     0</a>
-<a class="sourceLine" id="cb183-8" data-line-number="8">##  eight spades     0</a>
-<a class="sourceLine" id="cb183-9" data-line-number="9">##  seven spades     0</a>
-<a class="sourceLine" id="cb183-10" data-line-number="10">##    six spades     0</a>
-<a class="sourceLine" id="cb183-11" data-line-number="11">##   five spades     0</a>
-<a class="sourceLine" id="cb183-12" data-line-number="12">##   four spades     0</a>
-<a class="sourceLine" id="cb183-13" data-line-number="13">##  three spades     0</a>
-<a class="sourceLine" id="cb183-14" data-line-number="14">##    two spades     0</a>
-<a class="sourceLine" id="cb183-15" data-line-number="15">##    ace spades     0</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">deck4[deck4<span class="op">$</span>suit ## &quot;spades&quot;, ]
+##   face   suit value
+##   king spades     0
+##  queen spades     0
+##   jack spades     0
+##    ten spades     0
+##   nine spades     0
+##  eight spades     0
+##  seven spades     0
+##    six spades     0
+##   five spades     0
+##   four spades     0
+##  three spades     0
+##    two spades     0
+##    ace spades     0</code></pre>
 <p>But that’s 12 cards too many. What you really want to find is all of the cards that have both a face value equal to queen and a suit value equal to spades. You can do that with a <em>Boolean operator</em>. Boolean operators combine multiple logical tests together into a single test.</p>
 </div>
 <div id="boolean-operators" class="section level4">
@@ -705,43 +706,43 @@ Figure 5.1: R will evaluate the expressions on each side of a Boolean operator s
 </p>
 </div>
 <p>When used with vectors, Boolean operators will follow the same element-wise execution as arithmetic and logical operators:</p>
-<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb184-1" data-line-number="1">a &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</a>
-<a class="sourceLine" id="cb184-2" data-line-number="2">b &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</a>
-<a class="sourceLine" id="cb184-3" data-line-number="3">c &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">4</span>)</a>
-<a class="sourceLine" id="cb184-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb184-5" data-line-number="5">a ## b</a>
-<a class="sourceLine" id="cb184-6" data-line-number="6">##  TRUE TRUE TRUE</a>
-<a class="sourceLine" id="cb184-7" data-line-number="7"></a>
-<a class="sourceLine" id="cb184-8" data-line-number="8">b ## c</a>
-<a class="sourceLine" id="cb184-9" data-line-number="9">##  TRUE  TRUE FALSE</a>
-<a class="sourceLine" id="cb184-10" data-line-number="10"></a>
-<a class="sourceLine" id="cb184-11" data-line-number="11">a ## b &amp; b ## c</a>
-<a class="sourceLine" id="cb184-12" data-line-number="12">##  TRUE  TRUE FALSE</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)
+b &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)
+c &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">4</span>)
+
+a ## b
+##  TRUE TRUE TRUE
+
+b ## c
+##  TRUE  TRUE FALSE
+
+a ## b &amp; b ## c
+##  TRUE  TRUE FALSE</code></pre>
 <p>Could you use a Boolean operator to locate the queen of spades in your deck? Of course you can. You want to test each card to see if it is both a queen <em>and</em> a spade. You can write this test in R with:</p>
-<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb185-1" data-line-number="1">deck4<span class="op">$</span>face ## &quot;queen&quot; &amp; deck4$suit ## &quot;spades&quot;</a>
-<a class="sourceLine" id="cb185-2" data-line-number="2">##  FALSE  TRUE FALSE FALSE FALSE FALSE FALSE</a>
-<a class="sourceLine" id="cb185-3" data-line-number="3">##  FALSE FALSE FALSE FALSE FALSE FALSE FALSE</a>
-<a class="sourceLine" id="cb185-4" data-line-number="4">##  FALSE FALSE FALSE FALSE FALSE FALSE FALSE</a>
-<a class="sourceLine" id="cb185-5" data-line-number="5">##  FALSE FALSE FALSE FALSE FALSE FALSE FALSE</a>
-<a class="sourceLine" id="cb185-6" data-line-number="6">##  FALSE FALSE FALSE FALSE FALSE FALSE FALSE</a>
-<a class="sourceLine" id="cb185-7" data-line-number="7">##  FALSE FALSE FALSE FALSE FALSE FALSE FALSE</a>
-<a class="sourceLine" id="cb185-8" data-line-number="8">##  FALSE FALSE FALSE FALSE FALSE FALSE FALSE</a>
-<a class="sourceLine" id="cb185-9" data-line-number="9">##  FALSE FALSE FALSE</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">deck4<span class="op">$</span>face ## &quot;queen&quot; &amp; deck4$suit ## &quot;spades&quot;
+##  FALSE  TRUE FALSE FALSE FALSE FALSE FALSE
+##  FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  FALSE FALSE FALSE</code></pre>
 <p>I’ll save the results of this test to its own object. That will make the results easier to work with:</p>
-<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb186-1" data-line-number="1">queenOfSpades &lt;-<span class="st"> </span>deck4<span class="op">$</span>face ## &quot;queen&quot; &amp; deck4$suit ## &quot;spades&quot;</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">queenOfSpades &lt;-<span class="st"> </span>deck4<span class="op">$</span>face ## &quot;queen&quot; &amp; deck4$suit ## &quot;spades&quot;</code></pre>
 <p>Next, you can use the test as an index to select the value of the queen of spades. Make sure the test actually selects the correct value:</p>
-<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb187-1" data-line-number="1">deck4[queenOfSpades, ]</a>
-<a class="sourceLine" id="cb187-2" data-line-number="2">##  face   suit value</a>
-<a class="sourceLine" id="cb187-3" data-line-number="3">## queen spades     0</a>
-<a class="sourceLine" id="cb187-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb187-5" data-line-number="5">deck4<span class="op">$</span>value[queenOfSpades]</a>
-<a class="sourceLine" id="cb187-6" data-line-number="6">## 0</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">deck4[queenOfSpades, ]
+##  face   suit value
+## queen spades     0
+
+deck4<span class="op">$</span>value[queenOfSpades]
+## 0</code></pre>
 <p>Now that you’ve found the queen of spades, you can update her value:</p>
-<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb188-1" data-line-number="1">deck4<span class="op">$</span>value[queenOfSpades] &lt;-<span class="st"> </span><span class="dv">13</span></a>
-<a class="sourceLine" id="cb188-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb188-3" data-line-number="3">deck4[queenOfSpades, ]</a>
-<a class="sourceLine" id="cb188-4" data-line-number="4">##  face   suit value</a>
-<a class="sourceLine" id="cb188-5" data-line-number="5">## queen spades     13</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">deck4<span class="op">$</span>value[queenOfSpades] &lt;-<span class="st"> </span><span class="dv">13</span>
+
+deck4[queenOfSpades, ]
+##  face   suit value
+## queen spades     13</code></pre>
 <p>Your deck is now ready to play hearts.</p>
 
 <div class="exercise">
@@ -753,73 +754,73 @@ Figure 5.1: R will evaluate the expressions on each side of a Boolean operator s
 <li>Is <em>every</em> value in z a day of the week?
 </div></li>
 </ul>
-<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb189-1" data-line-number="1">w &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb189-2" data-line-number="2">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">15</span>)</a>
-<a class="sourceLine" id="cb189-3" data-line-number="3">y &lt;-<span class="st"> &quot;February&quot;</span></a>
-<a class="sourceLine" id="cb189-4" data-line-number="4">z &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Monday&quot;</span>, <span class="st">&quot;Tuesday&quot;</span>, <span class="st">&quot;Friday&quot;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">w &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>)
+x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">15</span>)
+y &lt;-<span class="st"> &quot;February&quot;</span>
+z &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Monday&quot;</span>, <span class="st">&quot;Tuesday&quot;</span>, <span class="st">&quot;Friday&quot;</span>)</code></pre>
 
 <div class="solution">
  <span class="solution"><em>Solution. </em></span> Here are some model answers. If you got stuck, be sure to re-read how R evaluates logical tests that use Boolean values:
 </div>
 
-<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb190-1" data-line-number="1">w <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span></a>
-<a class="sourceLine" id="cb190-2" data-line-number="2"><span class="dv">10</span> <span class="op">&lt;</span><span class="st"> </span>x <span class="op">&amp;</span><span class="st"> </span>x <span class="op">&lt;</span><span class="st"> </span><span class="dv">20</span></a>
-<a class="sourceLine" id="cb190-3" data-line-number="3">y ## &quot;February&quot;</a>
-<a class="sourceLine" id="cb190-4" data-line-number="4"><span class="kw">all</span>(z <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Monday&quot;</span>, <span class="st">&quot;Tuesday&quot;</span>, <span class="st">&quot;Wednesday&quot;</span>, <span class="st">&quot;Thursday&quot;</span>, <span class="st">&quot;Friday&quot;</span>, </a>
-<a class="sourceLine" id="cb190-5" data-line-number="5">  <span class="st">&quot;Saturday&quot;</span>, <span class="st">&quot;Sunday&quot;</span>))</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">w <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>
+<span class="dv">10</span> <span class="op">&lt;</span><span class="st"> </span>x <span class="op">&amp;</span><span class="st"> </span>x <span class="op">&lt;</span><span class="st"> </span><span class="dv">20</span>
+y ## &quot;February&quot;
+<span class="kw">all</span>(z <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Monday&quot;</span>, <span class="st">&quot;Tuesday&quot;</span>, <span class="st">&quot;Wednesday&quot;</span>, <span class="st">&quot;Thursday&quot;</span>, <span class="st">&quot;Friday&quot;</span>, 
+  <span class="st">&quot;Saturday&quot;</span>, <span class="st">&quot;Sunday&quot;</span>))</code></pre>
 <p>Let’s consider one last game, blackjack. In blackjack, each number card has a value equal to its face value. Each face card (king, queen, or jack) has a value of 10. Finally, each ace has a value of 11 or 1, depending on the final results of the game.</p>
 <p>Let’s begin with a fresh copy of <code>deck</code>—that way the number cards (<code>two</code> through <code>ten</code>) will start off with the correct value:</p>
-<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb191-1" data-line-number="1">deck5 &lt;-<span class="st"> </span>deck</a>
-<a class="sourceLine" id="cb191-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb191-3" data-line-number="3"><span class="kw">head</span>(deck5, <span class="dv">13</span>)</a>
-<a class="sourceLine" id="cb191-4" data-line-number="4">##   king spades    13</a>
-<a class="sourceLine" id="cb191-5" data-line-number="5">##  queen spades    12</a>
-<a class="sourceLine" id="cb191-6" data-line-number="6">##   jack spades    11</a>
-<a class="sourceLine" id="cb191-7" data-line-number="7">##    ten spades    10</a>
-<a class="sourceLine" id="cb191-8" data-line-number="8">##   nine spades     9</a>
-<a class="sourceLine" id="cb191-9" data-line-number="9">##  eight spades     8</a>
-<a class="sourceLine" id="cb191-10" data-line-number="10">##  seven spades     7</a>
-<a class="sourceLine" id="cb191-11" data-line-number="11">##    six spades     6</a>
-<a class="sourceLine" id="cb191-12" data-line-number="12">##   five spades     5</a>
-<a class="sourceLine" id="cb191-13" data-line-number="13">##   four spades     4</a>
-<a class="sourceLine" id="cb191-14" data-line-number="14">##  three spades     3</a>
-<a class="sourceLine" id="cb191-15" data-line-number="15">##    two spades     2</a>
-<a class="sourceLine" id="cb191-16" data-line-number="16">##    ace spades     1</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">deck5 &lt;-<span class="st"> </span>deck
+
+<span class="kw">head</span>(deck5, <span class="dv">13</span>)
+##   king spades    13
+##  queen spades    12
+##   jack spades    11
+##    ten spades    10
+##   nine spades     9
+##  eight spades     8
+##  seven spades     7
+##    six spades     6
+##   five spades     5
+##   four spades     4
+##  three spades     3
+##    two spades     2
+##    ace spades     1</code></pre>
 <p>You can change the value of the face cards in one fell swoop with <code>%in%</code>:</p>
-<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb192-1" data-line-number="1">facecard &lt;-<span class="st"> </span>deck5<span class="op">$</span>face <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;king&quot;</span>, <span class="st">&quot;queen&quot;</span>, <span class="st">&quot;jack&quot;</span>)</a>
-<a class="sourceLine" id="cb192-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb192-3" data-line-number="3">deck5[facecard, ]</a>
-<a class="sourceLine" id="cb192-4" data-line-number="4">##   face     suit value</a>
-<a class="sourceLine" id="cb192-5" data-line-number="5">##   king   spades    13</a>
-<a class="sourceLine" id="cb192-6" data-line-number="6">##  queen   spades    12</a>
-<a class="sourceLine" id="cb192-7" data-line-number="7">##   jack   spades    11</a>
-<a class="sourceLine" id="cb192-8" data-line-number="8">##   king    clubs    13</a>
-<a class="sourceLine" id="cb192-9" data-line-number="9">##  queen    clubs    12</a>
-<a class="sourceLine" id="cb192-10" data-line-number="10">##   jack    clubs    11</a>
-<a class="sourceLine" id="cb192-11" data-line-number="11">##   king diamonds    13</a>
-<a class="sourceLine" id="cb192-12" data-line-number="12">##  queen diamonds    12</a>
-<a class="sourceLine" id="cb192-13" data-line-number="13">##   jack diamonds    11</a>
-<a class="sourceLine" id="cb192-14" data-line-number="14">##   king   hearts    13</a>
-<a class="sourceLine" id="cb192-15" data-line-number="15">##  queen   hearts    12</a>
-<a class="sourceLine" id="cb192-16" data-line-number="16">##   jack   hearts    11</a>
-<a class="sourceLine" id="cb192-17" data-line-number="17"></a>
-<a class="sourceLine" id="cb192-18" data-line-number="18">deck5<span class="op">$</span>value[facecard] &lt;-<span class="st"> </span><span class="dv">10</span></a>
-<a class="sourceLine" id="cb192-19" data-line-number="19"></a>
-<a class="sourceLine" id="cb192-20" data-line-number="20"><span class="kw">head</span>(deck5, <span class="dv">13</span>)</a>
-<a class="sourceLine" id="cb192-21" data-line-number="21">##   face   suit value</a>
-<a class="sourceLine" id="cb192-22" data-line-number="22">##   king spades    10</a>
-<a class="sourceLine" id="cb192-23" data-line-number="23">##  queen spades    10</a>
-<a class="sourceLine" id="cb192-24" data-line-number="24">##   jack spades    10</a>
-<a class="sourceLine" id="cb192-25" data-line-number="25">##    ten spades    10</a>
-<a class="sourceLine" id="cb192-26" data-line-number="26">##   nine spades     9</a>
-<a class="sourceLine" id="cb192-27" data-line-number="27">##  eight spades     8</a>
-<a class="sourceLine" id="cb192-28" data-line-number="28">##  seven spades     7</a>
-<a class="sourceLine" id="cb192-29" data-line-number="29">##    six spades     6</a>
-<a class="sourceLine" id="cb192-30" data-line-number="30">##   five spades     5</a>
-<a class="sourceLine" id="cb192-31" data-line-number="31">##   four spades     4</a>
-<a class="sourceLine" id="cb192-32" data-line-number="32">##  three spades     3</a>
-<a class="sourceLine" id="cb192-33" data-line-number="33">##    two spades     2</a>
-<a class="sourceLine" id="cb192-34" data-line-number="34">##    ace spades     1</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">facecard &lt;-<span class="st"> </span>deck5<span class="op">$</span>face <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;king&quot;</span>, <span class="st">&quot;queen&quot;</span>, <span class="st">&quot;jack&quot;</span>)
+
+deck5[facecard, ]
+##   face     suit value
+##   king   spades    13
+##  queen   spades    12
+##   jack   spades    11
+##   king    clubs    13
+##  queen    clubs    12
+##   jack    clubs    11
+##   king diamonds    13
+##  queen diamonds    12
+##   jack diamonds    11
+##   king   hearts    13
+##  queen   hearts    12
+##   jack   hearts    11
+
+deck5<span class="op">$</span>value[facecard] &lt;-<span class="st"> </span><span class="dv">10</span>
+
+<span class="kw">head</span>(deck5, <span class="dv">13</span>)
+##   face   suit value
+##   king spades    10
+##  queen spades    10
+##   jack spades    10
+##    ten spades    10
+##   nine spades     9
+##  eight spades     8
+##  seven spades     7
+##    six spades     6
+##   five spades     5
+##   four spades     4
+##  three spades     3
+##    two spades     2
+##    ace spades     1</code></pre>
 <p>Now you just need to fix the ace values—or do you? It is hard to decide what value to give the aces because their exact value will change from hand to hand. At the end of each hand, an ace will equal 11 if the sum of the player’s cards does not exceed 21. Otherwise, the ace will equal 1. The actual value of the ace will depend on the other cards in the player’s hand. This is a case of missing information. At the moment, you do not have enough information to assign a correct point value to the ace cards.</p>
 </div>
 </div>
@@ -827,61 +828,61 @@ Figure 5.1: R will evaluate the expressions on each side of a Boolean operator s
 <h3><span class="header-section-number">5.0.3</span> Missing Information</h3>
 <p>Missing information problems happen frequently in data science. Usually, they are more straightforward: you don’t know a value because the measurement was lost, corrupted, or never taken to begin with. R has a way to help you manage these missing values.</p>
 <p>The <code>NA</code> character is a special symbol in R. It stands for “not available” and can be used as a placeholder for missing information. R will treat NA exactly as you should want missing information treated. For example, what result would you expect if you add 1 to a piece of missing information?</p>
-<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb193-1" data-line-number="1"><span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="ot">NA</span></a>
-<a class="sourceLine" id="cb193-2" data-line-number="2">## NA</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="ot">NA</span>
+## NA</code></pre>
 <p>R will return a second piece of missing information. It would not be correct to say that <code>1 + NA = 1</code> because there is a good chance that the missing quantity is not zero. You do not have enough information to determine the result.</p>
 <p>What if you tested whether a piece of missing information is equal to 1?</p>
-<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb194-1" data-line-number="1"><span class="ot">NA</span> ## 1</a>
-<a class="sourceLine" id="cb194-2" data-line-number="2">## NA</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="ot">NA</span> ## 1
+## NA</code></pre>
 <p>Again, your answer would be something like “I do not know if this is equal to one,” that is, <code>NA</code>. Generally, <code>NA</code>s will propagate whenever you use them in an R operation or function. This can save you from making errors based on missing data.</p>
 <div id="na.rm" class="section level4">
 <h4><span class="header-section-number">5.0.3.1</span> na.rm</h4>
 <p>Missing values can help you work around holes in your data sets, but they can also create some frustrating problems. Suppose, for example, that you’ve collected 1,000 pass:[<phrase role="keep-together">observations</phrase>] and wish to take their average with R’s <code>mean</code> function. If even one of the values is <code>NA</code>, your result will be <code>NA</code>:</p>
-<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb195-1" data-line-number="1"><span class="kw">c</span>(<span class="ot">NA</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">50</span>)</a>
-<a class="sourceLine" id="cb195-2" data-line-number="2">## NA  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16</a>
-<a class="sourceLine" id="cb195-3" data-line-number="3">## 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33</a>
-<a class="sourceLine" id="cb195-4" data-line-number="4">## 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50</a>
-<a class="sourceLine" id="cb195-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb195-6" data-line-number="6"><span class="kw">mean</span>(<span class="kw">c</span>(<span class="ot">NA</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">50</span>))</a>
-<a class="sourceLine" id="cb195-7" data-line-number="7">## NA</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(<span class="ot">NA</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">50</span>)
+## NA  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16
+## 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33
+## 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50
+
+<span class="kw">mean</span>(<span class="kw">c</span>(<span class="ot">NA</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">50</span>))
+## NA</code></pre>
 <p>Understandably, you may prefer a different behavior. Most R functions come with the optional argument, <code>na.rm</code>, which stands for <code>NA</code> remove. R will ignore <code>NA</code>s when it evaluates a function if you add the argument <code>na.rm = TRUE</code>:</p>
-<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb196-1" data-line-number="1"><span class="kw">mean</span>(<span class="kw">c</span>(<span class="ot">NA</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">50</span>), <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb196-2" data-line-number="2">## 25.5</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(<span class="kw">c</span>(<span class="ot">NA</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">50</span>), <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)
+## 25.5</code></pre>
 </div>
 <div id="is.na" class="section level4">
 <h4><span class="header-section-number">5.0.3.2</span> is.na</h4>
 <p>On occasion, you may want to identify the <code>NA</code>s in your data set with a logical test, but that too creates a problem. How would you go about it? If something is a missing value, any logical test that uses it will return a missing value, even this test:</p>
-<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb197-1" data-line-number="1"><span class="ot">NA</span> ## NA</a>
-<a class="sourceLine" id="cb197-2" data-line-number="2">## NA</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="ot">NA</span> ## NA
+## NA</code></pre>
 <p>Which means that tests like this won’t help you find missing values:</p>
-<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb198-1" data-line-number="1"><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="ot">NA</span>) ## NA</a>
-<a class="sourceLine" id="cb198-2" data-line-number="2">## NA NA NA NA</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="ot">NA</span>) ## NA
+## NA NA NA NA</code></pre>
 <p>But don’t worry too hard; R supplies a special function that can test whether a value is an <code>NA</code>. The function is sensibly named <code>is.na</code>:</p>
-<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb199-1" data-line-number="1"><span class="kw">is.na</span>(<span class="ot">NA</span>)</a>
-<a class="sourceLine" id="cb199-2" data-line-number="2">## TRUE</a>
-<a class="sourceLine" id="cb199-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb199-4" data-line-number="4">vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="ot">NA</span>)</a>
-<a class="sourceLine" id="cb199-5" data-line-number="5"><span class="kw">is.na</span>(vec)</a>
-<a class="sourceLine" id="cb199-6" data-line-number="6">## FALSE FALSE FALSE  TRUE</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">is.na</span>(<span class="ot">NA</span>)
+## TRUE
+
+vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="ot">NA</span>)
+<span class="kw">is.na</span>(vec)
+## FALSE FALSE FALSE  TRUE</code></pre>
 <p>Let’s set all of your ace values to <code>NA</code>. This will accomplish two things. First, it will remind you that you do not know the final value of each ace. Second, it will prevent you from accidentally scoring a hand that has an ace before you determine the ace’s final value.</p>
 <p>You can set your ace values to <code>NA</code> in the same way that you would set them to a number:</p>
-<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb200-1" data-line-number="1">deck5<span class="op">$</span>value[deck5<span class="op">$</span>face ## &quot;ace&quot;] &lt;- NA</a>
-<a class="sourceLine" id="cb200-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb200-3" data-line-number="3"><span class="kw">head</span>(deck5, <span class="dv">13</span>)</a>
-<a class="sourceLine" id="cb200-4" data-line-number="4">##   face   suit value</a>
-<a class="sourceLine" id="cb200-5" data-line-number="5">##   king spades    10</a>
-<a class="sourceLine" id="cb200-6" data-line-number="6">##  queen spades    10</a>
-<a class="sourceLine" id="cb200-7" data-line-number="7">##   jack spades    10</a>
-<a class="sourceLine" id="cb200-8" data-line-number="8">##    ten spades    10</a>
-<a class="sourceLine" id="cb200-9" data-line-number="9">##   nine spades     9</a>
-<a class="sourceLine" id="cb200-10" data-line-number="10">##  eight spades     8</a>
-<a class="sourceLine" id="cb200-11" data-line-number="11">##  seven spades     7</a>
-<a class="sourceLine" id="cb200-12" data-line-number="12">##    six spades     6</a>
-<a class="sourceLine" id="cb200-13" data-line-number="13">##   five spades     5</a>
-<a class="sourceLine" id="cb200-14" data-line-number="14">##   four spades     4</a>
-<a class="sourceLine" id="cb200-15" data-line-number="15">##  three spades     3</a>
-<a class="sourceLine" id="cb200-16" data-line-number="16">##    two spades     2</a>
-<a class="sourceLine" id="cb200-17" data-line-number="17">##    ace spades    NA</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">deck5<span class="op">$</span>value[deck5<span class="op">$</span>face ## &quot;ace&quot;] &lt;- NA
+
+<span class="kw">head</span>(deck5, <span class="dv">13</span>)
+##   face   suit value
+##   king spades    10
+##  queen spades    10
+##   jack spades    10
+##    ten spades    10
+##   nine spades     9
+##  eight spades     8
+##  seven spades     7
+##    six spades     6
+##   five spades     5
+##   four spades     4
+##  three spades     3
+##    two spades     2
+##    ace spades    NA</code></pre>
 <p>Congratulations. Your deck is now ready for a game of blackjack.</p>
 </div>
 </div>
@@ -936,7 +937,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');
     script.src = src;

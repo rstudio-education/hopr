@@ -7,12 +7,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Hands-On Programming with R</title>
   <meta name="description" content="This book will teach you how to program in R, with hands-on examples. I wrote it for non-programmers to provide a friendly introduction to the R language. You’ll learn how to load data, assemble and disassemble data objects, navigate R’s environment system, write your own functions, and use all of R’s programming tools. Throughout the book, you’ll use your newfound skills to solve practical data science problems.">
-  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
   <meta property="og:title" content="Hands-On Programming with R" />
   <meta property="og:type" content="book" />
-  <meta property="og:url" content="http://r4ds.had.co.nz/" />
-  <meta property="og:image" content="http://r4ds.had.co.nz/cover.png" />
+  <meta property="og:url" content="https://rstudio-education.github.io/hopr/" />
+  <meta property="og:image" content="https://rstudio-education.github.io/hopr/cover.png" />
   <meta property="og:description" content="This book will teach you how to program in R, with hands-on examples. I wrote it for non-programmers to provide a friendly introduction to the R language. You’ll learn how to load data, assemble and disassemble data objects, navigate R’s environment system, write your own functions, and use all of R’s programming tools. Throughout the book, you’ll use your newfound skills to solve practical data science problems." />
   <meta name="github-repo" content="rstudio-education/hopr" />
 
@@ -20,7 +20,7 @@
   <meta name="twitter:title" content="Hands-On Programming with R" />
   <meta name="twitter:site" content="@statgarrett" />
   <meta name="twitter:description" content="This book will teach you how to program in R, with hands-on examples. I wrote it for non-programmers to provide a friendly introduction to the R language. You’ll learn how to load data, assemble and disassemble data objects, navigate R’s environment system, write your own functions, and use all of R’s programming tools. Throughout the book, you’ll use your newfound skills to solve practical data science problems." />
-  <meta name="twitter:image" content="http://r4ds.had.co.nz/cover.png" />
+  <meta name="twitter:image" content="https://rstudio-education.github.io/hopr/cover.png" />
 
 <meta name="author" content="Garrett Grolemund">
 
@@ -35,6 +35,7 @@
 <link rel="next" href="starting.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
@@ -193,7 +194,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.1.2" data-path="r-notation.html"><a href="r-notation.html#negative-integers"><i class="fa fa-check"></i><b>4.1.2</b> Negative Integers</a></li>
 <li class="chapter" data-level="4.1.3" data-path="r-notation.html"><a href="r-notation.html#zero"><i class="fa fa-check"></i><b>4.1.3</b> Zero</a></li>
 <li class="chapter" data-level="4.1.4" data-path="r-notation.html"><a href="r-notation.html#blank-spaces"><i class="fa fa-check"></i><b>4.1.4</b> Blank Spaces</a></li>
-<li class="chapter" data-level="4.1.5" data-path="r-objects.html"><a href="r-objects.html#logicals"><i class="fa fa-check"></i><b>4.1.5</b> Logical Values</a></li>
+<li class="chapter" data-level="4.1.5" data-path="r-notation.html"><a href="r-notation.html#logic"><i class="fa fa-check"></i><b>4.1.5</b> Logical Values</a></li>
 <li class="chapter" data-level="4.1.6" data-path="r-notation.html"><a href="r-notation.html#names-1"><i class="fa fa-check"></i><b>4.1.6</b> Names</a></li>
 </ul></li>
 <li class="chapter" data-level="4.2" data-path="r-notation.html"><a href="r-notation.html#deal-a-card"><i class="fa fa-check"></i><b>4.2</b> Deal a Card</a></li>
@@ -336,37 +337,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">10.1</span> Vectorized Code</h2>
 <p>You can write a piece of code in many different ways, but the fastest R code will usually take advantage of three things: logical tests, subsetting, and element-wise execution. These are the things that R does best. Code that uses these things usually has a certain quality: it is <em>vectorized</em>; the code can take a vector of values as input and manipulate each value in the vector at the same time.</p>
 <p>To see what vectorized code looks like, compare these two examples of an absolute value function. Each takes a vector of numbers and transforms it into a vector of absolute values (e.g., positive numbers). The first example is not vectorized; <code>abs_loop</code> uses a <code>for</code> loop to manipulate each element of the vector one at a time:</p>
-<div class="sourceCode" id="cb380"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb380-1" data-line-number="1">abs_loop &lt;-<span class="st"> </span><span class="cf">function</span>(vec){</a>
-<a class="sourceLine" id="cb380-2" data-line-number="2">  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(vec)) {</a>
-<a class="sourceLine" id="cb380-3" data-line-number="3">    <span class="cf">if</span> (vec[i] <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>) {</a>
-<a class="sourceLine" id="cb380-4" data-line-number="4">      vec[i] &lt;-<span class="st"> </span><span class="op">-</span>vec[i]</a>
-<a class="sourceLine" id="cb380-5" data-line-number="5">    }</a>
-<a class="sourceLine" id="cb380-6" data-line-number="6">  }</a>
-<a class="sourceLine" id="cb380-7" data-line-number="7">  vec</a>
-<a class="sourceLine" id="cb380-8" data-line-number="8">}</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">abs_loop &lt;-<span class="st"> </span><span class="cf">function</span>(vec){
+  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(vec)) {
+    <span class="cf">if</span> (vec[i] <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>) {
+      vec[i] &lt;-<span class="st"> </span><span class="op">-</span>vec[i]
+    }
+  }
+  vec
+}</code></pre>
 <p>The second example, <code>abs_set</code>, is a vectorized version of <code>abs_loop</code>. It uses logical subsetting to manipulate every negative number in the vector at the same time:</p>
-<div class="sourceCode" id="cb381"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb381-1" data-line-number="1">abs_sets &lt;-<span class="st"> </span><span class="cf">function</span>(vec){</a>
-<a class="sourceLine" id="cb381-2" data-line-number="2">  negs &lt;-<span class="st"> </span>vec <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span></a>
-<a class="sourceLine" id="cb381-3" data-line-number="3">  vec[negs] &lt;-<span class="st"> </span>vec[negs] <span class="op">*</span><span class="st"> </span><span class="dv">-1</span></a>
-<a class="sourceLine" id="cb381-4" data-line-number="4">  vec</a>
-<a class="sourceLine" id="cb381-5" data-line-number="5">}</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">abs_sets &lt;-<span class="st"> </span><span class="cf">function</span>(vec){
+  negs &lt;-<span class="st"> </span>vec <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>
+  vec[negs] &lt;-<span class="st"> </span>vec[negs] <span class="op">*</span><span class="st"> </span><span class="dv">-1</span>
+  vec
+}</code></pre>
 <p><code>abs_set</code> is much faster than <code>abs_loop</code> because it relies on operations that R does quickly: logical tests, subsetting, and element-wise execution.</p>
 <p>You can use the <code>system.time</code> function to see just how fast <code>abs_set</code> is. <code>system.time</code> takes an R expression, runs it, and then displays how much time elapsed while the expression ran.</p>
 <p>To compare <code>abs_loop</code> and <code>abs_set</code>, first make a long vector of positive and negative numbers. <code>long</code> will contain 10 million values:</p>
-<div class="sourceCode" id="cb382"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb382-1" data-line-number="1">long &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>), <span class="dv">5000000</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">long &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>), <span class="dv">5000000</span>)</code></pre>
 
 <div class="rmdnote">
 <code>rep</code> repeats a value, or vector of values, many times. To use <code>rep</code>, give it a vector of values and then the number of times to repeat the vector. R will return the results as a new, longer vector.
 </div>
 
 <p>You can then use <code>system.time</code> to measure how much time it takes each function to evaluate <code>long</code>:</p>
-<div class="sourceCode" id="cb383"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb383-1" data-line-number="1"><span class="kw">system.time</span>(<span class="kw">abs_loop</span>(long))</a>
-<a class="sourceLine" id="cb383-2" data-line-number="2">##    user  system elapsed </a>
-<a class="sourceLine" id="cb383-3" data-line-number="3">##  15.982   0.032  16.018</a>
-<a class="sourceLine" id="cb383-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb383-5" data-line-number="5"><span class="kw">system.time</span>(<span class="kw">abs_sets</span>(long))</a>
-<a class="sourceLine" id="cb383-6" data-line-number="6">##    user  system elapsed </a>
-<a class="sourceLine" id="cb383-7" data-line-number="7">##   0.529   0.063   0.592</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system.time</span>(<span class="kw">abs_loop</span>(long))
+##    user  system elapsed 
+##  15.982   0.032  16.018
+
+<span class="kw">system.time</span>(<span class="kw">abs_sets</span>(long))
+##    user  system elapsed 
+##   0.529   0.063   0.592</code></pre>
 
 <div class="rmdimportant">
 Don’t confuse <code>system.time</code> with <code>Sys.time</code>, which returns the current time.
@@ -385,9 +386,9 @@ Don’t confuse <code>system.time</code> with <code>Sys.time</code>, which retur
  <span class="solution"><em>Solution. </em></span> You can measure the speed of <code>abs</code> with <code>system.time</code>. It takes <code>abs</code> a lightning-fast 0.05 seconds to calculate the absolute value of 10 million numbers. This is 0.592 / 0.054 = 10.96 times faster than <code>abs_set</code> and nearly 300 times faster than <code>abs_loop</code>:
 </div>
 
-<div class="sourceCode" id="cb384"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb384-1" data-line-number="1"><span class="kw">system.time</span>(<span class="kw">abs</span>(long))</a>
-<a class="sourceLine" id="cb384-2" data-line-number="2">##   user  system elapsed </a>
-<a class="sourceLine" id="cb384-3" data-line-number="3">##  0.037   0.018   0.054</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system.time</span>(<span class="kw">abs</span>(long))
+##   user  system elapsed 
+##  0.037   0.018   0.054</code></pre>
 </div>
 <div id="how-to-write-vectorized-code" class="section level2">
 <h2><span class="header-section-number">10.2</span> How to Write Vectorized Code</h2>
@@ -404,15 +405,15 @@ Figure 10.1: abs_loop uses a for loop to sift data into one of two cases: negati
 </p>
 </div>
 <p>You can identify all of the elements of a vector that fall into a case with a logical test. R will execute the test in element-wise fashion and return a <code>TRUE</code> for every element that belongs in the case. For example, <code>vec &lt; 0</code> identifies every value of <code>vec</code> that belongs to the negative case. You can use the same logical test to extract the set of negative values with logical subsetting:</p>
-<div class="sourceCode" id="cb385"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb385-1" data-line-number="1">vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">-2</span>, <span class="dv">3</span>, <span class="dv">-4</span>, <span class="dv">5</span>, <span class="dv">-6</span>, <span class="dv">7</span>, <span class="dv">-8</span>, <span class="dv">9</span>, <span class="dv">-10</span>)</a>
-<a class="sourceLine" id="cb385-2" data-line-number="2">vec <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span></a>
-<a class="sourceLine" id="cb385-3" data-line-number="3">## FALSE TRUE FALSE TRUE FALSE TRUE FALSE TRUE FALSE TRUE</a>
-<a class="sourceLine" id="cb385-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb385-5" data-line-number="5">vec[vec <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>]</a>
-<a class="sourceLine" id="cb385-6" data-line-number="6">## -2  -4  -6  -8 -10</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">-2</span>, <span class="dv">3</span>, <span class="dv">-4</span>, <span class="dv">5</span>, <span class="dv">-6</span>, <span class="dv">7</span>, <span class="dv">-8</span>, <span class="dv">9</span>, <span class="dv">-10</span>)
+vec <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>
+## FALSE TRUE FALSE TRUE FALSE TRUE FALSE TRUE FALSE TRUE
+
+vec[vec <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>]
+## -2  -4  -6  -8 -10</code></pre>
 <p>The plan in <a href="speed.html#fig:abs">10.1</a> now requires a sequential step: you must multiply each of the negative values by negative one. All of R’s arithmetic operators are vectorized, so you can use <code>*</code> to complete this step in vectorized fashion. <code>*</code> will multiply each number in <code>vec[vec &lt; 0]</code> by negative one at the same time:</p>
-<div class="sourceCode" id="cb386"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb386-1" data-line-number="1">vec[vec <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>] <span class="op">*</span><span class="st"> </span><span class="dv">-1</span></a>
-<a class="sourceLine" id="cb386-2" data-line-number="2">## 2  4  6  8 10</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">vec[vec <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>] <span class="op">*</span><span class="st"> </span><span class="dv">-1</span>
+## 2  4  6  8 10</code></pre>
 <p>Finally, you can use R’s assignment operator, which is also vectorized, to save the new set over the old set in the original <code>vec</code> object. Since <code>&lt;-</code> is vectorized, the elements of the new set will be paired up to the elements of the old set, in order, and then element-wise assignment will occur. As a result, each negative value will be replaced by its positive partner, as in <a href="speed.html#fig:assignment">10.2</a>.</p>
 <div class="figure"><span id="fig:assignment"></span>
 <img src="images/hopr_1002.png" alt="Use logical subsetting to modify groups of values in place. R's arithmetic and assignment operators are vectorized, which lets you manipulate and update multiple values at once."  />
@@ -425,63 +426,63 @@ Figure 10.2: Use logical subsetting to modify groups of values in place. R’s a
 <span id="exr:unnamed-chunk-93" class="exercise"><strong>Exercise 10.2  (Vectorize a Function)  </strong></span>The following function converts a vector of slot symbols to a vector of new slot symbols. Can you vectorize it? How much faster does the vectorized version work?
 </div>
 
-<div class="sourceCode" id="cb387"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb387-1" data-line-number="1">change_symbols &lt;-<span class="st"> </span><span class="cf">function</span>(vec){</a>
-<a class="sourceLine" id="cb387-2" data-line-number="2">  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(vec)){</a>
-<a class="sourceLine" id="cb387-3" data-line-number="3">    <span class="cf">if</span> (vec[i] <span class="op">==</span><span class="st"> &quot;DD&quot;</span>) {</a>
-<a class="sourceLine" id="cb387-4" data-line-number="4">      vec[i] &lt;-<span class="st"> &quot;joker&quot;</span></a>
-<a class="sourceLine" id="cb387-5" data-line-number="5">    } <span class="cf">else</span> <span class="cf">if</span> (vec[i] <span class="op">==</span><span class="st"> &quot;C&quot;</span>) {</a>
-<a class="sourceLine" id="cb387-6" data-line-number="6">      vec[i] &lt;-<span class="st"> &quot;ace&quot;</span></a>
-<a class="sourceLine" id="cb387-7" data-line-number="7">    } <span class="cf">else</span> <span class="cf">if</span> (vec[i] <span class="op">==</span><span class="st"> &quot;7&quot;</span>) {</a>
-<a class="sourceLine" id="cb387-8" data-line-number="8">      vec[i] &lt;-<span class="st"> &quot;king&quot;</span></a>
-<a class="sourceLine" id="cb387-9" data-line-number="9">    }<span class="cf">else</span> <span class="cf">if</span> (vec[i] <span class="op">==</span><span class="st"> &quot;B&quot;</span>) {</a>
-<a class="sourceLine" id="cb387-10" data-line-number="10">      vec[i] &lt;-<span class="st"> &quot;queen&quot;</span></a>
-<a class="sourceLine" id="cb387-11" data-line-number="11">    } <span class="cf">else</span> <span class="cf">if</span> (vec[i] <span class="op">==</span><span class="st"> &quot;BB&quot;</span>) {</a>
-<a class="sourceLine" id="cb387-12" data-line-number="12">      vec[i] &lt;-<span class="st"> &quot;jack&quot;</span></a>
-<a class="sourceLine" id="cb387-13" data-line-number="13">    } <span class="cf">else</span> <span class="cf">if</span> (vec[i] <span class="op">==</span><span class="st"> &quot;BBB&quot;</span>) {</a>
-<a class="sourceLine" id="cb387-14" data-line-number="14">      vec[i] &lt;-<span class="st"> &quot;ten&quot;</span></a>
-<a class="sourceLine" id="cb387-15" data-line-number="15">    } <span class="cf">else</span> {</a>
-<a class="sourceLine" id="cb387-16" data-line-number="16">      vec[i] &lt;-<span class="st"> &quot;nine&quot;</span></a>
-<a class="sourceLine" id="cb387-17" data-line-number="17">    } </a>
-<a class="sourceLine" id="cb387-18" data-line-number="18">  }</a>
-<a class="sourceLine" id="cb387-19" data-line-number="19">  vec</a>
-<a class="sourceLine" id="cb387-20" data-line-number="20">}</a>
-<a class="sourceLine" id="cb387-21" data-line-number="21"></a>
-<a class="sourceLine" id="cb387-22" data-line-number="22">vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;DD&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;7&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;BB&quot;</span>, <span class="st">&quot;BBB&quot;</span>, <span class="st">&quot;0&quot;</span>)</a>
-<a class="sourceLine" id="cb387-23" data-line-number="23"></a>
-<a class="sourceLine" id="cb387-24" data-line-number="24"><span class="kw">change_symbols</span>(vec)</a>
-<a class="sourceLine" id="cb387-25" data-line-number="25">##  &quot;joker&quot; &quot;ace&quot;   &quot;king&quot;  &quot;queen&quot; &quot;jack&quot;  &quot;ten&quot;   &quot;nine&quot;</a>
-<a class="sourceLine" id="cb387-26" data-line-number="26"></a>
-<a class="sourceLine" id="cb387-27" data-line-number="27">many &lt;-<span class="st"> </span><span class="kw">rep</span>(vec, <span class="dv">1000000</span>)</a>
-<a class="sourceLine" id="cb387-28" data-line-number="28"></a>
-<a class="sourceLine" id="cb387-29" data-line-number="29"><span class="kw">system.time</span>(<span class="kw">change_symbols</span>(many))</a>
-<a class="sourceLine" id="cb387-30" data-line-number="30">##    user  system elapsed </a>
-<a class="sourceLine" id="cb387-31" data-line-number="31">##  30.057   0.031  30.079</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">change_symbols &lt;-<span class="st"> </span><span class="cf">function</span>(vec){
+  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(vec)){
+    <span class="cf">if</span> (vec[i] <span class="op">==</span><span class="st"> &quot;DD&quot;</span>) {
+      vec[i] &lt;-<span class="st"> &quot;joker&quot;</span>
+    } <span class="cf">else</span> <span class="cf">if</span> (vec[i] <span class="op">==</span><span class="st"> &quot;C&quot;</span>) {
+      vec[i] &lt;-<span class="st"> &quot;ace&quot;</span>
+    } <span class="cf">else</span> <span class="cf">if</span> (vec[i] <span class="op">==</span><span class="st"> &quot;7&quot;</span>) {
+      vec[i] &lt;-<span class="st"> &quot;king&quot;</span>
+    }<span class="cf">else</span> <span class="cf">if</span> (vec[i] <span class="op">==</span><span class="st"> &quot;B&quot;</span>) {
+      vec[i] &lt;-<span class="st"> &quot;queen&quot;</span>
+    } <span class="cf">else</span> <span class="cf">if</span> (vec[i] <span class="op">==</span><span class="st"> &quot;BB&quot;</span>) {
+      vec[i] &lt;-<span class="st"> &quot;jack&quot;</span>
+    } <span class="cf">else</span> <span class="cf">if</span> (vec[i] <span class="op">==</span><span class="st"> &quot;BBB&quot;</span>) {
+      vec[i] &lt;-<span class="st"> &quot;ten&quot;</span>
+    } <span class="cf">else</span> {
+      vec[i] &lt;-<span class="st"> &quot;nine&quot;</span>
+    } 
+  }
+  vec
+}
+
+vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;DD&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;7&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;BB&quot;</span>, <span class="st">&quot;BBB&quot;</span>, <span class="st">&quot;0&quot;</span>)
+
+<span class="kw">change_symbols</span>(vec)
+##  &quot;joker&quot; &quot;ace&quot;   &quot;king&quot;  &quot;queen&quot; &quot;jack&quot;  &quot;ten&quot;   &quot;nine&quot;
+
+many &lt;-<span class="st"> </span><span class="kw">rep</span>(vec, <span class="dv">1000000</span>)
+
+<span class="kw">system.time</span>(<span class="kw">change_symbols</span>(many))
+##    user  system elapsed 
+##  30.057   0.031  30.079</code></pre>
 
 <div class="solution">
  <span class="solution"><em>Solution. </em></span> <code>change_symbols</code> uses a <code>for</code> loop to sort values into seven different cases, as demonstrated in <a href="speed.html#fig:change">10.3</a>.
 </div>
 
 <p>To vectorize <code>change_symbols</code>, create a logical test that can identify each case:</p>
-<div class="sourceCode" id="cb388"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb388-1" data-line-number="1">vec[vec <span class="op">==</span><span class="st"> &quot;DD&quot;</span>]</a>
-<a class="sourceLine" id="cb388-2" data-line-number="2">## &quot;DD&quot;</a>
-<a class="sourceLine" id="cb388-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb388-4" data-line-number="4">vec[vec <span class="op">==</span><span class="st"> &quot;C&quot;</span>]</a>
-<a class="sourceLine" id="cb388-5" data-line-number="5">## &quot;C&quot;</a>
-<a class="sourceLine" id="cb388-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb388-7" data-line-number="7">vec[vec <span class="op">==</span><span class="st"> &quot;7&quot;</span>]</a>
-<a class="sourceLine" id="cb388-8" data-line-number="8">## &quot;7&quot;</a>
-<a class="sourceLine" id="cb388-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb388-10" data-line-number="10">vec[vec <span class="op">==</span><span class="st"> &quot;B&quot;</span>]</a>
-<a class="sourceLine" id="cb388-11" data-line-number="11">## &quot;B&quot;</a>
-<a class="sourceLine" id="cb388-12" data-line-number="12"></a>
-<a class="sourceLine" id="cb388-13" data-line-number="13">vec[vec <span class="op">==</span><span class="st"> &quot;BB&quot;</span>]</a>
-<a class="sourceLine" id="cb388-14" data-line-number="14">## &quot;BB&quot;</a>
-<a class="sourceLine" id="cb388-15" data-line-number="15"></a>
-<a class="sourceLine" id="cb388-16" data-line-number="16">vec[vec <span class="op">==</span><span class="st"> &quot;BBB&quot;</span>]</a>
-<a class="sourceLine" id="cb388-17" data-line-number="17">## &quot;BBB&quot;</a>
-<a class="sourceLine" id="cb388-18" data-line-number="18"></a>
-<a class="sourceLine" id="cb388-19" data-line-number="19">vec[vec <span class="op">==</span><span class="st"> &quot;0&quot;</span>]</a>
-<a class="sourceLine" id="cb388-20" data-line-number="20">## &quot;0&quot;</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">vec[vec <span class="op">==</span><span class="st"> &quot;DD&quot;</span>]
+## &quot;DD&quot;
+
+vec[vec <span class="op">==</span><span class="st"> &quot;C&quot;</span>]
+## &quot;C&quot;
+
+vec[vec <span class="op">==</span><span class="st"> &quot;7&quot;</span>]
+## &quot;7&quot;
+
+vec[vec <span class="op">==</span><span class="st"> &quot;B&quot;</span>]
+## &quot;B&quot;
+
+vec[vec <span class="op">==</span><span class="st"> &quot;BB&quot;</span>]
+## &quot;BB&quot;
+
+vec[vec <span class="op">==</span><span class="st"> &quot;BBB&quot;</span>]
+## &quot;BBB&quot;
+
+vec[vec <span class="op">==</span><span class="st"> &quot;0&quot;</span>]
+## &quot;0&quot;</code></pre>
 <div class="figure"><span id="fig:change"></span>
 <img src="images/hopr_1003.png" alt="change_many does something different for each of seven cases."  />
 <p class="caption">
@@ -489,39 +490,39 @@ Figure 10.3: change_many does something different for each of seven cases.
 </p>
 </div>
 <p>Then write code that can change the symbols for each case:</p>
-<div class="sourceCode" id="cb389"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb389-1" data-line-number="1">vec[vec <span class="op">==</span><span class="st"> &quot;DD&quot;</span>] &lt;-<span class="st"> &quot;joker&quot;</span></a>
-<a class="sourceLine" id="cb389-2" data-line-number="2">vec[vec <span class="op">==</span><span class="st"> &quot;C&quot;</span>] &lt;-<span class="st"> &quot;ace&quot;</span></a>
-<a class="sourceLine" id="cb389-3" data-line-number="3">vec[vec <span class="op">==</span><span class="st"> &quot;7&quot;</span>] &lt;-<span class="st"> &quot;king&quot;</span></a>
-<a class="sourceLine" id="cb389-4" data-line-number="4">vec[vec <span class="op">==</span><span class="st"> &quot;B&quot;</span>] &lt;-<span class="st"> &quot;queen&quot;</span></a>
-<a class="sourceLine" id="cb389-5" data-line-number="5">vec[vec <span class="op">==</span><span class="st"> &quot;BB&quot;</span>] &lt;-<span class="st"> &quot;jack&quot;</span></a>
-<a class="sourceLine" id="cb389-6" data-line-number="6">vec[vec <span class="op">==</span><span class="st"> &quot;BBB&quot;</span>] &lt;-<span class="st"> &quot;ten&quot;</span></a>
-<a class="sourceLine" id="cb389-7" data-line-number="7">vec[vec <span class="op">==</span><span class="st"> &quot;0&quot;</span>] &lt;-<span class="st"> &quot;nine&quot;</span></a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">vec[vec <span class="op">==</span><span class="st"> &quot;DD&quot;</span>] &lt;-<span class="st"> &quot;joker&quot;</span>
+vec[vec <span class="op">==</span><span class="st"> &quot;C&quot;</span>] &lt;-<span class="st"> &quot;ace&quot;</span>
+vec[vec <span class="op">==</span><span class="st"> &quot;7&quot;</span>] &lt;-<span class="st"> &quot;king&quot;</span>
+vec[vec <span class="op">==</span><span class="st"> &quot;B&quot;</span>] &lt;-<span class="st"> &quot;queen&quot;</span>
+vec[vec <span class="op">==</span><span class="st"> &quot;BB&quot;</span>] &lt;-<span class="st"> &quot;jack&quot;</span>
+vec[vec <span class="op">==</span><span class="st"> &quot;BBB&quot;</span>] &lt;-<span class="st"> &quot;ten&quot;</span>
+vec[vec <span class="op">==</span><span class="st"> &quot;0&quot;</span>] &lt;-<span class="st"> &quot;nine&quot;</span></code></pre>
 <p>When you combine this into a function, you have a vectorized version of <code>change_symbols</code> that runs about 14 times faster:</p>
-<div class="sourceCode" id="cb390"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb390-1" data-line-number="1">change_vec &lt;-<span class="st"> </span><span class="cf">function</span> (vec) {</a>
-<a class="sourceLine" id="cb390-2" data-line-number="2">  vec[vec <span class="op">==</span><span class="st"> &quot;DD&quot;</span>] &lt;-<span class="st"> &quot;joker&quot;</span></a>
-<a class="sourceLine" id="cb390-3" data-line-number="3">  vec[vec <span class="op">==</span><span class="st"> &quot;C&quot;</span>] &lt;-<span class="st"> &quot;ace&quot;</span></a>
-<a class="sourceLine" id="cb390-4" data-line-number="4">  vec[vec <span class="op">==</span><span class="st"> &quot;7&quot;</span>] &lt;-<span class="st"> &quot;king&quot;</span></a>
-<a class="sourceLine" id="cb390-5" data-line-number="5">  vec[vec <span class="op">==</span><span class="st"> &quot;B&quot;</span>] &lt;-<span class="st"> &quot;queen&quot;</span></a>
-<a class="sourceLine" id="cb390-6" data-line-number="6">  vec[vec <span class="op">==</span><span class="st"> &quot;BB&quot;</span>] &lt;-<span class="st"> &quot;jack&quot;</span></a>
-<a class="sourceLine" id="cb390-7" data-line-number="7">  vec[vec <span class="op">==</span><span class="st"> &quot;BBB&quot;</span>] &lt;-<span class="st"> &quot;ten&quot;</span></a>
-<a class="sourceLine" id="cb390-8" data-line-number="8">  vec[vec <span class="op">==</span><span class="st"> &quot;0&quot;</span>] &lt;-<span class="st"> &quot;nine&quot;</span></a>
-<a class="sourceLine" id="cb390-9" data-line-number="9">  </a>
-<a class="sourceLine" id="cb390-10" data-line-number="10">  vec</a>
-<a class="sourceLine" id="cb390-11" data-line-number="11">}</a>
-<a class="sourceLine" id="cb390-12" data-line-number="12"></a>
-<a class="sourceLine" id="cb390-13" data-line-number="13"><span class="kw">system.time</span>(<span class="kw">change_vec</span>(many))</a>
-<a class="sourceLine" id="cb390-14" data-line-number="14">##   user  system elapsed </a>
-<a class="sourceLine" id="cb390-15" data-line-number="15">##  1.994   0.059   2.051 </a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">change_vec &lt;-<span class="st"> </span><span class="cf">function</span> (vec) {
+  vec[vec <span class="op">==</span><span class="st"> &quot;DD&quot;</span>] &lt;-<span class="st"> &quot;joker&quot;</span>
+  vec[vec <span class="op">==</span><span class="st"> &quot;C&quot;</span>] &lt;-<span class="st"> &quot;ace&quot;</span>
+  vec[vec <span class="op">==</span><span class="st"> &quot;7&quot;</span>] &lt;-<span class="st"> &quot;king&quot;</span>
+  vec[vec <span class="op">==</span><span class="st"> &quot;B&quot;</span>] &lt;-<span class="st"> &quot;queen&quot;</span>
+  vec[vec <span class="op">==</span><span class="st"> &quot;BB&quot;</span>] &lt;-<span class="st"> &quot;jack&quot;</span>
+  vec[vec <span class="op">==</span><span class="st"> &quot;BBB&quot;</span>] &lt;-<span class="st"> &quot;ten&quot;</span>
+  vec[vec <span class="op">==</span><span class="st"> &quot;0&quot;</span>] &lt;-<span class="st"> &quot;nine&quot;</span>
+  
+  vec
+}
+
+<span class="kw">system.time</span>(<span class="kw">change_vec</span>(many))
+##   user  system elapsed 
+##  1.994   0.059   2.051 </code></pre>
 <p>Or, even better, use a lookup table. Lookup tables are a vectorized method because they rely on R’s vectorized selection operations:</p>
-<div class="sourceCode" id="cb391"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb391-1" data-line-number="1">change_vec2 &lt;-<span class="st"> </span><span class="cf">function</span>(vec){</a>
-<a class="sourceLine" id="cb391-2" data-line-number="2">  tb &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;DD&quot;</span> =<span class="st"> &quot;joker&quot;</span>, <span class="st">&quot;C&quot;</span> =<span class="st"> &quot;ace&quot;</span>, <span class="st">&quot;7&quot;</span> =<span class="st"> &quot;king&quot;</span>, <span class="st">&quot;B&quot;</span> =<span class="st"> &quot;queen&quot;</span>, </a>
-<a class="sourceLine" id="cb391-3" data-line-number="3">    <span class="st">&quot;BB&quot;</span> =<span class="st"> &quot;jack&quot;</span>, <span class="st">&quot;BBB&quot;</span> =<span class="st"> &quot;ten&quot;</span>, <span class="st">&quot;0&quot;</span> =<span class="st"> &quot;nine&quot;</span>)</a>
-<a class="sourceLine" id="cb391-4" data-line-number="4">  <span class="kw">unname</span>(tb[vec])</a>
-<a class="sourceLine" id="cb391-5" data-line-number="5">}</a>
-<a class="sourceLine" id="cb391-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb391-7" data-line-number="7"><span class="kw">system.time</span>(<span class="kw">change_vec</span>(many))</a>
-<a class="sourceLine" id="cb391-8" data-line-number="8">##   user  system elapsed </a>
-<a class="sourceLine" id="cb391-9" data-line-number="9">##  0.687   0.059   0.746 </a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">change_vec2 &lt;-<span class="st"> </span><span class="cf">function</span>(vec){
+  tb &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;DD&quot;</span> =<span class="st"> &quot;joker&quot;</span>, <span class="st">&quot;C&quot;</span> =<span class="st"> &quot;ace&quot;</span>, <span class="st">&quot;7&quot;</span> =<span class="st"> &quot;king&quot;</span>, <span class="st">&quot;B&quot;</span> =<span class="st"> &quot;queen&quot;</span>, 
+    <span class="st">&quot;BB&quot;</span> =<span class="st"> &quot;jack&quot;</span>, <span class="st">&quot;BBB&quot;</span> =<span class="st"> &quot;ten&quot;</span>, <span class="st">&quot;0&quot;</span> =<span class="st"> &quot;nine&quot;</span>)
+  <span class="kw">unname</span>(tb[vec])
+}
+
+<span class="kw">system.time</span>(<span class="kw">change_vec</span>(many))
+##   user  system elapsed 
+##  0.687   0.059   0.746 </code></pre>
 <p>Here, a lookup table is 40 times faster than the original function.</p>
 <p><code>abs_loop</code> and <code>change_many</code> illustrate a characteristic of vectorized code: programmers often write slower, nonvectorized code by relying on unnecessary <code>for</code> loops, like the one in <code>change_many</code>. I think this is the result of a general misunderstanding about R. <code>for</code> loops do not behave the same way in R as they do in other languages, which means you should write code differently in R than you would in other languages.</p>
 <p>When you write in languages like C and Fortran, you must compile your code before your computer can run it. This compilation step optimizes how the <code>for</code> loops in the code use your computer’s memory, which makes the <code>for</code> loops very fast. As a result, many programmers use <code>for</code> loops frequently when they write in C and Fortran.</p>
@@ -538,23 +539,23 @@ A good way to spot <code>for</code> loops that could be vectorized is to look fo
 <h2><span class="header-section-number">10.3</span> How to Write Fast for Loops in R</h2>
 <p>You can dramatically increase the speed of your <code>for</code> loops by doing two things to optimize each loop. First, do as much as you can outside of the <code>for</code> loop. Every line of code that you place inside of the <code>for</code> loop will be run many, many times. If a line of code only needs to be run once, place it outside of the loop to avoid repetition.</p>
 <p>Second, make sure that any storage objects that you use with the loop are large enough to contain <em>all</em> of the results of the loop. For example, both loops below will need to store one million values. The first loop stores its values in an object named <code>output</code> that begins with a length of <em>one million</em>:</p>
-<div class="sourceCode" id="cb392"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb392-1" data-line-number="1"><span class="kw">system.time</span>(</a>
-<a class="sourceLine" id="cb392-2" data-line-number="2">  output &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="ot">NA</span>, <span class="dv">1000000</span>) </a>
-<a class="sourceLine" id="cb392-3" data-line-number="3">  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">1000000</span>) {</a>
-<a class="sourceLine" id="cb392-4" data-line-number="4">    output[i] &lt;-<span class="st"> </span>i <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb392-5" data-line-number="5">  }</a>
-<a class="sourceLine" id="cb392-6" data-line-number="6">)</a>
-<a class="sourceLine" id="cb392-7" data-line-number="7">##   user  system elapsed </a>
-<a class="sourceLine" id="cb392-8" data-line-number="8">##  1.709   0.015   1.724 </a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system.time</span>(
+  output &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="ot">NA</span>, <span class="dv">1000000</span>) 
+  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">1000000</span>) {
+    output[i] &lt;-<span class="st"> </span>i <span class="op">+</span><span class="st"> </span><span class="dv">1</span>
+  }
+)
+##   user  system elapsed 
+##  1.709   0.015   1.724 </code></pre>
 <p>The second loop stores its values in an object named <code>output</code> that begins with a length of <em>one</em>. R will expand the object to a length of one million as it runs the loop. The code in this loop is very similar to the code in the first loop, but the loop takes <em>37 minutes</em> longer to run than the first loop:</p>
-<div class="sourceCode" id="cb393"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb393-1" data-line-number="1"><span class="kw">system.time</span>(</a>
-<a class="sourceLine" id="cb393-2" data-line-number="2">  output &lt;-<span class="st"> </span><span class="ot">NA</span> </a>
-<a class="sourceLine" id="cb393-3" data-line-number="3">  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">1000000</span>) {</a>
-<a class="sourceLine" id="cb393-4" data-line-number="4">    output[i] &lt;-<span class="st"> </span>i <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb393-5" data-line-number="5">  }</a>
-<a class="sourceLine" id="cb393-6" data-line-number="6">)</a>
-<a class="sourceLine" id="cb393-7" data-line-number="7">##     user   system  elapsed </a>
-<a class="sourceLine" id="cb393-8" data-line-number="8">## 1689.537  560.951 2249.927</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system.time</span>(
+  output &lt;-<span class="st"> </span><span class="ot">NA</span> 
+  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">1000000</span>) {
+    output[i] &lt;-<span class="st"> </span>i <span class="op">+</span><span class="st"> </span><span class="dv">1</span>
+  }
+)
+##     user   system  elapsed 
+## 1689.537  560.951 2249.927</code></pre>
 <p>The two loops do the same thing, so what accounts for the difference? In the second loop, R has to increase the length of <code>output</code> by one for each run of the loop. To do this, R needs to find a new place in your computer’s memory that can contain the larger object. R must then copy the <code>output</code> vector over and erase the old version of <code>output</code> before moving on to the next run of the loop. By the end of the loop, R has rewritten <code>output</code> in your computer’s memory one million times.</p>
 <p>In the first case, the size of <code>output</code> never changes; R can define one <code>output</code> object in memory and use it for each run of the <code>for</code> loop.</p>
 
@@ -568,64 +569,64 @@ Whenever you see <code>.Primitive</code>, <code>.Internal</code>, or <code>.Call
 <h2><span class="header-section-number">10.4</span> Vectorized Code in Practice</h2>
 <p>To see how vectorized code can help you as a data scientist, consider our slot machine project. In <a href="loops.html#loops">Loops</a>, you calculated the exact payout rate for your slot machine, but you could have estimated this payout rate with a simulation. If you played the slot machine many, many times, the average prize over all of the plays would be a good estimate of the true payout rate.</p>
 <p>This method of estimation is based on the law of large numbers and is similar to many statistical simulations. To run this simulation, you could use a <code>for</code> loop:</p>
-<div class="sourceCode" id="cb394"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb394-1" data-line-number="1">winnings &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="dt">length =</span> <span class="dv">1000000</span>)</a>
-<a class="sourceLine" id="cb394-2" data-line-number="2"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">1000000</span>) {</a>
-<a class="sourceLine" id="cb394-3" data-line-number="3">  winnings[i] &lt;-<span class="st"> </span><span class="kw">play</span>()</a>
-<a class="sourceLine" id="cb394-4" data-line-number="4">}</a>
-<a class="sourceLine" id="cb394-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb394-6" data-line-number="6"><span class="kw">mean</span>(winnings)</a>
-<a class="sourceLine" id="cb394-7" data-line-number="7">## 0.9366984</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">winnings &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="dt">length =</span> <span class="dv">1000000</span>)
+<span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">1000000</span>) {
+  winnings[i] &lt;-<span class="st"> </span><span class="kw">play</span>()
+}
+
+<span class="kw">mean</span>(winnings)
+## 0.9366984</code></pre>
 <p>The estimated payout rate after 10 million runs is 0.937, which is very close to the true payout rate of 0.934. Note that I’m using the modified <code>score</code> function that treats diamonds as wilds.</p>
 <p>If you run this simulation, you will notice that it takes a while to run. In fact, the simulation takes 342,308 seconds to run, which is about 5.7 minutes. This is not particularly impressive, and you can do better by using vectorized code:</p>
-<div class="sourceCode" id="cb395"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb395-1" data-line-number="1"><span class="kw">system.time</span>(<span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">1000000</span>) {</a>
-<a class="sourceLine" id="cb395-2" data-line-number="2">  winnings[i] &lt;-<span class="st"> </span><span class="kw">play</span>()</a>
-<a class="sourceLine" id="cb395-3" data-line-number="3">})</a>
-<a class="sourceLine" id="cb395-4" data-line-number="4">##    user  system elapsed </a>
-<a class="sourceLine" id="cb395-5" data-line-number="5">## 342.041   0.355 342.308 </a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system.time</span>(<span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">1000000</span>) {
+  winnings[i] &lt;-<span class="st"> </span><span class="kw">play</span>()
+})
+##    user  system elapsed 
+## 342.041   0.355 342.308 </code></pre>
 <p>The current <code>score</code> function is not vectorized. It takes a single slot combination and uses an <code>if</code> tree to assign a prize to it. This combination of an <code>if</code> tree with a <code>for</code> loop suggests that you could write a piece of vectorized code that takes <em>many</em> slot combinations and then uses logical subsetting to operate on them all at once.</p>
 <p>For example, you could rewrite <code>get_symbols</code> to generate <em>n</em> slot combinations and return them as an <em>n</em> x 3 matrix, like the one that follows. Each row of the matrix will contain one slot combination to be scored:</p>
-<div class="sourceCode" id="cb396"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb396-1" data-line-number="1">get_many_symbols &lt;-<span class="st"> </span><span class="cf">function</span>(n) {</a>
-<a class="sourceLine" id="cb396-2" data-line-number="2">  wheel &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;DD&quot;</span>, <span class="st">&quot;7&quot;</span>, <span class="st">&quot;BBB&quot;</span>, <span class="st">&quot;BB&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;0&quot;</span>)</a>
-<a class="sourceLine" id="cb396-3" data-line-number="3">  vec &lt;-<span class="st"> </span><span class="kw">sample</span>(wheel, <span class="dt">size =</span> <span class="dv">3</span> <span class="op">*</span><span class="st"> </span>n, <span class="dt">replace =</span> <span class="ot">TRUE</span>,</a>
-<a class="sourceLine" id="cb396-4" data-line-number="4">    <span class="dt">prob =</span> <span class="kw">c</span>(<span class="fl">0.03</span>, <span class="fl">0.03</span>, <span class="fl">0.06</span>, <span class="fl">0.1</span>, <span class="fl">0.25</span>, <span class="fl">0.01</span>, <span class="fl">0.52</span>))</a>
-<a class="sourceLine" id="cb396-5" data-line-number="5">  <span class="kw">matrix</span>(vec, <span class="dt">ncol =</span> <span class="dv">3</span>)</a>
-<a class="sourceLine" id="cb396-6" data-line-number="6">}</a>
-<a class="sourceLine" id="cb396-7" data-line-number="7"></a>
-<a class="sourceLine" id="cb396-8" data-line-number="8"><span class="kw">get_many_symbols</span>(<span class="dv">5</span>)</a>
-<a class="sourceLine" id="cb396-9" data-line-number="9">##      [,1]  [,2] [,3] </a>
-<a class="sourceLine" id="cb396-10" data-line-number="10">## [1,] &quot;B&quot;   &quot;0&quot;  &quot;B&quot;  </a>
-<a class="sourceLine" id="cb396-11" data-line-number="11">## [2,] &quot;0&quot;   &quot;BB&quot; &quot;7&quot;  </a>
-<a class="sourceLine" id="cb396-12" data-line-number="12">## [3,] &quot;0&quot;   &quot;0&quot;  &quot;BBB&quot;</a>
-<a class="sourceLine" id="cb396-13" data-line-number="13">## [4,] &quot;0&quot;   &quot;0&quot;  &quot;B&quot;  </a>
-<a class="sourceLine" id="cb396-14" data-line-number="14">## [5,] &quot;BBB&quot; &quot;0&quot;  &quot;0&quot; </a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">get_many_symbols &lt;-<span class="st"> </span><span class="cf">function</span>(n) {
+  wheel &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;DD&quot;</span>, <span class="st">&quot;7&quot;</span>, <span class="st">&quot;BBB&quot;</span>, <span class="st">&quot;BB&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;0&quot;</span>)
+  vec &lt;-<span class="st"> </span><span class="kw">sample</span>(wheel, <span class="dt">size =</span> <span class="dv">3</span> <span class="op">*</span><span class="st"> </span>n, <span class="dt">replace =</span> <span class="ot">TRUE</span>,
+    <span class="dt">prob =</span> <span class="kw">c</span>(<span class="fl">0.03</span>, <span class="fl">0.03</span>, <span class="fl">0.06</span>, <span class="fl">0.1</span>, <span class="fl">0.25</span>, <span class="fl">0.01</span>, <span class="fl">0.52</span>))
+  <span class="kw">matrix</span>(vec, <span class="dt">ncol =</span> <span class="dv">3</span>)
+}
+
+<span class="kw">get_many_symbols</span>(<span class="dv">5</span>)
+##      [,1]  [,2] [,3] 
+## [1,] &quot;B&quot;   &quot;0&quot;  &quot;B&quot;  
+## [2,] &quot;0&quot;   &quot;BB&quot; &quot;7&quot;  
+## [3,] &quot;0&quot;   &quot;0&quot;  &quot;BBB&quot;
+## [4,] &quot;0&quot;   &quot;0&quot;  &quot;B&quot;  
+## [5,] &quot;BBB&quot; &quot;0&quot;  &quot;0&quot; </code></pre>
 <p>You could also rewrite <code>play</code> to take a parameter, <code>n</code>, and return <code>n</code> prizes, in a data frame:</p>
-<div class="sourceCode" id="cb397"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb397-1" data-line-number="1">play_many &lt;-<span class="st"> </span><span class="cf">function</span>(n) {</a>
-<a class="sourceLine" id="cb397-2" data-line-number="2">  symb_mat &lt;-<span class="st"> </span><span class="kw">get_many_symbols</span>(<span class="dt">n =</span> n)</a>
-<a class="sourceLine" id="cb397-3" data-line-number="3">  <span class="kw">data.frame</span>(<span class="dt">w1 =</span> symb_mat[,<span class="dv">1</span>], <span class="dt">w2 =</span> symb_mat[,<span class="dv">2</span>],</a>
-<a class="sourceLine" id="cb397-4" data-line-number="4">             <span class="dt">w3 =</span> symb_mat[,<span class="dv">3</span>], <span class="dt">prize =</span> <span class="kw">score_many</span>(symb_mat))</a>
-<a class="sourceLine" id="cb397-5" data-line-number="5">}</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">play_many &lt;-<span class="st"> </span><span class="cf">function</span>(n) {
+  symb_mat &lt;-<span class="st"> </span><span class="kw">get_many_symbols</span>(<span class="dt">n =</span> n)
+  <span class="kw">data.frame</span>(<span class="dt">w1 =</span> symb_mat[,<span class="dv">1</span>], <span class="dt">w2 =</span> symb_mat[,<span class="dv">2</span>],
+             <span class="dt">w3 =</span> symb_mat[,<span class="dv">3</span>], <span class="dt">prize =</span> <span class="kw">score_many</span>(symb_mat))
+}</code></pre>
 <p>This new function would make it easy to simulate a million, or even 10 million plays of the slot machine, which will be our goal. When we’re finished, you will be able to estimate the payout rate with:</p>
-<div class="sourceCode" id="cb398"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb398-1" data-line-number="1"><span class="co"># plays &lt;- play_many(10000000))</span></a>
-<a class="sourceLine" id="cb398-2" data-line-number="2"><span class="co"># mean(plays$prize)</span></a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plays &lt;- play_many(10000000))</span>
+<span class="co"># mean(plays$prize)</span></code></pre>
 <p>Now you just need to write <code>score_many</code>, a vectorized (matix-ized?) version of <code>score</code> that takes an <em>n</em> x 3 matrix and returns <em>n</em> prizes. It will be difficult to write this function because <code>score</code> is already quite complicated. I would not expect you to feel confident doing this on your own until you have more practice and experience than we’ve been able to develop here.</p>
 <p>Should you like to test your skills and write a version of <code>score_many</code>, I recommend that you use the function <code>rowSums</code> within your code. It calculates the sum of each row of numbers (or logicals) in a matrix.</p>
 <p>If you would like to test yourself in a more modest way, I recommend that you study the following model <code>score_many</code> function until you understand how each part works and how the parts work together to create a vectorized function. To do this, it will be helpful to create a concrete example, like this:</p>
-<div class="sourceCode" id="cb399"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb399-1" data-line-number="1">symbols &lt;-<span class="st"> </span><span class="kw">matrix</span>(</a>
-<a class="sourceLine" id="cb399-2" data-line-number="2">  <span class="kw">c</span>(<span class="st">&quot;DD&quot;</span>, <span class="st">&quot;DD&quot;</span>, <span class="st">&quot;DD&quot;</span>, </a>
-<a class="sourceLine" id="cb399-3" data-line-number="3">    <span class="st">&quot;C&quot;</span>, <span class="st">&quot;DD&quot;</span>, <span class="st">&quot;0&quot;</span>, </a>
-<a class="sourceLine" id="cb399-4" data-line-number="4">    <span class="st">&quot;B&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;B&quot;</span>, </a>
-<a class="sourceLine" id="cb399-5" data-line-number="5">    <span class="st">&quot;B&quot;</span>, <span class="st">&quot;BB&quot;</span>, <span class="st">&quot;BBB&quot;</span>, </a>
-<a class="sourceLine" id="cb399-6" data-line-number="6">    <span class="st">&quot;C&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;0&quot;</span>, </a>
-<a class="sourceLine" id="cb399-7" data-line-number="7">    <span class="st">&quot;7&quot;</span>, <span class="st">&quot;DD&quot;</span>, <span class="st">&quot;DD&quot;</span>), <span class="dt">nrow =</span> <span class="dv">6</span>, <span class="dt">byrow =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb399-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb399-9" data-line-number="9">symbols</a>
-<a class="sourceLine" id="cb399-10" data-line-number="10">##      [,1] [,2] [,3] </a>
-<a class="sourceLine" id="cb399-11" data-line-number="11">## [1,] &quot;DD&quot; &quot;DD&quot; &quot;DD&quot; </a>
-<a class="sourceLine" id="cb399-12" data-line-number="12">## [2,] &quot;C&quot;  &quot;DD&quot; &quot;0&quot;  </a>
-<a class="sourceLine" id="cb399-13" data-line-number="13">## [3,] &quot;B&quot;  &quot;B&quot;  &quot;B&quot;  </a>
-<a class="sourceLine" id="cb399-14" data-line-number="14">## [4,] &quot;B&quot;  &quot;BB&quot; &quot;BBB&quot;</a>
-<a class="sourceLine" id="cb399-15" data-line-number="15">## [5,] &quot;C&quot;  &quot;C&quot;  &quot;0&quot;  </a>
-<a class="sourceLine" id="cb399-16" data-line-number="16">## [6,] &quot;7&quot;  &quot;DD&quot; &quot;DD&quot; </a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">symbols &lt;-<span class="st"> </span><span class="kw">matrix</span>(
+  <span class="kw">c</span>(<span class="st">&quot;DD&quot;</span>, <span class="st">&quot;DD&quot;</span>, <span class="st">&quot;DD&quot;</span>, 
+    <span class="st">&quot;C&quot;</span>, <span class="st">&quot;DD&quot;</span>, <span class="st">&quot;0&quot;</span>, 
+    <span class="st">&quot;B&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;B&quot;</span>, 
+    <span class="st">&quot;B&quot;</span>, <span class="st">&quot;BB&quot;</span>, <span class="st">&quot;BBB&quot;</span>, 
+    <span class="st">&quot;C&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;0&quot;</span>, 
+    <span class="st">&quot;7&quot;</span>, <span class="st">&quot;DD&quot;</span>, <span class="st">&quot;DD&quot;</span>), <span class="dt">nrow =</span> <span class="dv">6</span>, <span class="dt">byrow =</span> <span class="ot">TRUE</span>)
+
+symbols
+##      [,1] [,2] [,3] 
+## [1,] &quot;DD&quot; &quot;DD&quot; &quot;DD&quot; 
+## [2,] &quot;C&quot;  &quot;DD&quot; &quot;0&quot;  
+## [3,] &quot;B&quot;  &quot;B&quot;  &quot;B&quot;  
+## [4,] &quot;B&quot;  &quot;BB&quot; &quot;BBB&quot;
+## [5,] &quot;C&quot;  &quot;C&quot;  &quot;0&quot;  
+## [6,] &quot;7&quot;  &quot;DD&quot; &quot;DD&quot; </code></pre>
 <p>Then you can run each line of <code>score_many</code> against the example and examine the results as you go.</p>
 
 <div class="exercise">
@@ -643,74 +644,74 @@ Whenever you see <code>.Primitive</code>, <code>.Internal</code>, or <code>.Call
  <span class="solution"><em>Solution. </em></span> <code>score_many</code> is a vectorized version of <code>score</code>. You can use it to run the simulation at the start of this section in a little over 20 seconds. This is 17 times faster than using a <code>for</code> loop:
 </div>
 
-<div class="sourceCode" id="cb400"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb400-1" data-line-number="1"><span class="co"># symbols should be a matrix with a column for each slot machine window</span></a>
-<a class="sourceLine" id="cb400-2" data-line-number="2">score_many &lt;-<span class="st"> </span><span class="cf">function</span>(symbols) {</a>
-<a class="sourceLine" id="cb400-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb400-4" data-line-number="4">  <span class="co"># Step 1: Assign base prize based on cherries and diamonds ---------</span></a>
-<a class="sourceLine" id="cb400-5" data-line-number="5">  ## Count the number of cherries and diamonds in each combination</a>
-<a class="sourceLine" id="cb400-6" data-line-number="6">  cherries &lt;-<span class="st"> </span><span class="kw">rowSums</span>(symbols <span class="op">==</span><span class="st"> &quot;C&quot;</span>)</a>
-<a class="sourceLine" id="cb400-7" data-line-number="7">  diamonds &lt;-<span class="st"> </span><span class="kw">rowSums</span>(symbols <span class="op">==</span><span class="st"> &quot;DD&quot;</span>) </a>
-<a class="sourceLine" id="cb400-8" data-line-number="8">  </a>
-<a class="sourceLine" id="cb400-9" data-line-number="9">  ## Wild diamonds count as cherries</a>
-<a class="sourceLine" id="cb400-10" data-line-number="10">  prize &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">5</span>)[cherries <span class="op">+</span><span class="st"> </span>diamonds <span class="op">+</span><span class="st"> </span><span class="dv">1</span>]</a>
-<a class="sourceLine" id="cb400-11" data-line-number="11">  </a>
-<a class="sourceLine" id="cb400-12" data-line-number="12">  ## ...but not if there are zero real cherries </a>
-<a class="sourceLine" id="cb400-13" data-line-number="13">  ### (cherries is coerced to FALSE where cherries == 0)</a>
-<a class="sourceLine" id="cb400-14" data-line-number="14">  prize[<span class="op">!</span>cherries] &lt;-<span class="st"> </span><span class="dv">0</span></a>
-<a class="sourceLine" id="cb400-15" data-line-number="15">  </a>
-<a class="sourceLine" id="cb400-16" data-line-number="16">  <span class="co"># Step 2: Change prize for combinations that contain three of a kind </span></a>
-<a class="sourceLine" id="cb400-17" data-line-number="17">  same &lt;-<span class="st"> </span>symbols[, <span class="dv">1</span>] <span class="op">==</span><span class="st"> </span>symbols[, <span class="dv">2</span>] <span class="op">&amp;</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb400-18" data-line-number="18"><span class="st">    </span>symbols[, <span class="dv">2</span>] <span class="op">==</span><span class="st"> </span>symbols[, <span class="dv">3</span>]</a>
-<a class="sourceLine" id="cb400-19" data-line-number="19">  payoffs &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;DD&quot;</span> =<span class="st"> </span><span class="dv">100</span>, <span class="st">&quot;7&quot;</span> =<span class="st"> </span><span class="dv">80</span>, <span class="st">&quot;BBB&quot;</span> =<span class="st"> </span><span class="dv">40</span>, </a>
-<a class="sourceLine" id="cb400-20" data-line-number="20">    <span class="st">&quot;BB&quot;</span> =<span class="st"> </span><span class="dv">25</span>, <span class="st">&quot;B&quot;</span> =<span class="st"> </span><span class="dv">10</span>, <span class="st">&quot;C&quot;</span> =<span class="st"> </span><span class="dv">10</span>, <span class="st">&quot;0&quot;</span> =<span class="st"> </span><span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb400-21" data-line-number="21">  prize[same] &lt;-<span class="st"> </span>payoffs[symbols[same, <span class="dv">1</span>]]</a>
-<a class="sourceLine" id="cb400-22" data-line-number="22">  </a>
-<a class="sourceLine" id="cb400-23" data-line-number="23">  <span class="co"># Step 3: Change prize for combinations that contain all bars ------</span></a>
-<a class="sourceLine" id="cb400-24" data-line-number="24">  bars &lt;-<span class="st"> </span>symbols <span class="op">==</span><span class="st"> &quot;B&quot;</span> <span class="op">|</span><span class="st"> </span>symbols <span class="op">==</span><span class="st">  &quot;BB&quot;</span> <span class="op">|</span><span class="st"> </span>symbols <span class="op">==</span><span class="st"> &quot;BBB&quot;</span></a>
-<a class="sourceLine" id="cb400-25" data-line-number="25">  all_bars &lt;-<span class="st"> </span>bars[, <span class="dv">1</span>] <span class="op">&amp;</span><span class="st"> </span>bars[, <span class="dv">2</span>] <span class="op">&amp;</span><span class="st"> </span>bars[, <span class="dv">3</span>] <span class="op">&amp;</span><span class="st"> </span><span class="op">!</span>same</a>
-<a class="sourceLine" id="cb400-26" data-line-number="26">  prize[all_bars] &lt;-<span class="st"> </span><span class="dv">5</span></a>
-<a class="sourceLine" id="cb400-27" data-line-number="27">  </a>
-<a class="sourceLine" id="cb400-28" data-line-number="28">  <span class="co"># Step 4: Handle wilds ---------------------------------------------</span></a>
-<a class="sourceLine" id="cb400-29" data-line-number="29">  </a>
-<a class="sourceLine" id="cb400-30" data-line-number="30">  ## combos with two diamonds</a>
-<a class="sourceLine" id="cb400-31" data-line-number="31">  two_wilds &lt;-<span class="st"> </span>diamonds <span class="op">==</span><span class="st"> </span><span class="dv">2</span></a>
-<a class="sourceLine" id="cb400-32" data-line-number="32"></a>
-<a class="sourceLine" id="cb400-33" data-line-number="33">  ### Identify the nonwild symbol</a>
-<a class="sourceLine" id="cb400-34" data-line-number="34">  one &lt;-<span class="st"> </span>two_wilds <span class="op">&amp;</span><span class="st"> </span>symbols[, <span class="dv">1</span>] <span class="op">!=</span><span class="st"> </span>symbols[, <span class="dv">2</span>] <span class="op">&amp;</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb400-35" data-line-number="35"><span class="st">    </span>symbols[, <span class="dv">2</span>] <span class="op">==</span><span class="st"> </span>symbols[, <span class="dv">3</span>]</a>
-<a class="sourceLine" id="cb400-36" data-line-number="36">  two &lt;-<span class="st"> </span>two_wilds <span class="op">&amp;</span><span class="st"> </span>symbols[, <span class="dv">1</span>] <span class="op">!=</span><span class="st"> </span>symbols[, <span class="dv">2</span>] <span class="op">&amp;</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb400-37" data-line-number="37"><span class="st">    </span>symbols[, <span class="dv">1</span>] <span class="op">==</span><span class="st"> </span>symbols[, <span class="dv">3</span>]</a>
-<a class="sourceLine" id="cb400-38" data-line-number="38">  three &lt;-<span class="st"> </span>two_wilds <span class="op">&amp;</span><span class="st"> </span>symbols[, <span class="dv">1</span>] <span class="op">==</span><span class="st"> </span>symbols[, <span class="dv">2</span>] <span class="op">&amp;</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb400-39" data-line-number="39"><span class="st">    </span>symbols[, <span class="dv">2</span>] <span class="op">!=</span><span class="st"> </span>symbols[, <span class="dv">3</span>]</a>
-<a class="sourceLine" id="cb400-40" data-line-number="40">  </a>
-<a class="sourceLine" id="cb400-41" data-line-number="41">  ### Treat as three of a kind</a>
-<a class="sourceLine" id="cb400-42" data-line-number="42">  prize[one] &lt;-<span class="st"> </span>payoffs[symbols[one, <span class="dv">1</span>]]</a>
-<a class="sourceLine" id="cb400-43" data-line-number="43">  prize[two] &lt;-<span class="st"> </span>payoffs[symbols[two, <span class="dv">2</span>]]</a>
-<a class="sourceLine" id="cb400-44" data-line-number="44">  prize[three] &lt;-<span class="st"> </span>payoffs[symbols[three, <span class="dv">3</span>]]</a>
-<a class="sourceLine" id="cb400-45" data-line-number="45">  </a>
-<a class="sourceLine" id="cb400-46" data-line-number="46">  ## combos with one wild</a>
-<a class="sourceLine" id="cb400-47" data-line-number="47">  one_wild &lt;-<span class="st"> </span>diamonds <span class="op">==</span><span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb400-48" data-line-number="48">  </a>
-<a class="sourceLine" id="cb400-49" data-line-number="49">  ### Treat as all bars (if appropriate)</a>
-<a class="sourceLine" id="cb400-50" data-line-number="50">  wild_bars &lt;-<span class="st"> </span>one_wild <span class="op">&amp;</span><span class="st"> </span>(<span class="kw">rowSums</span>(bars) <span class="op">==</span><span class="st"> </span><span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb400-51" data-line-number="51">  prize[wild_bars] &lt;-<span class="st"> </span><span class="dv">5</span></a>
-<a class="sourceLine" id="cb400-52" data-line-number="52">  </a>
-<a class="sourceLine" id="cb400-53" data-line-number="53">  ### Treat as three of a kind (if appropriate)</a>
-<a class="sourceLine" id="cb400-54" data-line-number="54">  one &lt;-<span class="st"> </span>one_wild <span class="op">&amp;</span><span class="st"> </span>symbols[, <span class="dv">1</span>] <span class="op">==</span><span class="st"> </span>symbols[, <span class="dv">2</span>]</a>
-<a class="sourceLine" id="cb400-55" data-line-number="55">  two &lt;-<span class="st"> </span>one_wild <span class="op">&amp;</span><span class="st"> </span>symbols[, <span class="dv">2</span>] <span class="op">==</span><span class="st"> </span>symbols[, <span class="dv">3</span>]</a>
-<a class="sourceLine" id="cb400-56" data-line-number="56">  three &lt;-<span class="st"> </span>one_wild <span class="op">&amp;</span><span class="st"> </span>symbols[, <span class="dv">3</span>] <span class="op">==</span><span class="st"> </span>symbols[, <span class="dv">1</span>]</a>
-<a class="sourceLine" id="cb400-57" data-line-number="57">  prize[one] &lt;-<span class="st"> </span>payoffs[symbols[one, <span class="dv">1</span>]]</a>
-<a class="sourceLine" id="cb400-58" data-line-number="58">  prize[two] &lt;-<span class="st"> </span>payoffs[symbols[two, <span class="dv">2</span>]]</a>
-<a class="sourceLine" id="cb400-59" data-line-number="59">  prize[three] &lt;-<span class="st"> </span>payoffs[symbols[three, <span class="dv">3</span>]]</a>
-<a class="sourceLine" id="cb400-60" data-line-number="60"> </a>
-<a class="sourceLine" id="cb400-61" data-line-number="61">  <span class="co"># Step 5: Double prize for every diamond in combo ------------------</span></a>
-<a class="sourceLine" id="cb400-62" data-line-number="62">  <span class="kw">unname</span>(prize <span class="op">*</span><span class="st"> </span><span class="dv">2</span><span class="op">^</span>diamonds)</a>
-<a class="sourceLine" id="cb400-63" data-line-number="63">  </a>
-<a class="sourceLine" id="cb400-64" data-line-number="64">}</a>
-<a class="sourceLine" id="cb400-65" data-line-number="65"></a>
-<a class="sourceLine" id="cb400-66" data-line-number="66"><span class="kw">system.time</span>(<span class="kw">play_many</span>(<span class="dv">10000000</span>))</a>
-<a class="sourceLine" id="cb400-67" data-line-number="67">##   user  system elapsed </a>
-<a class="sourceLine" id="cb400-68" data-line-number="68">## 20.942   1.433  22.367</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># symbols should be a matrix with a column for each slot machine window</span>
+score_many &lt;-<span class="st"> </span><span class="cf">function</span>(symbols) {
+
+  <span class="co"># Step 1: Assign base prize based on cherries and diamonds ---------</span>
+  ## Count the number of cherries and diamonds in each combination
+  cherries &lt;-<span class="st"> </span><span class="kw">rowSums</span>(symbols <span class="op">==</span><span class="st"> &quot;C&quot;</span>)
+  diamonds &lt;-<span class="st"> </span><span class="kw">rowSums</span>(symbols <span class="op">==</span><span class="st"> &quot;DD&quot;</span>) 
+  
+  ## Wild diamonds count as cherries
+  prize &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">5</span>)[cherries <span class="op">+</span><span class="st"> </span>diamonds <span class="op">+</span><span class="st"> </span><span class="dv">1</span>]
+  
+  ## ...but not if there are zero real cherries 
+  ### (cherries is coerced to FALSE where cherries == 0)
+  prize[<span class="op">!</span>cherries] &lt;-<span class="st"> </span><span class="dv">0</span>
+  
+  <span class="co"># Step 2: Change prize for combinations that contain three of a kind </span>
+  same &lt;-<span class="st"> </span>symbols[, <span class="dv">1</span>] <span class="op">==</span><span class="st"> </span>symbols[, <span class="dv">2</span>] <span class="op">&amp;</span><span class="st"> </span>
+<span class="st">    </span>symbols[, <span class="dv">2</span>] <span class="op">==</span><span class="st"> </span>symbols[, <span class="dv">3</span>]
+  payoffs &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;DD&quot;</span> =<span class="st"> </span><span class="dv">100</span>, <span class="st">&quot;7&quot;</span> =<span class="st"> </span><span class="dv">80</span>, <span class="st">&quot;BBB&quot;</span> =<span class="st"> </span><span class="dv">40</span>, 
+    <span class="st">&quot;BB&quot;</span> =<span class="st"> </span><span class="dv">25</span>, <span class="st">&quot;B&quot;</span> =<span class="st"> </span><span class="dv">10</span>, <span class="st">&quot;C&quot;</span> =<span class="st"> </span><span class="dv">10</span>, <span class="st">&quot;0&quot;</span> =<span class="st"> </span><span class="dv">0</span>)
+  prize[same] &lt;-<span class="st"> </span>payoffs[symbols[same, <span class="dv">1</span>]]
+  
+  <span class="co"># Step 3: Change prize for combinations that contain all bars ------</span>
+  bars &lt;-<span class="st"> </span>symbols <span class="op">==</span><span class="st"> &quot;B&quot;</span> <span class="op">|</span><span class="st"> </span>symbols <span class="op">==</span><span class="st">  &quot;BB&quot;</span> <span class="op">|</span><span class="st"> </span>symbols <span class="op">==</span><span class="st"> &quot;BBB&quot;</span>
+  all_bars &lt;-<span class="st"> </span>bars[, <span class="dv">1</span>] <span class="op">&amp;</span><span class="st"> </span>bars[, <span class="dv">2</span>] <span class="op">&amp;</span><span class="st"> </span>bars[, <span class="dv">3</span>] <span class="op">&amp;</span><span class="st"> </span><span class="op">!</span>same
+  prize[all_bars] &lt;-<span class="st"> </span><span class="dv">5</span>
+  
+  <span class="co"># Step 4: Handle wilds ---------------------------------------------</span>
+  
+  ## combos with two diamonds
+  two_wilds &lt;-<span class="st"> </span>diamonds <span class="op">==</span><span class="st"> </span><span class="dv">2</span>
+
+  ### Identify the nonwild symbol
+  one &lt;-<span class="st"> </span>two_wilds <span class="op">&amp;</span><span class="st"> </span>symbols[, <span class="dv">1</span>] <span class="op">!=</span><span class="st"> </span>symbols[, <span class="dv">2</span>] <span class="op">&amp;</span><span class="st"> </span>
+<span class="st">    </span>symbols[, <span class="dv">2</span>] <span class="op">==</span><span class="st"> </span>symbols[, <span class="dv">3</span>]
+  two &lt;-<span class="st"> </span>two_wilds <span class="op">&amp;</span><span class="st"> </span>symbols[, <span class="dv">1</span>] <span class="op">!=</span><span class="st"> </span>symbols[, <span class="dv">2</span>] <span class="op">&amp;</span><span class="st"> </span>
+<span class="st">    </span>symbols[, <span class="dv">1</span>] <span class="op">==</span><span class="st"> </span>symbols[, <span class="dv">3</span>]
+  three &lt;-<span class="st"> </span>two_wilds <span class="op">&amp;</span><span class="st"> </span>symbols[, <span class="dv">1</span>] <span class="op">==</span><span class="st"> </span>symbols[, <span class="dv">2</span>] <span class="op">&amp;</span><span class="st"> </span>
+<span class="st">    </span>symbols[, <span class="dv">2</span>] <span class="op">!=</span><span class="st"> </span>symbols[, <span class="dv">3</span>]
+  
+  ### Treat as three of a kind
+  prize[one] &lt;-<span class="st"> </span>payoffs[symbols[one, <span class="dv">1</span>]]
+  prize[two] &lt;-<span class="st"> </span>payoffs[symbols[two, <span class="dv">2</span>]]
+  prize[three] &lt;-<span class="st"> </span>payoffs[symbols[three, <span class="dv">3</span>]]
+  
+  ## combos with one wild
+  one_wild &lt;-<span class="st"> </span>diamonds <span class="op">==</span><span class="st"> </span><span class="dv">1</span>
+  
+  ### Treat as all bars (if appropriate)
+  wild_bars &lt;-<span class="st"> </span>one_wild <span class="op">&amp;</span><span class="st"> </span>(<span class="kw">rowSums</span>(bars) <span class="op">==</span><span class="st"> </span><span class="dv">2</span>)
+  prize[wild_bars] &lt;-<span class="st"> </span><span class="dv">5</span>
+  
+  ### Treat as three of a kind (if appropriate)
+  one &lt;-<span class="st"> </span>one_wild <span class="op">&amp;</span><span class="st"> </span>symbols[, <span class="dv">1</span>] <span class="op">==</span><span class="st"> </span>symbols[, <span class="dv">2</span>]
+  two &lt;-<span class="st"> </span>one_wild <span class="op">&amp;</span><span class="st"> </span>symbols[, <span class="dv">2</span>] <span class="op">==</span><span class="st"> </span>symbols[, <span class="dv">3</span>]
+  three &lt;-<span class="st"> </span>one_wild <span class="op">&amp;</span><span class="st"> </span>symbols[, <span class="dv">3</span>] <span class="op">==</span><span class="st"> </span>symbols[, <span class="dv">1</span>]
+  prize[one] &lt;-<span class="st"> </span>payoffs[symbols[one, <span class="dv">1</span>]]
+  prize[two] &lt;-<span class="st"> </span>payoffs[symbols[two, <span class="dv">2</span>]]
+  prize[three] &lt;-<span class="st"> </span>payoffs[symbols[three, <span class="dv">3</span>]]
+ 
+  <span class="co"># Step 5: Double prize for every diamond in combo ------------------</span>
+  <span class="kw">unname</span>(prize <span class="op">*</span><span class="st"> </span><span class="dv">2</span><span class="op">^</span>diamonds)
+  
+}
+
+<span class="kw">system.time</span>(<span class="kw">play_many</span>(<span class="dv">10000000</span>))
+##   user  system elapsed 
+## 20.942   1.433  22.367</code></pre>
 <div id="loops-versus-vectorized-code" class="section level3">
 <h3><span class="header-section-number">10.4.1</span> Loops Versus Vectorized Code</h3>
 <p>In many languages, <code>for</code> loops run very fast. As a result, programmers learn to use <code>for</code> loops whenever possible when they code. Often these programmers continue to rely on <code>for</code> loops when they begin to program in R, usually without taking the simple steps needed to optimize R’s <code>for</code> loops. These programmers may become disillusioned with R when their code does not work as fast as they would like. If you think that this may be happening to you, examine how often you are using <code>for</code> loops and what you are using them to do. If you find yourself using <code>for</code> loops for every task, there is a good chance that you are “speaking R with a C accent.” The cure is to learn to write and use vectorized code.</p>
@@ -796,7 +797,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');
     script.src = src;

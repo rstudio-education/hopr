@@ -7,12 +7,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Hands-On Programming with R</title>
   <meta name="description" content="This book will teach you how to program in R, with hands-on examples. I wrote it for non-programmers to provide a friendly introduction to the R language. You’ll learn how to load data, assemble and disassemble data objects, navigate R’s environment system, write your own functions, and use all of R’s programming tools. Throughout the book, you’ll use your newfound skills to solve practical data science problems.">
-  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
   <meta property="og:title" content="Hands-On Programming with R" />
   <meta property="og:type" content="book" />
-  <meta property="og:url" content="http://r4ds.had.co.nz/" />
-  <meta property="og:image" content="http://r4ds.had.co.nz/cover.png" />
+  <meta property="og:url" content="https://rstudio-education.github.io/hopr/" />
+  <meta property="og:image" content="https://rstudio-education.github.io/hopr/cover.png" />
   <meta property="og:description" content="This book will teach you how to program in R, with hands-on examples. I wrote it for non-programmers to provide a friendly introduction to the R language. You’ll learn how to load data, assemble and disassemble data objects, navigate R’s environment system, write your own functions, and use all of R’s programming tools. Throughout the book, you’ll use your newfound skills to solve practical data science problems." />
   <meta name="github-repo" content="rstudio-education/hopr" />
 
@@ -20,7 +20,7 @@
   <meta name="twitter:title" content="Hands-On Programming with R" />
   <meta name="twitter:site" content="@statgarrett" />
   <meta name="twitter:description" content="This book will teach you how to program in R, with hands-on examples. I wrote it for non-programmers to provide a friendly introduction to the R language. You’ll learn how to load data, assemble and disassemble data objects, navigate R’s environment system, write your own functions, and use all of R’s programming tools. Throughout the book, you’ll use your newfound skills to solve practical data science problems." />
-  <meta name="twitter:image" content="http://r4ds.had.co.nz/cover.png" />
+  <meta name="twitter:image" content="https://rstudio-education.github.io/hopr/cover.png" />
 
 <meta name="author" content="Garrett Grolemund">
 
@@ -35,6 +35,7 @@
 
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
@@ -193,7 +194,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.1.2" data-path="r-notation.html"><a href="r-notation.html#negative-integers"><i class="fa fa-check"></i><b>4.1.2</b> Negative Integers</a></li>
 <li class="chapter" data-level="4.1.3" data-path="r-notation.html"><a href="r-notation.html#zero"><i class="fa fa-check"></i><b>4.1.3</b> Zero</a></li>
 <li class="chapter" data-level="4.1.4" data-path="r-notation.html"><a href="r-notation.html#blank-spaces"><i class="fa fa-check"></i><b>4.1.4</b> Blank Spaces</a></li>
-<li class="chapter" data-level="4.1.5" data-path="r-objects.html"><a href="r-objects.html#logicals"><i class="fa fa-check"></i><b>4.1.5</b> Logical Values</a></li>
+<li class="chapter" data-level="4.1.5" data-path="r-notation.html"><a href="r-notation.html#logic"><i class="fa fa-check"></i><b>4.1.5</b> Logical Values</a></li>
 <li class="chapter" data-level="4.1.6" data-path="r-notation.html"><a href="r-notation.html#names-1"><i class="fa fa-check"></i><b>4.1.6</b> Names</a></li>
 </ul></li>
 <li class="chapter" data-level="4.2" data-path="r-notation.html"><a href="r-notation.html#deal-a-card"><i class="fa fa-check"></i><b>4.2</b> Deal a Card</a></li>
@@ -342,41 +343,41 @@ This appendix refers to environments, the topic of <a href="environments.html#en
 <div id="traceback" class="section level2">
 <h2><span class="header-section-number">E.1</span> traceback</h2>
 <p>The <code>traceback</code> tool pinpoints the location of an error. Many R functions call other R functions, which call other functions, and so on. When an error occurs, it may not be clear which of these functions went wrong. Let’s consider an example. The following functions call one another, and the last function creates an error (you’ll see why in a second):</p>
-<div class="sourceCode" id="cb446"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb446-1" data-line-number="1">first &lt;-<span class="st"> </span><span class="cf">function</span>() <span class="kw">second</span>()</a>
-<a class="sourceLine" id="cb446-2" data-line-number="2">second &lt;-<span class="st"> </span><span class="cf">function</span>() <span class="kw">third</span>()</a>
-<a class="sourceLine" id="cb446-3" data-line-number="3">third &lt;-<span class="st"> </span><span class="cf">function</span>() <span class="kw">fourth</span>()</a>
-<a class="sourceLine" id="cb446-4" data-line-number="4">fourth &lt;-<span class="st"> </span><span class="cf">function</span>() <span class="kw">fifth</span>()</a>
-<a class="sourceLine" id="cb446-5" data-line-number="5">fifth &lt;-<span class="st"> </span><span class="cf">function</span>() <span class="kw">bug</span>()</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">first &lt;-<span class="st"> </span><span class="cf">function</span>() <span class="kw">second</span>()
+second &lt;-<span class="st"> </span><span class="cf">function</span>() <span class="kw">third</span>()
+third &lt;-<span class="st"> </span><span class="cf">function</span>() <span class="kw">fourth</span>()
+fourth &lt;-<span class="st"> </span><span class="cf">function</span>() <span class="kw">fifth</span>()
+fifth &lt;-<span class="st"> </span><span class="cf">function</span>() <span class="kw">bug</span>()</code></pre>
 <p>When you run <code>first</code>, it will call <code>second</code>, which will call <code>third</code>, which will call <code>fourth</code>, which will call <code>fifth</code>, which will call <code>bug</code>, a function that does not exist. Here’s what that will look like at the command line:</p>
-<div class="sourceCode" id="cb447"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb447-1" data-line-number="1"><span class="kw">first</span>()</a>
-<a class="sourceLine" id="cb447-2" data-line-number="2">##  Error in fifth() : could not find function &quot;bug&quot; </a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">first</span>()
+##  Error in fifth() : could not find function &quot;bug&quot; </code></pre>
 <p>The error report tells us that the error occurred when R tried to run <code>fifth</code>. It also tells us the nature of the error (there is no function called <code>bug</code>). Here, it is obvious why R calls <code>fifth</code>, but it might not be so obvious why R calls a function when an error occurs in the wild.</p>
 <p>You can see the path of functions that R called before it hit an error by typing <em><code>traceback()</code></em> at the command line. <code>traceback</code> will return a call stack, a list of the functions that R called in the order that it called them. The bottom function will be the command that you entered in the command line. The top function will be the function that caused the error:</p>
-<div class="sourceCode" id="cb448"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb448-1" data-line-number="1"><span class="kw">traceback</span>()</a>
-<a class="sourceLine" id="cb448-2" data-line-number="2">## 5: fifth() at #1</a>
-<a class="sourceLine" id="cb448-3" data-line-number="3">## 4: fourth() at #1</a>
-<a class="sourceLine" id="cb448-4" data-line-number="4">## 3: third() at #1</a>
-<a class="sourceLine" id="cb448-5" data-line-number="5">## 2: second() at #1</a>
-<a class="sourceLine" id="cb448-6" data-line-number="6">## 1: first()</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">traceback</span>()
+## 5: fifth() at #1
+## 4: fourth() at #1
+## 3: third() at #1
+## 2: second() at #1
+## 1: first()</code></pre>
 <p><code>traceback</code> will always refer to the last error you encountered. If you would like to look at a less recent error, you will need to recreate it before running <code>traceback</code>.</p>
 <p>How can this help you? First, <code>traceback</code> returns a list of suspects. One of these functions caused the error, and each function is more suspicious than the ones below it. Chances are that our bug came from <code>fifth</code> (it did), but it is also possible that an earlier function did something odd—like call <code>fifth</code> when it shouldn’t have.</p>
 <p>Second, <code>traceback</code> can show you if R stepped off the path that you expected it to take. If this happened, look at the last function before things went wrong.</p>
 <p>Third, <code>traceback</code> can reveal the frightening extent of infinite recursion errors. For example, if you change <code>fifth</code> so that it calls <code>second</code>, the functions will make a loop: <code>second</code> will call <code>third</code>, which will call <code>fourth</code>, which will call <code>fifth</code>, which will call <code>second</code> and start the loop over again. It is easier to do this sort of thing in practice than you might think:</p>
-<div class="sourceCode" id="cb449"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb449-1" data-line-number="1">fifth &lt;-<span class="st"> </span><span class="cf">function</span>() <span class="kw">second</span>()</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">fifth &lt;-<span class="st"> </span><span class="cf">function</span>() <span class="kw">second</span>()</code></pre>
 <p>When you call <code>first()</code>, R will start to run the functions. After awhile, it will notice that it is repeating itself and will return an error. <code>traceback</code> will show just what R was doing:</p>
-<div class="sourceCode" id="cb450"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb450-1" data-line-number="1"><span class="kw">first</span>()</a>
-<a class="sourceLine" id="cb450-2" data-line-number="2">## Error: evaluation nested too deeply: infinite recursion/options(expressions=)?</a>
-<a class="sourceLine" id="cb450-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb450-4" data-line-number="4"><span class="kw">traceback</span>()</a>
-<a class="sourceLine" id="cb450-5" data-line-number="5">## 5000: fourth() at #1</a>
-<a class="sourceLine" id="cb450-6" data-line-number="6">## 4999: third() at #1</a>
-<a class="sourceLine" id="cb450-7" data-line-number="7">## 4998: second() at #1</a>
-<a class="sourceLine" id="cb450-8" data-line-number="8">## 4997: fifth() at #1</a>
-<a class="sourceLine" id="cb450-9" data-line-number="9">## 4996: fourth() at #1</a>
-<a class="sourceLine" id="cb450-10" data-line-number="10">## 4995: third() at #1</a>
-<a class="sourceLine" id="cb450-11" data-line-number="11">## 4994: second() at #1</a>
-<a class="sourceLine" id="cb450-12" data-line-number="12">## 4993: fifth() at #1</a>
-<a class="sourceLine" id="cb450-13" data-line-number="13">## ...</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">first</span>()
+## Error: evaluation nested too deeply: infinite recursion/options(expressions=)?
+
+<span class="kw">traceback</span>()
+## 5000: fourth() at #1
+## 4999: third() at #1
+## 4998: second() at #1
+## 4997: fifth() at #1
+## 4996: fourth() at #1
+## 4995: third() at #1
+## 4994: second() at #1
+## 4993: fifth() at #1
+## ...</code></pre>
 <p>Notice that there are 5,000 lines of output in this <code>traceback</code>. If you are using RStudio, you will not get to see the traceback of an infinite recursion error (I used the Mac GUI to get this output). RStudio represses the traceback for infinite recursion errors to prevent the large call stacks from pushing your console history out of R’s memory buffer. With RStudio, you will have to recognize the infinite recursion error by its error message. However, you can still see the imposing <code>traceback</code> by running things in a UNIX shell or the Windows or Mac GUIs.</p>
 <p>RStudio makes it very easy to use <code>traceback</code>. You do not even need to type in the function name. Whenever an error occurs, RStudio will display it in a gray box with two options. The first is Show Traceback, shown in <a href="debug.html#fig:show-traceback">E.1</a>.</p>
 <div class="figure"><span id="fig:show-traceback"></span>
@@ -398,40 +399,40 @@ Figure E.2: RStudio’s Traceback display.
 <h2><span class="header-section-number">E.2</span> browser</h2>
 <p>You can ask R to pause in the middle of running a function and give control back to you with <code>browser</code>. This will let you enter new commands at the command line. The active environment for these commands will not be the global environment (as usual); it will be the runtime environment of the function that you have paused. As a result, you can look at the objects that the function is using, look up their values with the same scoping rules that the function would use, and run code under the same conditions that the function would run it in. This arrangement provides the best chance for spotting the source of bugs in a function.</p>
 <p>To use <code>browser</code>, add the call <code>browser()</code> to the body of a function and then resave the function. For example, if I wanted to pause in the middle of the <code>score</code> function from <a href="programs.html#programs">Programs</a>, I could add <code>browser()</code> to the body of <code>score</code> and then rerun the following code, which defines <code>score</code>:</p>
-<div class="sourceCode" id="cb451"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb451-1" data-line-number="1">score &lt;-<span class="st"> </span><span class="cf">function</span> (symbols) {</a>
-<a class="sourceLine" id="cb451-2" data-line-number="2">  <span class="co"># identify case</span></a>
-<a class="sourceLine" id="cb451-3" data-line-number="3">  same &lt;-<span class="st"> </span>symbols[<span class="dv">1</span>] <span class="op">==</span><span class="st"> </span>symbols[<span class="dv">2</span>] <span class="op">&amp;&amp;</span><span class="st"> </span>symbols[<span class="dv">2</span>] <span class="op">==</span><span class="st"> </span>symbols[<span class="dv">3</span>]</a>
-<a class="sourceLine" id="cb451-4" data-line-number="4">  bars &lt;-<span class="st"> </span>symbols <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;B&quot;</span>, <span class="st">&quot;BB&quot;</span>, <span class="st">&quot;BBB&quot;</span>)</a>
-<a class="sourceLine" id="cb451-5" data-line-number="5">  </a>
-<a class="sourceLine" id="cb451-6" data-line-number="6">  <span class="co"># get prize</span></a>
-<a class="sourceLine" id="cb451-7" data-line-number="7">  <span class="cf">if</span> (same) {</a>
-<a class="sourceLine" id="cb451-8" data-line-number="8">    payouts &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;DD&quot;</span> =<span class="st"> </span><span class="dv">100</span>, <span class="st">&quot;7&quot;</span> =<span class="st"> </span><span class="dv">80</span>, <span class="st">&quot;BBB&quot;</span> =<span class="st"> </span><span class="dv">40</span>, <span class="st">&quot;BB&quot;</span> =<span class="st"> </span><span class="dv">25</span>, </a>
-<a class="sourceLine" id="cb451-9" data-line-number="9">      <span class="st">&quot;B&quot;</span> =<span class="st"> </span><span class="dv">10</span>, <span class="st">&quot;C&quot;</span> =<span class="st"> </span><span class="dv">10</span>, <span class="st">&quot;0&quot;</span> =<span class="st"> </span><span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb451-10" data-line-number="10">    prize &lt;-<span class="st"> </span><span class="kw">unname</span>(payouts[symbols[<span class="dv">1</span>]])</a>
-<a class="sourceLine" id="cb451-11" data-line-number="11">  } <span class="cf">else</span> <span class="cf">if</span> (<span class="kw">all</span>(bars)) {</a>
-<a class="sourceLine" id="cb451-12" data-line-number="12">    prize &lt;-<span class="st"> </span><span class="dv">5</span></a>
-<a class="sourceLine" id="cb451-13" data-line-number="13">  } <span class="cf">else</span> {</a>
-<a class="sourceLine" id="cb451-14" data-line-number="14">    cherries &lt;-<span class="st"> </span><span class="kw">sum</span>(symbols <span class="op">==</span><span class="st"> &quot;C&quot;</span>)</a>
-<a class="sourceLine" id="cb451-15" data-line-number="15">    prize &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">5</span>)[cherries <span class="op">+</span><span class="st"> </span><span class="dv">1</span>]</a>
-<a class="sourceLine" id="cb451-16" data-line-number="16">  }</a>
-<a class="sourceLine" id="cb451-17" data-line-number="17">  </a>
-<a class="sourceLine" id="cb451-18" data-line-number="18">  <span class="kw">browser</span>()</a>
-<a class="sourceLine" id="cb451-19" data-line-number="19"></a>
-<a class="sourceLine" id="cb451-20" data-line-number="20">  <span class="co"># adjust for diamonds</span></a>
-<a class="sourceLine" id="cb451-21" data-line-number="21">  diamonds &lt;-<span class="st"> </span><span class="kw">sum</span>(symbols <span class="op">==</span><span class="st"> &quot;DD&quot;</span>)</a>
-<a class="sourceLine" id="cb451-22" data-line-number="22">  prize <span class="op">*</span><span class="st"> </span><span class="dv">2</span> <span class="op">^</span><span class="st"> </span>diamonds</a>
-<a class="sourceLine" id="cb451-23" data-line-number="23">}</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">score &lt;-<span class="st"> </span><span class="cf">function</span> (symbols) {
+  <span class="co"># identify case</span>
+  same &lt;-<span class="st"> </span>symbols[<span class="dv">1</span>] <span class="op">==</span><span class="st"> </span>symbols[<span class="dv">2</span>] <span class="op">&amp;&amp;</span><span class="st"> </span>symbols[<span class="dv">2</span>] <span class="op">==</span><span class="st"> </span>symbols[<span class="dv">3</span>]
+  bars &lt;-<span class="st"> </span>symbols <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;B&quot;</span>, <span class="st">&quot;BB&quot;</span>, <span class="st">&quot;BBB&quot;</span>)
+  
+  <span class="co"># get prize</span>
+  <span class="cf">if</span> (same) {
+    payouts &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;DD&quot;</span> =<span class="st"> </span><span class="dv">100</span>, <span class="st">&quot;7&quot;</span> =<span class="st"> </span><span class="dv">80</span>, <span class="st">&quot;BBB&quot;</span> =<span class="st"> </span><span class="dv">40</span>, <span class="st">&quot;BB&quot;</span> =<span class="st"> </span><span class="dv">25</span>, 
+      <span class="st">&quot;B&quot;</span> =<span class="st"> </span><span class="dv">10</span>, <span class="st">&quot;C&quot;</span> =<span class="st"> </span><span class="dv">10</span>, <span class="st">&quot;0&quot;</span> =<span class="st"> </span><span class="dv">0</span>)
+    prize &lt;-<span class="st"> </span><span class="kw">unname</span>(payouts[symbols[<span class="dv">1</span>]])
+  } <span class="cf">else</span> <span class="cf">if</span> (<span class="kw">all</span>(bars)) {
+    prize &lt;-<span class="st"> </span><span class="dv">5</span>
+  } <span class="cf">else</span> {
+    cherries &lt;-<span class="st"> </span><span class="kw">sum</span>(symbols <span class="op">==</span><span class="st"> &quot;C&quot;</span>)
+    prize &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">5</span>)[cherries <span class="op">+</span><span class="st"> </span><span class="dv">1</span>]
+  }
+  
+  <span class="kw">browser</span>()
+
+  <span class="co"># adjust for diamonds</span>
+  diamonds &lt;-<span class="st"> </span><span class="kw">sum</span>(symbols <span class="op">==</span><span class="st"> &quot;DD&quot;</span>)
+  prize <span class="op">*</span><span class="st"> </span><span class="dv">2</span> <span class="op">^</span><span class="st"> </span>diamonds
+}</code></pre>
 <p>Now whenever R runs <code>score</code>, it will come to the call <code>browser()</code>. You can see this with the <code>play</code> function from <a href="programs.html#programs">Programs</a>. If you don’t have <code>play</code> handy, you can access it by running this code:</p>
-<div class="sourceCode" id="cb452"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb452-1" data-line-number="1">get_symbols &lt;-<span class="st"> </span><span class="cf">function</span>() {</a>
-<a class="sourceLine" id="cb452-2" data-line-number="2">  wheel &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;DD&quot;</span>, <span class="st">&quot;7&quot;</span>, <span class="st">&quot;BBB&quot;</span>, <span class="st">&quot;BB&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;0&quot;</span>)</a>
-<a class="sourceLine" id="cb452-3" data-line-number="3">  <span class="kw">sample</span>(wheel, <span class="dt">size =</span> <span class="dv">3</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>, </a>
-<a class="sourceLine" id="cb452-4" data-line-number="4">    <span class="dt">prob =</span> <span class="kw">c</span>(<span class="fl">0.03</span>, <span class="fl">0.03</span>, <span class="fl">0.06</span>, <span class="fl">0.1</span>, <span class="fl">0.25</span>, <span class="fl">0.01</span>, <span class="fl">0.52</span>))</a>
-<a class="sourceLine" id="cb452-5" data-line-number="5">}</a>
-<a class="sourceLine" id="cb452-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb452-7" data-line-number="7">play &lt;-<span class="st"> </span><span class="cf">function</span>() {</a>
-<a class="sourceLine" id="cb452-8" data-line-number="8">  symbols &lt;-<span class="st"> </span><span class="kw">get_symbols</span>()</a>
-<a class="sourceLine" id="cb452-9" data-line-number="9">  <span class="kw">structure</span>(<span class="kw">score</span>(symbols), <span class="dt">symbols =</span> symbols, <span class="dt">class =</span> <span class="st">&quot;slots&quot;</span>)</a>
-<a class="sourceLine" id="cb452-10" data-line-number="10">}</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">get_symbols &lt;-<span class="st"> </span><span class="cf">function</span>() {
+  wheel &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;DD&quot;</span>, <span class="st">&quot;7&quot;</span>, <span class="st">&quot;BBB&quot;</span>, <span class="st">&quot;BB&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;0&quot;</span>)
+  <span class="kw">sample</span>(wheel, <span class="dt">size =</span> <span class="dv">3</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>, 
+    <span class="dt">prob =</span> <span class="kw">c</span>(<span class="fl">0.03</span>, <span class="fl">0.03</span>, <span class="fl">0.06</span>, <span class="fl">0.1</span>, <span class="fl">0.25</span>, <span class="fl">0.01</span>, <span class="fl">0.52</span>))
+}
+
+play &lt;-<span class="st"> </span><span class="cf">function</span>() {
+  symbols &lt;-<span class="st"> </span><span class="kw">get_symbols</span>()
+  <span class="kw">structure</span>(<span class="kw">score</span>(symbols), <span class="dt">symbols =</span> symbols, <span class="dt">class =</span> <span class="st">&quot;slots&quot;</span>)
+}</code></pre>
 <p>When you run <code>play</code>, <code>play</code> will call <code>get_symbols</code> and then <code>score</code>. As R works through <code>score</code>, it will come across the call to <code>browser</code> and run it. When R runs this call, several things will happen, as in <a href="debug.html#fig:browser">E.3</a>. First, R will stop running <code>score</code>. Second, the command prompt will change to <code>browser[1]&gt;</code> and R will give me back control; I can now type new commands in at the new command prompt. Third, three buttons will appear above the console pane: Next, Continue, and Stop. Fourth, RStudio will display the source code for <code>score</code> in the scripts pane, and it will highlight the line that contains <code>browser()</code>. Fifth, the environments tab will change. Instead of revealing the objects that are saved in the global environment, it will reveal the objects that are saved in the runtime environment of <code>score</code> (see <a href="environments.html#environments-1">Environments</a> for an explanation of R’s environment system). Sixth, RStudio will open a new Traceback pane, which shows the call stack RStudio took to get to <code>browser</code>. The most recent function, <code>score</code>, will be highlighted.</p>
 <p>I’m now in a new R mode, called <em>browser mode</em>. Browser mode is designed to help you uncover bugs, and the new display in RStudio is designed to help you navigate this mode.</p>
 <p>Any command that you run in browser mode will be evaluated in the context of the runtime environment of the function that called <code>browser</code>. This will be the function that is highlighted in the new Traceback pane. Here, that function is <code>score</code>. So while we are in browser mode, the active environment will be <code>score</code>’s runtime environment. This lets you do two things.</p>
@@ -442,11 +443,11 @@ Figure E.3: RStudio updates its display whenever you enter browser mode to help 
 </p>
 </div>
 <p>First, you can inspect the objects that <code>score</code> uses. The updated Environments pane shows you which objects <code>score</code> has saved in its local environment. You can inspect any of them by typing their name at the browser prompt. This gives you a way to see the values of runtime variables that you normally would not be able to access. If a value looks clearly wrong, you may be close to finding a bug:</p>
-<div class="sourceCode" id="cb453"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb453-1" data-line-number="1">Browse[<span class="dv">1</span>]<span class="op">&gt;</span><span class="st"> </span>symbols</a>
-<a class="sourceLine" id="cb453-2" data-line-number="2">## [1] &quot;B&quot; &quot;B&quot; &quot;0&quot;</a>
-<a class="sourceLine" id="cb453-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb453-4" data-line-number="4">Browse[<span class="dv">1</span>]<span class="op">&gt;</span><span class="st"> </span>same</a>
-<a class="sourceLine" id="cb453-5" data-line-number="5">## [1] FALSE</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">Browse[<span class="dv">1</span>]<span class="op">&gt;</span><span class="st"> </span>symbols
+## [1] &quot;B&quot; &quot;B&quot; &quot;0&quot;
+
+Browse[<span class="dv">1</span>]<span class="op">&gt;</span><span class="st"> </span>same
+## [1] FALSE</code></pre>
 <p>Second, you can run code and see the same results that <code>score</code> would see. For example, you could run the remaining lines of the <code>score</code> function and see if they do anything unusual. You could run these lines by typing them into the command prompt, or you could use the three navigation buttons that now appear above the prompt, as in <a href="debug.html#fig:browser-buttons">E.4</a>.</p>
 <p>The first button, Next, will run the next line of code in <code>score</code>. The highlighted line in the scripts pane will advance by one line to show you your new location in the <code>score</code> function. If the next line begins a code chunk, like a +for+ loop or an <code>if</code> tree, R will run the whole chunk and will highlight the whole chunk in the script window.</p>
 <p>The second button, Continue, will run all of the remaining lines of <code>score</code> and then exit the browser mode.</p>
@@ -476,63 +477,63 @@ Figure E.5: Break points provide the graphical equivalent of a browser statement
 <div id="debug-1" class="section level2">
 <h2><span class="header-section-number">E.4</span> debug</h2>
 <p>You can “add” a browser call to the very start of a preexisting function with <code>debug</code>. To do this, run <code>debug</code> on the function. For example, you can run <code>debug</code> on <code>sample</code> with:</p>
-<div class="sourceCode" id="cb454"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb454-1" data-line-number="1"><span class="kw">debug</span>(sample)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">debug</span>(sample)</code></pre>
 <p>Afterward, R will act as if there is a <code>browser()</code> statement in the first line of the function. Whenever R runs the function, it will immediately enter browser mode, allowing you to step through the function one line at a time. R will continue to behave this way until you “remove” the browser statement with <code>undebug</code>:</p>
-<div class="sourceCode" id="cb455"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb455-1" data-line-number="1"><span class="kw">undebug</span>(sample)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">undebug</span>(sample)</code></pre>
 <p>You can check whether a function is in “debugging” mode with <code>isdebugged</code>. This will return <code>TRUE</code> if you’ve ran <code>debug</code> on the function but have yet to run <code>undebug</code>:</p>
-<div class="sourceCode" id="cb456"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb456-1" data-line-number="1"><span class="kw">isdebugged</span>(sample)</a>
-<a class="sourceLine" id="cb456-2" data-line-number="2">## FALSE</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">isdebugged</span>(sample)
+## FALSE</code></pre>
 <p>If this is all too much of a hassle, you can do what I do and use <code>debugonce</code> instead of <code>debug</code>. R will enter browser mode the very next time it runs the function but will automatically undebug the function afterward. If you need to browse through the function again, you can just run <code>debugonce</code> on it a second time.</p>
 <p>You can recreate <code>debugonce</code> in RStudio whenever an error occurs. “Rerun with debug” will appear in the grey error box beneath Show Traceback (<a href="debug.html#fig:show-traceback">E.1</a>). If you click this option, RStudio will rerun the command as if you had first run <code>debugonce</code> on it. R will immediately go into browser mode, allowing you to step through the code. The browser behavior will only occur on this run of the code. You do not need to worry about calling <code>undebug</code> when you are done.</p>
 </div>
 <div id="trace" class="section level2">
 <h2><span class="header-section-number">E.5</span> trace</h2>
 <p>You can add the browser statement further into the function, and not at the very start, with <code>trace</code>. <code>trace</code> takes the name of a function as a character string and then an R expression to insert into the function. You can also provide an <code>at</code> argument that tells <code>trace</code> at which line of the function to place the expression. So to insert a browser call at the fourth line of <code>sample</code>, you would run:</p>
-<div class="sourceCode" id="cb457"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb457-1" data-line-number="1"><span class="kw">trace</span>(<span class="st">&quot;sample&quot;</span>, browser, <span class="dt">at =</span> <span class="dv">4</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">trace</span>(<span class="st">&quot;sample&quot;</span>, browser, <span class="dt">at =</span> <span class="dv">4</span>)</code></pre>
 <p>You can use <code>trace</code> to insert other R functions (not just <code>browser</code>) into a function, but you may need to think of a clever reason for doing so. You can also run <code>trace</code> on a function without inserting any new code. R will prints <code>trace:&lt;the function&gt;</code> at the command line every time R runs the function. This is a great way to test a claim I made in <a href="s3.html#s3">S3</a>, that R calls <code>print</code> every time it displays something at the command line:</p>
-<div class="sourceCode" id="cb458"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb458-1" data-line-number="1"><span class="kw">trace</span>(print)</a>
-<a class="sourceLine" id="cb458-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb458-3" data-line-number="3">first</a>
-<a class="sourceLine" id="cb458-4" data-line-number="4">## trace: print(function () second())</a>
-<a class="sourceLine" id="cb458-5" data-line-number="5">## function() second()</a>
-<a class="sourceLine" id="cb458-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb458-7" data-line-number="7"><span class="kw">head</span>(deck)</a>
-<a class="sourceLine" id="cb458-8" data-line-number="8">## trace: print</a>
-<a class="sourceLine" id="cb458-9" data-line-number="9">##    face   suit value</a>
-<a class="sourceLine" id="cb458-10" data-line-number="10">## 1  king spades    13</a>
-<a class="sourceLine" id="cb458-11" data-line-number="11">## 2 queen spades    12</a>
-<a class="sourceLine" id="cb458-12" data-line-number="12">## 3  jack spades    11</a>
-<a class="sourceLine" id="cb458-13" data-line-number="13">## 4   ten spades    10</a>
-<a class="sourceLine" id="cb458-14" data-line-number="14">## 5  nine spades     9</a>
-<a class="sourceLine" id="cb458-15" data-line-number="15">## 6 eight spades     8</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">trace</span>(print)
+
+first
+## trace: print(function () second())
+## function() second()
+
+<span class="kw">head</span>(deck)
+## trace: print
+##    face   suit value
+## 1  king spades    13
+## 2 queen spades    12
+## 3  jack spades    11
+## 4   ten spades    10
+## 5  nine spades     9
+## 6 eight spades     8</code></pre>
 <p>You can revert a function to normal after calling trace on it with <code>untrace</code>:</p>
-<div class="sourceCode" id="cb459"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb459-1" data-line-number="1"><span class="kw">untrace</span>(sample)</a>
-<a class="sourceLine" id="cb459-2" data-line-number="2"><span class="kw">untrace</span>(print)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">untrace</span>(sample)
+<span class="kw">untrace</span>(print)</code></pre>
 </div>
 <div id="recover" class="section level2">
 <h2><span class="header-section-number">E.6</span> recover</h2>
 <p>The <code>recover</code> function provides one final option for debugging. It combines the call stack of <code>traceback</code> with the browser mode of <code>browser</code>. You can use <code>recover</code> just like <code>browser</code>, by inserting it directly into a function’s body. Let’s demonstrate <code>recover</code> with the <code>fifth</code> function:</p>
-<div class="sourceCode" id="cb460"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb460-1" data-line-number="1">fifth &lt;-<span class="st"> </span><span class="cf">function</span>() <span class="kw">recover</span>()</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">fifth &lt;-<span class="st"> </span><span class="cf">function</span>() <span class="kw">recover</span>()</code></pre>
 <p>When R runs <code>recover</code>, it will pause and display the call stack, but that’s not all. R gives you the option of opening a browser mode in <em>any</em> of the functions that appear in the call stack. Annoyingly, the call stack will be displayed upside down compared to <code>traceback</code>. The most recent function will be on the bottom, and the original function will be on the top:</p>
-<div class="sourceCode" id="cb461"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb461-1" data-line-number="1"><span class="kw">first</span>()</a>
-<a class="sourceLine" id="cb461-2" data-line-number="2">## </a>
-<a class="sourceLine" id="cb461-3" data-line-number="3">## Enter a frame number, or 0 to exit   </a>
-<a class="sourceLine" id="cb461-4" data-line-number="4">## </a>
-<a class="sourceLine" id="cb461-5" data-line-number="5">## 1: first()</a>
-<a class="sourceLine" id="cb461-6" data-line-number="6">## 2: #1: second()</a>
-<a class="sourceLine" id="cb461-7" data-line-number="7">## 3: #1: third()</a>
-<a class="sourceLine" id="cb461-8" data-line-number="8">## 4: #1: fourth()</a>
-<a class="sourceLine" id="cb461-9" data-line-number="9">## 5: #1: fifth()</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">first</span>()
+## 
+## Enter a frame number, or 0 to exit   
+## 
+## 1: first()
+## 2: #1: second()
+## 3: #1: third()
+## 4: #1: fourth()
+## 5: #1: fifth()</code></pre>
 <p>To enter a browser mode, type in the number next to the function in whose runtime environment you would like to browse. If you do not wish to browse any of the functions, type <code>0</code>:</p>
-<div class="sourceCode" id="cb462"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb462-1" data-line-number="1"><span class="dv">3</span></a>
-<a class="sourceLine" id="cb462-2" data-line-number="2">## Selection: 3</a>
-<a class="sourceLine" id="cb462-3" data-line-number="3">## Called from: fourth()</a>
-<a class="sourceLine" id="cb462-4" data-line-number="4">## Browse[1]&gt; </a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="dv">3</span>
+## Selection: 3
+## Called from: fourth()
+## Browse[1]&gt; </code></pre>
 <p>You can then proceed as normal. <code>recover</code> gives you a chance to inspect variables up and down your call stack and is a powerful tool for uncovering bugs. However, adding <code>recover</code> to the body of an R function can be cumbersome. Most R users use it as a global option for handling errors.</p>
 <p>If you run the following code, R will automatically call <code>recover()</code> whenever an error occurs:</p>
-<div class="sourceCode" id="cb463"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb463-1" data-line-number="1"><span class="kw">options</span>(<span class="dt">error =</span> recover)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">options</span>(<span class="dt">error =</span> recover)</code></pre>
 <p>This behavior will last until you close your R session, or reverse the behavior by calling:</p>
-<div class="sourceCode" id="cb464"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb464-1" data-line-number="1"><span class="kw">options</span>(<span class="dt">error =</span> <span class="ot">NULL</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">options</span>(<span class="dt">error =</span> <span class="ot">NULL</span>)</code></pre>
 
 </div>
 </div>
@@ -579,7 +580,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');
     script.src = src;

@@ -7,12 +7,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Hands-On Programming with R</title>
   <meta name="description" content="This book will teach you how to program in R, with hands-on examples. I wrote it for non-programmers to provide a friendly introduction to the R language. You’ll learn how to load data, assemble and disassemble data objects, navigate R’s environment system, write your own functions, and use all of R’s programming tools. Throughout the book, you’ll use your newfound skills to solve practical data science problems.">
-  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
   <meta property="og:title" content="Hands-On Programming with R" />
   <meta property="og:type" content="book" />
-  <meta property="og:url" content="http://r4ds.had.co.nz/" />
-  <meta property="og:image" content="http://r4ds.had.co.nz/cover.png" />
+  <meta property="og:url" content="https://rstudio-education.github.io/hopr/" />
+  <meta property="og:image" content="https://rstudio-education.github.io/hopr/cover.png" />
   <meta property="og:description" content="This book will teach you how to program in R, with hands-on examples. I wrote it for non-programmers to provide a friendly introduction to the R language. You’ll learn how to load data, assemble and disassemble data objects, navigate R’s environment system, write your own functions, and use all of R’s programming tools. Throughout the book, you’ll use your newfound skills to solve practical data science problems." />
   <meta name="github-repo" content="rstudio-education/hopr" />
 
@@ -20,7 +20,7 @@
   <meta name="twitter:title" content="Hands-On Programming with R" />
   <meta name="twitter:site" content="@statgarrett" />
   <meta name="twitter:description" content="This book will teach you how to program in R, with hands-on examples. I wrote it for non-programmers to provide a friendly introduction to the R language. You’ll learn how to load data, assemble and disassemble data objects, navigate R’s environment system, write your own functions, and use all of R’s programming tools. Throughout the book, you’ll use your newfound skills to solve practical data science problems." />
-  <meta name="twitter:image" content="http://r4ds.had.co.nz/cover.png" />
+  <meta name="twitter:image" content="https://rstudio-education.github.io/hopr/cover.png" />
 
 <meta name="author" content="Garrett Grolemund">
 
@@ -35,6 +35,7 @@
 <link rel="next" href="s3.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
@@ -193,7 +194,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.1.2" data-path="r-notation.html"><a href="r-notation.html#negative-integers"><i class="fa fa-check"></i><b>4.1.2</b> Negative Integers</a></li>
 <li class="chapter" data-level="4.1.3" data-path="r-notation.html"><a href="r-notation.html#zero"><i class="fa fa-check"></i><b>4.1.3</b> Zero</a></li>
 <li class="chapter" data-level="4.1.4" data-path="r-notation.html"><a href="r-notation.html#blank-spaces"><i class="fa fa-check"></i><b>4.1.4</b> Blank Spaces</a></li>
-<li class="chapter" data-level="4.1.5" data-path="r-objects.html"><a href="r-objects.html#logicals"><i class="fa fa-check"></i><b>4.1.5</b> Logical Values</a></li>
+<li class="chapter" data-level="4.1.5" data-path="r-notation.html"><a href="r-notation.html#logic"><i class="fa fa-check"></i><b>4.1.5</b> Logical Values</a></li>
 <li class="chapter" data-level="4.1.6" data-path="r-notation.html"><a href="r-notation.html#names-1"><i class="fa fa-check"></i><b>4.1.6</b> Names</a></li>
 </ul></li>
 <li class="chapter" data-level="4.2" data-path="r-notation.html"><a href="r-notation.html#deal-a-card"><i class="fa fa-check"></i><b>4.2</b> Deal a Card</a></li>
@@ -332,29 +333,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="programs" class="section level1">
 <h1><span class="header-section-number">7</span> Programs</h1>
 <p>In this chapter, you will build a real, working slot machine that you can play by running an R function. When you’re finished, you’ll be able to play it like this:</p>
-<div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb241-1" data-line-number="1"><span class="kw">play</span>()</a>
-<a class="sourceLine" id="cb241-2" data-line-number="2">## 0 0 DD</a>
-<a class="sourceLine" id="cb241-3" data-line-number="3">## $0</a>
-<a class="sourceLine" id="cb241-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb241-5" data-line-number="5"><span class="kw">play</span>()</a>
-<a class="sourceLine" id="cb241-6" data-line-number="6">## 7 7 7</a>
-<a class="sourceLine" id="cb241-7" data-line-number="7">## $80</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">play</span>()
+## 0 0 DD
+## $0
+
+<span class="kw">play</span>()
+## 7 7 7
+## $80</code></pre>
 <p>The <code>play</code> function will need to do two things. First, it will need to randomly generate three symbols; and, second, it will need to calculate a prize based on those symbols.</p>
 <p>The first step is easy to simulate. You can randomly generate three symbols with the <code>sample</code> function—just like you randomly “rolled” two dice in <a href="project-1-weighted-dice.html#project-1-weighted-dice">Project 1: Weighted Dice</a>. The following function generates three symbols from a group of common slot machine symbols: diamonds (<code>DD</code>), sevens (<code>7</code>), triple bars (<code>BBB</code>), double bars (<code>BB</code>), single bars (<code>B</code>), cherries (<code>C</code>), and zeroes (<code>0</code>). The symbols are selected randomly, and each symbol appears with a different probability:</p>
-<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb242-1" data-line-number="1">get_symbols &lt;-<span class="st"> </span><span class="cf">function</span>() {</a>
-<a class="sourceLine" id="cb242-2" data-line-number="2">  wheel &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;DD&quot;</span>, <span class="st">&quot;7&quot;</span>, <span class="st">&quot;BBB&quot;</span>, <span class="st">&quot;BB&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;0&quot;</span>)</a>
-<a class="sourceLine" id="cb242-3" data-line-number="3">  <span class="kw">sample</span>(wheel, <span class="dt">size =</span> <span class="dv">3</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>, </a>
-<a class="sourceLine" id="cb242-4" data-line-number="4">    <span class="dt">prob =</span> <span class="kw">c</span>(<span class="fl">0.03</span>, <span class="fl">0.03</span>, <span class="fl">0.06</span>, <span class="fl">0.1</span>, <span class="fl">0.25</span>, <span class="fl">0.01</span>, <span class="fl">0.52</span>))</a>
-<a class="sourceLine" id="cb242-5" data-line-number="5">}</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">get_symbols &lt;-<span class="st"> </span><span class="cf">function</span>() {
+  wheel &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;DD&quot;</span>, <span class="st">&quot;7&quot;</span>, <span class="st">&quot;BBB&quot;</span>, <span class="st">&quot;BB&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;0&quot;</span>)
+  <span class="kw">sample</span>(wheel, <span class="dt">size =</span> <span class="dv">3</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>, 
+    <span class="dt">prob =</span> <span class="kw">c</span>(<span class="fl">0.03</span>, <span class="fl">0.03</span>, <span class="fl">0.06</span>, <span class="fl">0.1</span>, <span class="fl">0.25</span>, <span class="fl">0.01</span>, <span class="fl">0.52</span>))
+}</code></pre>
 <p>You can use <code>get_symbols</code> to generate the symbols used in your slot machine:</p>
-<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb243-1" data-line-number="1"><span class="kw">get_symbols</span>()</a>
-<a class="sourceLine" id="cb243-2" data-line-number="2">## &quot;BBB&quot; &quot;0&quot;   &quot;C&quot;  </a>
-<a class="sourceLine" id="cb243-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb243-4" data-line-number="4"><span class="kw">get_symbols</span>()</a>
-<a class="sourceLine" id="cb243-5" data-line-number="5">## &quot;0&quot; &quot;0&quot; &quot;0&quot;</a>
-<a class="sourceLine" id="cb243-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb243-7" data-line-number="7"><span class="kw">get_symbols</span>()</a>
-<a class="sourceLine" id="cb243-8" data-line-number="8">## &quot;7&quot; &quot;0&quot; &quot;B&quot;</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">get_symbols</span>()
+## &quot;BBB&quot; &quot;0&quot;   &quot;C&quot;  
+
+<span class="kw">get_symbols</span>()
+## &quot;0&quot; &quot;0&quot; &quot;0&quot;
+
+<span class="kw">get_symbols</span>()
+## &quot;7&quot; &quot;0&quot; &quot;B&quot;</code></pre>
 <p><code>get_symbols</code> uses the probabilities observed in a group of video lottery terminals from Manitoba, Canada. These slot machines became briefly controversial in the 1990s, when a reporter decided to test their payout rate. The machines appeared to pay out only 40 cents on the dollar, even though the manufacturer claimed they would pay out 92 cents on the dollar. The original data collected on the machines and a description of the controversy is available online in <a href="http://bit.ly/jse_Braun">a journal article by W. John Braun</a>. The controversy died down when additional testing showed that the manufacturer was correct.</p>
 <p>The Manitoba slot machines use the complicated payout scheme shown in <a href="programs.html#tab:prizes">7.1</a>. A player will win a prize if he gets:</p>
 <ul>
@@ -430,14 +431,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </table>
 <p>To create your <code>play</code> function, you will need to write a program that can take the output of <code>get_symbols</code> and calculate the correct prize based on <a href="programs.html#tab:prizes">7.1</a>.</p>
 <p>In R, programs are saved either as R scripts or as functions. We’ll save your program as a function named <code>score</code>. When you are finished, you will be able to use <code>score</code> to calculate a prize like this:</p>
-<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb244-1" data-line-number="1"><span class="kw">score</span>(<span class="kw">c</span>(<span class="st">&quot;DD&quot;</span>, <span class="st">&quot;DD&quot;</span>, <span class="st">&quot;DD&quot;</span>))</a>
-<a class="sourceLine" id="cb244-2" data-line-number="2">## 800</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">score</span>(<span class="kw">c</span>(<span class="st">&quot;DD&quot;</span>, <span class="st">&quot;DD&quot;</span>, <span class="st">&quot;DD&quot;</span>))
+## 800</code></pre>
 <p>After that it will be easy to create the full slot machine, like this:</p>
-<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb245-1" data-line-number="1">play &lt;-<span class="st"> </span><span class="cf">function</span>() {</a>
-<a class="sourceLine" id="cb245-2" data-line-number="2">  symbols &lt;-<span class="st"> </span><span class="kw">get_symbols</span>()</a>
-<a class="sourceLine" id="cb245-3" data-line-number="3">  <span class="kw">print</span>(symbols)</a>
-<a class="sourceLine" id="cb245-4" data-line-number="4">  <span class="kw">score</span>(symbols)</a>
-<a class="sourceLine" id="cb245-5" data-line-number="5">}</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">play &lt;-<span class="st"> </span><span class="cf">function</span>() {
+  symbols &lt;-<span class="st"> </span><span class="kw">get_symbols</span>()
+  <span class="kw">print</span>(symbols)
+  <span class="kw">score</span>(symbols)
+}</code></pre>
 
 <div class="rmdnote">
 The <code>print</code> command prints its output to the console window, which makes <code>print</code> a useful way to display messages from within the body of a function.
@@ -460,17 +461,17 @@ The <code>print</code> command prints its output to the console window, which ma
 <div id="sequential-steps" class="section level3">
 <h3><span class="header-section-number">7.1.1</span> Sequential Steps</h3>
 <p>One way to subdivide a program is into a series of sequential steps. The <code>play</code> function takes the approach, shown in <a href="programs.html#fig:subdivide1">7.1</a>. First, it generates three symbols (step 1), then it displays them in the console window (step 2), and then it scores them (step 3):</p>
-<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb246-1" data-line-number="1">play &lt;-<span class="st"> </span><span class="cf">function</span>() {</a>
-<a class="sourceLine" id="cb246-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb246-3" data-line-number="3">  <span class="co"># step 1: generate symbols</span></a>
-<a class="sourceLine" id="cb246-4" data-line-number="4">  symbols &lt;-<span class="st"> </span><span class="kw">get_symbols</span>()</a>
-<a class="sourceLine" id="cb246-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb246-6" data-line-number="6">  <span class="co"># step 2: display the symbols</span></a>
-<a class="sourceLine" id="cb246-7" data-line-number="7">  <span class="kw">print</span>(symbols)</a>
-<a class="sourceLine" id="cb246-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb246-9" data-line-number="9">  <span class="co"># step 3: score the symbols</span></a>
-<a class="sourceLine" id="cb246-10" data-line-number="10">  <span class="kw">score</span>(symbols)</a>
-<a class="sourceLine" id="cb246-11" data-line-number="11">}</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">play &lt;-<span class="st"> </span><span class="cf">function</span>() {
+
+  <span class="co"># step 1: generate symbols</span>
+  symbols &lt;-<span class="st"> </span><span class="kw">get_symbols</span>()
+
+  <span class="co"># step 2: display the symbols</span>
+  <span class="kw">print</span>(symbols)
+
+  <span class="co"># step 3: score the symbols</span>
+  <span class="kw">score</span>(symbols)
+}</code></pre>
 <p>To have R execute steps in sequence, place the steps one after another in an R script or function body.</p>
 <div class="figure"><span id="fig:subdivide1"></span>
 <img src="images/hopr_0701.png" alt="The play function uses a series of steps."  />
@@ -504,59 +505,59 @@ Figure 7.3: The complete slot machine simulation will involve subtasks that are 
 <h2><span class="header-section-number">7.2</span> if Statements</h2>
 <p>Linking cases together in parallel requires a bit of structure; your program faces a fork in the road whenever it must choose between cases. You can help the program navigate this fork with an <code>if</code> statement.</p>
 <p>An <code>if</code> statement tells R to do a certain task for a certain case. In English you would say something like, “If this is true, do that.” In R, you would say:</p>
-<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb247-1" data-line-number="1"><span class="cf">if</span> (this) {</a>
-<a class="sourceLine" id="cb247-2" data-line-number="2">  that</a>
-<a class="sourceLine" id="cb247-3" data-line-number="3">}</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="cf">if</span> (this) {
+  that
+}</code></pre>
 <p>The <code>this</code> object should be a logical test or an R expression that evaluates to a single <code>TRUE</code> or <code>FALSE</code>. If <code>this</code> evaluates to <code>TRUE</code>, R will run all of the code that appears between the braces that follow the <code>if</code> statement (i.e., between the <code>{</code> and <code>}</code> symbols). If <code>this</code> evaluates to <code>FALSE</code>, R will skip the code between the braces without running it.</p>
 <p>For example, you could write an <code>if</code> statement that ensures some object, <code>num</code>, is positive:</p>
-<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb248-1" data-line-number="1"><span class="cf">if</span> (num <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>) {</a>
-<a class="sourceLine" id="cb248-2" data-line-number="2">  num &lt;-<span class="st"> </span>num <span class="op">*</span><span class="st"> </span><span class="dv">-1</span></a>
-<a class="sourceLine" id="cb248-3" data-line-number="3">}</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="cf">if</span> (num <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>) {
+  num &lt;-<span class="st"> </span>num <span class="op">*</span><span class="st"> </span><span class="dv">-1</span>
+}</code></pre>
 <p>If <code>num &lt; 0</code> is <code>TRUE</code>, R will multiply <code>num</code> by negative one, which will make <code>num</code> positive:</p>
-<div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb249-1" data-line-number="1">num &lt;-<span class="st"> </span><span class="dv">-2</span></a>
-<a class="sourceLine" id="cb249-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb249-3" data-line-number="3"><span class="cf">if</span> (num <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>) {</a>
-<a class="sourceLine" id="cb249-4" data-line-number="4">  num &lt;-<span class="st"> </span>num <span class="op">*</span><span class="st"> </span><span class="dv">-1</span></a>
-<a class="sourceLine" id="cb249-5" data-line-number="5">}</a>
-<a class="sourceLine" id="cb249-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb249-7" data-line-number="7">num</a>
-<a class="sourceLine" id="cb249-8" data-line-number="8">## 2</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">num &lt;-<span class="st"> </span><span class="dv">-2</span>
+
+<span class="cf">if</span> (num <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>) {
+  num &lt;-<span class="st"> </span>num <span class="op">*</span><span class="st"> </span><span class="dv">-1</span>
+}
+
+num
+## 2</code></pre>
 <p>If <code>num &lt; 0</code> is <code>FALSE</code>, R will do nothing and <code>num</code> will remain as it is—positive (or zero):</p>
-<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb250-1" data-line-number="1">num &lt;-<span class="st"> </span><span class="dv">4</span></a>
-<a class="sourceLine" id="cb250-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb250-3" data-line-number="3"><span class="cf">if</span> (num <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>) {</a>
-<a class="sourceLine" id="cb250-4" data-line-number="4">  num &lt;-<span class="st"> </span>num <span class="op">*</span><span class="st"> </span><span class="dv">-1</span></a>
-<a class="sourceLine" id="cb250-5" data-line-number="5">}</a>
-<a class="sourceLine" id="cb250-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb250-7" data-line-number="7">num</a>
-<a class="sourceLine" id="cb250-8" data-line-number="8">## 4</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">num &lt;-<span class="st"> </span><span class="dv">4</span>
+
+<span class="cf">if</span> (num <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>) {
+  num &lt;-<span class="st"> </span>num <span class="op">*</span><span class="st"> </span><span class="dv">-1</span>
+}
+
+num
+## 4</code></pre>
 <p>The condition of an <code>if</code> statement must evaluate to a <em>single</em> <code>TRUE</code> or <code>FALSE</code>. If the condition creates a vector of <code>TRUE</code>s and <code>FALSE</code>s (which is easier to make than you may think), your <code>if</code> statement will print a warning message and use only the first element of the vector. Remember that you can condense vectors of logical values to a single <code>TRUE</code> or <code>FALSE</code> with the functions <code>any</code> and <code>all</code>.</p>
 <p>You don’t have to limit your <code>if</code> statements to a single line of code; you can include as many lines as you like between the braces. For example, the following code uses many lines to ensure that <code>num</code> is positive. The additional lines print some informative statements if <code>num</code> begins as a negative number. R will skip the entire code block—<code>print</code> statements and all—if <code>num</code> begins as a positive number:</p>
-<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb251-1" data-line-number="1">num &lt;-<span class="st"> </span><span class="dv">-1</span></a>
-<a class="sourceLine" id="cb251-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb251-3" data-line-number="3"><span class="cf">if</span> (num <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>) {</a>
-<a class="sourceLine" id="cb251-4" data-line-number="4">  <span class="kw">print</span>(<span class="st">&quot;num is negative.&quot;</span>)</a>
-<a class="sourceLine" id="cb251-5" data-line-number="5">  <span class="kw">print</span>(<span class="st">&quot;Don&#39;t worry, I&#39;ll fix it.&quot;</span>)</a>
-<a class="sourceLine" id="cb251-6" data-line-number="6">  num &lt;-<span class="st"> </span>num <span class="op">*</span><span class="st"> </span><span class="dv">-1</span></a>
-<a class="sourceLine" id="cb251-7" data-line-number="7">  <span class="kw">print</span>(<span class="st">&quot;Now num is positive.&quot;</span>)</a>
-<a class="sourceLine" id="cb251-8" data-line-number="8">}</a>
-<a class="sourceLine" id="cb251-9" data-line-number="9">## &quot;num is negative.&quot;</a>
-<a class="sourceLine" id="cb251-10" data-line-number="10">## &quot;Don&#39;t worry, I&#39;ll fix it.&quot;</a>
-<a class="sourceLine" id="cb251-11" data-line-number="11">## &quot;Now num is positive.&quot;</a>
-<a class="sourceLine" id="cb251-12" data-line-number="12"></a>
-<a class="sourceLine" id="cb251-13" data-line-number="13">num</a>
-<a class="sourceLine" id="cb251-14" data-line-number="14">## 1</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">num &lt;-<span class="st"> </span><span class="dv">-1</span>
+
+<span class="cf">if</span> (num <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>) {
+  <span class="kw">print</span>(<span class="st">&quot;num is negative.&quot;</span>)
+  <span class="kw">print</span>(<span class="st">&quot;Don&#39;t worry, I&#39;ll fix it.&quot;</span>)
+  num &lt;-<span class="st"> </span>num <span class="op">*</span><span class="st"> </span><span class="dv">-1</span>
+  <span class="kw">print</span>(<span class="st">&quot;Now num is positive.&quot;</span>)
+}
+## &quot;num is negative.&quot;
+## &quot;Don&#39;t worry, I&#39;ll fix it.&quot;
+## &quot;Now num is positive.&quot;
+
+num
+## 1</code></pre>
 <p>Try the following quizzes to develop your understanding of <code>if</code> statements.</p>
 
 <div class="exercise">
 <span id="exr:unnamed-chunk-50" class="exercise"><strong>Exercise 7.1  (Quiz A)  </strong></span>What will this return?
 </div>
 
-<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb252-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb252-2" data-line-number="2"><span class="cf">if</span> (<span class="dv">3</span> <span class="op">==</span><span class="st"> </span><span class="dv">3</span>) {</a>
-<a class="sourceLine" id="cb252-3" data-line-number="3">  x &lt;-<span class="st"> </span><span class="dv">2</span></a>
-<a class="sourceLine" id="cb252-4" data-line-number="4">}</a>
-<a class="sourceLine" id="cb252-5" data-line-number="5">x</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="dv">1</span>
+<span class="cf">if</span> (<span class="dv">3</span> <span class="op">==</span><span class="st"> </span><span class="dv">3</span>) {
+  x &lt;-<span class="st"> </span><span class="dv">2</span>
+}
+x</code></pre>
 
 <div class="solution">
  <span class="solution"><em>Solution. </em></span> The code will return the number 2. <code>x</code> begins as 1, and then R encounters the <code>if</code> statement. Since the condition evaluates to <code>TRUE</code>, R will run <code>x &lt;- 2</code>, changing the value of <code>x</code>.
@@ -567,11 +568,11 @@ Figure 7.3: The complete slot machine simulation will involve subtasks that are 
 <span id="exr:unnamed-chunk-52" class="exercise"><strong>Exercise 7.2  (Quiz B)  </strong></span>What will this return?
 </div>
 
-<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb253-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb253-2" data-line-number="2"><span class="cf">if</span> (<span class="ot">TRUE</span>) {</a>
-<a class="sourceLine" id="cb253-3" data-line-number="3">  x &lt;-<span class="st"> </span><span class="dv">2</span></a>
-<a class="sourceLine" id="cb253-4" data-line-number="4">}</a>
-<a class="sourceLine" id="cb253-5" data-line-number="5">x</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="dv">1</span>
+<span class="cf">if</span> (<span class="ot">TRUE</span>) {
+  x &lt;-<span class="st"> </span><span class="dv">2</span>
+}
+x</code></pre>
 
 <div class="solution">
  <span class="solution"><em>Solution. </em></span> This code will also return the number 2. It works the same as the code in Quiz A, except the condition in this statement is already <code>TRUE</code>. R doesn’t even need to evaluate it. As a result, the code inside the <code>if</code> statement will be run, and <code>x</code> will be set to 2.
@@ -582,14 +583,14 @@ Figure 7.3: The complete slot machine simulation will involve subtasks that are 
 <span id="exr:unnamed-chunk-54" class="exercise"><strong>Exercise 7.3  (Quiz C)  </strong></span>What will this return?
 </div>
 
-<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb254-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb254-2" data-line-number="2"><span class="cf">if</span> (x <span class="op">==</span><span class="st"> </span><span class="dv">1</span>) {</a>
-<a class="sourceLine" id="cb254-3" data-line-number="3">  x &lt;-<span class="st"> </span><span class="dv">2</span></a>
-<a class="sourceLine" id="cb254-4" data-line-number="4">  <span class="cf">if</span> (x <span class="op">==</span><span class="st"> </span><span class="dv">1</span>) {</a>
-<a class="sourceLine" id="cb254-5" data-line-number="5">    x &lt;-<span class="st"> </span><span class="dv">3</span></a>
-<a class="sourceLine" id="cb254-6" data-line-number="6">  }</a>
-<a class="sourceLine" id="cb254-7" data-line-number="7">}</a>
-<a class="sourceLine" id="cb254-8" data-line-number="8">x</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="dv">1</span>
+<span class="cf">if</span> (x <span class="op">==</span><span class="st"> </span><span class="dv">1</span>) {
+  x &lt;-<span class="st"> </span><span class="dv">2</span>
+  <span class="cf">if</span> (x <span class="op">==</span><span class="st"> </span><span class="dv">1</span>) {
+    x &lt;-<span class="st"> </span><span class="dv">3</span>
+  }
+}
+x</code></pre>
 
 <div class="solution">
  <span class="solution"><em>Solution. </em></span> Once again, the code will return the number 2. <code>x</code> starts out as 1, and the condition of the first <code>if</code> statement will evaluate to <code>TRUE</code>, which causes R to run the code in the body of the <code>if</code> statement. First, R sets <code>x</code> equal to 2, then R evaluates the second <code>if</code> statement, which is in the body of the first. This time <code>x == 1</code> will evaluate to <code>FALSE</code> because <code>x</code> now equals 2. As a result, R ignores <code>x &lt;- 3</code> and exits both <code>if</code> statements.
@@ -599,18 +600,18 @@ Figure 7.3: The complete slot machine simulation will involve subtasks that are 
 <div id="else-statements" class="section level2">
 <h2><span class="header-section-number">7.3</span> else Statements</h2>
 <p><code>if</code> statements tell R what to do when your condition is <em>true</em>, but you can also tell R what to do when the condition is <em>false</em>. <code>else</code> is a counterpart to <code>if</code> that extends an <code>if</code> statement to include a second case. In English, you would say, “If this is true, do plan A; else do plan B.” In R, you would say:</p>
-<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb255-1" data-line-number="1"><span class="cf">if</span> (this) {</a>
-<a class="sourceLine" id="cb255-2" data-line-number="2">  Plan A</a>
-<a class="sourceLine" id="cb255-3" data-line-number="3">} <span class="cf">else</span> {</a>
-<a class="sourceLine" id="cb255-4" data-line-number="4">  Plan B</a>
-<a class="sourceLine" id="cb255-5" data-line-number="5">}</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="cf">if</span> (this) {
+  Plan A
+} <span class="cf">else</span> {
+  Plan B
+}</code></pre>
 <p>When <code>this</code> evaluates to <code>TRUE</code>, R will run the code in the first set of braces, but not the code in the second. When <code>this</code> evaluates to <code>FALSE</code>, R will run the code in the second set of braces, but not the first. You can use this arrangement to cover all of the possible cases. For example, you could write some code that rounds a decimal to the nearest integer.</p>
 <p>Start with a decimal:</p>
-<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb256-1" data-line-number="1">a &lt;-<span class="st"> </span><span class="fl">3.14</span></a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="fl">3.14</span></code></pre>
 <p>Then isolate the decimal component with <code>trunc</code>:</p>
-<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb257-1" data-line-number="1">dec &lt;-<span class="st"> </span>a <span class="op">-</span><span class="st"> </span><span class="kw">trunc</span>(a)</a>
-<a class="sourceLine" id="cb257-2" data-line-number="2">dec</a>
-<a class="sourceLine" id="cb257-3" data-line-number="3">## 0.14</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">dec &lt;-<span class="st"> </span>a <span class="op">-</span><span class="st"> </span><span class="kw">trunc</span>(a)
+dec
+## 0.14</code></pre>
 
 <div class="rmdnote">
 <code>trunc</code> takes a number and returns only the portion of the number that appears to the left of the decimal place (i.e., the integer part of the number).
@@ -622,40 +623,40 @@ Figure 7.3: The complete slot machine simulation will involve subtasks that are 
 </div>
 
 <p>Then use an <code>if else</code> tree to round the number (either up or down):</p>
-<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb258-1" data-line-number="1"><span class="cf">if</span> (dec <span class="op">&gt;=</span><span class="st"> </span><span class="fl">0.5</span>) {</a>
-<a class="sourceLine" id="cb258-2" data-line-number="2">  a &lt;-<span class="st"> </span><span class="kw">trunc</span>(a) <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb258-3" data-line-number="3">} <span class="cf">else</span> {</a>
-<a class="sourceLine" id="cb258-4" data-line-number="4">  a &lt;-<span class="st"> </span><span class="kw">trunc</span>(a)</a>
-<a class="sourceLine" id="cb258-5" data-line-number="5">}</a>
-<a class="sourceLine" id="cb258-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb258-7" data-line-number="7">a</a>
-<a class="sourceLine" id="cb258-8" data-line-number="8">## 3</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="cf">if</span> (dec <span class="op">&gt;=</span><span class="st"> </span><span class="fl">0.5</span>) {
+  a &lt;-<span class="st"> </span><span class="kw">trunc</span>(a) <span class="op">+</span><span class="st"> </span><span class="dv">1</span>
+} <span class="cf">else</span> {
+  a &lt;-<span class="st"> </span><span class="kw">trunc</span>(a)
+}
+
+a
+## 3</code></pre>
 <p>If your situation has more than two mutually exclusive cases, you can string multiple <code>if</code> and <code>else</code> statements together by adding a new <code>if</code> statement immediately after <code>else</code>. For example:</p>
-<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb259-1" data-line-number="1">a &lt;-<span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb259-2" data-line-number="2">b &lt;-<span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb259-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb259-4" data-line-number="4"><span class="cf">if</span> (a <span class="op">&gt;</span><span class="st"> </span>b) {</a>
-<a class="sourceLine" id="cb259-5" data-line-number="5">  <span class="kw">print</span>(<span class="st">&quot;A wins!&quot;</span>)</a>
-<a class="sourceLine" id="cb259-6" data-line-number="6">} <span class="cf">else</span> <span class="cf">if</span> (a <span class="op">&lt;</span><span class="st"> </span>b) {</a>
-<a class="sourceLine" id="cb259-7" data-line-number="7">  <span class="kw">print</span>(<span class="st">&quot;B wins!&quot;</span>)</a>
-<a class="sourceLine" id="cb259-8" data-line-number="8">} <span class="cf">else</span> {</a>
-<a class="sourceLine" id="cb259-9" data-line-number="9">  <span class="kw">print</span>(<span class="st">&quot;Tie.&quot;</span>)</a>
-<a class="sourceLine" id="cb259-10" data-line-number="10">}</a>
-<a class="sourceLine" id="cb259-11" data-line-number="11">## &quot;Tie.&quot;</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="dv">1</span>
+b &lt;-<span class="st"> </span><span class="dv">1</span>
+
+<span class="cf">if</span> (a <span class="op">&gt;</span><span class="st"> </span>b) {
+  <span class="kw">print</span>(<span class="st">&quot;A wins!&quot;</span>)
+} <span class="cf">else</span> <span class="cf">if</span> (a <span class="op">&lt;</span><span class="st"> </span>b) {
+  <span class="kw">print</span>(<span class="st">&quot;B wins!&quot;</span>)
+} <span class="cf">else</span> {
+  <span class="kw">print</span>(<span class="st">&quot;Tie.&quot;</span>)
+}
+## &quot;Tie.&quot;</code></pre>
 <p>R will work through the <code>if</code> conditions until one evaluates to <code>TRUE</code>, then R will ignore any remaining <code>if</code> and <code>else</code> clauses in the tree. If no conditions evaluate to <code>TRUE</code>, R will run the final <code>else</code> statement.</p>
 <p>If two <code>if</code> statements describe mutually exclusive events, it is better to join the <code>if</code> statements with an <code>else if</code> than to list them separately. This lets R ignore the second <code>if</code> statement whenever the first returns a <code>TRUE</code>, which saves work.</p>
 <p>You can use <code>if</code> and <code>else</code> to link the subtasks in your slot-machine function. Open a fresh R script, and copy this code into it. The code will be the skeleton of our final <code>score</code> function. Compare it to the flow chart for <code>score</code> in <a href="programs.html#fig:subdivide2">7.2</a>:</p>
-<div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb260-1" data-line-number="1"><span class="cf">if</span> ( <span class="co"># Case 1: all the same &lt;1&gt;) {</span></a>
-<a class="sourceLine" id="cb260-2" data-line-number="2">  prize &lt;-<span class="st"> </span><span class="co"># look up the prize &lt;3&gt;</span></a>
-<a class="sourceLine" id="cb260-3" data-line-number="3"><span class="er">}</span> <span class="cf">else</span> <span class="cf">if</span> ( <span class="co"># Case 2: all bars &lt;2&gt; ) {</span></a>
-<a class="sourceLine" id="cb260-4" data-line-number="4">  prize &lt;-<span class="st"> </span><span class="co"># assign $5 &lt;4&gt;</span></a>
-<a class="sourceLine" id="cb260-5" data-line-number="5"><span class="er">}</span> <span class="cf">else</span> {</a>
-<a class="sourceLine" id="cb260-6" data-line-number="6">  <span class="co"># count cherries &lt;5&gt;</span></a>
-<a class="sourceLine" id="cb260-7" data-line-number="7">  prize &lt;-<span class="st"> </span><span class="co"># calculate a prize &lt;7&gt;</span></a>
-<a class="sourceLine" id="cb260-8" data-line-number="8">}</a>
-<a class="sourceLine" id="cb260-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb260-10" data-line-number="10"><span class="co"># count diamonds &lt;6&gt;</span></a>
-<a class="sourceLine" id="cb260-11" data-line-number="11"><span class="co"># double the prize if necessary &lt;8&gt;</span></a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="cf">if</span> ( <span class="co"># Case 1: all the same &lt;1&gt;) {</span>
+  prize &lt;-<span class="st"> </span><span class="co"># look up the prize &lt;3&gt;</span>
+<span class="er">}</span> <span class="cf">else</span> <span class="cf">if</span> ( <span class="co"># Case 2: all bars &lt;2&gt; ) {</span>
+  prize &lt;-<span class="st"> </span><span class="co"># assign $5 &lt;4&gt;</span>
+<span class="er">}</span> <span class="cf">else</span> {
+  <span class="co"># count cherries &lt;5&gt;</span>
+  prize &lt;-<span class="st"> </span><span class="co"># calculate a prize &lt;7&gt;</span>
+}
+
+<span class="co"># count diamonds &lt;6&gt;</span>
+<span class="co"># double the prize if necessary &lt;8&gt;</span></code></pre>
 <p>Our skeleton is rather incomplete; there are many sections that are just code comments instead of real code. However, we’ve reduced the program to eight simple subtasks:</p>
 <p><strong>&lt;1&gt;</strong> - Test whether the symbols are three of a kind.<br />
 <strong>&lt;2&gt;</strong> - Test whether the symbols are all bars.<br />
@@ -675,18 +676,18 @@ Figure 7.4: score can navigate three cases with two if else decisions. We can al
 <p>Now we can work through the subtasks one at a time, adding R code to the <code>if</code> tree as we go. Each subtask will be easy to solve if you set up a concrete example to work with and try to describe a solution in English before coding in R.</p>
 <p>The first subtask asks you to test whether the symbols are three of a kind. How should you begin writing the code for this subtask?</p>
 <p>You know that the final <code>score</code> function will look something like this:</p>
-<div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb261-1" data-line-number="1">score &lt;-<span class="st"> </span><span class="cf">function</span>(symbols) {</a>
-<a class="sourceLine" id="cb261-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb261-3" data-line-number="3">  <span class="co"># calculate a prize</span></a>
-<a class="sourceLine" id="cb261-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb261-5" data-line-number="5">  prize</a>
-<a class="sourceLine" id="cb261-6" data-line-number="6">}</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">score &lt;-<span class="st"> </span><span class="cf">function</span>(symbols) {
+
+  <span class="co"># calculate a prize</span>
+
+  prize
+}</code></pre>
 <p>Its argument, <code>symbols</code>, will be the output of <code>get_symbols</code>, a vector that contains three character strings. You could start writing <code>score</code> as I have written it, by defining an object named <code>score</code> and then slowly filling in the body of the function. However, this would be a bad idea. The eventual function will have eight separate parts, and it will not work correctly until <em>all</em> of those parts are written (and themselves work correctly). This means you would have to write the entire <code>score</code> function before you could test any of the subtasks. If <code>score</code> doesn’t work—which is very likely—you will not know which subtask needs fixed.</p>
 <p>You can save yourself time and headaches if you focus on one subtask at a time. For each subtask, create a concrete example that you can test your code on. For example, you know that <code>score</code> will need to work on a vector named <code>symbols</code> that contains three character strings. If you make a real vector named <code>symbols</code>, you can run the code for many of your subtasks on the vector as you go:</p>
-<div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb262-1" data-line-number="1">symbols &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;7&quot;</span>, <span class="st">&quot;7&quot;</span>, <span class="st">&quot;7&quot;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">symbols &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;7&quot;</span>, <span class="st">&quot;7&quot;</span>, <span class="st">&quot;7&quot;</span>)</code></pre>
 <p>If a piece of code does not work on <code>symbols</code>, you will know that you need to fix it before you move on. You can change the value of <code>symbols</code> from subtask to subtask to ensure that your code works in every situation:</p>
-<div class="sourceCode" id="cb263"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb263-1" data-line-number="1">symbols &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;B&quot;</span>, <span class="st">&quot;BB&quot;</span>, <span class="st">&quot;BBB&quot;</span>)</a>
-<a class="sourceLine" id="cb263-2" data-line-number="2">symbols &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;C&quot;</span>, <span class="st">&quot;DD&quot;</span>, <span class="st">&quot;0&quot;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">symbols &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;B&quot;</span>, <span class="st">&quot;BB&quot;</span>, <span class="st">&quot;BBB&quot;</span>)
+symbols &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;C&quot;</span>, <span class="st">&quot;DD&quot;</span>, <span class="st">&quot;0&quot;</span>)</code></pre>
 <p>Only combine your subtasks into a <code>score</code> function once each subtask works on a concrete example. If you follow this plan, you will spend more time using your functions and less time trying to figure out why they do not work.</p>
 <p>After you set up a concrete example, try to describe how you will do the subtask in English. The more precisely you can describe your solution, the easier it will be to write your R code.</p>
 <p>Our first subtask asks us to “test whether the symbols are three of a kind.” This phrase does not suggest any useful R code to me. However, I could describe a more precise test for three of a kind: three symbols will be the same if the first symbol is equal to the second and the second symbol is equal to the third. Or, even more precisely:</p>
@@ -701,41 +702,41 @@ Figure 7.4: score can navigate three cases with two if else decisions. We can al
  <span class="solution"><em>Solution. </em></span> Here are a couple of ways to test that <code>symbols</code> contains three of the same symbol. The first method parallels the English suggestion above, but there are other ways to do the same test. There is no right or wrong answer, so long as your solution works, which is easy to check because you’ve created a vector named <code>symbols</code>:
 </div>
 
-<div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb264-1" data-line-number="1">symbols</a>
-<a class="sourceLine" id="cb264-2" data-line-number="2">##  &quot;7&quot; &quot;7&quot; &quot;7&quot;</a>
-<a class="sourceLine" id="cb264-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb264-4" data-line-number="4">symbols[<span class="dv">1</span>] <span class="op">==</span><span class="st"> </span>symbols[<span class="dv">2</span>] <span class="op">&amp;</span><span class="st"> </span>symbols[<span class="dv">2</span>] <span class="op">==</span><span class="st"> </span>symbols[<span class="dv">3</span>]</a>
-<a class="sourceLine" id="cb264-5" data-line-number="5">## TRUE</a>
-<a class="sourceLine" id="cb264-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb264-7" data-line-number="7">symbols[<span class="dv">1</span>] <span class="op">==</span><span class="st"> </span>symbols[<span class="dv">2</span>] <span class="op">&amp;</span><span class="st"> </span>symbols[<span class="dv">1</span>] <span class="op">==</span><span class="st"> </span>symbols[<span class="dv">3</span>]</a>
-<a class="sourceLine" id="cb264-8" data-line-number="8">## TRUE</a>
-<a class="sourceLine" id="cb264-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb264-10" data-line-number="10"><span class="kw">all</span>(symbols <span class="op">==</span><span class="st"> </span>symbols[<span class="dv">1</span>])</a>
-<a class="sourceLine" id="cb264-11" data-line-number="11">## TRUE</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">symbols
+##  &quot;7&quot; &quot;7&quot; &quot;7&quot;
+
+symbols[<span class="dv">1</span>] <span class="op">==</span><span class="st"> </span>symbols[<span class="dv">2</span>] <span class="op">&amp;</span><span class="st"> </span>symbols[<span class="dv">2</span>] <span class="op">==</span><span class="st"> </span>symbols[<span class="dv">3</span>]
+## TRUE
+
+symbols[<span class="dv">1</span>] <span class="op">==</span><span class="st"> </span>symbols[<span class="dv">2</span>] <span class="op">&amp;</span><span class="st"> </span>symbols[<span class="dv">1</span>] <span class="op">==</span><span class="st"> </span>symbols[<span class="dv">3</span>]
+## TRUE
+
+<span class="kw">all</span>(symbols <span class="op">==</span><span class="st"> </span>symbols[<span class="dv">1</span>])
+## TRUE</code></pre>
 <p>As your vocabulary of R functions broadens, you’ll think of more ways to do basic tasks. One method that I like for checking three of a kind is:</p>
-<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb265-1" data-line-number="1"><span class="kw">length</span>(<span class="kw">unique</span>(symbols) <span class="op">==</span><span class="st"> </span><span class="dv">1</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(<span class="kw">unique</span>(symbols) <span class="op">==</span><span class="st"> </span><span class="dv">1</span>)</code></pre>
 <p>The <code>unique</code> function returns every unique term that appears in a vector. If your <code>symbols</code> vector contains three of a kind (i.e., one unique term that appears three times), then <code>unique(symbols)</code> will return a vector of length <code>1</code>.</p>
 <p>Now that you have a working test, you can add it to your slot-machine script:</p>
-<div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb266-1" data-line-number="1">same &lt;-<span class="st"> </span>symbols[<span class="dv">1</span>] <span class="op">==</span><span class="st"> </span>symbols[<span class="dv">2</span>] <span class="op">&amp;&amp;</span><span class="st"> </span>symbols[<span class="dv">2</span>] <span class="op">==</span><span class="st"> </span>symbols[<span class="dv">3</span>]</a>
-<a class="sourceLine" id="cb266-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb266-3" data-line-number="3"><span class="cf">if</span> (same) {</a>
-<a class="sourceLine" id="cb266-4" data-line-number="4">  prize &lt;-<span class="st"> </span><span class="co"># look up the prize</span></a>
-<a class="sourceLine" id="cb266-5" data-line-number="5">} <span class="cf">else</span> <span class="cf">if</span> ( <span class="co"># Case 2: all bars ) {</span></a>
-<a class="sourceLine" id="cb266-6" data-line-number="6">  prize &lt;-<span class="st"> </span><span class="co"># assign $5</span></a>
-<a class="sourceLine" id="cb266-7" data-line-number="7"><span class="er">}</span> <span class="cf">else</span> {</a>
-<a class="sourceLine" id="cb266-8" data-line-number="8">  <span class="co"># count cherries</span></a>
-<a class="sourceLine" id="cb266-9" data-line-number="9">  prize &lt;-<span class="st"> </span><span class="co"># calculate a prize</span></a>
-<a class="sourceLine" id="cb266-10" data-line-number="10">}</a>
-<a class="sourceLine" id="cb266-11" data-line-number="11"></a>
-<a class="sourceLine" id="cb266-12" data-line-number="12"><span class="co"># count diamonds</span></a>
-<a class="sourceLine" id="cb266-13" data-line-number="13"><span class="co"># double the prize if necessary</span></a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">same &lt;-<span class="st"> </span>symbols[<span class="dv">1</span>] <span class="op">==</span><span class="st"> </span>symbols[<span class="dv">2</span>] <span class="op">&amp;&amp;</span><span class="st"> </span>symbols[<span class="dv">2</span>] <span class="op">==</span><span class="st"> </span>symbols[<span class="dv">3</span>]
+
+<span class="cf">if</span> (same) {
+  prize &lt;-<span class="st"> </span><span class="co"># look up the prize</span>
+} <span class="cf">else</span> <span class="cf">if</span> ( <span class="co"># Case 2: all bars ) {</span>
+  prize &lt;-<span class="st"> </span><span class="co"># assign $5</span>
+<span class="er">}</span> <span class="cf">else</span> {
+  <span class="co"># count cherries</span>
+  prize &lt;-<span class="st"> </span><span class="co"># calculate a prize</span>
+}
+
+<span class="co"># count diamonds</span>
+<span class="co"># double the prize if necessary</span></code></pre>
 
 <div class="rmdnote">
 <code>&amp;&amp;</code> and <code>||</code> behave like <code>&amp;</code> and <code>|</code> but can sometimes be more efficient. The double operators will not evaluate the second test in a pair of tests if the first test makes the result clear. For example, if <code>symbols[1]</code> does not equal <code>symbols[2]</code> in the next expression, <code>&amp;&amp;</code> will not evaluate <code>symbols[2] == symbols[3]</code>; it can immediately return a <code>FALSE</code> for the whole expression (because <code>FALSE &amp; TRUE</code> and <code>FALSE &amp; FALSE</code> both evaluate to <code>FALSE</code>). This efficiency can speed up your programs; however, double operators are not appropriate everywhere. <code>&amp;&amp;</code> and <code>||</code> are not vectorized, which means they can only handle a single logical test on each side of the operator.
 </div>
 
 <p>The second prize case occurs when all the symbols are a type of bar, for example, <code>B</code>, <code>BB</code>, and <code>BBB</code>. Let’s begin by creating a concrete example to work with:</p>
-<div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb267-1" data-line-number="1">symbols &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;B&quot;</span>, <span class="st">&quot;BBB&quot;</span>, <span class="st">&quot;BB&quot;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">symbols &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;B&quot;</span>, <span class="st">&quot;BBB&quot;</span>, <span class="st">&quot;BB&quot;</span>)</code></pre>
 
 <div class="exercise">
 <span id="exr:unnamed-chunk-61" class="exercise"><strong>Exercise 7.5  (Test for All Bars)  </strong></span>Use R’s logical and Boolean operators to write a test that will determine whether a vector named <code>symbols</code> contains only symbols that are a type of bar. Check whether your test works with our example <code>symbols</code> vector. Remember to describe how the test should work in English, and then convert the solution to R.
@@ -746,124 +747,124 @@ Figure 7.4: score can navigate three cases with two if else decisions. We can al
  <span class="solution"><em>Solution. </em></span> As with many things in R, there are multiple ways to test whether <code>symbols</code> contains all bars. For example, you could write a very long test that uses multiple Boolean operators, like this:
 </div>
 
-<div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb268-1" data-line-number="1">symbols[<span class="dv">1</span>] <span class="op">==</span><span class="st"> &quot;B&quot;</span> <span class="op">|</span><span class="st"> </span>symbols[<span class="dv">1</span>] <span class="op">==</span><span class="st"> &quot;BB&quot;</span> <span class="op">|</span><span class="st"> </span>symbols[<span class="dv">1</span>] <span class="op">==</span><span class="st"> &quot;BBB&quot;</span> <span class="op">&amp;</span></a>
-<a class="sourceLine" id="cb268-2" data-line-number="2"><span class="st">  </span>symbols[<span class="dv">2</span>] <span class="op">==</span><span class="st"> &quot;B&quot;</span> <span class="op">|</span><span class="st"> </span>symbols[<span class="dv">2</span>] <span class="op">==</span><span class="st"> &quot;BB&quot;</span> <span class="op">|</span><span class="st"> </span>symbols[<span class="dv">2</span>] <span class="op">==</span><span class="st"> &quot;BBB&quot;</span> <span class="op">&amp;</span></a>
-<a class="sourceLine" id="cb268-3" data-line-number="3"><span class="st">  </span>symbols[<span class="dv">3</span>] <span class="op">==</span><span class="st"> &quot;B&quot;</span> <span class="op">|</span><span class="st"> </span>symbols[<span class="dv">3</span>] <span class="op">==</span><span class="st"> &quot;BB&quot;</span> <span class="op">|</span><span class="st"> </span>symbols[<span class="dv">3</span>] <span class="op">==</span><span class="st"> &quot;BBB&quot;</span></a>
-<a class="sourceLine" id="cb268-4" data-line-number="4">## TRUE</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">symbols[<span class="dv">1</span>] <span class="op">==</span><span class="st"> &quot;B&quot;</span> <span class="op">|</span><span class="st"> </span>symbols[<span class="dv">1</span>] <span class="op">==</span><span class="st"> &quot;BB&quot;</span> <span class="op">|</span><span class="st"> </span>symbols[<span class="dv">1</span>] <span class="op">==</span><span class="st"> &quot;BBB&quot;</span> <span class="op">&amp;</span>
+<span class="st">  </span>symbols[<span class="dv">2</span>] <span class="op">==</span><span class="st"> &quot;B&quot;</span> <span class="op">|</span><span class="st"> </span>symbols[<span class="dv">2</span>] <span class="op">==</span><span class="st"> &quot;BB&quot;</span> <span class="op">|</span><span class="st"> </span>symbols[<span class="dv">2</span>] <span class="op">==</span><span class="st"> &quot;BBB&quot;</span> <span class="op">&amp;</span>
+<span class="st">  </span>symbols[<span class="dv">3</span>] <span class="op">==</span><span class="st"> &quot;B&quot;</span> <span class="op">|</span><span class="st"> </span>symbols[<span class="dv">3</span>] <span class="op">==</span><span class="st"> &quot;BB&quot;</span> <span class="op">|</span><span class="st"> </span>symbols[<span class="dv">3</span>] <span class="op">==</span><span class="st"> &quot;BBB&quot;</span>
+## TRUE</code></pre>
 <p>However, this is not a very efficient solution, because R has to run nine logical tests (and you have to type them). You can often replace multiple <code>|</code> operators with a single <code>%in%</code>. Also, you can check that a test is true for each element in a vector with <code>all</code>. These two changes shorten the preceding code to:</p>
-<div class="sourceCode" id="cb269"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb269-1" data-line-number="1"><span class="kw">all</span>(symbols <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;B&quot;</span>, <span class="st">&quot;BB&quot;</span>, <span class="st">&quot;BBB&quot;</span>))</a>
-<a class="sourceLine" id="cb269-2" data-line-number="2">## TRUE</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">all</span>(symbols <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;B&quot;</span>, <span class="st">&quot;BB&quot;</span>, <span class="st">&quot;BBB&quot;</span>))
+## TRUE</code></pre>
 <p>Let’s add this code to our script:</p>
-<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb270-1" data-line-number="1">same &lt;-<span class="st"> </span>symbols[<span class="dv">1</span>] <span class="op">==</span><span class="st"> </span>symbols[<span class="dv">2</span>] <span class="op">&amp;&amp;</span><span class="st"> </span>symbols[<span class="dv">2</span>] <span class="op">==</span><span class="st"> </span>symbols[<span class="dv">3</span>]</a>
-<a class="sourceLine" id="cb270-2" data-line-number="2">bars &lt;-<span class="st"> </span>symbols <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;B&quot;</span>, <span class="st">&quot;BB&quot;</span>, <span class="st">&quot;BBB&quot;</span>)</a>
-<a class="sourceLine" id="cb270-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb270-4" data-line-number="4"><span class="cf">if</span> (same) {</a>
-<a class="sourceLine" id="cb270-5" data-line-number="5">  prize &lt;-<span class="st"> </span><span class="co"># look up the prize</span></a>
-<a class="sourceLine" id="cb270-6" data-line-number="6">} <span class="cf">else</span> <span class="cf">if</span> (<span class="kw">all</span>(bars)) {</a>
-<a class="sourceLine" id="cb270-7" data-line-number="7">  prize &lt;-<span class="st"> </span><span class="co"># assign $5</span></a>
-<a class="sourceLine" id="cb270-8" data-line-number="8">} <span class="cf">else</span> {</a>
-<a class="sourceLine" id="cb270-9" data-line-number="9">  <span class="co"># count cherries</span></a>
-<a class="sourceLine" id="cb270-10" data-line-number="10">  prize &lt;-<span class="st"> </span><span class="co"># calculate a prize</span></a>
-<a class="sourceLine" id="cb270-11" data-line-number="11">}</a>
-<a class="sourceLine" id="cb270-12" data-line-number="12"></a>
-<a class="sourceLine" id="cb270-13" data-line-number="13"><span class="co"># count diamonds</span></a>
-<a class="sourceLine" id="cb270-14" data-line-number="14"><span class="co"># double the prize if necessary</span></a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">same &lt;-<span class="st"> </span>symbols[<span class="dv">1</span>] <span class="op">==</span><span class="st"> </span>symbols[<span class="dv">2</span>] <span class="op">&amp;&amp;</span><span class="st"> </span>symbols[<span class="dv">2</span>] <span class="op">==</span><span class="st"> </span>symbols[<span class="dv">3</span>]
+bars &lt;-<span class="st"> </span>symbols <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;B&quot;</span>, <span class="st">&quot;BB&quot;</span>, <span class="st">&quot;BBB&quot;</span>)
+
+<span class="cf">if</span> (same) {
+  prize &lt;-<span class="st"> </span><span class="co"># look up the prize</span>
+} <span class="cf">else</span> <span class="cf">if</span> (<span class="kw">all</span>(bars)) {
+  prize &lt;-<span class="st"> </span><span class="co"># assign $5</span>
+} <span class="cf">else</span> {
+  <span class="co"># count cherries</span>
+  prize &lt;-<span class="st"> </span><span class="co"># calculate a prize</span>
+}
+
+<span class="co"># count diamonds</span>
+<span class="co"># double the prize if necessary</span></code></pre>
 <p>You may have noticed that I split this test up into two steps, <code>bars</code> and <code>all(bars)</code>. That’s just a matter of personal preference. Wherever possible, I like to write my code so it can be read with function and object names conveying what they do.</p>
 <p>You also may have noticed that our test for Case 2 will capture some symbols that should be in Case 1 because they contain three of a kind:</p>
-<div class="sourceCode" id="cb271"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb271-1" data-line-number="1">symbols &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;B&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;B&quot;</span>)</a>
-<a class="sourceLine" id="cb271-2" data-line-number="2"><span class="kw">all</span>(symbols <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;B&quot;</span>, <span class="st">&quot;BB&quot;</span>, <span class="st">&quot;BBB&quot;</span>))</a>
-<a class="sourceLine" id="cb271-3" data-line-number="3">## TRUE</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">symbols &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;B&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;B&quot;</span>)
+<span class="kw">all</span>(symbols <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;B&quot;</span>, <span class="st">&quot;BB&quot;</span>, <span class="st">&quot;BBB&quot;</span>))
+## TRUE</code></pre>
 <p>That won’t be a problem, however, because we’ve connected our cases with <code>else if</code> in the <code>if</code> tree. As soon as R comes to a case that evaluates to <code>TRUE</code>, it will skip over the rest of the tree. Think of it this way: each <code>else</code> tells R to only run the code that follows it <em>if none of the previous conditions have been met</em>. So when we have three of the same type of bar, R will evaluate the code for Case 1 and then skip the code for Case 2 (and Case 3).</p>
 <p>Our next subtask is to assign a prize for <code>symbols</code>. When the <code>symbols</code> vector contains three of the same symbol, the prize will depend on which symbol there are three of. If there are three <code>DD</code>s, the prize will be $100; if there are three <code>7</code>s, the prize will be $80; and so on.</p>
 <p>This suggests another <code>if</code> tree. You could assign a prize with some code like this:</p>
-<div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb272-1" data-line-number="1"><span class="cf">if</span> (same) {</a>
-<a class="sourceLine" id="cb272-2" data-line-number="2">  symbol &lt;-<span class="st"> </span>symbols[<span class="dv">1</span>]</a>
-<a class="sourceLine" id="cb272-3" data-line-number="3">  <span class="cf">if</span> (symbol <span class="op">==</span><span class="st"> &quot;DD&quot;</span>) {</a>
-<a class="sourceLine" id="cb272-4" data-line-number="4">    prize &lt;-<span class="st"> </span><span class="dv">800</span></a>
-<a class="sourceLine" id="cb272-5" data-line-number="5">  } <span class="cf">else</span> <span class="cf">if</span> (symbol <span class="op">==</span><span class="st"> &quot;7&quot;</span>) {</a>
-<a class="sourceLine" id="cb272-6" data-line-number="6">    prize &lt;-<span class="st"> </span><span class="dv">80</span></a>
-<a class="sourceLine" id="cb272-7" data-line-number="7">  } <span class="cf">else</span> <span class="cf">if</span> (symbol <span class="op">==</span><span class="st"> &quot;BBB&quot;</span>) {</a>
-<a class="sourceLine" id="cb272-8" data-line-number="8">    prize &lt;-<span class="st"> </span><span class="dv">40</span></a>
-<a class="sourceLine" id="cb272-9" data-line-number="9">  } <span class="cf">else</span> <span class="cf">if</span> (symbol <span class="op">==</span><span class="st"> &quot;BB&quot;</span>) {</a>
-<a class="sourceLine" id="cb272-10" data-line-number="10">    prize &lt;-<span class="st"> </span><span class="dv">5</span></a>
-<a class="sourceLine" id="cb272-11" data-line-number="11">  } <span class="cf">else</span> <span class="cf">if</span> (symbol <span class="op">==</span><span class="st"> &quot;B&quot;</span>) {</a>
-<a class="sourceLine" id="cb272-12" data-line-number="12">    prize &lt;-<span class="st"> </span><span class="dv">10</span></a>
-<a class="sourceLine" id="cb272-13" data-line-number="13">  } <span class="cf">else</span> <span class="cf">if</span> (symbol <span class="op">==</span><span class="st"> &quot;C&quot;</span>) {</a>
-<a class="sourceLine" id="cb272-14" data-line-number="14">    prize &lt;-<span class="st"> </span><span class="dv">10</span></a>
-<a class="sourceLine" id="cb272-15" data-line-number="15">  } <span class="cf">else</span> <span class="cf">if</span> (symbol <span class="op">==</span><span class="st"> &quot;0&quot;</span>) {</a>
-<a class="sourceLine" id="cb272-16" data-line-number="16">    prize &lt;-<span class="st"> </span><span class="dv">0</span></a>
-<a class="sourceLine" id="cb272-17" data-line-number="17">  }</a>
-<a class="sourceLine" id="cb272-18" data-line-number="18">}</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="cf">if</span> (same) {
+  symbol &lt;-<span class="st"> </span>symbols[<span class="dv">1</span>]
+  <span class="cf">if</span> (symbol <span class="op">==</span><span class="st"> &quot;DD&quot;</span>) {
+    prize &lt;-<span class="st"> </span><span class="dv">800</span>
+  } <span class="cf">else</span> <span class="cf">if</span> (symbol <span class="op">==</span><span class="st"> &quot;7&quot;</span>) {
+    prize &lt;-<span class="st"> </span><span class="dv">80</span>
+  } <span class="cf">else</span> <span class="cf">if</span> (symbol <span class="op">==</span><span class="st"> &quot;BBB&quot;</span>) {
+    prize &lt;-<span class="st"> </span><span class="dv">40</span>
+  } <span class="cf">else</span> <span class="cf">if</span> (symbol <span class="op">==</span><span class="st"> &quot;BB&quot;</span>) {
+    prize &lt;-<span class="st"> </span><span class="dv">5</span>
+  } <span class="cf">else</span> <span class="cf">if</span> (symbol <span class="op">==</span><span class="st"> &quot;B&quot;</span>) {
+    prize &lt;-<span class="st"> </span><span class="dv">10</span>
+  } <span class="cf">else</span> <span class="cf">if</span> (symbol <span class="op">==</span><span class="st"> &quot;C&quot;</span>) {
+    prize &lt;-<span class="st"> </span><span class="dv">10</span>
+  } <span class="cf">else</span> <span class="cf">if</span> (symbol <span class="op">==</span><span class="st"> &quot;0&quot;</span>) {
+    prize &lt;-<span class="st"> </span><span class="dv">0</span>
+  }
+}</code></pre>
 <p>While this code will work, it is a bit long to write and read, and it may require R to perform multiple logical tests before delivering the correct prize. We can do better with a different method.</p>
 </div>
 <div id="lookup-tables" class="section level2">
 <h2><span class="header-section-number">7.4</span> Lookup Tables</h2>
 <p>Very often in R, the simplest way to do something will involve subsetting. How could you use subsetting here? Since you know the exact relationship between the symbols and their prizes, you can create a vector that captures this information. This vector can store symbols as names and prize values as elements:</p>
-<div class="sourceCode" id="cb273"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb273-1" data-line-number="1">payouts &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;DD&quot;</span> =<span class="st"> </span><span class="dv">100</span>, <span class="st">&quot;7&quot;</span> =<span class="st"> </span><span class="dv">80</span>, <span class="st">&quot;BBB&quot;</span> =<span class="st"> </span><span class="dv">40</span>, <span class="st">&quot;BB&quot;</span> =<span class="st"> </span><span class="dv">25</span>, </a>
-<a class="sourceLine" id="cb273-2" data-line-number="2">  <span class="st">&quot;B&quot;</span> =<span class="st"> </span><span class="dv">10</span>, <span class="st">&quot;C&quot;</span> =<span class="st"> </span><span class="dv">10</span>, <span class="st">&quot;0&quot;</span> =<span class="st"> </span><span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb273-3" data-line-number="3">payouts</a>
-<a class="sourceLine" id="cb273-4" data-line-number="4">##  DD   7 BBB  BB   B   C   0 </a>
-<a class="sourceLine" id="cb273-5" data-line-number="5">## 100  80  40  25  10  10   0 </a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">payouts &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;DD&quot;</span> =<span class="st"> </span><span class="dv">100</span>, <span class="st">&quot;7&quot;</span> =<span class="st"> </span><span class="dv">80</span>, <span class="st">&quot;BBB&quot;</span> =<span class="st"> </span><span class="dv">40</span>, <span class="st">&quot;BB&quot;</span> =<span class="st"> </span><span class="dv">25</span>, 
+  <span class="st">&quot;B&quot;</span> =<span class="st"> </span><span class="dv">10</span>, <span class="st">&quot;C&quot;</span> =<span class="st"> </span><span class="dv">10</span>, <span class="st">&quot;0&quot;</span> =<span class="st"> </span><span class="dv">0</span>)
+payouts
+##  DD   7 BBB  BB   B   C   0 
+## 100  80  40  25  10  10   0 </code></pre>
 <p>Now you can extract the correct prize for any symbol by subsetting the vector with the symbol’s name:</p>
-<div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb274-1" data-line-number="1">payouts[<span class="st">&quot;DD&quot;</span>]</a>
-<a class="sourceLine" id="cb274-2" data-line-number="2">##  DD </a>
-<a class="sourceLine" id="cb274-3" data-line-number="3">## 100 </a>
-<a class="sourceLine" id="cb274-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb274-5" data-line-number="5">payouts[<span class="st">&quot;B&quot;</span>]</a>
-<a class="sourceLine" id="cb274-6" data-line-number="6">##  B</a>
-<a class="sourceLine" id="cb274-7" data-line-number="7">## 10</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">payouts[<span class="st">&quot;DD&quot;</span>]
+##  DD 
+## 100 
+
+payouts[<span class="st">&quot;B&quot;</span>]
+##  B
+## 10</code></pre>
 <p>If you want to leave behind the symbol’s name when subsetting, you can run the <code>unname</code> function on the output:</p>
-<div class="sourceCode" id="cb275"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb275-1" data-line-number="1"><span class="kw">unname</span>(payouts[<span class="st">&quot;DD&quot;</span>])</a>
-<a class="sourceLine" id="cb275-2" data-line-number="2">## 100 </a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">unname</span>(payouts[<span class="st">&quot;DD&quot;</span>])
+## 100 </code></pre>
 <p><code>unname</code> returns a copy of an object with the names attribute removed.</p>
 <p><code>payouts</code> is a type of <em>lookup table</em>, an R object that you can use to look up values. Subsetting <code>payouts</code> provides a simple way to find the prize for a symbol. It doesn’t take many lines of code, and it does the same amount of work whether your symbol is <code>DD</code> or <code>0</code>. You can create lookup tables in R by creating named objects that can be subsetted in clever ways.</p>
 <p>Sadly, our method is not quite automatic; we need to tell R which symbol to look up in <code>payouts</code>. Or do we? What would happen if you subsetted <code>payouts</code> by <code>symbols[1]</code>? Give it a try:</p>
-<div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb276-1" data-line-number="1">symbols &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;7&quot;</span>, <span class="st">&quot;7&quot;</span>, <span class="st">&quot;7&quot;</span>)</a>
-<a class="sourceLine" id="cb276-2" data-line-number="2">symbols[<span class="dv">1</span>]</a>
-<a class="sourceLine" id="cb276-3" data-line-number="3">## &quot;7&quot;</a>
-<a class="sourceLine" id="cb276-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb276-5" data-line-number="5">payouts[symbols[<span class="dv">1</span>]]</a>
-<a class="sourceLine" id="cb276-6" data-line-number="6">##  7 </a>
-<a class="sourceLine" id="cb276-7" data-line-number="7">## 80 </a>
-<a class="sourceLine" id="cb276-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb276-9" data-line-number="9">symbols &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;C&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;C&quot;</span>)</a>
-<a class="sourceLine" id="cb276-10" data-line-number="10">payouts[symbols[<span class="dv">1</span>]]</a>
-<a class="sourceLine" id="cb276-11" data-line-number="11">##  C </a>
-<a class="sourceLine" id="cb276-12" data-line-number="12">## 10 </a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">symbols &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;7&quot;</span>, <span class="st">&quot;7&quot;</span>, <span class="st">&quot;7&quot;</span>)
+symbols[<span class="dv">1</span>]
+## &quot;7&quot;
+
+payouts[symbols[<span class="dv">1</span>]]
+##  7 
+## 80 
+
+symbols &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;C&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;C&quot;</span>)
+payouts[symbols[<span class="dv">1</span>]]
+##  C 
+## 10 </code></pre>
 <p>You don’t need to know the exact symbol to look up because you can tell R to look up whichever symbol happens to be in <code>symbols</code>. You can find this symbol with <code>symbols[1]</code>, <code>symbols[2]</code>, or <code>symbols[3]</code>, because each contains the same symbol in this case. You now have a simple automated way to calculate the prize when <code>symbols</code> contains three of a kind. Let’s add it to our code and then look at Case 2:</p>
-<div class="sourceCode" id="cb277"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb277-1" data-line-number="1">same &lt;-<span class="st"> </span>symbols[<span class="dv">1</span>] <span class="op">==</span><span class="st"> </span>symbols[<span class="dv">2</span>] <span class="op">&amp;&amp;</span><span class="st"> </span>symbols[<span class="dv">2</span>] <span class="op">==</span><span class="st"> </span>symbols[<span class="dv">3</span>]</a>
-<a class="sourceLine" id="cb277-2" data-line-number="2">bars &lt;-<span class="st"> </span>symbols <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;B&quot;</span>, <span class="st">&quot;BB&quot;</span>, <span class="st">&quot;BBB&quot;</span>)</a>
-<a class="sourceLine" id="cb277-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb277-4" data-line-number="4"><span class="cf">if</span> (same) {</a>
-<a class="sourceLine" id="cb277-5" data-line-number="5">  payouts &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;DD&quot;</span> =<span class="st"> </span><span class="dv">100</span>, <span class="st">&quot;7&quot;</span> =<span class="st"> </span><span class="dv">80</span>, <span class="st">&quot;BBB&quot;</span> =<span class="st"> </span><span class="dv">40</span>, <span class="st">&quot;BB&quot;</span> =<span class="st"> </span><span class="dv">25</span>, </a>
-<a class="sourceLine" id="cb277-6" data-line-number="6">    <span class="st">&quot;B&quot;</span> =<span class="st"> </span><span class="dv">10</span>, <span class="st">&quot;C&quot;</span> =<span class="st"> </span><span class="dv">10</span>, <span class="st">&quot;0&quot;</span> =<span class="st"> </span><span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb277-7" data-line-number="7">  prize &lt;-<span class="st"> </span><span class="kw">unname</span>(payouts[symbols[<span class="dv">1</span>]])</a>
-<a class="sourceLine" id="cb277-8" data-line-number="8">} <span class="cf">else</span> <span class="cf">if</span> (<span class="kw">all</span>(bars)) {</a>
-<a class="sourceLine" id="cb277-9" data-line-number="9">  prize &lt;-<span class="st"> </span><span class="co"># assign $5</span></a>
-<a class="sourceLine" id="cb277-10" data-line-number="10">} <span class="cf">else</span> {</a>
-<a class="sourceLine" id="cb277-11" data-line-number="11">  <span class="co"># count cherries</span></a>
-<a class="sourceLine" id="cb277-12" data-line-number="12">  prize &lt;-<span class="st"> </span><span class="co"># calculate a prize</span></a>
-<a class="sourceLine" id="cb277-13" data-line-number="13">}</a>
-<a class="sourceLine" id="cb277-14" data-line-number="14"></a>
-<a class="sourceLine" id="cb277-15" data-line-number="15"><span class="co"># count diamonds</span></a>
-<a class="sourceLine" id="cb277-16" data-line-number="16"><span class="co"># double the prize if necessary</span></a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">same &lt;-<span class="st"> </span>symbols[<span class="dv">1</span>] <span class="op">==</span><span class="st"> </span>symbols[<span class="dv">2</span>] <span class="op">&amp;&amp;</span><span class="st"> </span>symbols[<span class="dv">2</span>] <span class="op">==</span><span class="st"> </span>symbols[<span class="dv">3</span>]
+bars &lt;-<span class="st"> </span>symbols <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;B&quot;</span>, <span class="st">&quot;BB&quot;</span>, <span class="st">&quot;BBB&quot;</span>)
+
+<span class="cf">if</span> (same) {
+  payouts &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;DD&quot;</span> =<span class="st"> </span><span class="dv">100</span>, <span class="st">&quot;7&quot;</span> =<span class="st"> </span><span class="dv">80</span>, <span class="st">&quot;BBB&quot;</span> =<span class="st"> </span><span class="dv">40</span>, <span class="st">&quot;BB&quot;</span> =<span class="st"> </span><span class="dv">25</span>, 
+    <span class="st">&quot;B&quot;</span> =<span class="st"> </span><span class="dv">10</span>, <span class="st">&quot;C&quot;</span> =<span class="st"> </span><span class="dv">10</span>, <span class="st">&quot;0&quot;</span> =<span class="st"> </span><span class="dv">0</span>)
+  prize &lt;-<span class="st"> </span><span class="kw">unname</span>(payouts[symbols[<span class="dv">1</span>]])
+} <span class="cf">else</span> <span class="cf">if</span> (<span class="kw">all</span>(bars)) {
+  prize &lt;-<span class="st"> </span><span class="co"># assign $5</span>
+} <span class="cf">else</span> {
+  <span class="co"># count cherries</span>
+  prize &lt;-<span class="st"> </span><span class="co"># calculate a prize</span>
+}
+
+<span class="co"># count diamonds</span>
+<span class="co"># double the prize if necessary</span></code></pre>
 <p>Case 2 occurs whenever the symbols are all bars. In that case, the prize will be $5, which is easy to assign:</p>
-<div class="sourceCode" id="cb278"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb278-1" data-line-number="1">same &lt;-<span class="st"> </span>symbols[<span class="dv">1</span>] <span class="op">==</span><span class="st"> </span>symbols[<span class="dv">2</span>] <span class="op">&amp;&amp;</span><span class="st"> </span>symbols[<span class="dv">2</span>] <span class="op">==</span><span class="st"> </span>symbols[<span class="dv">3</span>]</a>
-<a class="sourceLine" id="cb278-2" data-line-number="2">bars &lt;-<span class="st"> </span>symbols <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;B&quot;</span>, <span class="st">&quot;BB&quot;</span>, <span class="st">&quot;BBB&quot;</span>)</a>
-<a class="sourceLine" id="cb278-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb278-4" data-line-number="4"><span class="cf">if</span> (same) {</a>
-<a class="sourceLine" id="cb278-5" data-line-number="5">  payouts &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;DD&quot;</span> =<span class="st"> </span><span class="dv">100</span>, <span class="st">&quot;7&quot;</span> =<span class="st"> </span><span class="dv">80</span>, <span class="st">&quot;BBB&quot;</span> =<span class="st"> </span><span class="dv">40</span>, <span class="st">&quot;BB&quot;</span> =<span class="st"> </span><span class="dv">25</span>, </a>
-<a class="sourceLine" id="cb278-6" data-line-number="6">    <span class="st">&quot;B&quot;</span> =<span class="st"> </span><span class="dv">10</span>, <span class="st">&quot;C&quot;</span> =<span class="st"> </span><span class="dv">10</span>, <span class="st">&quot;0&quot;</span> =<span class="st"> </span><span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb278-7" data-line-number="7">  prize &lt;-<span class="st"> </span><span class="kw">unname</span>(payouts[symbols[<span class="dv">1</span>]])</a>
-<a class="sourceLine" id="cb278-8" data-line-number="8">} <span class="cf">else</span> <span class="cf">if</span> (<span class="kw">all</span>(bars)) {</a>
-<a class="sourceLine" id="cb278-9" data-line-number="9">  prize &lt;-<span class="st"> </span><span class="dv">5</span></a>
-<a class="sourceLine" id="cb278-10" data-line-number="10">} <span class="cf">else</span> {</a>
-<a class="sourceLine" id="cb278-11" data-line-number="11">  <span class="co"># count cherries</span></a>
-<a class="sourceLine" id="cb278-12" data-line-number="12">  prize &lt;-<span class="st"> </span><span class="co"># calculate a prize</span></a>
-<a class="sourceLine" id="cb278-13" data-line-number="13">}</a>
-<a class="sourceLine" id="cb278-14" data-line-number="14"></a>
-<a class="sourceLine" id="cb278-15" data-line-number="15"><span class="co"># count diamonds</span></a>
-<a class="sourceLine" id="cb278-16" data-line-number="16"><span class="co"># double the prize if necessary</span></a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">same &lt;-<span class="st"> </span>symbols[<span class="dv">1</span>] <span class="op">==</span><span class="st"> </span>symbols[<span class="dv">2</span>] <span class="op">&amp;&amp;</span><span class="st"> </span>symbols[<span class="dv">2</span>] <span class="op">==</span><span class="st"> </span>symbols[<span class="dv">3</span>]
+bars &lt;-<span class="st"> </span>symbols <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;B&quot;</span>, <span class="st">&quot;BB&quot;</span>, <span class="st">&quot;BBB&quot;</span>)
+
+<span class="cf">if</span> (same) {
+  payouts &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;DD&quot;</span> =<span class="st"> </span><span class="dv">100</span>, <span class="st">&quot;7&quot;</span> =<span class="st"> </span><span class="dv">80</span>, <span class="st">&quot;BBB&quot;</span> =<span class="st"> </span><span class="dv">40</span>, <span class="st">&quot;BB&quot;</span> =<span class="st"> </span><span class="dv">25</span>, 
+    <span class="st">&quot;B&quot;</span> =<span class="st"> </span><span class="dv">10</span>, <span class="st">&quot;C&quot;</span> =<span class="st"> </span><span class="dv">10</span>, <span class="st">&quot;0&quot;</span> =<span class="st"> </span><span class="dv">0</span>)
+  prize &lt;-<span class="st"> </span><span class="kw">unname</span>(payouts[symbols[<span class="dv">1</span>]])
+} <span class="cf">else</span> <span class="cf">if</span> (<span class="kw">all</span>(bars)) {
+  prize &lt;-<span class="st"> </span><span class="dv">5</span>
+} <span class="cf">else</span> {
+  <span class="co"># count cherries</span>
+  prize &lt;-<span class="st"> </span><span class="co"># calculate a prize</span>
+}
+
+<span class="co"># count diamonds</span>
+<span class="co"># double the prize if necessary</span></code></pre>
 <p>Now we can work on the last case. Here, you’ll need to know how many cherries are in <code>symbols</code> before you can calculate a prize.</p>
 
 <div class="exercise">
@@ -881,81 +882,81 @@ How might you count the number of <code>C</code>s in a vector named <code>symbol
  <span class="solution"><em>Solution. </em></span> As always, let’s work with a real example:
 </div>
 
-<div class="sourceCode" id="cb279"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb279-1" data-line-number="1">symbols &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;C&quot;</span>, <span class="st">&quot;DD&quot;</span>, <span class="st">&quot;C&quot;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">symbols &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;C&quot;</span>, <span class="st">&quot;DD&quot;</span>, <span class="st">&quot;C&quot;</span>)</code></pre>
 <p>One way to test for cherries would be to check which, if any, of the symbols are a <code>C</code>:</p>
-<div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb280-1" data-line-number="1">symbols <span class="op">==</span><span class="st"> &quot;C&quot;</span></a>
-<a class="sourceLine" id="cb280-2" data-line-number="2">## TRUE FALSE  TRUE</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">symbols <span class="op">==</span><span class="st"> &quot;C&quot;</span>
+## TRUE FALSE  TRUE</code></pre>
 <p>It’d be even more useful to count how many of the symbols are cherries. You can do this with <code>sum</code>, which expects numeric input, not logical. Knowing this, R will coerce the <code>TRUE</code>s and <code>FALSE</code>s to <code>1</code>s and <code>0</code>s before doing the summation. As a result, <code>sum</code> will return the number of <code>TRUE</code>s, which is also the number of cherries:</p>
-<div class="sourceCode" id="cb281"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb281-1" data-line-number="1"><span class="kw">sum</span>(symbols <span class="op">==</span><span class="st"> &quot;C&quot;</span>)</a>
-<a class="sourceLine" id="cb281-2" data-line-number="2">## 2</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(symbols <span class="op">==</span><span class="st"> &quot;C&quot;</span>)
+## 2</code></pre>
 <p>You can use the same method to count the number of diamonds in <code>symbols</code>:</p>
-<div class="sourceCode" id="cb282"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb282-1" data-line-number="1"><span class="kw">sum</span>(symbols <span class="op">==</span><span class="st"> &quot;DD&quot;</span>)</a>
-<a class="sourceLine" id="cb282-2" data-line-number="2">## 1</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(symbols <span class="op">==</span><span class="st"> &quot;DD&quot;</span>)
+## 1</code></pre>
 <p>Let’s add both of these subtasks to the program skeleton:</p>
-<div class="sourceCode" id="cb283"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb283-1" data-line-number="1">same &lt;-<span class="st"> </span>symbols[<span class="dv">1</span>] <span class="op">==</span><span class="st"> </span>symbols[<span class="dv">2</span>] <span class="op">&amp;&amp;</span><span class="st"> </span>symbols[<span class="dv">2</span>] <span class="op">==</span><span class="st"> </span>symbols[<span class="dv">3</span>]</a>
-<a class="sourceLine" id="cb283-2" data-line-number="2">bars &lt;-<span class="st"> </span>symbols <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;B&quot;</span>, <span class="st">&quot;BB&quot;</span>, <span class="st">&quot;BBB&quot;</span>)</a>
-<a class="sourceLine" id="cb283-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb283-4" data-line-number="4"><span class="cf">if</span> (same) {</a>
-<a class="sourceLine" id="cb283-5" data-line-number="5">  payouts &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;DD&quot;</span> =<span class="st"> </span><span class="dv">100</span>, <span class="st">&quot;7&quot;</span> =<span class="st"> </span><span class="dv">80</span>, <span class="st">&quot;BBB&quot;</span> =<span class="st"> </span><span class="dv">40</span>, <span class="st">&quot;BB&quot;</span> =<span class="st"> </span><span class="dv">25</span>, </a>
-<a class="sourceLine" id="cb283-6" data-line-number="6">    <span class="st">&quot;B&quot;</span> =<span class="st"> </span><span class="dv">10</span>, <span class="st">&quot;C&quot;</span> =<span class="st"> </span><span class="dv">10</span>, <span class="st">&quot;0&quot;</span> =<span class="st"> </span><span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb283-7" data-line-number="7">  prize &lt;-<span class="st"> </span><span class="kw">unname</span>(payouts[symbols[<span class="dv">1</span>]])</a>
-<a class="sourceLine" id="cb283-8" data-line-number="8">} <span class="cf">else</span> <span class="cf">if</span> (<span class="kw">all</span>(bars)) {</a>
-<a class="sourceLine" id="cb283-9" data-line-number="9">  prize &lt;-<span class="st"> </span><span class="dv">5</span></a>
-<a class="sourceLine" id="cb283-10" data-line-number="10">} <span class="cf">else</span> {</a>
-<a class="sourceLine" id="cb283-11" data-line-number="11">  cherries &lt;-<span class="st"> </span><span class="kw">sum</span>(symbols <span class="op">==</span><span class="st"> &quot;C&quot;</span>)</a>
-<a class="sourceLine" id="cb283-12" data-line-number="12">  prize &lt;-<span class="st"> </span><span class="co"># calculate a prize</span></a>
-<a class="sourceLine" id="cb283-13" data-line-number="13">}</a>
-<a class="sourceLine" id="cb283-14" data-line-number="14"></a>
-<a class="sourceLine" id="cb283-15" data-line-number="15">diamonds &lt;-<span class="st"> </span><span class="kw">sum</span>(symbols <span class="op">==</span><span class="st"> &quot;DD&quot;</span>)</a>
-<a class="sourceLine" id="cb283-16" data-line-number="16"><span class="co"># double the prize if necessary</span></a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">same &lt;-<span class="st"> </span>symbols[<span class="dv">1</span>] <span class="op">==</span><span class="st"> </span>symbols[<span class="dv">2</span>] <span class="op">&amp;&amp;</span><span class="st"> </span>symbols[<span class="dv">2</span>] <span class="op">==</span><span class="st"> </span>symbols[<span class="dv">3</span>]
+bars &lt;-<span class="st"> </span>symbols <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;B&quot;</span>, <span class="st">&quot;BB&quot;</span>, <span class="st">&quot;BBB&quot;</span>)
+
+<span class="cf">if</span> (same) {
+  payouts &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;DD&quot;</span> =<span class="st"> </span><span class="dv">100</span>, <span class="st">&quot;7&quot;</span> =<span class="st"> </span><span class="dv">80</span>, <span class="st">&quot;BBB&quot;</span> =<span class="st"> </span><span class="dv">40</span>, <span class="st">&quot;BB&quot;</span> =<span class="st"> </span><span class="dv">25</span>, 
+    <span class="st">&quot;B&quot;</span> =<span class="st"> </span><span class="dv">10</span>, <span class="st">&quot;C&quot;</span> =<span class="st"> </span><span class="dv">10</span>, <span class="st">&quot;0&quot;</span> =<span class="st"> </span><span class="dv">0</span>)
+  prize &lt;-<span class="st"> </span><span class="kw">unname</span>(payouts[symbols[<span class="dv">1</span>]])
+} <span class="cf">else</span> <span class="cf">if</span> (<span class="kw">all</span>(bars)) {
+  prize &lt;-<span class="st"> </span><span class="dv">5</span>
+} <span class="cf">else</span> {
+  cherries &lt;-<span class="st"> </span><span class="kw">sum</span>(symbols <span class="op">==</span><span class="st"> &quot;C&quot;</span>)
+  prize &lt;-<span class="st"> </span><span class="co"># calculate a prize</span>
+}
+
+diamonds &lt;-<span class="st"> </span><span class="kw">sum</span>(symbols <span class="op">==</span><span class="st"> &quot;DD&quot;</span>)
+<span class="co"># double the prize if necessary</span></code></pre>
 <p>Since Case 3 appears further down the <code>if</code> tree than Cases 1 and 2, the code in Case 3 will only be applied to players that do not have three of a kind or all bars. According to the slot machine’s payout scheme, these players will win $5 if they have two cherries and $2 if they have one cherry. If the player has no cherries, she gets a prize of $0. We don’t need to worry about three cherries because that outcome is already covered in Case 1.</p>
 <p>As in Case 1, you could write an <code>if</code> tree that handles each combination of cherries, but just like in Case 1, this would be an inefficient solution:</p>
-<div class="sourceCode" id="cb284"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb284-1" data-line-number="1"><span class="cf">if</span> (cherries <span class="op">==</span><span class="st"> </span><span class="dv">2</span>) {</a>
-<a class="sourceLine" id="cb284-2" data-line-number="2">  prize &lt;-<span class="st"> </span><span class="dv">5</span></a>
-<a class="sourceLine" id="cb284-3" data-line-number="3">} <span class="cf">else</span> <span class="cf">if</span> (cherries <span class="op">==</span><span class="st"> </span><span class="dv">1</span>) {</a>
-<a class="sourceLine" id="cb284-4" data-line-number="4">  prize &lt;-<span class="st"> </span><span class="dv">2</span></a>
-<a class="sourceLine" id="cb284-5" data-line-number="5">} <span class="cf">else</span> {}</a>
-<a class="sourceLine" id="cb284-6" data-line-number="6">  prize &lt;-<span class="st"> </span><span class="dv">0</span></a>
-<a class="sourceLine" id="cb284-7" data-line-number="7"><span class="er">}</span></a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="cf">if</span> (cherries <span class="op">==</span><span class="st"> </span><span class="dv">2</span>) {
+  prize &lt;-<span class="st"> </span><span class="dv">5</span>
+} <span class="cf">else</span> <span class="cf">if</span> (cherries <span class="op">==</span><span class="st"> </span><span class="dv">1</span>) {
+  prize &lt;-<span class="st"> </span><span class="dv">2</span>
+} <span class="cf">else</span> {}
+  prize &lt;-<span class="st"> </span><span class="dv">0</span>
+<span class="er">}</span></code></pre>
 <p>Again, I think the best solution will involve subsetting. If you are feeling ambitious, you can try to work this solution out on your own, but you will learn just as quickly by mentally working through the following proposed solution.</p>
 <p>We know that our prize should be $0 if we have no cherries, $2 if we have one cherry, and $5 if we have two cherries. You can create a vector that contains this information. This will be a very simple lookup table:</p>
-<div class="sourceCode" id="cb285"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb285-1" data-line-number="1"><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">5</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">5</span>)</code></pre>
 <p>Now, like in Case 1, you can subset the vector to retrieve the correct prize. In this case, the prize’s aren’t identified by a symbol name, but by the number of cherries present. Do we have that information? Yes, it is stored in <code>cherries</code>. We can use basic integer subsetting to get the correct prize from the prior lookup table, for example, <code>c(0, 2, 5)[1]</code>.</p>
 <p><code>cherries</code> isn’t exactly suited for integer subsetting because it could contain a zero, but that’s easy to fix. We can subset with <code>cherries + 1</code>. Now when <code>cherries</code> equals zero, we have:</p>
-<div class="sourceCode" id="cb286"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb286-1" data-line-number="1">cherries <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb286-2" data-line-number="2">## 1</a>
-<a class="sourceLine" id="cb286-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb286-4" data-line-number="4"><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">5</span>)[cherries <span class="op">+</span><span class="st"> </span><span class="dv">1</span>]</a>
-<a class="sourceLine" id="cb286-5" data-line-number="5">## 0</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">cherries <span class="op">+</span><span class="st"> </span><span class="dv">1</span>
+## 1
+
+<span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">5</span>)[cherries <span class="op">+</span><span class="st"> </span><span class="dv">1</span>]
+## 0</code></pre>
 <p>When <code>cherries</code> equals one, we have:</p>
-<div class="sourceCode" id="cb287"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb287-1" data-line-number="1">cherries <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb287-2" data-line-number="2">## 2</a>
-<a class="sourceLine" id="cb287-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb287-4" data-line-number="4"><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">5</span>)[cherries <span class="op">+</span><span class="st"> </span><span class="dv">1</span>]</a>
-<a class="sourceLine" id="cb287-5" data-line-number="5">## 2</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">cherries <span class="op">+</span><span class="st"> </span><span class="dv">1</span>
+## 2
+
+<span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">5</span>)[cherries <span class="op">+</span><span class="st"> </span><span class="dv">1</span>]
+## 2</code></pre>
 <p>And when <code>cherries</code> equals three, we have:</p>
-<div class="sourceCode" id="cb288"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb288-1" data-line-number="1">cherries <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb288-2" data-line-number="2">## 3</a>
-<a class="sourceLine" id="cb288-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb288-4" data-line-number="4"><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">5</span>)[cherries <span class="op">+</span><span class="st"> </span><span class="dv">1</span>]</a>
-<a class="sourceLine" id="cb288-5" data-line-number="5">## 5</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">cherries <span class="op">+</span><span class="st"> </span><span class="dv">1</span>
+## 3
+
+<span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">5</span>)[cherries <span class="op">+</span><span class="st"> </span><span class="dv">1</span>]
+## 5</code></pre>
 <p>Examine these solutions until you are satisfied that they return the correct prize for each number of cherries. Then add the code to your script, as follows:</p>
-<div class="sourceCode" id="cb289"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb289-1" data-line-number="1">same &lt;-<span class="st"> </span>symbols[<span class="dv">1</span>] <span class="op">==</span><span class="st"> </span>symbols[<span class="dv">2</span>] <span class="op">&amp;&amp;</span><span class="st"> </span>symbols[<span class="dv">2</span>] <span class="op">==</span><span class="st"> </span>symbols[<span class="dv">3</span>]</a>
-<a class="sourceLine" id="cb289-2" data-line-number="2">bars &lt;-<span class="st"> </span>symbols <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;B&quot;</span>, <span class="st">&quot;BB&quot;</span>, <span class="st">&quot;BBB&quot;</span>)</a>
-<a class="sourceLine" id="cb289-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb289-4" data-line-number="4"><span class="cf">if</span> (same) {</a>
-<a class="sourceLine" id="cb289-5" data-line-number="5">  payouts &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;DD&quot;</span> =<span class="st"> </span><span class="dv">100</span>, <span class="st">&quot;7&quot;</span> =<span class="st"> </span><span class="dv">80</span>, <span class="st">&quot;BBB&quot;</span> =<span class="st"> </span><span class="dv">40</span>, <span class="st">&quot;BB&quot;</span> =<span class="st"> </span><span class="dv">25</span>, </a>
-<a class="sourceLine" id="cb289-6" data-line-number="6">    <span class="st">&quot;B&quot;</span> =<span class="st"> </span><span class="dv">10</span>, <span class="st">&quot;C&quot;</span> =<span class="st"> </span><span class="dv">10</span>, <span class="st">&quot;0&quot;</span> =<span class="st"> </span><span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb289-7" data-line-number="7">  prize &lt;-<span class="st"> </span><span class="kw">unname</span>(payouts[symbols[<span class="dv">1</span>]])</a>
-<a class="sourceLine" id="cb289-8" data-line-number="8">} <span class="cf">else</span> <span class="cf">if</span> (<span class="kw">all</span>(bars)) {</a>
-<a class="sourceLine" id="cb289-9" data-line-number="9">  prize &lt;-<span class="st"> </span><span class="dv">5</span></a>
-<a class="sourceLine" id="cb289-10" data-line-number="10">} <span class="cf">else</span> {</a>
-<a class="sourceLine" id="cb289-11" data-line-number="11">  cherries &lt;-<span class="st"> </span><span class="kw">sum</span>(symbols <span class="op">==</span><span class="st"> &quot;C&quot;</span>)</a>
-<a class="sourceLine" id="cb289-12" data-line-number="12">  prize &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">5</span>)[cherries <span class="op">+</span><span class="st"> </span><span class="dv">1</span>]</a>
-<a class="sourceLine" id="cb289-13" data-line-number="13">}</a>
-<a class="sourceLine" id="cb289-14" data-line-number="14"></a>
-<a class="sourceLine" id="cb289-15" data-line-number="15">diamonds &lt;-<span class="st"> </span><span class="kw">sum</span>(symbols <span class="op">==</span><span class="st"> &quot;DD&quot;</span>)</a>
-<a class="sourceLine" id="cb289-16" data-line-number="16"><span class="co"># double the prize if necessary</span></a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">same &lt;-<span class="st"> </span>symbols[<span class="dv">1</span>] <span class="op">==</span><span class="st"> </span>symbols[<span class="dv">2</span>] <span class="op">&amp;&amp;</span><span class="st"> </span>symbols[<span class="dv">2</span>] <span class="op">==</span><span class="st"> </span>symbols[<span class="dv">3</span>]
+bars &lt;-<span class="st"> </span>symbols <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;B&quot;</span>, <span class="st">&quot;BB&quot;</span>, <span class="st">&quot;BBB&quot;</span>)
+
+<span class="cf">if</span> (same) {
+  payouts &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;DD&quot;</span> =<span class="st"> </span><span class="dv">100</span>, <span class="st">&quot;7&quot;</span> =<span class="st"> </span><span class="dv">80</span>, <span class="st">&quot;BBB&quot;</span> =<span class="st"> </span><span class="dv">40</span>, <span class="st">&quot;BB&quot;</span> =<span class="st"> </span><span class="dv">25</span>, 
+    <span class="st">&quot;B&quot;</span> =<span class="st"> </span><span class="dv">10</span>, <span class="st">&quot;C&quot;</span> =<span class="st"> </span><span class="dv">10</span>, <span class="st">&quot;0&quot;</span> =<span class="st"> </span><span class="dv">0</span>)
+  prize &lt;-<span class="st"> </span><span class="kw">unname</span>(payouts[symbols[<span class="dv">1</span>]])
+} <span class="cf">else</span> <span class="cf">if</span> (<span class="kw">all</span>(bars)) {
+  prize &lt;-<span class="st"> </span><span class="dv">5</span>
+} <span class="cf">else</span> {
+  cherries &lt;-<span class="st"> </span><span class="kw">sum</span>(symbols <span class="op">==</span><span class="st"> &quot;C&quot;</span>)
+  prize &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">5</span>)[cherries <span class="op">+</span><span class="st"> </span><span class="dv">1</span>]
+}
+
+diamonds &lt;-<span class="st"> </span><span class="kw">sum</span>(symbols <span class="op">==</span><span class="st"> &quot;DD&quot;</span>)
+<span class="co"># double the prize if necessary</span></code></pre>
 
 <div class="rmdimportant">
 <p><strong>Lookup Tables Versus if Trees</strong></p>
@@ -966,13 +967,13 @@ To convert an <code>if</code> tree to a lookup table, identify the values to be 
 </div>
 
 <p>The final subtask is to double the prize once for every diamond present. This means that the final prize will be some multiple of the current prize. For example, if no diamonds are present, the prize will be:</p>
-<div class="sourceCode" id="cb290"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb290-1" data-line-number="1">prize <span class="op">*</span><span class="st"> </span><span class="dv">1</span>      <span class="co"># 1 = 2 ^ 0</span></a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">prize <span class="op">*</span><span class="st"> </span><span class="dv">1</span>      <span class="co"># 1 = 2 ^ 0</span></code></pre>
 <p>If one diamond is present, it will be:</p>
-<div class="sourceCode" id="cb291"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb291-1" data-line-number="1">prize <span class="op">*</span><span class="st"> </span><span class="dv">2</span>      <span class="co"># 2 = 2 ^ 1</span></a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">prize <span class="op">*</span><span class="st"> </span><span class="dv">2</span>      <span class="co"># 2 = 2 ^ 1</span></code></pre>
 <p>If two diamonds are present, it will be:</p>
-<div class="sourceCode" id="cb292"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb292-1" data-line-number="1">prize <span class="op">*</span><span class="st"> </span><span class="dv">4</span>      <span class="co"># 4 = 2 ^ 2</span></a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">prize <span class="op">*</span><span class="st"> </span><span class="dv">4</span>      <span class="co"># 4 = 2 ^ 2</span></code></pre>
 <p>And if three diamonds are present, it will be:</p>
-<div class="sourceCode" id="cb293"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb293-1" data-line-number="1">prize <span class="op">*</span><span class="st"> </span><span class="dv">8</span>      <span class="co"># 8 = 2 ^ 3</span></a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">prize <span class="op">*</span><span class="st"> </span><span class="dv">8</span>      <span class="co"># 8 = 2 ^ 3</span></code></pre>
 <p>Can you think of an easy way to handle this? How about something similar to these examples?</p>
 
 <div class="exercise">
@@ -984,87 +985,87 @@ To convert an <code>if</code> tree to a lookup table, identify the values to be 
  <span class="solution"><em>Solution. </em></span> Here is a concise solution inspired by the previous pattern. The adjusted prize will equal:
 </div>
 
-<div class="sourceCode" id="cb294"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb294-1" data-line-number="1">prize <span class="op">*</span><span class="st"> </span><span class="dv">2</span> <span class="op">^</span><span class="st"> </span>diamonds</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">prize <span class="op">*</span><span class="st"> </span><span class="dv">2</span> <span class="op">^</span><span class="st"> </span>diamonds</code></pre>
 <p>which gives us our final <code>score</code> script:</p>
-<div class="sourceCode" id="cb295"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb295-1" data-line-number="1">same &lt;-<span class="st"> </span>symbols[<span class="dv">1</span>] <span class="op">==</span><span class="st"> </span>symbols[<span class="dv">2</span>] <span class="op">&amp;&amp;</span><span class="st"> </span>symbols[<span class="dv">2</span>] <span class="op">==</span><span class="st"> </span>symbols[<span class="dv">3</span>]</a>
-<a class="sourceLine" id="cb295-2" data-line-number="2">bars &lt;-<span class="st"> </span>symbols <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;B&quot;</span>, <span class="st">&quot;BB&quot;</span>, <span class="st">&quot;BBB&quot;</span>)</a>
-<a class="sourceLine" id="cb295-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb295-4" data-line-number="4"><span class="cf">if</span> (same) {</a>
-<a class="sourceLine" id="cb295-5" data-line-number="5">  payouts &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;DD&quot;</span> =<span class="st"> </span><span class="dv">100</span>, <span class="st">&quot;7&quot;</span> =<span class="st"> </span><span class="dv">80</span>, <span class="st">&quot;BBB&quot;</span> =<span class="st"> </span><span class="dv">40</span>, <span class="st">&quot;BB&quot;</span> =<span class="st"> </span><span class="dv">25</span>, </a>
-<a class="sourceLine" id="cb295-6" data-line-number="6">    <span class="st">&quot;B&quot;</span> =<span class="st"> </span><span class="dv">10</span>, <span class="st">&quot;C&quot;</span> =<span class="st"> </span><span class="dv">10</span>, <span class="st">&quot;0&quot;</span> =<span class="st"> </span><span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb295-7" data-line-number="7">  prize &lt;-<span class="st"> </span><span class="kw">unname</span>(payouts[symbols[<span class="dv">1</span>]])</a>
-<a class="sourceLine" id="cb295-8" data-line-number="8">} <span class="cf">else</span> <span class="cf">if</span> (<span class="kw">all</span>(bars)) {</a>
-<a class="sourceLine" id="cb295-9" data-line-number="9">  prize &lt;-<span class="st"> </span><span class="dv">5</span></a>
-<a class="sourceLine" id="cb295-10" data-line-number="10">} <span class="cf">else</span> {</a>
-<a class="sourceLine" id="cb295-11" data-line-number="11">  cherries &lt;-<span class="st"> </span><span class="kw">sum</span>(symbols <span class="op">==</span><span class="st"> &quot;C&quot;</span>)</a>
-<a class="sourceLine" id="cb295-12" data-line-number="12">  prize &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">5</span>)[cherries <span class="op">+</span><span class="st"> </span><span class="dv">1</span>]</a>
-<a class="sourceLine" id="cb295-13" data-line-number="13">}</a>
-<a class="sourceLine" id="cb295-14" data-line-number="14"></a>
-<a class="sourceLine" id="cb295-15" data-line-number="15">diamonds &lt;-<span class="st"> </span><span class="kw">sum</span>(symbols <span class="op">==</span><span class="st"> &quot;DD&quot;</span>)</a>
-<a class="sourceLine" id="cb295-16" data-line-number="16">prize <span class="op">*</span><span class="st"> </span><span class="dv">2</span> <span class="op">^</span><span class="st"> </span>diamonds</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">same &lt;-<span class="st"> </span>symbols[<span class="dv">1</span>] <span class="op">==</span><span class="st"> </span>symbols[<span class="dv">2</span>] <span class="op">&amp;&amp;</span><span class="st"> </span>symbols[<span class="dv">2</span>] <span class="op">==</span><span class="st"> </span>symbols[<span class="dv">3</span>]
+bars &lt;-<span class="st"> </span>symbols <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;B&quot;</span>, <span class="st">&quot;BB&quot;</span>, <span class="st">&quot;BBB&quot;</span>)
+
+<span class="cf">if</span> (same) {
+  payouts &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;DD&quot;</span> =<span class="st"> </span><span class="dv">100</span>, <span class="st">&quot;7&quot;</span> =<span class="st"> </span><span class="dv">80</span>, <span class="st">&quot;BBB&quot;</span> =<span class="st"> </span><span class="dv">40</span>, <span class="st">&quot;BB&quot;</span> =<span class="st"> </span><span class="dv">25</span>, 
+    <span class="st">&quot;B&quot;</span> =<span class="st"> </span><span class="dv">10</span>, <span class="st">&quot;C&quot;</span> =<span class="st"> </span><span class="dv">10</span>, <span class="st">&quot;0&quot;</span> =<span class="st"> </span><span class="dv">0</span>)
+  prize &lt;-<span class="st"> </span><span class="kw">unname</span>(payouts[symbols[<span class="dv">1</span>]])
+} <span class="cf">else</span> <span class="cf">if</span> (<span class="kw">all</span>(bars)) {
+  prize &lt;-<span class="st"> </span><span class="dv">5</span>
+} <span class="cf">else</span> {
+  cherries &lt;-<span class="st"> </span><span class="kw">sum</span>(symbols <span class="op">==</span><span class="st"> &quot;C&quot;</span>)
+  prize &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">5</span>)[cherries <span class="op">+</span><span class="st"> </span><span class="dv">1</span>]
+}
+
+diamonds &lt;-<span class="st"> </span><span class="kw">sum</span>(symbols <span class="op">==</span><span class="st"> &quot;DD&quot;</span>)
+prize <span class="op">*</span><span class="st"> </span><span class="dv">2</span> <span class="op">^</span><span class="st"> </span>diamonds</code></pre>
 </div>
 <div id="code-comments" class="section level2">
 <h2><span class="header-section-number">7.5</span> Code Comments</h2>
 <p>You now have a working score script that you can save to a function. Before you save your script, though, consider adding comments to your code with a <code>#</code>. Comments can make your code easier to understand by explaining <em>why</em> the code does what it does. You can also use comments to break long programs into scannable chunks. For example, I would include three comments in the <code>score</code> code:</p>
-<div class="sourceCode" id="cb296"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb296-1" data-line-number="1"><span class="co"># identify case</span></a>
-<a class="sourceLine" id="cb296-2" data-line-number="2">same &lt;-<span class="st"> </span>symbols[<span class="dv">1</span>] <span class="op">==</span><span class="st"> </span>symbols[<span class="dv">2</span>] <span class="op">&amp;&amp;</span><span class="st"> </span>symbols[<span class="dv">2</span>] <span class="op">==</span><span class="st"> </span>symbols[<span class="dv">3</span>]</a>
-<a class="sourceLine" id="cb296-3" data-line-number="3">bars &lt;-<span class="st"> </span>symbols <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;B&quot;</span>, <span class="st">&quot;BB&quot;</span>, <span class="st">&quot;BBB&quot;</span>)</a>
-<a class="sourceLine" id="cb296-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb296-5" data-line-number="5"><span class="co"># get prize</span></a>
-<a class="sourceLine" id="cb296-6" data-line-number="6"><span class="cf">if</span> (same) {</a>
-<a class="sourceLine" id="cb296-7" data-line-number="7">  payouts &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;DD&quot;</span> =<span class="st"> </span><span class="dv">100</span>, <span class="st">&quot;7&quot;</span> =<span class="st"> </span><span class="dv">80</span>, <span class="st">&quot;BBB&quot;</span> =<span class="st"> </span><span class="dv">40</span>, <span class="st">&quot;BB&quot;</span> =<span class="st"> </span><span class="dv">25</span>, </a>
-<a class="sourceLine" id="cb296-8" data-line-number="8">    <span class="st">&quot;B&quot;</span> =<span class="st"> </span><span class="dv">10</span>, <span class="st">&quot;C&quot;</span> =<span class="st"> </span><span class="dv">10</span>, <span class="st">&quot;0&quot;</span> =<span class="st"> </span><span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb296-9" data-line-number="9">  prize &lt;-<span class="st"> </span><span class="kw">unname</span>(payouts[symbols[<span class="dv">1</span>]])</a>
-<a class="sourceLine" id="cb296-10" data-line-number="10">} <span class="cf">else</span> <span class="cf">if</span> (<span class="kw">all</span>(bars)) {</a>
-<a class="sourceLine" id="cb296-11" data-line-number="11">  prize &lt;-<span class="st"> </span><span class="dv">5</span></a>
-<a class="sourceLine" id="cb296-12" data-line-number="12">} <span class="cf">else</span> {</a>
-<a class="sourceLine" id="cb296-13" data-line-number="13">  cherries &lt;-<span class="st"> </span><span class="kw">sum</span>(symbols <span class="op">==</span><span class="st"> &quot;C&quot;</span>)</a>
-<a class="sourceLine" id="cb296-14" data-line-number="14">  prize &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">5</span>)[cherries <span class="op">+</span><span class="st"> </span><span class="dv">1</span>]</a>
-<a class="sourceLine" id="cb296-15" data-line-number="15">}</a>
-<a class="sourceLine" id="cb296-16" data-line-number="16"></a>
-<a class="sourceLine" id="cb296-17" data-line-number="17"><span class="co"># adjust for diamonds</span></a>
-<a class="sourceLine" id="cb296-18" data-line-number="18">diamonds &lt;-<span class="st"> </span><span class="kw">sum</span>(symbols <span class="op">==</span><span class="st"> &quot;DD&quot;</span>)</a>
-<a class="sourceLine" id="cb296-19" data-line-number="19">prize <span class="op">*</span><span class="st"> </span><span class="dv">2</span> <span class="op">^</span><span class="st"> </span>diamonds</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># identify case</span>
+same &lt;-<span class="st"> </span>symbols[<span class="dv">1</span>] <span class="op">==</span><span class="st"> </span>symbols[<span class="dv">2</span>] <span class="op">&amp;&amp;</span><span class="st"> </span>symbols[<span class="dv">2</span>] <span class="op">==</span><span class="st"> </span>symbols[<span class="dv">3</span>]
+bars &lt;-<span class="st"> </span>symbols <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;B&quot;</span>, <span class="st">&quot;BB&quot;</span>, <span class="st">&quot;BBB&quot;</span>)
+
+<span class="co"># get prize</span>
+<span class="cf">if</span> (same) {
+  payouts &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;DD&quot;</span> =<span class="st"> </span><span class="dv">100</span>, <span class="st">&quot;7&quot;</span> =<span class="st"> </span><span class="dv">80</span>, <span class="st">&quot;BBB&quot;</span> =<span class="st"> </span><span class="dv">40</span>, <span class="st">&quot;BB&quot;</span> =<span class="st"> </span><span class="dv">25</span>, 
+    <span class="st">&quot;B&quot;</span> =<span class="st"> </span><span class="dv">10</span>, <span class="st">&quot;C&quot;</span> =<span class="st"> </span><span class="dv">10</span>, <span class="st">&quot;0&quot;</span> =<span class="st"> </span><span class="dv">0</span>)
+  prize &lt;-<span class="st"> </span><span class="kw">unname</span>(payouts[symbols[<span class="dv">1</span>]])
+} <span class="cf">else</span> <span class="cf">if</span> (<span class="kw">all</span>(bars)) {
+  prize &lt;-<span class="st"> </span><span class="dv">5</span>
+} <span class="cf">else</span> {
+  cherries &lt;-<span class="st"> </span><span class="kw">sum</span>(symbols <span class="op">==</span><span class="st"> &quot;C&quot;</span>)
+  prize &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">5</span>)[cherries <span class="op">+</span><span class="st"> </span><span class="dv">1</span>]
+}
+
+<span class="co"># adjust for diamonds</span>
+diamonds &lt;-<span class="st"> </span><span class="kw">sum</span>(symbols <span class="op">==</span><span class="st"> &quot;DD&quot;</span>)
+prize <span class="op">*</span><span class="st"> </span><span class="dv">2</span> <span class="op">^</span><span class="st"> </span>diamonds</code></pre>
 <p>Now that each part of your code works, you can wrap it into a function with the methods you learned in <a href="basics.html#write-functions">Writing Your Own Functions</a>. Either use RStudio’s Extract Function option in the menu bar under Code, or use the <code>function</code> function. Ensure that the last line of the function returns a result (it does), and identify any arguments used by your function. Often the concrete examples that you used to test your code, like <code>symbols</code>, will become the arguments of your function. Run the following code to start using the <code>score</code> function:</p>
-<div class="sourceCode" id="cb297"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb297-1" data-line-number="1">score &lt;-<span class="st"> </span><span class="cf">function</span> (symbols) {</a>
-<a class="sourceLine" id="cb297-2" data-line-number="2">  <span class="co"># identify case</span></a>
-<a class="sourceLine" id="cb297-3" data-line-number="3">  same &lt;-<span class="st"> </span>symbols[<span class="dv">1</span>] <span class="op">==</span><span class="st"> </span>symbols[<span class="dv">2</span>] <span class="op">&amp;&amp;</span><span class="st"> </span>symbols[<span class="dv">2</span>] <span class="op">==</span><span class="st"> </span>symbols[<span class="dv">3</span>]</a>
-<a class="sourceLine" id="cb297-4" data-line-number="4">  bars &lt;-<span class="st"> </span>symbols <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;B&quot;</span>, <span class="st">&quot;BB&quot;</span>, <span class="st">&quot;BBB&quot;</span>)</a>
-<a class="sourceLine" id="cb297-5" data-line-number="5">  </a>
-<a class="sourceLine" id="cb297-6" data-line-number="6">  <span class="co"># get prize</span></a>
-<a class="sourceLine" id="cb297-7" data-line-number="7">  <span class="cf">if</span> (same) {</a>
-<a class="sourceLine" id="cb297-8" data-line-number="8">    payouts &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;DD&quot;</span> =<span class="st"> </span><span class="dv">100</span>, <span class="st">&quot;7&quot;</span> =<span class="st"> </span><span class="dv">80</span>, <span class="st">&quot;BBB&quot;</span> =<span class="st"> </span><span class="dv">40</span>, <span class="st">&quot;BB&quot;</span> =<span class="st"> </span><span class="dv">25</span>, </a>
-<a class="sourceLine" id="cb297-9" data-line-number="9">      <span class="st">&quot;B&quot;</span> =<span class="st"> </span><span class="dv">10</span>, <span class="st">&quot;C&quot;</span> =<span class="st"> </span><span class="dv">10</span>, <span class="st">&quot;0&quot;</span> =<span class="st"> </span><span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb297-10" data-line-number="10">    prize &lt;-<span class="st"> </span><span class="kw">unname</span>(payouts[symbols[<span class="dv">1</span>]])</a>
-<a class="sourceLine" id="cb297-11" data-line-number="11">  } <span class="cf">else</span> <span class="cf">if</span> (<span class="kw">all</span>(bars)) {</a>
-<a class="sourceLine" id="cb297-12" data-line-number="12">    prize &lt;-<span class="st"> </span><span class="dv">5</span></a>
-<a class="sourceLine" id="cb297-13" data-line-number="13">  } <span class="cf">else</span> {</a>
-<a class="sourceLine" id="cb297-14" data-line-number="14">    cherries &lt;-<span class="st"> </span><span class="kw">sum</span>(symbols <span class="op">==</span><span class="st"> &quot;C&quot;</span>)</a>
-<a class="sourceLine" id="cb297-15" data-line-number="15">    prize &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">5</span>)[cherries <span class="op">+</span><span class="st"> </span><span class="dv">1</span>]</a>
-<a class="sourceLine" id="cb297-16" data-line-number="16">  }</a>
-<a class="sourceLine" id="cb297-17" data-line-number="17">  </a>
-<a class="sourceLine" id="cb297-18" data-line-number="18">  <span class="co"># adjust for diamonds</span></a>
-<a class="sourceLine" id="cb297-19" data-line-number="19">  diamonds &lt;-<span class="st"> </span><span class="kw">sum</span>(symbols <span class="op">==</span><span class="st"> &quot;DD&quot;</span>)</a>
-<a class="sourceLine" id="cb297-20" data-line-number="20">  prize <span class="op">*</span><span class="st"> </span><span class="dv">2</span> <span class="op">^</span><span class="st"> </span>diamonds</a>
-<a class="sourceLine" id="cb297-21" data-line-number="21">}</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">score &lt;-<span class="st"> </span><span class="cf">function</span> (symbols) {
+  <span class="co"># identify case</span>
+  same &lt;-<span class="st"> </span>symbols[<span class="dv">1</span>] <span class="op">==</span><span class="st"> </span>symbols[<span class="dv">2</span>] <span class="op">&amp;&amp;</span><span class="st"> </span>symbols[<span class="dv">2</span>] <span class="op">==</span><span class="st"> </span>symbols[<span class="dv">3</span>]
+  bars &lt;-<span class="st"> </span>symbols <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;B&quot;</span>, <span class="st">&quot;BB&quot;</span>, <span class="st">&quot;BBB&quot;</span>)
+  
+  <span class="co"># get prize</span>
+  <span class="cf">if</span> (same) {
+    payouts &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;DD&quot;</span> =<span class="st"> </span><span class="dv">100</span>, <span class="st">&quot;7&quot;</span> =<span class="st"> </span><span class="dv">80</span>, <span class="st">&quot;BBB&quot;</span> =<span class="st"> </span><span class="dv">40</span>, <span class="st">&quot;BB&quot;</span> =<span class="st"> </span><span class="dv">25</span>, 
+      <span class="st">&quot;B&quot;</span> =<span class="st"> </span><span class="dv">10</span>, <span class="st">&quot;C&quot;</span> =<span class="st"> </span><span class="dv">10</span>, <span class="st">&quot;0&quot;</span> =<span class="st"> </span><span class="dv">0</span>)
+    prize &lt;-<span class="st"> </span><span class="kw">unname</span>(payouts[symbols[<span class="dv">1</span>]])
+  } <span class="cf">else</span> <span class="cf">if</span> (<span class="kw">all</span>(bars)) {
+    prize &lt;-<span class="st"> </span><span class="dv">5</span>
+  } <span class="cf">else</span> {
+    cherries &lt;-<span class="st"> </span><span class="kw">sum</span>(symbols <span class="op">==</span><span class="st"> &quot;C&quot;</span>)
+    prize &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">5</span>)[cherries <span class="op">+</span><span class="st"> </span><span class="dv">1</span>]
+  }
+  
+  <span class="co"># adjust for diamonds</span>
+  diamonds &lt;-<span class="st"> </span><span class="kw">sum</span>(symbols <span class="op">==</span><span class="st"> &quot;DD&quot;</span>)
+  prize <span class="op">*</span><span class="st"> </span><span class="dv">2</span> <span class="op">^</span><span class="st"> </span>diamonds
+}</code></pre>
 <p>Once you have defined the <code>score</code> function, the <code>play</code> function will work as well:</p>
-<div class="sourceCode" id="cb298"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb298-1" data-line-number="1">play &lt;-<span class="st"> </span><span class="cf">function</span>() {</a>
-<a class="sourceLine" id="cb298-2" data-line-number="2">  symbols &lt;-<span class="st"> </span><span class="kw">get_symbols</span>()</a>
-<a class="sourceLine" id="cb298-3" data-line-number="3">  <span class="kw">print</span>(symbols)</a>
-<a class="sourceLine" id="cb298-4" data-line-number="4">  <span class="kw">score</span>(symbols)</a>
-<a class="sourceLine" id="cb298-5" data-line-number="5">}</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">play &lt;-<span class="st"> </span><span class="cf">function</span>() {
+  symbols &lt;-<span class="st"> </span><span class="kw">get_symbols</span>()
+  <span class="kw">print</span>(symbols)
+  <span class="kw">score</span>(symbols)
+}</code></pre>
 <p>Now it is easy to play the slot machine:</p>
-<div class="sourceCode" id="cb299"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb299-1" data-line-number="1"><span class="kw">play</span>()</a>
-<a class="sourceLine" id="cb299-2" data-line-number="2">## &quot;0&quot;  &quot;BB&quot; &quot;B&quot; </a>
-<a class="sourceLine" id="cb299-3" data-line-number="3">## 0</a>
-<a class="sourceLine" id="cb299-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb299-5" data-line-number="5"><span class="kw">play</span>()</a>
-<a class="sourceLine" id="cb299-6" data-line-number="6">## &quot;DD&quot;  &quot;0&quot; &quot;B&quot;  </a>
-<a class="sourceLine" id="cb299-7" data-line-number="7">## 0</a>
-<a class="sourceLine" id="cb299-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb299-9" data-line-number="9"><span class="kw">play</span>()</a>
-<a class="sourceLine" id="cb299-10" data-line-number="10">## &quot;BB&quot; &quot;BB&quot; &quot;B&quot; </a>
-<a class="sourceLine" id="cb299-11" data-line-number="11">## 25</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">play</span>()
+## &quot;0&quot;  &quot;BB&quot; &quot;B&quot; 
+## 0
+
+<span class="kw">play</span>()
+## &quot;DD&quot;  &quot;0&quot; &quot;B&quot;  
+## 0
+
+<span class="kw">play</span>()
+## &quot;BB&quot; &quot;BB&quot; &quot;B&quot; 
+## 25</code></pre>
 </div>
 <div id="summary-6" class="section level2">
 <h2><span class="header-section-number">7.6</span> Summary</h2>
@@ -1119,7 +1120,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');
     script.src = src;
