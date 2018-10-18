@@ -175,7 +175,7 @@ options(stringsAsFactors = TRUE)
 
 ### The read Family
 
-R also comes with some prepackaged short cuts for `read.table`, shown in \@ref(tab:shortcuts). 
+R also comes with some prepackaged short cuts for `read.table`, shown in Table \@ref(tab:shortcuts). 
 
 Table: (\#tab:shortcuts) R's read functions. You can overwrite any of the default arguments as necessary.
 
@@ -250,7 +250,7 @@ Note that websites that begin with _https://_ are secure websites, which means R
 
 ### Saving Plain-Text Files
 
-Once your data is in R, you can save it to any file format that R supports. If you'd like to save it as a plain-text file, you can use the +write+ family of functions. The three basic write functions appear in \@ref(tab:write). Use `write.csv` to save your data as a _.csv_ file and `write.table` to save your data as a tab delimited document or a document with more exotic separators.
+Once your data is in R, you can save it to any file format that R supports. If you'd like to save it as a plain-text file, you can use the +write+ family of functions. The three basic write functions appear in Table \@ref(tab:write). Use `write.csv` to save your data as a _.csv_ file and `write.table` to save your data as a tab delimited document or a document with more exotic separators.
 
 Table: (\#tab:write) R saves data sets to plain-text files with the write family of functions
 
@@ -292,7 +292,7 @@ To compress a plain-text file, surround the file name or file path with the func
 write.csv(poker, file = bzfile("data/poker.csv.bz2"), row.names = FALSE)
 ```
 
-Each of these functions will compress the output with a different type of compression format, shown in \@ref(tab:compression). 
+Each of these functions will compress the output with a different type of compression format, shown in Table \@ref(tab:compression). 
 
 Table: (\#tab:compression) R comes with three helper functions for compressing files
 
@@ -475,7 +475,7 @@ vignette("XLConnect")
 
 You should follow the same advice I gave you for Excel files whenever you wish to work with file formats native to other programs: open the file in the original program and export the data as a plain-text file, usually a CSV. This will ensure the most faithful transcription of the data in the file, and it will usually give you the most options for customizing how the data is transcribed.
 
-Sometimes, however, you may acquire a file but not the program it came from. As a result, you won't be able to open the file in its native program and export it as a text file. In this case, you can use one of the functions in \@ref(tab:others) to open the file. These functions mostly come in R's `foreign` package. Each attempts to read in a different file format with as few hiccups as possible.
+Sometimes, however, you may acquire a file but not the program it came from. As a result, you won't be able to open the file in its native program and export it as a text file. In this case, you can use one of the functions in Table \@ref(tab:others) to open the file. These functions mostly come in R's `foreign` package. Each attempts to read in a different file format with as few hiccups as possible.
 
 Table: (\#tab:others) A number of functions will attempt to read the file types of other data-analysis programs
 

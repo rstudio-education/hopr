@@ -63,7 +63,7 @@ You can [download RStudio](http://www.rstudio.com/ide) for free. Just click the 
 Windows and Mac users usually do not program from a terminal window, so the Windows and Mac downloads for R come with a simple program that opens a terminal-like window for you to run R code in. This is what opens when you click the R icon on your Windows or Mac computer. These programs do a little more than the basic terminal window, but not much. You may hear people refer to them as the Windows or Mac R GUIs.
 ```
 
-When you open RStudio, a window appears with three panes in it, as in \@ref(fig:layout). The largest pane is a console window. This is where you'll run your R code and see results. The console window is exactly what you'd see if you ran R from a UNIX console or the Windows or Mac GUIs. Everything else you see is unique to RStudio. Hidden in the other panes are a text editor, a graphics window, a debugger, a file manager, and much more. You'll learn about these panes as they become useful throughout the course of this book.
+When you open RStudio, a window appears with three panes in it, as in Figure \@ref(fig:layout). The largest pane is a console window. This is where you'll run your R code and see results. The console window is exactly what you'd see if you ran R from a UNIX console or the Windows or Mac GUIs. Everything else you see is unique to RStudio. Hidden in the other panes are a text editor, a graphics window, a debugger, a file manager, and much more. You'll learn about these panes as they become useful throughout the course of this book.
 
 ```{r layout, echo = FALSE, fig.cap = "The RStudio IDE for R."}
 knitr::include_graphics("images/hopr_aa01.png")
