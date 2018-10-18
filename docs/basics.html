@@ -586,7 +586,7 @@ die <span class="op">%o%</span><span class="st"> </span>die
 
 <span class="kw">factorial</span>(<span class="dv">3</span>)
 ## 6</code></pre>
-<p>The data that you pass into the function is called the function’s <em>argument</em>. The argument can be raw data, an R object, or even the results of another R function. In this last case, R will work from the innermost function to the outermost, as in <a href="basics.html#fig:pemdas">1.5</a>.</p>
+<p>The data that you pass into the function is called the function’s <em>argument</em>. The argument can be raw data, an R object, or even the results of another R function. In this last case, R will work from the innermost function to the outermost, as in figure <a href="basics.html#fig:pemdas">1.5</a>.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">6</span>)
 ## 3.5
 
@@ -595,15 +595,15 @@ die <span class="op">%o%</span><span class="st"> </span>die
 
 <span class="kw">round</span>(<span class="kw">mean</span>(die))
 ## 4</code></pre>
-<p>Lucky for us, there is an R function that can help “roll” the die. You can simulate a roll of the die with R’s <code>sample</code> function. <code>sample</code> takes <em>two</em> arguments: a vector named <code>x</code> and a number named <code>size</code>. <code>sample</code> will return <code>size</code> elements from the vector:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sample</span>(<span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dt">size =</span> <span class="dv">2</span>)
-## 3 2</code></pre>
 <div class="figure"><span id="fig:pemdas"></span>
 <img src="images/hopr_0105.png" alt="When you link functions together, R will resolve them from the innermost operation to the outermost. Here R first looks up die, then calculates the mean of one through six, then rounds the mean."  />
 <p class="caption">
 Figure 1.5: When you link functions together, R will resolve them from the innermost operation to the outermost. Here R first looks up die, then calculates the mean of one through six, then rounds the mean.
 </p>
 </div>
+<p>Lucky for us, there is an R function that can help “roll” the die. You can simulate a roll of the die with R’s <code>sample</code> function. <code>sample</code> takes <em>two</em> arguments: a vector named <code>x</code> and a number named <code>size</code>. <code>sample</code> will return <code>size</code> elements from the vector:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sample</span>(<span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dt">size =</span> <span class="dv">2</span>)
+## 3 2</code></pre>
 <p>To roll your die and get a number back, set <code>x</code> to <code>die</code> and sample one element from it. You’ll get a new (maybe different) number each time you roll it:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sample</span>(<span class="dt">x =</span> die, <span class="dt">size =</span> <span class="dv">1</span>)
 ## 2
@@ -618,7 +618,7 @@ Figure 1.5: When you link functions together, R will resolve them from the inner
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sample</span>(die, <span class="dt">size =</span> <span class="dv">1</span>)
 ## 2</code></pre>
 <p>Often, the name of the first argument is not very descriptive, and it is usually obvious what the first piece of data refers to anyways.</p>
-<p>But how do you know which argument names to use?(((errors/error messages, when naming arguments))) If you try to use a name that a function does not expect, you will likely get an error:</p>
+<p>But how do you know which argument names to use? If you try to use a name that a function does not expect, you will likely get an error:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">round</span>(<span class="fl">3.1415</span>, <span class="dt">corners =</span> <span class="dv">2</span>)
 ## Error in round(3.1415, corners = 2) : unused argument(s) (corners = 2)</code></pre>
 <p>If you’re not sure which names to use with a function, you can look up the function’s arguments with <code>args</code>. To do this, place the name of the function in the parentheses behind <code>args</code>. For example, you can see that the <code>round</code> function takes two arguments, one named <code>x</code> and one named <code>digits</code>:</p>
@@ -626,7 +626,10 @@ Figure 1.5: When you link functions together, R will resolve them from the inner
 ## function (x, digits = 0) 
 ## NULL</code></pre>
 <p>Did you notice that <code>args</code> shows that the <code>digits</code> argument of <code>round</code> is already set to 0? Frequently, an R function will take optional arguments like <code>digits</code>. These arguments are considered optional because they come with a default value. You can pass a new value to an optional argument if you want, and R will use the default value if you do not. For example, <code>round</code> will round your number to 0 digits past the decimal point by default. To override the default, supply your own value for <code>digits</code>:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">round</span>(<span class="fl">3.1415</span>, <span class="dt">digits =</span> <span class="dv">2</span>)
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">round</span>(<span class="fl">3.1415</span>)
+## 3
+
+<span class="kw">round</span>(<span class="fl">3.1415</span>, <span class="dt">digits =</span> <span class="dv">2</span>)
 ## 3.14</code></pre>
 <p>You should write out the names of each argument after the first one or two when you call a function with multiple arguments. Why? First, this will help you and others understand your code. It is usually obvious which argument your first input refers to (and sometimes the second input as well). However, you’d need a large memory to remember the third and fourth arguments of every R function. Second, and more importantly, writing out argument names prevents errors.</p>
 <p>If you do not write out the names of your arguments, R will match your values to the arguments in your function by order. For example, in the following code, the first value, <code>die</code>, will be matched to the first argument of <code>sample</code>, which is named <code>x</code>. The next value, <code>1</code>, will be matched to the next argument, <code>size</code>:</p>
@@ -671,7 +674,7 @@ dice
 </div>
 <div id="write-functions" class="section level2">
 <h2><span class="header-section-number">1.4</span> Writing Your Own Functions</h2>
-<p>To recap, you already have working R code that simulates rolling a pair of(((weighted dice project, re-rolling the dice))) dice:</p>
+<p>To recap, you already have working R code that simulates rolling a pair of dice:</p>
 <pre class="sourceCode r"><code class="sourceCode r">die &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">6</span>
 dice &lt;-<span class="st"> </span><span class="kw">sample</span>(die, <span class="dt">size =</span> <span class="dv">2</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>)
 <span class="kw">sum</span>(dice)</code></pre>
@@ -778,14 +781,14 @@ Figure 1.6: Every function in R has the same parts, and you can use function to 
 <h2><span class="header-section-number">1.6</span> Scripts</h2>
 <p>What if you want to edit <code>roll2</code> again? You could go back and retype each line of code in <code>roll2</code>, but it would be so much easier if you had a draft of the code to start from. You can create a draft of your code as you go by using an R <em>script</em>. An R script is just a plain text file that you save R code in. You can open an R script in RStudio by going to <code>File &gt; New File &gt; R script</code> in the menu bar. RStudio will then open a fresh script above your console pane, as shown in <a href="basics.html#fig:script">1.7</a>.</p>
 <p>I strongly encourage you to write and edit all of your R code in a script before you run it in the console. Why? This habit creates a reproducible record of your work. When you’re finished for the day, you can save your script and then use it to rerun your entire analysis the next day. Scripts are also very handy for editing and proofreading your code, and they make a nice copy of your work to share with others. To save a script, click the scripts pane, and then go to <code>File &gt; Save As</code> in the menu bar.</p>
-<p>RStudio comes with many built-in features that make it easy to work with scripts. First, you can automatically execute a line of code in a script by clicking the Run button, as shown in <a href="basics.html#fig:run">1.8</a>.</p>
-<p>R will run whichever line of code your cursor is on. If you have a whole section highlighted, R will run the highlighted code. Alternatively, you can run the entire script by clicking the Source button. Don’t like clicking buttons? You can use Control + Return as a shortcut for the Run button. On Macs, that would be Command + Return.</p>
 <div class="figure"><span id="fig:script"></span>
 <img src="images/hopr_0107.png" alt="When you open an R Script (File &gt; New File &gt; R Script in the menu bar), RStudio creates a fourth pane above the console where you can write and edit your code."  />
 <p class="caption">
 Figure 1.7: When you open an R Script (File &gt; New File &gt; R Script in the menu bar), RStudio creates a fourth pane above the console where you can write and edit your code.
 </p>
 </div>
+<p>RStudio comes with many built-in features that make it easy to work with scripts. First, you can automatically execute a line of code in a script by clicking the Run button, as shown in <a href="basics.html#fig:run">1.8</a>.</p>
+<p>R will run whichever line of code your cursor is on. If you have a whole section highlighted, R will run the highlighted code. Alternatively, you can run the entire script by clicking the Source button. Don’t like clicking buttons? You can use Control + Return as a shortcut for the Run button. On Macs, that would be Command + Return.</p>
 <div class="figure"><span id="fig:run"></span>
 <img src="images/hopr_0108.png" alt="You can run a highlighted portion of code in your script if you click the Run button at the top of the scripts pane. You can run the entire script by clicking the Source button."  />
 <p class="caption">
@@ -796,7 +799,7 @@ Figure 1.8: You can run a highlighted portion of code in your script if you clic
 
 <div class="rmdtip">
 <p><strong>Extract function</strong></p>
-<p>RStudio comes with a tool that can help you build functions. To use it, highlight the lines of code in your R script that you want to turn into a function. Then click <code>Code &gt; Extract Function</code> in the menu bar. RStudio will ask you for a function name to use and then wrap you code in a <code>function</code> call. It will scan the code for undefined variables and use these as arguments.</p>
+<p>RStudio comes with a tool that can help you build functions. To use it, highlight the lines of code in your R script that you want to turn into a function. Then click <code>Code &gt; Extract Function</code> in the menu bar. RStudio will ask you for a function name to use and then wrap your code in a <code>function</code> call. It will scan the code for undefined variables and use these as arguments.</p>
 You may want to double-check RStudio’s work. It assumes that your code is correct, so if it does something surprising, you may have a problem in your code.
 </div>
 
