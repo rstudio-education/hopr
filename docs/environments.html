@@ -358,7 +358,7 @@ Figure 6.1: Your computer arranges files into a hierarchy of folders and subfold
 </div>
 <p>R uses a similar system to save R objects. Each object is saved inside of an environment, a list-like object that resembles a folder on your computer. Each environment is connected to a <em>parent environment</em>, a higher-level environment, which creates a hierarchy of environments.</p>
 <p>You can see R’s environment system with the <code>parenvs</code> function in the devtools package. <code>parenvs(all = TRUE)</code> will return a list of the environments that your R session is using. The actual output will vary from session to session depending on which packages you have loaded. Here’s the output from my current session:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(devtools)
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(pryr)
 <span class="kw">parenvs</span>(<span class="dt">all =</span> <span class="ot">TRUE</span>)
 ##    label                            name               
 ## 1  &lt;environment: R_GlobalEnv&gt;       &quot;&quot;                 
