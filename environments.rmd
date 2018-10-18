@@ -35,7 +35,7 @@ R uses a similar system to save R objects. Each object is saved inside of an env
 You can see R's environment system with the `parenvs` function in the devtools package. `parenvs(all = TRUE)` will return a list of the environments that your R session is using. The actual output will vary from session to session depending on which packages you have loaded. Here's the output from my current session:
 
 ```r
-library(devtools)
+library(pryr)
 parenvs(all = TRUE)
 ##    label                            name               
 ## 1  <environment: R_GlobalEnv>       ""                 
