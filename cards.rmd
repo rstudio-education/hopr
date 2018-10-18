@@ -1,4 +1,6 @@
-# Project 2: Playing Cards {-}
+# (PART) Part 2 {-}
+
+# Project 2: Playing Cards
 
 This project--which spans the next four chapters--will teach you how to store, retrieve, and change data values in your computer's memory. These skills will help you save and manage data without accumulating errors. In the project, you'll design a deck of playing cards that you can shuffle and deal from. Best of all, the deck will remember which cards have been dealt--just like a real deck. You can use the deck to play card games, tell fortunes, and test card-counting strategies.
 

@@ -1,4 +1,6 @@
-# Project 1: Weighted Dice {-}
+# (PART) Part 1 {-}
+
+# Project 1: Weighted Dice
 
 Computers let you assemble, manipulate, and visualize data sets, all at speeds that would have wowed yesterday's scientists. In short, computers give you scientific superpowers! But if you wish to use them, you'll need to pick up some programming skills.
 
