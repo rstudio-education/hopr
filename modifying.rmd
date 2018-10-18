@@ -186,7 +186,7 @@ Table: (\#tab:logop) R's Logical Operators
 |`>=`|`a >= b`|Is a greater than or equal to b?
 |`<`|`a < b`|Is a less than b?
 |`<=`|`a <= b`|Is a less than or equal to b?
-|`==`|`a ## b`|Is a equal to b?
+|`==`|`a == b`|Is a equal to b?
 |`!=`|`a != b`|Is a not equal to b?
 |`%in%`|`a %in% c(a, b, c)`|Is a in the group c(a, b, c)? 
 
@@ -199,7 +199,7 @@ Each operator returns a `TRUE` or a `FALSE`. If you use an operator to compare v
 1 > c(0, 1, 2)
 ## TRUE FALSE FALSE
 
-c(1, 2, 3) ## c(3, 2, 1)
+c(1, 2, 3) == c(3, 2, 1)
 ## FALSE  TRUE FALSE
 ```
 
@@ -255,7 +255,7 @@ deck2$face
 Next, you can use the `==` operator to test whether each value is equal to `ace`. In the following code, R will use its recycling rules to indivuidually compare every value of `deck2$face` to `"ace"`. Notice that the quotation marks are important. If you leave them out, R will try to find an object named `ace` to compare against `deck2$face`:
 
 ```r
-deck2$face ## "ace"
+deck2$face == "ace"
 ##  FALSE FALSE FALSE FALSE FALSE FALSE FALSE
 ##  FALSE FALSE FALSE FALSE FALSE  TRUE FALSE
 ##  FALSE FALSE FALSE FALSE FALSE FALSE FALSE
@@ -269,27 +269,27 @@ deck2$face ## "ace"
 You can use `sum` to quickly count the number of `TRUE`s in the previous vector. Remember that R will coerce logicals to numerics when you do math with them. R will turn `TRUE`s into ones and `FALSE`s into zeroes. As a result, sum will count the number of `TRUE`s:
 
 ```r
-sum(deck2$face ## "ace")
+sum(deck2$face == "ace")
 ## 4
 ```
 
 You can use this method to spot and then change the aces in your deck—even if you've shuffled your cards. First, build a logical test that identifies the aces in your shuffled deck:
 
 ```r
-deck3$face ## "ace"
+deck3$face == "ace"
 ```
 
 Then use the test to single out the ace point values. Since the test returns a logical vector, you can use it as an index:
 
 ```r
-deck3$value[deck3$face ## "ace"]
+deck3$value[deck3$face == "ace"]
 ##  1 1 1 1
 ```
 
 Finally, use assignment to change the ace values in `deck3`:
 
 ```r
-deck3$value[deck3$face ## "ace"] <- 14
+deck3$value[deck3$face == "ace"] <- 14
 
 head(deck3)
 ##  face     suit value
@@ -341,7 +341,7 @@ To do this, first write a test that identifies cards in the `hearts` suit:
 ```
 
 ```r
-deck4$suit ## "hearts"
+deck4$suit == "hearts"
 ##  FALSE FALSE FALSE FALSE FALSE FALSE FALSE
 ##  FALSE FALSE FALSE FALSE FALSE FALSE FALSE
 ##  FALSE FALSE FALSE FALSE FALSE FALSE FALSE
@@ -355,27 +355,27 @@ deck4$suit ## "hearts"
 Then use your test to select the values of these cards:
 
 ```r
-deck4$value[deck4$suit ## "hearts"]
+deck4$value[deck4$suit == "hearts"]
 ## 0 0 0 0 0 0 0 0 0 0 0 0 0
 ```
 
 Finally, assign a new number to these values:
 
 ```r
-deck4$value[deck4$suit ## "hearts"] <- 1
+deck4$value[deck4$suit == "hearts"] <- 1
 ```
 
 Now all of your `hearts` cards have been updated:
 
 ```r
-deck4$value[deck4$suit ## "hearts"]
+deck4$value[deck4$suit == "hearts"]
 ## 1 1 1 1 1 1 1 1 1 1 1 1 1
 ```
 
 In hearts, the queen of spades has the most unusual value of all: she's worth 13 points. It should be simple to change her value, but she's surprisingly hard to find. You could find all of the _queens_:
 
 ```r
-deck4[deck4$face ## "queen", ]
+deck4[deck4$face == "queen", ]
 ##   face     suit value
 ##  queen   spades     0
 ##  queen    clubs     0
@@ -386,7 +386,7 @@ deck4[deck4$face ## "queen", ]
 But that's three cards too many. On the other hand, you could find all of the cards in _spades_: 
 
 ```r
-deck4[deck4$suit ## "spades", ]
+deck4[deck4$suit == "spades", ]
 ##   face   suit value
 ##   king spades     0
 ##  queen spades     0
@@ -439,20 +439,20 @@ a <- c(1, 2, 3)
 b <- c(1, 2, 3)
 c <- c(1, 2, 4)
 
-a ## b
+a == b
 ##  TRUE TRUE TRUE
 
-b ## c
+b == c
 ##  TRUE  TRUE FALSE
 
-a ## b & b ## c
+a == b & b == c
 ##  TRUE  TRUE FALSE
 ```
 
 Could you use a Boolean operator to locate the queen of spades in your deck? Of course you can. You want to test each card to see if it is both a queen _and_ a spade. You can write this test in R with:
 
 ```r
-deck4$face ## "queen" & deck4$suit ## "spades"
+deck4$face == "queen" & deck4$suit == "spades"
 ##  FALSE  TRUE FALSE FALSE FALSE FALSE FALSE
 ##  FALSE FALSE FALSE FALSE FALSE FALSE FALSE
 ##  FALSE FALSE FALSE FALSE FALSE FALSE FALSE
@@ -466,7 +466,7 @@ deck4$face ## "queen" & deck4$suit ## "spades"
 I'll save the results of this test to its own object. That will make the results easier to work with:
 
 ```r
-queenOfSpades <- deck4$face ## "queen" & deck4$suit ## "spades"
+queenOfSpades <- deck4$face == "queen" & deck4$suit == "spades"
 ```
 
 Next, you can use the test as an index to select the value of the queen of spades. Make sure the test actually selects the correct value: 
@@ -515,7 +515,7 @@ Here are some model answers. If you got stuck, be sure to re-read how R evaluate
 ```r
 w > 0
 10 < x & x < 20
-y ## "February"
+y == "February"
 all(z %in% c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", 
   "Saturday", "Sunday"))
 ```
@@ -600,7 +600,7 @@ R will return a second piece of missing information. It would not be correct to 
 What if you tested whether a piece of missing information is equal to 1?
 
 ```r
-NA ## 1
+NA == 1
 ## NA
 ```
 
@@ -632,14 +632,14 @@ mean(c(NA, 1:50), na.rm = TRUE)
 On occasion, you may want to identify the `NA`s in your data set with a logical test, but that too creates a problem. How would you go about it? If something is a missing value, any logical test that uses it will return a missing value, even this test:
 
 ```r
-NA ## NA
+NA == NA
 ## NA
 ```
 
 Which means that tests like this won't help you find missing values:
 
 ```r
-c(1, 2, 3, NA) ## NA
+c(1, 2, 3, NA) == NA
 ## NA NA NA NA
 ```
 
@@ -660,7 +660,7 @@ Let's set all of your ace values to `NA`. This will accomplish two things. First
 You can set your ace values to `NA` in the same way that you would set them to a number:
 
 ```r
-deck5$value[deck5$face ## "ace"] <- NA
+deck5$value[deck5$face == "ace"] <- NA
 
 head(deck5, 13)
 ##   face   suit value
