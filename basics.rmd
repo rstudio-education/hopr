@@ -608,7 +608,7 @@ To summarize, `function` helps you construct your own R functions. You create a 
 
 Once you've created your function, R will treat it like every other function in R. Think about how useful this is. Have you ever tried to create a new Excel option and add it to Microsoft's menu bar? Or a new slide animation and add it to Powerpoint's options? When you work with a programming language, you can do these types of things. As you learn to program in R, you will be able to create new, customized, reproducible tools for yourself whenever you like. [Project 3: Slot Machine](#slots) will teach you much more about writing functions in R.
 
-```{r functions, echo = FALSE, fig.cap = "Every function in R has the same parts, and you can use function to create these parts."}
+```{r functions, echo = FALSE, fig.cap = "Every function in R has the same parts, and you can use function to create these parts. Assign the result to a name, so you can call the function later."}
 knitr::include_graphics("images/hopr_0106.png")
 ```
 
