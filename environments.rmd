@@ -32,14 +32,14 @@ knitr::include_graphics("images/hopr_0601.png")
 
 R uses a similar system to save R objects. Each object is saved inside of an environment, a list-like object that resembles a folder on your computer. Each environment is connected to a _parent environment_, a higher-level environment, which creates a hierarchy of environments. 
 
-You can see R's environment system with the `parenvs` function in the devtools package. `parenvs(all = TRUE)` will return a list of the environments that your R session is using. The actual output will vary from session to session depending on which packages you have loaded. Here's the output from my current session:
+You can see R's environment system with the `parenvs` function in the pryr package (note `parenvs` came in the pryr package when this book was first published). `parenvs(all = TRUE)` will return a list of the environments that your R session is using. The actual output will vary from session to session depending on which packages you have loaded. Here's the output from my current session:
 
 ```r
 library(pryr)
 parenvs(all = TRUE)
 ##    label                            name               
 ## 1  <environment: R_GlobalEnv>       ""                 
-## 2  <environment: package:devtools>  "package:devtools" 
+## 2  <environment: package:pryr>  "package:pryr" 
 ## 3  <environment: 0x7fff3321c388>    "tools:rstudio"    
 ## 4  <environment: package:stats>     "package:stats"    
 ## 5  <environment: package:graphics>  "package:graphics" 
@@ -52,7 +52,7 @@ parenvs(all = TRUE)
 ## 12 <environment: R_EmptyEnv>        ""                 
 ```
 
-It takes some imagination to interpret this output, so let's visualize the environments as a system of folders, Figure \@ref(fig:environments). You can think of the environment tree like this. The lowest-level environment is named `R_GlobalEnv` and is saved inside an environment named `package:devtools`, which is saved inside the environment named `0x7fff3321c388`, and so on, until you get to the final, highest-level environment, `R_EmptyEnv`. `R_EmptyEnv` is the only R environment that does not have a parent environment. 
+It takes some imagination to interpret this output, so let's visualize the environments as a system of folders, Figure \@ref(fig:environments). You can think of the environment tree like this. The lowest-level environment is named `R_GlobalEnv` and is saved inside an environment named `package:pryr`, which is saved inside the environment named `0x7fff3321c388`, and so on, until you get to the final, highest-level environment, `R_EmptyEnv`. `R_EmptyEnv` is the only R environment that does not have a parent environment. 
 
 ```{r environments, echo = FALSE, fig.cap = "R stores R objects in an environment tree that resembles your computer's folder system."}
 knitr::include_graphics("images/hopr_0602.png")
@@ -90,11 +90,11 @@ Next, you can look up an environment's parent with `parent.env`:
 
 ```r
 parent.env(globalenv())
-## <environment: package:devtools>
+## <environment: package:pryr>
 ## attr(,"name")
-## [1] "package:devtools"
+## [1] "package:pryr"
 ## attr(,"path")
-## [1] "/Library/Frameworks/R.framework/Versions/3.0/Resources/library/devtools"
+## [1] "/Library/Frameworks/R.framework/Versions/3.0/Resources/library/pryr"
 ```
 
 Notice that the empty environment is the only R environment without a parent:
@@ -271,12 +271,12 @@ environment(show_env)
 ## <environment: R_GlobalEnv>
 ```
 
-The origin environment of `show_env` is the global environment because we created `show_env` at the command line, but the origin environment does not need to be the global environment. For example, the environment of `parenvs` is the `devtools` package: 
+The origin environment of `show_env` is the global environment because we created `show_env` at the command line, but the origin environment does not need to be the global environment. For example, the environment of `parenvs` is the `pryr` package: 
 
 
 ```r
 environment(parenvs)
-## <environment: namespace:devtools>
+## <environment: namespace:pryr>
 ```
 
 In other words, the parent of a runtime environment will not always be the global environment; it will be whichever environment the function was first created in.
