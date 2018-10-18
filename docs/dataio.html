@@ -441,7 +441,7 @@ We accidentally repeated the last row of data.
 </div>
 <div id="the-read-family" class="section level3">
 <h3><span class="header-section-number">D.3.2</span> The read Family</h3>
-<p>R also comes with some prepackaged short cuts for <code>read.table</code>, shown in <a href="dataio.html#tab:shortcuts">D.1</a>.</p>
+<p>R also comes with some prepackaged short cuts for <code>read.table</code>, shown in Table <a href="dataio.html#tab:shortcuts">D.1</a>.</p>
 <table>
 <caption><span id="tab:shortcuts">Table D.1: </span> R’s read functions. You can overwrite any of the default arguments as necessary.</caption>
 <colgroup>
@@ -522,7 +522,7 @@ jack      spades     11
 </div>
 <div id="saving-plain-text-files" class="section level3">
 <h3><span class="header-section-number">D.3.5</span> Saving Plain-Text Files</h3>
-<p>Once your data is in R, you can save it to any file format that R supports. If you’d like to save it as a plain-text file, you can use the +write+ family of functions. The three basic write functions appear in <a href="dataio.html#tab:write">D.2</a>. Use <code>write.csv</code> to save your data as a <em>.csv</em> file and <code>write.table</code> to save your data as a tab delimited document or a document with more exotic separators.</p>
+<p>Once your data is in R, you can save it to any file format that R supports. If you’d like to save it as a plain-text file, you can use the +write+ family of functions. The three basic write functions appear in Table <a href="dataio.html#tab:write">D.2</a>. Use <code>write.csv</code> to save your data as a <em>.csv</em> file and <code>write.table</code> to save your data as a tab delimited document or a document with more exotic separators.</p>
 <table>
 <caption><span id="tab:write">Table D.2: </span> R saves data sets to plain-text files with the write family of functions</caption>
 <colgroup>
@@ -568,7 +568,7 @@ jack      spades     11
 <h3><span class="header-section-number">D.3.6</span> Compressing Files</h3>
 <p>To compress a plain-text file, surround the file name or file path with the function <code>bzfile</code>, <code>gzfile</code>, or <code>xzfile</code>. For example:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">write.csv</span>(poker, <span class="dt">file =</span> <span class="kw">bzfile</span>(<span class="st">&quot;data/poker.csv.bz2&quot;</span>), <span class="dt">row.names =</span> <span class="ot">FALSE</span>)</code></pre>
-<p>Each of these functions will compress the output with a different type of compression format, shown in <a href="dataio.html#tab:compression">D.3</a>.</p>
+<p>Each of these functions will compress the output with a different type of compression format, shown in Table <a href="dataio.html#tab:compression">D.3</a>.</p>
 <table>
 <caption><span id="tab:compression">Table D.3: </span> R comes with three helper functions for compressing files</caption>
 <thead>
@@ -684,7 +684,7 @@ a &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="st"
 <div id="loading-files-from-other-programs" class="section level2">
 <h2><span class="header-section-number">D.6</span> Loading Files from Other Programs</h2>
 <p>You should follow the same advice I gave you for Excel files whenever you wish to work with file formats native to other programs: open the file in the original program and export the data as a plain-text file, usually a CSV. This will ensure the most faithful transcription of the data in the file, and it will usually give you the most options for customizing how the data is transcribed.</p>
-<p>Sometimes, however, you may acquire a file but not the program it came from. As a result, you won’t be able to open the file in its native program and export it as a text file. In this case, you can use one of the functions in <a href="dataio.html#tab:others">D.4</a> to open the file. These functions mostly come in R’s <code>foreign</code> package. Each attempts to read in a different file format with as few hiccups as possible.</p>
+<p>Sometimes, however, you may acquire a file but not the program it came from. As a result, you won’t be able to open the file in its native program and export it as a text file. In this case, you can use one of the functions in Table <a href="dataio.html#tab:others">D.4</a> to open the file. These functions mostly come in R’s <code>foreign</code> package. Each attempts to read in a different file format with as few hiccups as possible.</p>
 <table>
 <caption><span id="tab:others">Table D.4: </span> A number of functions will attempt to read the file types of other data-analysis programs</caption>
 <thead>
