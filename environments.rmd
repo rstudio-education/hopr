@@ -24,7 +24,7 @@ To fix these functions, you will need to learn how R stores, looks up, and manip
 
 Consider for a moment how your computer stores files. Every file is saved in a folder, and each folder is saved in another folder, which forms a hierarchical file system. If your computer wants to open up a file, it must first look up the file in this file system.
 
-You can see your file system by opening a finder window. For example, \@ref(fig:folders) shows part of the file system on my computer. I have tons of folders. Inside one of them is a subfolder named _Documents_, inside of that subfolder is a sub-subfolder named _ggsubplot_, inside of that folder is a folder named _inst_, inside of that is a folder named _doc_, and inside of that is a file named _manual.pdf_.
+You can see your file system by opening a finder window. For example, Figure \@ref(fig:folders) shows part of the file system on my computer. I have tons of folders. Inside one of them is a subfolder named _Documents_, inside of that subfolder is a sub-subfolder named _ggsubplot_, inside of that folder is a folder named _inst_, inside of that is a folder named _doc_, and inside of that is a file named _manual.pdf_.
 
 ```{r folders, echo = FALSE, fig.cap = "Your computer arranges files into a hierarchy of folders and subfolders. To look at a file, you need to find where it is saved in the file system."}
 knitr::include_graphics("images/hopr_0601.png")
@@ -52,7 +52,7 @@ parenvs(all = TRUE)
 ## 12 <environment: R_EmptyEnv>        ""                 
 ```
 
-It takes some imagination to interpret this output, so let's visualize the environments as a system of folders, \@ref(fig:environments). You can think of the environment tree like this. The lowest-level environment is named `R_GlobalEnv` and is saved inside an environment named `package:devtools`, which is saved inside the environment named `0x7fff3321c388`, and so on, until you get to the final, highest-level environment, `R_EmptyEnv`. `R_EmptyEnv` is the only R environment that does not have a parent environment. 
+It takes some imagination to interpret this output, so let's visualize the environments as a system of folders, Figure \@ref(fig:environments). You can think of the environment tree like this. The lowest-level environment is named `R_GlobalEnv` and is saved inside an environment named `package:devtools`, which is saved inside the environment named `0x7fff3321c388`, and so on, until you get to the final, highest-level environment, `R_EmptyEnv`. `R_EmptyEnv` is the only R environment that does not have a parent environment. 
 
 ```{r environments, echo = FALSE, fig.cap = "R stores R objects in an environment tree that resembles your computer's folder system."}
 knitr::include_graphics("images/hopr_0602.png")
@@ -172,7 +172,7 @@ Here is a third rule that explains how R finds objects that are not in the activ
 
 3. When R does not find an object in an environment, R looks in the environment's parent environment, then the parent of the parent, and so on, until R finds the object or reaches the empty environment.
 
-So, if you call an object at the command line, R will look for it in the global environment. If R can't find it there, R will look in the parent of the global environment, and then the parent of the parent, and so on, working its way up the environment tree until it finds the object, as in \@ref(fig:path). If R cannot find the object in any environment, it will return an error that says the object is not found.
+So, if you call an object at the command line, R will look for it in the global environment. If R can't find it there, R will look in the parent of the global environment, and then the parent of the parent, and so on, working its way up the environment tree until it finds the object, as in Figure \@ref(fig:path). If R cannot find the object in any environment, it will return an error that says the object is not found.
 
 ```{r path, echo = FALSE, fig.cap = "R will search for an object by name in the active environment, here the global environment. If R does not find the object there, it will search in the active environment's parent, and then the parent's parent, and so on until R finds the object or runs out of environments."}
 knitr::include_graphics("images/hopr_0603.png")
@@ -241,7 +241,7 @@ show_env()
 ## $objects
 ```
 
-The results reveal that R created a new environment named `0x7ff711d12e28` to run `show_env()` in. The environment had no objects in it, and its parent was the `global environment`. So for purposes of running `show_env`, R's environment tree looked like \@ref(fig:tree).
+The results reveal that R created a new environment named `0x7ff711d12e28` to run `show_env()` in. The environment had no objects in it, and its parent was the `global environment`. So for purposes of running `show_env`, R's environment tree looked like Figure \@ref(fig:tree).
 
 Let's run `show_env` again:
 
@@ -369,7 +369,7 @@ environment(deal)
 ## <environment: R_GlobalEnv>
 ```
 
-When `deal` calls `deck`, R will need to look up the `deck` object. R's scoping rules will lead it to the version of `deck` in the global environment, as in \@ref(fig:deal). `deal` works as expected as a result:
+When `deal` calls `deck`, R will need to look up the `deck` object. R's scoping rules will lead it to the version of `deck` in the global environment, as in Figure \@ref(fig:deal). `deal` works as expected as a result:
 
 ```r
 deal()
@@ -417,7 +417,7 @@ deal <- function() {
 }
 ```
 
-This code won't work because R will be in a runtime environment when it executes `deck <- deck[-1, ]`. Instead of overwriting the global copy of `deck` with `deck[-1, ]`, `deal` will just create a slightly altered copy of `deck` in its runtime environment, as in \@ref(fig:second-deck).
+This code won't work because R will be in a runtime environment when it executes `deck <- deck[-1, ]`. Instead of overwriting the global copy of `deck` with `deck[-1, ]`, `deal` will just create a slightly altered copy of `deck` in its runtime environment, as in Figure \@ref(fig:second-deck).
 
 ```{r second-deck, echo = FALSE, fig.cap = "The deal function looks up deck in the global environment but saves deck[-1, ] in the runtime environment as a new object named deck. "}
 knitr::include_graphics("images/hopr_0606.png")
@@ -548,7 +548,7 @@ setup <- function(deck) {
 }
 ```
 
-When you run `setup`, R will create a runtime environment to store these objects in. The environment will look like \@ref(fig:closure1).
+When you run `setup`, R will create a runtime environment to store these objects in. The environment will look like Figure \@ref(fig:closure1).
 
 Now all of these things are safely out of the way in a child of the global environment. That makes them safe but hard to use. Let's ask `setup` to return `DEAL` and `SHUFFLE` so we can use them. The best way to do this is to return the functions as a list:
 
@@ -615,7 +615,7 @@ environment(shuffle)
 ## <environment: 0x7ff7169c3390>
 ```
 
-Why does this matter? Because now when you run `deal` or `shuffle`, R will evaluate the functions in a runtime environment that uses `0x7ff7169c3390` as its parent. `DECK` and `deck` will be in this parent environment, which means that `deal` and `shuffle` will be able to find them at runtime. `DECK` and `deck` will be in the functions' search path but still out of the way in every other respect, as shown in \@ref(fig:closure2).
+Why does this matter? Because now when you run `deal` or `shuffle`, R will evaluate the functions in a runtime environment that uses `0x7ff7169c3390` as its parent. `DECK` and `deck` will be in this parent environment, which means that `deal` and `shuffle` will be able to find them at runtime. `DECK` and `deck` will be in the functions' search path but still out of the way in every other respect, as shown in Figure \@ref(fig:closure2).
 
 ```{r closure2, echo = FALSE, fig.cap = "Now deal and shuffle will be run in an environment that has the protected deck and DECK in its search path."}
 knitr::include_graphics("images/hopr_0608.png")
@@ -623,7 +623,7 @@ knitr::include_graphics("images/hopr_0608.png")
 
 This arrangement is called a _closure_. `setup`'s runtime environment "encloses" the `deal` and `shuffle` functions. Both `deal` and `shuffle` can work closely with the objects contained in the enclosing environment, but almost nothing else can. The enclosing environment is not on the search path for any other R function or environment.
 
-You may have noticed that `deal` and `shuffle` still update the `deck` object in the global environment. Don't worry, we're about to change that. We want `deal` and `shuffle` to work exclusively with the objects in the parent (enclosing) environment of their runtime environments. Instead of having each function reference the global environment to update `deck`, you can have them reference their parent environment at runtime, as shown in \@ref(fig:closure3):
+You may have noticed that `deal` and `shuffle` still update the `deck` object in the global environment. Don't worry, we're about to change that. We want `deal` and `shuffle` to work exclusively with the objects in the parent (enclosing) environment of their runtime environments. Instead of having each function reference the global environment to update `deck`, you can have them reference their parent environment at runtime, as shown in Figure \@ref(fig:closure3):
 
 ```r
 setup <- function(deck) {

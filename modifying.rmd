@@ -176,7 +176,7 @@ At first glance, this system might seem impractical. Who wants to type out long 
 
 #### Logical Tests
 
-A logical test is a comparison like "is one less than two?", `1 < 2`, or "is three greater than four?", `3 > 4`. R provides seven logical operators that you can use to make comparisons, shown in \@ref(tab:logop). 
+A logical test is a comparison like "is one less than two?", `1 < 2`, or "is three greater than four?", `3 > 4`. R provides seven logical operators that you can use to make comparisons, shown in Table \@ref(tab:logop). 
 
 Table: (\#tab:logop) R's Logical Operators
 
@@ -407,7 +407,7 @@ But that's 12 cards too many. What you really want to find is all of the cards t
 
 #### Boolean Operators
 
-Boolean operators are things like _and_ (`&`) and _or_ (`|`). They collapse the results of multiple logical tests into a single `TRUE` or `FALSE`. R has six boolean operators, shown in \@ref(tab:boole).
+Boolean operators are things like _and_ (`&`) and _or_ (`|`). They collapse the results of multiple logical tests into a single `TRUE` or `FALSE`. R has six boolean operators, shown in Table \@ref(tab:boole).
 
 Table: (\#tab:boole) Boolean operators
 
@@ -420,12 +420,12 @@ Table: (\#tab:boole) Boolean operators
 |`any`|`any(cond1, cond2, cond3, ...)`|Are any of the conditions true?
 |`all`|`all(cond1, cond2, cond3, ...)`|Are all of the conditions true?
 
-To use a Boolean operator, place it between two _complete_ logical tests. R will execute each logical test and then use the Boolean operator to combine the results into a single `TRUE` or `FALSE`, \@ref(fig:boolean). 
+To use a Boolean operator, place it between two _complete_ logical tests. R will execute each logical test and then use the Boolean operator to combine the results into a single `TRUE` or `FALSE`, Figure \@ref(fig:boolean). 
 
 ```{block2, type = "rmdwarning"}
 **The most common mistake with Boolean operators**
   
-It is easy to forget to put a complete test on either side of a Boolean operator. In English, it is efficient to say "Is _x_ greater than two and less than nine?" But in R, you need to write the equivalent of "Is _x_ greater than two and _is x_ less than nine?" This is shown in \@ref(fig:boolean).
+It is easy to forget to put a complete test on either side of a Boolean operator. In English, it is efficient to say "Is _x_ greater than two and less than nine?" But in R, you need to write the equivalent of "Is _x_ greater than two and _is x_ less than nine?" This is shown in Figure \@ref(fig:boolean).
 ```
 
 ```{r boolean, echo = FALSE, fig.cap = "R will evaluate the expressions on each side of a Boolean operator separately, and then combine the results into a single TRUE or FALSE. If you do not supply a complete test to each side of the operator, R will return an error."}

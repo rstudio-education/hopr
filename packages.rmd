@@ -52,7 +52,7 @@ qplot
 
 Now that you've loaded `qplot`, let's take it for a spin. `qplot` makes "quick plots." If you give `qplot` two vectors of equal lengths, `qplot` will draw a scatterplot for you. `qplot` will use the first vector as a set of x values and the second vector as a set of y values. Look for the plot to appear in the Plots tab of the bottom-right pane in your RStudio window. 
 
-The following code will make the plot that appears in \@ref(fig:qplot). Until now, we've been creating sequences of numbers with the `:` operator; but you can also create vectors of numbers with the `c` function. Give `c` all of the numbers that you want to appear in the vector, separated by a comma. `c` stands for _concatenate_, but you can think of it as "collect" or "combine":
+The following code will make the plot that appears in Figure \@ref(fig:qplot). Until now, we've been creating sequences of numbers with the `:` operator; but you can also create vectors of numbers with the `c` function. Give `c` all of the numbers that you want to appear in the vector, separated by a comma. `c` stands for _concatenate_, but you can think of it as "collect" or "combine":
 
 ```r
 x <- c(-1, -0.8, -0.6, -0.4, -0.2, 0, 0.2, 0.4, 0.6, 0.8, 1)
@@ -71,11 +71,11 @@ qplot(x, y)
 knitr::include_graphics("images/hopr_0201.png")
 ```
 
-You don't need to name your vectors `x` and `y`. I just did that to make the example clear. As you can see in \@ref(fig:qplot), a scatterplot is a set of points, each plotted according to its x and y values. Together, the vectors `x` and `y` describe a set of 10 points. How did R match up the values in `x` and `y` to make these points? With element-wise execution, as we saw in \@ref(fig:elementwise).
+You don't need to name your vectors `x` and `y`. I just did that to make the example clear. As you can see in Figure \@ref(fig:qplot), a scatterplot is a set of points, each plotted according to its x and y values. Together, the vectors `x` and `y` describe a set of 10 points. How did R match up the values in `x` and `y` to make these points? With element-wise execution, as we saw in Figure \@ref(fig:elementwise).
 
 Scatterplots are useful for visualizing the relationship between two variables. However, we're going to use a different type of graph, a _histogram_. A histogram visualizes the distribution of a single variable; it displays how many data points appear at each value of x. 
 
-Let's take a look at a histogram to see if this makes sense. `qplot` will make a histogram whenever you give it only _one_ vector to plot. The following code makes the left-hand plot in \@ref(fig:hist) (we'll worry about the right-hand plot in just second). To make sure our graphs look the same, use the extra argument *`binwidth = 1`*:
+Let's take a look at a histogram to see if this makes sense. `qplot` will make a histogram whenever you give it only _one_ vector to plot. The following code makes the left-hand plot in Figure \@ref(fig:hist) (we'll worry about the right-hand plot in just second). To make sure our graphs look the same, use the extra argument *`binwidth = 1`*:
 
 ```r
 x <- c(1, 2, 2, 2, 3, 3)
@@ -88,7 +88,7 @@ knitr::include_graphics("images/hopr_0202.png")
 
 This plot shows that our vector contains one value in the interval `[1, 2)` by placing a bar of height 1 above that interval. Similarly, the plot shows that the vector contains three values in the interval `[2, 3)` by placing a bar of height 3 in that interval. It shows that the vector contains two values in the interval `[3, 4)` by placing a bar of height 2 in that interval. In these intervals, the hard bracket, `[`, means that the first number is included in the interval. The parenthesis, `)`, means that the last number is _not_ included.
 
-Let's try another histogram. This code makes the right-hand plot in \@ref(fig:hist). Notice that there are five points with a value of 1 in `x2`. The histogram displays this by plotting a bar of height 5 above the interval x2 = [1, 2):
+Let's try another histogram. This code makes the right-hand plot in Figure \@ref(fig:hist). Notice that there are five points with a value of 1 in `x2`. The histogram displays this by plotting a bar of height 5 above the interval x2 = [1, 2):
 
 ```r
 x2 <- c(1, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 4)
@@ -114,9 +114,9 @@ You can use a histogram to display visually how common different values of `x` a
 
 How can you use a histogram to check the accuracy of your dice? 
 
-Well, if you roll your dice many times and keep track of the results, you would expect some numbers to occur more than others. This is because there are more ways to get some numbers by adding two dice together than to get other numbers, as shown in \@ref(fig:probs). 
+Well, if you roll your dice many times and keep track of the results, you would expect some numbers to occur more than others. This is because there are more ways to get some numbers by adding two dice together than to get other numbers, as shown in Figure \@ref(fig:probs). 
 
-If you roll your dice many times and plot the results with `qplot`, the histogram will show you how often each sum appeared. The sums that occurred most often will have the highest bars. The histogram should look like the pattern in \@ref(fig:probs) if the dice are fairly weighted.
+If you roll your dice many times and plot the results with `qplot`, the histogram will show you how often each sum appeared. The sums that occurred most often will have the highest bars. The histogram should look like the pattern in Figure \@ref(fig:probs) if the dice are fairly weighted.
 
 This is where `replicate` comes in. `replicate` provides an easy way to repeat an R command many times. To use it, first give `replicate` the number of times you wish to repeat an R command, and then give it the command you wish to repeat. `replicate` will run the command multiple times and store the results as a vector:
 
@@ -132,7 +132,7 @@ replicate(10, roll())
 knitr::include_graphics("images/hopr_0203.png")
 ```
 
-A histogram of your first 10 rolls probably won't look like the pattern shown in \@ref(fig:probs). Why not? There is too much randomness involved. Remember that we use dice in real life because they are effective random number generators. Patterns of long run frequencies will only appear _over the long run_. So let's simulate 10,000 dice rolls and plot the results. Don't worry; `qplot` and `replicate` can handle it. The results appear in \@ref(fig:fair):
+A histogram of your first 10 rolls probably won't look like the pattern shown in Figure \@ref(fig:probs). Why not? There is too much randomness involved. Remember that we use dice in real life because they are effective random number generators. Patterns of long run frequencies will only appear _over the long run_. So let's simulate 10,000 dice rolls and plot the results. Don't worry; `qplot` and `replicate` can handle it. The results appear in Figure \@ref(fig:fair):
 
 ```r
 rolls <- replicate(10000, roll())
@@ -283,7 +283,7 @@ roll <- function() {
 
 This will cause `roll` to pick 1 through 5 with probability 1/8 and 6 with probability 3/8.
 
-Overwrite your previous version of `roll` with the new function (by running the previous code snippet in your command line). Then visualize the new long-term behavior of your dice. I've put the results in \@ref(fig:weighted) next to our original results:
+Overwrite your previous version of `roll` with the new function (by running the previous code snippet in your command line). Then visualize the new long-term behavior of your dice. I've put the results in Figure \@ref(fig:weighted) next to our original results:
 
 ```r
 rolls <- replicate(10000, roll())

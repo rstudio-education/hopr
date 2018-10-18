@@ -35,7 +35,7 @@ The simplest of these to use is positive integers.
 
 ### Positive Integers
 
-R treats positive integers just like _ij_ notation in linear algebra: `deck[i,j]` will return the value of `deck` that is in the _ith_ row and the _jth_ column, \@ref(fig:positive). Notice that _i_ and _j_ only need to be integers in the mathematical sense. They can be saved as numerics in R
+R treats positive integers just like _ij_ notation in linear algebra: `deck[i,j]` will return the value of `deck` that is in the _ith_ row and the _jth_ column, Figure \@ref(fig:positive). Notice that _i_ and _j_ only need to be integers in the mathematical sense. They can be saved as numerics in R
 
 ```r
 head(deck)
@@ -169,7 +169,7 @@ deck[1, ]
 
 ### Logical Values {#logic}
 
-If you supply a vector of `TRUE`s and `FALSE`s as your index, R will match each `TRUE` and `FALSE` to a row in your data frame (or a column depending on where you place the index). R will then return each row that corresponds to a `TRUE`, \@ref(fig:logicals). 
+If you supply a vector of `TRUE`s and `FALSE`s as your index, R will match each `TRUE` and `FALSE` to a row in your data frame (or a column depending on where you place the index). R will then return each row that corresponds to a `TRUE`, Figure \@ref(fig:logicals). 
 
 It may help to imagine R reading through the data frame and asking, "Should I return the _i_th row of the data structure?" and then consulting the _i_th value of the index for its answer. For this system to work, your vector must be as long as the dimension you are trying to subset: 
 
@@ -427,7 +427,7 @@ lst[["numbers"]]
 ## 1 2
 ```
 
-This difference is subtle but important. In the R community, there is a popular, and helpful, way to think about it, \@ref(fig:trains). Imagine that each list is a train and each element is a train car. When you use single brackets, R selects individual train cars and returns them as a new train. Each car keeps its contents, but those contents are still inside a train car (i.e., a list). When you use double brackets, R actually unloads the car and gives you back the contents.
+This difference is subtle but important. In the R community, there is a popular, and helpful, way to think about it, Figure \@ref(fig:trains). Imagine that each list is a train and each element is a train car. When you use single brackets, R selects individual train cars and returns them as a new train. Each car keeps its contents, but those contents are still inside a train car (i.e., a list). When you use double brackets, R actually unloads the car and gives you back the contents.
 
 ```{r trains, echo = FALSE, fig.cap = "It can be helpful to think of your list as a train. Use single brackets to select train cars, double brackets to select the contents inside of a car."}
 knitr::include_graphics("images/hopr_0403.png")

@@ -39,7 +39,7 @@ get_symbols()
 
 `get_symbols` uses the probabilities observed in a group of video lottery terminals from Manitoba, Canada. These slot machines became briefly controversial in the 1990s, when a reporter decided to test their payout rate. The machines appeared to pay out only 40 cents on the dollar, even though the manufacturer claimed they would pay out 92 cents on the dollar. The original data collected on the machines and a description of the controversy is available online in [a journal article by W. John Braun](http://bit.ly/jse_Braun). The controversy died down when additional testing showed that the manufacturer was correct.
 
-The Manitoba slot machines use the complicated payout scheme shown in \@ref(tab:prizes). A player will win a prize if he gets:
+The Manitoba slot machines use the complicated payout scheme shown in Table \@ref(tab:prizes). A player will win a prize if he gets:
 
 * Three of the same type of symbol (except for three zeroes)
 * Three bars (of mixed variety)
@@ -69,7 +69,7 @@ Table: (\#tab:prizes) Each play of the slot machine costs $1. A player's symbols
 |`*  C  *`|2
 |`*  *  C`|2
 
-To create your `play` function, you will need to write a program that can take the output of `get_symbols` and calculate the correct prize based on  \@ref(tab:prizes). 
+To create your `play` function, you will need to write a program that can take the output of `get_symbols` and calculate the correct prize based on  Table \@ref(tab:prizes). 
 
 In R, programs are saved either as R scripts or as functions. We'll save your program as a function named `score`. When you are finished, you will be able to use `score` to calculate a prize like this:
 
@@ -114,7 +114,7 @@ R programs contain two types of subtasks: sequential steps and parallel cases.
 
 ### Sequential Steps
 
-One way to subdivide a program is into a series of sequential steps. The `play` function takes the approach, shown in \@ref(fig:subdivide1). First, it generates three symbols (step 1), then it displays them in the console window (step 2), and then it scores them (step 3): 
+One way to subdivide a program is into a series of sequential steps. The `play` function takes the approach, shown in Figure \@ref(fig:subdivide1). First, it generates three symbols (step 1), then it displays them in the console window (step 2), and then it scores them (step 3): 
 
 ```r
 play <- function() {
@@ -142,9 +142,9 @@ Another way to divide a task is to spot groups of similar cases within the task.
 
 For example, `score` will need to calculate the prize one way if `symbols` contains three of a kind (In that case, `score` will need to match the common symbol to a prize). `score` will need to calculate the prize a second way if the symbols are all bars (In that case, `score` can just assign a prize of $5). And, finally, `score` will need to calculate the prize in a third way if the symbols do not contain three of a kind or all bars (In that case, `score` must count the number of cherries present). `score` will never use all three of these algorithms at once; it will always choose just one algorithm to run based on the combination of symbols. 
 
-Diamonds complicate all of this because diamonds can be treated as wild cards. Let's ignore that for now and focus on the simpler case where diamonds double the prize but are not wilds. `score` can double the prize as necessary after it runs one of the following algorithms, as shown in \@ref(fig:subdivide2).
+Diamonds complicate all of this because diamonds can be treated as wild cards. Let's ignore that for now and focus on the simpler case where diamonds double the prize but are not wilds. `score` can double the prize as necessary after it runs one of the following algorithms, as shown in Figure \@ref(fig:subdivide2).
 
-Adding the `score` cases to the `play` steps reveals a strategy for the complete slot machine program, as shown in \@ref(fig:subdivide3).
+Adding the `score` cases to the `play` steps reveals a strategy for the complete slot machine program, as shown in Figure \@ref(fig:subdivide3).
 
 We've already solved the first few steps in this strategy. Our program can get three slot machine symbols with the `get_symbols` function. Then it can display the symbols with the `print` function. Now let's examine how the program can handle the parallel score cases.
 
@@ -348,7 +348,7 @@ R will work through the `if` conditions until one evaluates to `TRUE`, then R wi
 
 If two `if` statements describe mutually exclusive events, it is better to join the `if` statements with an `else if` than to list them separately. This lets R ignore the second `if` statement whenever the first returns a `TRUE`, which saves work.
 
-You can use `if` and `else` to link the subtasks in your slot-machine function. Open a fresh R script, and copy this code into it. The code will be the skeleton of our final `score` function. Compare it to the flow chart for `score` in \@ref(fig:subdivide2):
+You can use `if` and `else` to link the subtasks in your slot-machine function. Open a fresh R script, and copy this code into it. The code will be the skeleton of our final `score` function. Compare it to the flow chart for `score` in Figure \@ref(fig:subdivide2):
 
 ```r
 if ( # Case 1: all the same <1>) {
@@ -375,7 +375,7 @@ Our skeleton is rather incomplete; there are many sections that are just code co
 **<7>** - Calculate a prize based on the number of cherries.  
 **<8>** -  Adjust the prize for diamonds.  
 
-If you like, you can reorganize your flow chart around these tasks, as in \@ref(fig:subdivide4). The chart will describe the same strategy, but in a more precise way. I'll use a diamond shape to symbolize an `if else` decision.
+If you like, you can reorganize your flow chart around these tasks, as in Figure \@ref(fig:subdivide4). The chart will describe the same strategy, but in a more precise way. I'll use a diamond shape to symbolize an `if else` decision.
 
 ```{r subdivide4, echo = FALSE, fig.cap = "score can navigate three cases with two if else decisions. We can also break some of our tasks into two steps."}
 knitr::include_graphics("images/hopr_0704.png")

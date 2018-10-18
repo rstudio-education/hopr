@@ -613,7 +613,7 @@ Second, coercion is a common behavior in R, so you'll want to know how it works.
 
 R's coercion behavior may seem inconvenient, but it is not arbitrary. R always follows the same rules when it coerces data types. Once you are familiar with these rules, you can use R's coercion behavior to do surprisingly useful things.
 
-So how does R coerce data types? If a character string is present in an atomic vector, R will convert everything else in the vector to character strings. If a vector only contains logicals and numbers, R will convert the logicals to numbers; every `TRUE` becomes a 1, and every `FALSE` becomes a 0, as shown in \@ref(fig:coercion). 
+So how does R coerce data types? If a character string is present in an atomic vector, R will convert everything else in the vector to character strings. If a vector only contains logicals and numbers, R will convert the logicals to numbers; every `TRUE` becomes a 1, and every `FALSE` becomes a 0, as shown in Figure \@ref(fig:coercion). 
 
 ```{r coercion, echo = FALSE, fig.cap = "R always uses the same rules to coerce data to a single type. If character strings are present, everything will be coerced to a character string. Otherwise, logicals are coerced to numerics."}
 knitr::include_graphics("images/hopr_0301.png")
@@ -719,7 +719,7 @@ You can also use a list to store a whole deck of playing cards. Since you can sa
 
 Data frames are the two-dimensional version of a list. They are far and away the most useful storage structure for data analysis, and they provide an ideal way to store an entire deck of cards. You can think of a data frame as R's equivalent to the Excel spreadsheet because it stores data in a similar format. 
 
-Data frames group vectors together into a two-dimensional table. Each vector becomes a column in the table. As a result, each column of a data frame can contain a different type of data; but within a column, every cell must be the same type of data, as in \@ref(fig:data-frame).
+Data frames group vectors together into a two-dimensional table. Each vector becomes a column in the table. As a result, each column of a data frame can contain a different type of data; but within a column, every cell must be the same type of data, as in Figure \@ref(fig:data-frame).
 
 ```{r data-frame, echo = FALSE, fig.cap = "Data frames store data as a sequence of columns. Each column can be a different data type. Every column in a data frame must be the same length."}
 knitr::include_graphics("images/hopr_0302.png")
@@ -737,7 +737,7 @@ df
 ##  six clubs     3
 ```
 
-You'll need to make sure that each vector is the same length (or can be made so with R's recycling rules; see \@ref(fig:recycle), as data frames cannot combine columns of different lengths.
+You'll need to make sure that each vector is the same length (or can be made so with R's recycling rules; see Figure \@ref(fig:recycle), as data frames cannot combine columns of different lengths.
 
 In the previous code, I named the arguments in `data.frame` `face`, `suit`, and `value`, but you can name the arguments whatever you like. `data.frame` will use your argument names to label the columns of the data frame.
 
@@ -846,13 +846,13 @@ _deck.csv_ is a comma-separated values file, or CSV for short. CSVs are plain-te
 
 Most data-science applications can open plain-text files and export data as plain-text files. This makes plain-text files a sort of lingua franca for data science. 
 
-To load a plain-text file into R, click the Import Dataset icon in RStudio, shown in \@ref(fig:import). Then select "From text file."
+To load a plain-text file into R, click the Import Dataset icon in RStudio, shown in Figure \@ref(fig:import). Then select "From text file."
 
 ```{r import, echo = FALSE, fig.cap = "You can import data from plain-text files with RStudio's Import Dataset."}
 knitr::include_graphics("images/hopr_0303.png")
 ```
 
-RStudio will ask you to select the file you want to import, then it will open a wizard to help you import the data, as in \@ref(fig:wizard). Use the wizard to tell RStudio what name to give the data set.  You can also use the wizard to tell RStudio which character the data set uses as a separator, which character it uses to represent decimals (usually a period in the United States and a comma in Europe), and whether or not the data set comes with a row of column names (known as a _header_). To help you out, the wizard shows you what the raw file looks like, as well as what your loaded data will look like based on the input settings.
+RStudio will ask you to select the file you want to import, then it will open a wizard to help you import the data, as in Figure \@ref(fig:wizard). Use the wizard to tell RStudio what name to give the data set.  You can also use the wizard to tell RStudio which character the data set uses as a separator, which character it uses to represent decimals (usually a period in the United States and a comma in Europe), and whether or not the data set comes with a row of column names (known as a _header_). To help you out, the wizard shows you what the raw file looks like, as well as what your loaded data will look like based on the input settings.
 
 You can also unclick the box "Strings as factors" in the wizard. I recommend doing this. If you do, R will load all of your character strings as character strings. If you do not, R will convert them to factors.
 
@@ -860,7 +860,7 @@ You can also unclick the box "Strings as factors" in the wizard. I recommend doi
 knitr::include_graphics("images/hopr_0304.png")
 ```
 
-Once everything looks right, click Import. RStudio will read in the data and save it to a data frame. RStudio will also open a data viewer, so you can see your new data in a spreadsheet format. This is a good way to check that everything came through as expected. If all worked well, your file should appear in a View tab of RStudio, like in \@ref(fig:view). You can examine the data frame in the console with *`head(deck)`*.
+Once everything looks right, click Import. RStudio will read in the data and save it to a data frame. RStudio will also open a data viewer, so you can see your new data in a spreadsheet format. This is a good way to check that everything came through as expected. If all worked well, your file should appear in a View tab of RStudio, like in Figure \@ref(fig:view). You can examine the data frame in the console with *`head(deck)`*.
 
 ```{block2, type = "rmdtip"}
 **Online data**
@@ -913,7 +913,7 @@ Good work. You now have a virtual deck of cards to work with. Take a breather, a
 
 ## Summary
 
-You can save data in R with five different objects, which let you store different types of values in different types of relationships, as in \@ref(fig:structures). Of these objects, data frames are by far the most useful for data science. Data frames store one of the most common forms of data used in data science, tabular data. 
+You can save data in R with five different objects, which let you store different types of values in different types of relationships, as in Figure \@ref(fig:structures). Of these objects, data frames are by far the most useful for data science. Data frames store one of the most common forms of data used in data science, tabular data. 
 
 ```{r structures, echo = FALSE, fig.cap = "R's most common data structures are vectors, matrices, arrays, lists, and data frames."}
 knitr::include_graphics("images/hopr_0306.png")

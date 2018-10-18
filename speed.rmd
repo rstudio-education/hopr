@@ -86,7 +86,7 @@ Vectorized code is easy to write in R because most R functions are already vecto
 1. Use vectorized functions to complete the sequential steps in your program.
 2. Use logical subsetting to handle parallel cases. Try to manipulate every element in a case at once. 
 
-`abs_loop` and `abs_set` illustrate these rules. The functions both handle two cases and perform one sequential step, \@ref(fig:abs). If a number is positive, the functions leave it alone. If a number is negative, the functions multiply it by negative one.
+`abs_loop` and `abs_set` illustrate these rules. The functions both handle two cases and perform one sequential step, Figure \@ref(fig:abs). If a number is positive, the functions leave it alone. If a number is negative, the functions multiply it by negative one.
 
 ```{r abs, echo = FALSE, fig.cap = "abs_loop uses a for loop to sift data into one of two cases: negative numbers and nonnegative numbers."}
 knitr::include_graphics("images/hopr_1001.png")
@@ -103,14 +103,14 @@ vec[vec < 0]
 ## -2  -4  -6  -8 -10
 ```
 
-The plan in \@ref(fig:abs) now requires a sequential step: you must multiply each of the negative values by negative one. All of R's arithmetic operators are vectorized, so you can use `*` to complete this step in vectorized fashion. `*` will multiply each number in `vec[vec < 0]` by negative one at the same time:
+The plan in Figure \@ref(fig:abs) now requires a sequential step: you must multiply each of the negative values by negative one. All of R's arithmetic operators are vectorized, so you can use `*` to complete this step in vectorized fashion. `*` will multiply each number in `vec[vec < 0]` by negative one at the same time:
 
 ```r
 vec[vec < 0] * -1
 ## 2  4  6  8 10
 ```
 
-Finally, you can use R's assignment operator, which is also vectorized, to save the new set over the old set in the original `vec` object. Since `<-` is vectorized, the elements of the new set will be paired up to the elements of the old set, in order, and then element-wise assignment will occur. As a result, each negative value will be replaced by its positive partner, as in \@ref(fig:assignment).
+Finally, you can use R's assignment operator, which is also vectorized, to save the new set over the old set in the original `vec` object. Since `<-` is vectorized, the elements of the new set will be paired up to the elements of the old set, in order, and then element-wise assignment will occur. As a result, each negative value will be replaced by its positive partner, as in Figure \@ref(fig:assignment).
 
 ```{r assignment, echo = FALSE, fig.cap = "Use logical subsetting to modify groups of values in place. R's arithmetic and assignment operators are vectorized, which lets you manipulate and update multiple values at once."}
 knitr::include_graphics("images/hopr_1002.png")
@@ -155,7 +155,7 @@ system.time(change_symbols(many))
 ```
 
 ```{solution}
-`change_symbols` uses a `for` loop to sort values into seven different cases, as demonstrated in \@ref(fig:change).
+`change_symbols` uses a `for` loop to sort values into seven different cases, as demonstrated in Figure \@ref(fig:change).
 ```
 
 To vectorize `change_symbols`, create a logical test that can identify each case:
@@ -493,7 +493,7 @@ This project completes the education you began in [The Very Basics]. You can now
 
 These skills solve an important logistical problem faced by every data scientist: _how can you store and manipulate data without making errors?_ However, this is not the only problem that you will face as a data scientist. The next problem will appear when you try to understand the information contained in your data. It is nearly impossible to spot insights or to discover patterns in raw data. A third problem will appear when you try to use your data set to reason about reality, which includes things not contained in your data set. What exactly does your data imply about things outside of the data set? How certain can you be?
 
-I refer to these problems as the logistical, tactical, and strategic problems of data science, as shown in \@ref(fig:venn). You'll face them whenever you try to learn from data:
+I refer to these problems as the logistical, tactical, and strategic problems of data science, as shown in Figure \@ref(fig:venn). You'll face them whenever you try to learn from data:
 
 * **A logistical problem:** - How can you store and manipulate data without making errors?
 * **A tactical problem** - How can you discover the information contained in your data?
