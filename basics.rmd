@@ -631,7 +631,7 @@ If you're not convinced about scripts, you soon will be. It becomes a pain to wr
 ```{block2, extract, type = "rmdtip"}
 **Extract function**
 
-RStudio comes with a tool that can help you build functions. To use it, highlight the lines of code in your R script that you want to turn into a function. Then click `Code > Extract Function` in the menu bar. RStudio will ask you for a function name to use and then wrap you code in a `function` call. It will scan the code for undefined variables and use these as arguments.
+RStudio comes with a tool that can help you build functions. To use it, highlight the lines of code in your R script that you want to turn into a function. Then click `Code > Extract Function` in the menu bar. RStudio will ask you for a function name to use and then wrap your code in a `function` call. It will scan the code for undefined variables and use these as arguments.
 
 You may want to double-check RStudio's work. It assumes that your code is correct, so if it does something surprising, you may have a problem in your code.
 ```
