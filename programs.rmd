@@ -762,7 +762,7 @@ c(0, 2, 5)[cherries + 1]
 ## 2
 ```
 
-And when `cherries` equals three, we have:
+And when `cherries` equals two, we have:
 
 ```r
 cherries + 1
