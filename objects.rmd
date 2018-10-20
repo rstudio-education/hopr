@@ -79,7 +79,7 @@ text <- c("ace", "hearts")
 You may wonder why R uses multiple types of vectors. Vector types help R behave as you would expect. For example, R will do math with atomic vectors that contain numbers, but not with atomic vectors that contain character strings:
 
 ```r
-sum(num)
+sum(int)
 ## 6
 
 sum(text)
