@@ -56,10 +56,10 @@ R's S3 system is built around three components: attributes (especially the `clas
 
 In [Attributes](#attributes), you learned that many R objects come with attributes, pieces of extra information that are given a name and appended to the object. Attributes do not affect the values of the object, but stick to the object as a type of metadata that R can use to handle the object. For example, a data frame stores its row and column names as attributes. Data frames also store their class, `"data.frame"`, as an attribute. 
 
-You can see an object's attributes with `attribute`. If you run `attribute` on the `DECK` data frame that you created in [Project 2: Playing Cards], you will see:
+You can see an object's attributes with `attribute`. If you run `attribute` on the `deck` data frame that you created in [Project 2: Playing Cards], you will see:
 
 ```r
-attributes(DECK)
+attributes(deck)
 ## $names
 ## [1] "face"  "suit"  "value"
 ## 
@@ -75,7 +75,7 @@ attributes(DECK)
 R comes with many helper functions that let you set and access the most common attributes used in R. You've already met the `names`, `dim`, and `class` functions, which each work with an eponymously named attribute. However, R also has `row.names`, `levels`, and many other attribute-based helper functions. You can use any of these functions to retrieve an attribute's value:
 
 ```r
-row.names(DECK)
+row.names(deck)
 ##  [1] "1"  "2"  "3"  "4"  "5"  "6"  "7"  "8"  "9"  "10" "11" "12" "13"
 ## [14] "14" "15" "16" "17" "18" "19" "20" "21" "22" "23" "24" "25" "26"
 ## [27] "27" "28" "29" "30" "31" "32" "33" "34" "35" "36" "37" "38" "39"
@@ -85,15 +85,15 @@ row.names(DECK)
 or to change an attribute's value:
 
 ```r
-row.names(DECK) <- 101:152
+row.names(deck) <- 101:152
 ```
 
 or to give an object a new attribute altogether:
 
 ```r
-levels(DECK) <- c("level 1", "level 2", "level 3")
+levels(deck) <- c("level 1", "level 2", "level 3")
 
-attributes(DECK)
+attributes(deck)
 ## $names
 ## [1] "face"  "suit"  "value"
 ## 
@@ -226,11 +226,11 @@ slot_display <- function(prize){
   # collapse symbols into single string
   symbols <- paste(symbols, collapse = " ")
 
-  # combine symbol with prize as a regular expression
-  # \n is regular expression for new line (i.e. return or enter)
+  # combine symbol with prize as a character string
+  # \n is special escape sequence for a new line (i.e. return or enter)
   string <- paste(symbols, prize, sep = "\n$")
 
-  # display regular expression in console without quotes
+  # display character string in console without quotes
   cat(string)
 }
 
