@@ -367,8 +367,8 @@ one_play
 <div id="attributes-1" class="section level2">
 <h2><span class="header-section-number">10.2</span> Attributes</h2>
 <p>In <a href="r-objects.html#attributes">Attributes</a>, you learned that many R objects come with attributes, pieces of extra information that are given a name and appended to the object. Attributes do not affect the values of the object, but stick to the object as a type of metadata that R can use to handle the object. For example, a data frame stores its row and column names as attributes. Data frames also store their class, <code>&quot;data.frame&quot;</code>, as an attribute.</p>
-<p>You can see an object’s attributes with <code>attribute</code>. If you run <code>attribute</code> on the <code>DECK</code> data frame that you created in <a href="project-2-playing-cards.html#project-2-playing-cards">Project 2: Playing Cards</a>, you will see:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">attributes</span>(DECK)
+<p>You can see an object’s attributes with <code>attribute</code>. If you run <code>attribute</code> on the <code>deck</code> data frame that you created in <a href="project-2-playing-cards.html#project-2-playing-cards">Project 2: Playing Cards</a>, you will see:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">attributes</span>(deck)
 ## $names
 ## [1] &quot;face&quot;  &quot;suit&quot;  &quot;value&quot;
 ## 
@@ -380,17 +380,17 @@ one_play
 ## [20] 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36
 ## [37] 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52</code></pre>
 <p>R comes with many helper functions that let you set and access the most common attributes used in R. You’ve already met the <code>names</code>, <code>dim</code>, and <code>class</code> functions, which each work with an eponymously named attribute. However, R also has <code>row.names</code>, <code>levels</code>, and many other attribute-based helper functions. You can use any of these functions to retrieve an attribute’s value:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">row.names</span>(DECK)
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">row.names</span>(deck)
 ##  [1] &quot;1&quot;  &quot;2&quot;  &quot;3&quot;  &quot;4&quot;  &quot;5&quot;  &quot;6&quot;  &quot;7&quot;  &quot;8&quot;  &quot;9&quot;  &quot;10&quot; &quot;11&quot; &quot;12&quot; &quot;13&quot;
 ## [14] &quot;14&quot; &quot;15&quot; &quot;16&quot; &quot;17&quot; &quot;18&quot; &quot;19&quot; &quot;20&quot; &quot;21&quot; &quot;22&quot; &quot;23&quot; &quot;24&quot; &quot;25&quot; &quot;26&quot;
 ## [27] &quot;27&quot; &quot;28&quot; &quot;29&quot; &quot;30&quot; &quot;31&quot; &quot;32&quot; &quot;33&quot; &quot;34&quot; &quot;35&quot; &quot;36&quot; &quot;37&quot; &quot;38&quot; &quot;39&quot;
 ## [40] &quot;40&quot; &quot;41&quot; &quot;42&quot; &quot;43&quot; &quot;44&quot; &quot;45&quot; &quot;46&quot; &quot;47&quot; &quot;48&quot; &quot;49&quot; &quot;50&quot; &quot;51&quot; &quot;52&quot;</code></pre>
 <p>or to change an attribute’s value:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">row.names</span>(DECK) &lt;-<span class="st"> </span><span class="dv">101</span><span class="op">:</span><span class="dv">152</span></code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">row.names</span>(deck) &lt;-<span class="st"> </span><span class="dv">101</span><span class="op">:</span><span class="dv">152</span></code></pre>
 <p>or to give an object a new attribute altogether:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">levels</span>(DECK) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;level 1&quot;</span>, <span class="st">&quot;level 2&quot;</span>, <span class="st">&quot;level 3&quot;</span>)
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">levels</span>(deck) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;level 1&quot;</span>, <span class="st">&quot;level 2&quot;</span>, <span class="st">&quot;level 3&quot;</span>)
 
-<span class="kw">attributes</span>(DECK)
+<span class="kw">attributes</span>(deck)
 ## $names
 ## [1] &quot;face&quot;  &quot;suit&quot;  &quot;value&quot;
 ## 
@@ -485,11 +485,11 @@ three_play
   <span class="co"># collapse symbols into single string</span>
   symbols &lt;-<span class="st"> </span><span class="kw">paste</span>(symbols, <span class="dt">collapse =</span> <span class="st">&quot; &quot;</span>)
 
-  <span class="co"># combine symbol with prize as a regular expression</span>
-  <span class="co"># \n is regular expression for new line (i.e. return or enter)</span>
+  <span class="co"># combine symbol with prize as a character string</span>
+  <span class="co"># \n is special escape sequence for a new line (i.e. return or enter)</span>
   string &lt;-<span class="st"> </span><span class="kw">paste</span>(symbols, prize, <span class="dt">sep =</span> <span class="st">&quot;</span><span class="ch">\n</span><span class="st">$&quot;</span>)
 
-  <span class="co"># display regular expression in console without quotes</span>
+  <span class="co"># display character string in console without quotes</span>
   <span class="kw">cat</span>(string)
 }
 
