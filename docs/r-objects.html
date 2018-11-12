@@ -388,7 +388,7 @@ text &lt;-<span class="st"> &quot;ace&quot;</span></code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">int &lt;-<span class="st"> </span><span class="kw">c</span>(1L, 5L)
 text &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;ace&quot;</span>, <span class="st">&quot;hearts&quot;</span>)</code></pre>
 <p>You may wonder why R uses multiple types of vectors. Vector types help R behave as you would expect. For example, R will do math with atomic vectors that contain numbers, but not with atomic vectors that contain character strings:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(int)
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(num)
 ## 6
 
 <span class="kw">sum</span>(text)
