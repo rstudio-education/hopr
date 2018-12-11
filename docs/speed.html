@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Hands-On Programming with R</title>
+  <title>12 Speed | Hands-On Programming with R</title>
   <meta name="description" content="This book will teach you how to program in R, with hands-on examples. I wrote it for non-programmers to provide a friendly introduction to the R language. You’ll learn how to load data, assemble and disassemble data objects, navigate R’s environment system, write your own functions, and use all of R’s programming tools. Throughout the book, you’ll use your newfound skills to solve practical data science problems.">
   <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="Hands-On Programming with R" />
+  <meta property="og:title" content="12 Speed | Hands-On Programming with R" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://rstudio-education.github.io/hopr/" />
   <meta property="og:image" content="https://rstudio-education.github.io/hopr/cover.png" />
@@ -17,7 +17,7 @@
   <meta name="github-repo" content="rstudio-education/hopr" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Hands-On Programming with R" />
+  <meta name="twitter:title" content="12 Speed | Hands-On Programming with R" />
   <meta name="twitter:site" content="@statgarrett" />
   <meta name="twitter:description" content="This book will teach you how to program in R, with hands-on examples. I wrote it for non-programmers to provide a friendly introduction to the R language. You’ll learn how to load data, assemble and disassemble data objects, navigate R’s environment system, write your own functions, and use all of R’s programming tools. Throughout the book, you’ll use your newfound skills to solve practical data science problems." />
   <meta name="twitter:image" content="https://rstudio-education.github.io/hopr/cover.png" />
@@ -542,21 +542,21 @@ A good way to spot <code>for</code> loops that could be vectorized is to look fo
 <h2><span class="header-section-number">12.3</span> How to Write Fast for Loops in R</h2>
 <p>You can dramatically increase the speed of your <code>for</code> loops by doing two things to optimize each loop. First, do as much as you can outside of the <code>for</code> loop. Every line of code that you place inside of the <code>for</code> loop will be run many, many times. If a line of code only needs to be run once, place it outside of the loop to avoid repetition.</p>
 <p>Second, make sure that any storage objects that you use with the loop are large enough to contain <em>all</em> of the results of the loop. For example, both loops below will need to store one million values. The first loop stores its values in an object named <code>output</code> that begins with a length of <em>one million</em>:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system.time</span>(
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system.time</span>({
   output &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="ot">NA</span>, <span class="dv">1000000</span>) 
   <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">1000000</span>) {
     output[i] &lt;-<span class="st"> </span>i <span class="op">+</span><span class="st"> </span><span class="dv">1</span>
   }
-)
+})
 ##   user  system elapsed 
 ##  1.709   0.015   1.724 </code></pre>
 <p>The second loop stores its values in an object named <code>output</code> that begins with a length of <em>one</em>. R will expand the object to a length of one million as it runs the loop. The code in this loop is very similar to the code in the first loop, but the loop takes <em>37 minutes</em> longer to run than the first loop:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system.time</span>(
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system.time</span>({
   output &lt;-<span class="st"> </span><span class="ot">NA</span> 
   <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">1000000</span>) {
     output[i] &lt;-<span class="st"> </span>i <span class="op">+</span><span class="st"> </span><span class="dv">1</span>
   }
-)
+})
 ##     user   system  elapsed 
 ## 1689.537  560.951 2249.927</code></pre>
 <p>The two loops do the same thing, so what accounts for the difference? In the second loop, R has to increase the length of <code>output</code> by one for each run of the loop. To do this, R needs to find a new place in your computer’s memory that can contain the larger object. R must then copy the <code>output</code> vector over and erase the old version of <code>output</code> before moving on to the next run of the loop. By the end of the loop, R has rewritten <code>output</code> in your computer’s memory one million times.</p>
@@ -785,6 +785,10 @@ gitbook.start({
 "edit": {
 "link": "https://github.com/rstudio-education/hopr/edit/master/speed.rmd",
 "text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
 },
 "download": null,
 "toc": {
