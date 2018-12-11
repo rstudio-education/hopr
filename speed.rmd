@@ -256,12 +256,12 @@ You can dramatically increase the speed of your `for` loops by doing two things 
 Second, make sure that any storage objects that you use with the loop are large enough to contain _all_ of the results of the loop. For example, both loops below will need to store one million values. The first loop stores its values in an object named `output` that begins with a length of _one million_:
 
 ```r
-system.time(
+system.time({
   output <- rep(NA, 1000000) 
   for (i in 1:1000000) {
     output[i] <- i + 1
   }
-)
+})
 ##   user  system elapsed 
 ##  1.709   0.015   1.724 
 ```
@@ -269,12 +269,12 @@ system.time(
 The second loop stores its values in an object named `output` that begins with a length of _one_. R will expand the object to a length of one million as it runs the loop. The code in this loop is very similar to the code in the first loop, but the loop takes _37 minutes_ longer to run than the first loop:
 
 ```r
-system.time(
+system.time({
   output <- NA 
   for (i in 1:1000000) {
     output[i] <- i + 1
   }
-)
+})
 ##     user   system  elapsed 
 ## 1689.537  560.951 2249.927
 ```
