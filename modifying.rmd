@@ -414,7 +414,7 @@ Table: (\#tab:boole) Boolean operators
 |Operator|Syntax|Tests
 |--------|------|-----
 |`&`|`cond1 & cond2`|Are both `cond1` and `cond2` true?
-|`\|`|`cond1 pipe cond2`|Is one or more of `cond1` and `cond2` true?
+|`|`|`cond1 | cond2`|Is one or more of `cond1` and `cond2` true?
 |`xor`|`xor(cond1, cond2)`|Is exactly one of `cond1` and `cond2` true?
 |`!`|`!cond1`|Is `cond1` false? (e.g., `!` flips the results of a logical test)
 |`any`|`any(cond1, cond2, cond3, ...)`|Are any of the conditions true?
