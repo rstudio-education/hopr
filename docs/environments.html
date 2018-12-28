@@ -485,7 +485,7 @@ Remember that functions are a type of object in R. R will store and look up func
 
 new
 ## &quot;Hello Active&quot;</code></pre>
-<p>This arrangement creates a quandry for R whenever R runs a function. Many functions save temporary objects that help them do their jobs. For example, the <code>roll</code> function from <a href="project-1-weighted-dice.html#project-1-weighted-dice">Project 1: Weighted Dice</a> saved an object named <code>die</code> and an object named <code>dice</code>:</p>
+<p>This arrangement creates a quandary for R whenever R runs a function. Many functions save temporary objects that help them do their jobs. For example, the <code>roll</code> function from <a href="project-1-weighted-dice.html#project-1-weighted-dice">Project 1: Weighted Dice</a> saved an object named <code>die</code> and an object named <code>dice</code>:</p>
 <pre class="sourceCode r"><code class="sourceCode r">roll &lt;-<span class="st"> </span><span class="cf">function</span>() {
   die &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">6</span>
   dice &lt;-<span class="st"> </span><span class="kw">sample</span>(die, <span class="dt">size =</span> <span class="dv">2</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>)
