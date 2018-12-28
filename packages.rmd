@@ -300,7 +300,7 @@ knitr::include_graphics("images/hopr_0205.png")
 
 R also comes with a super active community of users that you can turn to for [help on the R-help mailing list](http://bit.ly/r-help). You can email the list with questions, but there's a great chance that your question has already been answered. Find out by searching the [archives](http://bit.ly/R_archives).
 
-Even better than the R-help list is http://stackoverflow.com[Stack Overflow], a website that allows programmers to answer questions and users to rank answers based on helpfulness. Personally, I find the Stack Overflow format to be more user-friendly than the R-help email list (and the respondents to be more human friendly). You can submit your own question or search through Stack Overflow's previously answered questions related to R. There are over 30,000.
+Even better than the R-help list is [Stack Overflow](http://stackoverflow.com), a website that allows programmers to answer questions and users to rank answers based on helpfulness. Personally, I find the Stack Overflow format to be more user-friendly than the R-help email list (and the respondents to be more human friendly). You can submit your own question or search through Stack Overflow's previously answered questions related to R. There are over 30,000.
 
 Best of all is [community.rstudio.com](http://community.rstudio.com), a friendly, inclusive place to share questions related to R. community.rstudio.com is a very active forum focused on R. Don't be surprised if you ask a question about an R package, and the author of the package shows up to answer.
 
