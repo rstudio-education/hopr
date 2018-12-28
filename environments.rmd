@@ -202,7 +202,7 @@ new
 ## "Hello Active"
 ```
 
-This arrangement creates a quandry for R whenever R runs a function. Many functions save temporary objects that help them do their jobs. For example, the `roll` function from [Project 1: Weighted Dice] saved an object named `die` and an object named `dice`:
+This arrangement creates a quandary for R whenever R runs a function. Many functions save temporary objects that help them do their jobs. For example, the `roll` function from [Project 1: Weighted Dice] saved an object named `die` and an object named `dice`:
 
 ```r
 roll <- function() {
