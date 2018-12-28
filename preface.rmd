@@ -29,7 +29,7 @@ However, learning to program _should_ be on every data scientist's to-do list. K
 
 Greg compares R to SPSS, but he assumes that you use the full powers of R; in other words, that you learn how to program in R. If you only use functions that preexist in R, you are using R like SPSS: it is a bus that can only take you to certain places. 
 
-This flexibility matters to data scientists. The exact details of a method or simulation will change from problem to problem. If you cannot build a method tailored to your situation, you may find yourself tempted to make unrealistic assumptions just so you can you use an ill-suited method that already exists.
+This flexibility matters to data scientists. The exact details of a method or simulation will change from problem to problem. If you cannot build a method tailored to your situation, you may find yourself tempted to make unrealistic assumptions just so you can use an ill-suited method that already exists.
 
 This book will help you make the leap from bus to car. I have written it for beginning programmers. I do not talk about the theory of computer science—there are no discussions of big `O()` and little `o()` in these pages. Nor do I get into advanced details such as the workings of _lazy evaluation_. These things are interesting if you think of computer science at the theoretical level, but they are a distraction when you first learn to program.
 
