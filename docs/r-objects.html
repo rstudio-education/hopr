@@ -456,7 +456,7 @@ text
 <p>Logical vectors store <code>TRUE</code>s and <code>FALSE</code>s, R’s form of Boolean data. Logicals are very helpful for doing things like comparisons:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="dv">3</span> <span class="op">&gt;</span><span class="st"> </span><span class="dv">4</span>
 ## FALSE</code></pre>
-<p>Any time you type <code>TRUE</code> or <code>FALSE</code> in capital letters (without quotation marks), R will treat your input as logical data. R also assumes that <code>T</code> and <code>F</code> are shorthand for <code>TRUE</code> and <code>FALSE</code>:</p>
+<p>Any time you type <code>TRUE</code> or <code>FALSE</code> in capital letters (without quotation marks), R will treat your input as logical data. R also assumes that <code>T</code> and <code>F</code> are shorthand for <code>TRUE</code> and <code>FALSE</code>, unless they are defined elsewhere (e.g. <code>T &lt;- 500</code>). Since the meaning of <code>T</code> and <code>F</code> can change, its best to stick with <code>TRUE</code> and <code>FALSE</code>:</p>
 <pre class="sourceCode r"><code class="sourceCode r">logic &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>)
 logic
 ##   TRUE FALSE  TRUE
