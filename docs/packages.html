@@ -411,7 +411,7 @@ Figure 3.2: qplot makes a histogram when you give it a single vector.
  <span class="solution"><em>Solution. </em></span> You can make a histogram of <code>x3</code> with <code>qplot(x3, binwidth = 1)</code>. The histogram will look like a symmetric pyramid. The middle bar will have a height of 3 and will appear above <code>[2, 3)</code>, but be sure to try it and see for yourself.
 </div>
 
-<p>You can use a histogram to display visually how common different values of <code>x</code> are. Numbers covered by a tall bar are no more common than numbers covered by a short bar.</p>
+<p>You can use a histogram to display visually how common different values of <code>x</code> are. Numbers covered by a tall bar are more common than numbers covered by a short bar.</p>
 <p>How can you use a histogram to check the accuracy of your dice?</p>
 <p>Well, if you roll your dice many times and keep track of the results, you would expect some numbers to occur more than others. This is because there are more ways to get some numbers by adding two dice together than to get other numbers, as shown in Figure <a href="packages.html#fig:probs">3.3</a>.</p>
 <p>If you roll your dice many times and plot the results with <code>qplot</code>, the histogram will show you how often each sum appeared. The sums that occurred most often will have the highest bars. The histogram should look like the pattern in Figure <a href="packages.html#fig:probs">3.3</a> if the dice are fairly weighted.</p>
