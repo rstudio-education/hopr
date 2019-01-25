@@ -110,7 +110,7 @@ When you are done, plot a histogram of `x3` with `binwidth = 1`, and see if you 
 You can make a histogram of `x3` with `qplot(x3, binwidth = 1)`. The histogram will look like a symmetric pyramid. The middle bar will have a height of 3 and will appear above `[2, 3)`, but be sure to try it and see for yourself.
 ```
 
-You can use a histogram to display visually how common different values of `x` are. Numbers covered by a tall bar are no more common than numbers covered by a short bar.
+You can use a histogram to display visually how common different values of `x` are. Numbers covered by a tall bar are more common than numbers covered by a short bar.
 
 How can you use a histogram to check the accuracy of your dice? 
 
