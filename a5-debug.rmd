@@ -157,7 +157,7 @@ Browse[1]> same
 
 Second, you can run code and see the same results that `score` would see. For example, you could run the remaining lines of the `score` function and see if they do anything unusual. You could run these lines by typing them into the command prompt, or you could use the three navigation buttons that now appear above the prompt, as in Figure \@ref(fig:browser-buttons).
 
-The first button, Next, will run the next line of code in `score`. The highlighted line in the scripts pane will advance by one line to show you your new location in the `score` function. If the next line begins a code chunk, like a +for+ loop or an `if` tree, R will run the whole chunk and will highlight the whole chunk in the script window. 
+The first button, Next, will run the next line of code in `score`. The highlighted line in the scripts pane will advance by one line to show you your new location in the `score` function. If the next line begins a code chunk, like a `for` loop or an `if` tree, R will run the whole chunk and will highlight the whole chunk in the script window. 
 
 The second button, Continue, will run all of the remaining lines of `score` and then exit the browser mode.
 

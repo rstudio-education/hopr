@@ -181,7 +181,7 @@ Logical vectors store `TRUE`s and `FALSE`s, R's form of Boolean data. Logicals a
 ## FALSE
 ```
 
-Any time you type `TRUE` or `FALSE` in capital letters (without quotation marks), R will treat your input as logical data. R also assumes that `T` and `F` are shorthand for `TRUE` and `FALSE`:
+Any time you type `TRUE` or `FALSE` in capital letters (without quotation marks), R will treat your input as logical data. R also assumes that `T` and `F` are shorthand for `TRUE` and `FALSE`, unless they are defined elsewhere (e.g. `T <- 500`). Since the meaning of `T` and `F` can change, its best to stick with `TRUE` and `FALSE`:
 
 ```r
 logic <- c(TRUE, FALSE, TRUE)
