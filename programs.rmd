@@ -108,7 +108,7 @@ Let's start by looking at how you can divide a program into subtasks that are si
 
 A program is a set of step-by-step instructions for your computer to follow. Taken together, these instructions may accomplish something very sophisticated. Taken apart, each individual step will likely be simple and straightforward. 
 
-You can make coding easier by identifying the individual steps or subtasks within your program. You can then work on each subtask separately. If a subtask seems complicated, try to divide it again into even subtasks that are even more simple. You can often reduce an R program into substasks so simple that each can be performed with a preexisting function. 
+You can make coding easier by identifying the individual steps or subtasks within your program. You can then work on each subtask separately. If a subtask seems complicated, try to divide it again into even subtasks that are even more simple. You can often reduce an R program into subtasks so simple that each can be performed with a preexisting function. 
 
 R programs contain two types of subtasks: sequential steps and parallel cases.
 
@@ -444,7 +444,7 @@ all(symbols == symbols[1])
 As your vocabulary of R functions broadens, you'll think of more ways to do basic tasks. One method that I like for checking three of a kind is:
 
 ```r
-length(unique(symbols) == 1)
+length(unique(symbols)) == 1
 ```
 
 The `unique` function returns every unique term that appears in a vector. If your `symbols` vector contains three of a kind (i.e., one unique term that appears three times), then `unique(symbols)` will return a vector of length `1`.
