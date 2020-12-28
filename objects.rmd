@@ -340,7 +340,7 @@ die
 ## [3,]    3    6
 ```
 
-or a 1 &#x00D7; 2 &#x00D7; 3 hypercube (which has 1 row, 2 columns, and 3 "slices"). This is a three-dimensional structure, but R will need to show it slice by slice by slice on your two-dimensional computer screen:
+or a 1 &#x00D7; 2 &#x00D7; 3 cube (which has 1 row, 2 columns, and 3 "slices"). This is a three-dimensional structure, but R will need to show it slice by slice on your two-dimensional computer screen:
 
 ```r
 dim(die) <- c(1, 2, 3)
