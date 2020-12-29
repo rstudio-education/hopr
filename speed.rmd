@@ -355,7 +355,7 @@ This new function would make it easy to simulate a million, or even 10 million p
 # mean(plays$prize)
 ```
 
-Now you just need to write `score_many`, a vectorized (matix-ized?) version of `score` that takes an _n_ x 3 matrix and returns _n_ prizes. It will be difficult to write this function because `score` is already quite complicated. I would not expect you to feel confident doing this on your own until you have more practice and experience than we've been able to develop here. 
+Now you just need to write `score_many`, a vectorized (matrix-ized?) version of `score` that takes an _n_ x 3 matrix and returns _n_ prizes. It will be difficult to write this function because `score` is already quite complicated. I would not expect you to feel confident doing this on your own until you have more practice and experience than we've been able to develop here. 
 
 Should you like to test your skills and write a version of `score_many`, I recommend that you use the function `rowSums` within your code. It calculates the sum of each row of numbers (or logicals) in a matrix.
 
