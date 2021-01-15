@@ -56,7 +56,7 @@ R's S3 system is built around three components: attributes (especially the `clas
 
 In [Attributes](#attributes), you learned that many R objects come with attributes, pieces of extra information that are given a name and appended to the object. Attributes do not affect the values of the object, but stick to the object as a type of metadata that R can use to handle the object. For example, a data frame stores its row and column names as attributes. Data frames also store their class, `"data.frame"`, as an attribute. 
 
-You can see an object's attributes with `attribute`. If you run `attribute` on the `deck` data frame that you created in [Project 2: Playing Cards], you will see:
+You can see an object's attributes with `attributes`. If you run `attributes` on the `deck` data frame that you created in [Project 2: Playing Cards], you will see:
 
 ```r
 attributes(deck)
