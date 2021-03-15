@@ -489,9 +489,9 @@ As with many things in R, there are multiple ways to test whether `symbols` cont
 ```
 
 ```r
-symbols[1] == "B" | symbols[1] == "BB" | symbols[1] == "BBB" &
-  symbols[2] == "B" | symbols[2] == "BB" | symbols[2] == "BBB" &
-  symbols[3] == "B" | symbols[3] == "BB" | symbols[3] == "BBB"
+(symbols[1] == "B" | symbols[1] == "BB" | symbols[1] == "BBB") &
+  (symbols[2] == "B" | symbols[2] == "BB" | symbols[2] == "BBB") &
+  (symbols[3] == "B" | symbols[3] == "BB" | symbols[3] == "BBB")
 ## TRUE
 ```
 
