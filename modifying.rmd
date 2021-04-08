@@ -7,7 +7,7 @@ In this task, you will change the point system of your deck three times to match
 ```r
 deck2 <- deck
 ```
-### Changing Values in Place
+## Changing Values in Place
 
 You can use R's notation system to modify values within an R object. First, describe the value (or values) you wish to modify. Then use the assignment operator `<-` to overwrite those values. R will update the selected values _in the original object_. Let's put this into action with a real example:
 
@@ -160,7 +160,7 @@ head(deck3)
 
 Why not ask R to find the aces for you? You can do this with logical subsetting. Logical subsetting provides a way to do targeted extraction and modification with R objects, a sort of search-and-destroy mission inside your own data sets. 
 
-### Logical Subsetting
+## Logical Subsetting
 
 Do you remember R's logical index system, [logicals](#logicals)? To recap, you can select values with a vector of `TRUE`s and `FALSE`s. The vector must be the same length as the dimension that you wish to subset. R will return every element that matches a TRUE:
 
@@ -174,7 +174,7 @@ vec[c(FALSE, FALSE, FALSE, FALSE, TRUE, FALSE, FALSE)]
 
 At first glance, this system might seem impractical. Who wants to type out long vectors of TRUEs and FALSEs? No one. But you don't have to. You can let a logical test create a vector of TRUEs and FALSEs for you.
 
-#### Logical Tests
+### Logical Tests
 
 A logical test is a comparison like "is one less than two?", `1 < 2`, or "is three greater than four?", `3 > 4`. R provides seven logical operators that you can use to make comparisons, shown in Table \@ref(tab:logop). 
 
@@ -405,7 +405,7 @@ deck4[deck4$suit == "spades", ]
 
 But that's 12 cards too many. What you really want to find is all of the cards that have both a face value equal to queen and a suit value equal to spades. You can do that with a _Boolean operator_. Boolean operators combine multiple logical tests together into a single test.
 
-#### Boolean Operators
+### Boolean Operators
 
 Boolean operators are things like _and_ (`&`) and _or_ (`|`). They collapse the results of multiple logical tests into a single `TRUE` or `FALSE`. R has six boolean operators, shown in Table \@ref(tab:boole).
 
@@ -584,7 +584,7 @@ head(deck5, 13)
 
 Now you just need to fix the ace values—or do you? It is hard to decide what value to give the aces because their exact value will change from hand to hand. At the end of each hand, an ace will equal 11 if the sum of the player's cards does not exceed 21. Otherwise, the ace will equal 1. The actual value of the ace will depend on the other cards in the player's hand. This is a case of missing information. At the moment, you do not have enough information to assign a correct point value to the ace cards.
 
-### Missing Information {#missing}
+## Missing Information {#missing}
 
 Missing information problems happen frequently in data science. Usually, they are more straightforward: you don't know a value because the measurement was lost, corrupted, or never taken to begin with. R has a way to help you manage these missing values.
 
@@ -606,7 +606,7 @@ NA == 1
 
 Again, your answer would be something like "I do not know if this is equal to one," that is, `NA`. Generally, `NA`s will propagate whenever you use them in an R operation or function. This can save you from making errors based on missing data. 
 
-#### na.rm
+### na.rm
 
 Missing values can help you work around holes in your data sets, but they can also create some frustrating problems. Suppose, for example, that you've collected 1,000 pass:[<phrase role="keep-together">observations</phrase>] and wish to take their average with R's `mean` function. If even one of the values is `NA`, your result will be `NA`:
 
@@ -627,7 +627,7 @@ mean(c(NA, 1:50), na.rm = TRUE)
 ## 25.5
 ```
 
-#### is.na
+### is.na
 
 On occasion, you may want to identify the `NA`s in your data set with a logical test, but that too creates a problem. How would you go about it? If something is a missing value, any logical test that uses it will return a missing value, even this test:
 
@@ -681,7 +681,7 @@ head(deck5, 13)
 
 Congratulations. Your deck is now ready for a game of blackjack.
 
-### Summary
+## Summary
 
 You can modify values in place inside an R object when you combine R's notation syntax with the assignment operator, `<-`. This lets you update your data and clean your data sets
 
