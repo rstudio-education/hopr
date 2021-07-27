@@ -303,7 +303,7 @@ die + 1
 You can also use `names` to change the names attribute or remove it all together. To change the names, assign a new set of labels to `names`: 
 
 ```r
-names(die) <- c("uno", "dos", "tres", "quatro", "cinco", "seis")
+names(die) <- c("uno", "dos", "tres", "cuatro", "cinco", "seis")
 die
 ##   uno    dos   tres quatro  cinco   seis 
 ##     1      2      3      4      5      6 
