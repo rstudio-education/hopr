@@ -232,7 +232,7 @@ poker <- read.fwf("poker.fwf", widths = c(10, 7, 6), header = TRUE)
 
 ### HTML Links
 
-Many data files are made available on the Internet at their own web address. If you are connected to the Internet, you can open these files straight into R with `read.table`, `read.csv`, etc. You can pass a web address into the file name argument for any of R's data-reading functions. As a result, you could read in the poker data set from a web address like _http://.../poker.csv_ with:
+Many data files are made available on the Internet at their own web address. If you are connected to the Internet, you can open these files straight into R with `read.table`, `read.csv`, etc. You can pass a web address into the file name argument for any of R's data-reading functions. As a result, you could read in the poker data set from a web address like _http&#58;//.../poker.csv_ with:
 
 ```r
 poker <- read.csv("http://.../poker.csv")
@@ -246,7 +246,7 @@ deck <- read.csv("https://gist.githubusercontent.com/garrettgman/9629323/raw/ee5
 
 Just make sure that the web address links directly to the file and not to a web page that links to the file. Usually, when you visit a data file's web address, the file will begin to download or the raw data will appear in your browser window.
 
-Note that websites that begin with _https://_ are secure websites, which means R may not be able to access the data provided at these links.
+Note that websites that begin with _https:// _ are secure websites, which means R may not be able to access the data provided at these links.
 
 ### Saving Plain-Text Files
 
