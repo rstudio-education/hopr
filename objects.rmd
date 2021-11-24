@@ -686,7 +686,7 @@ list1
 
 I left the `[1]` notation in the output so you can see how it changes for lists. The double-bracketed indexes tell you which element of the list is being displayed. The single-bracket indexes tell you which subelement of an element is being displayed. For example, `100` is the first subelement of the first element in the list. `"R"` is the first sub-element of the second element. This two-system notation arises because each element of a list can be _any_ R object, including a new vector (or list) with its own indexes.
 
-Lists are a basic type of object in R, on par with atomic vectors. Like atomic vectors, they are used as building blocks to create many more spohisticated types of R objects.
+Lists are a basic type of object in R, on par with atomic vectors. Like atomic vectors, they are used as building blocks to create many more sophisticated types of R objects.
 
 As you can imagine, the structure of lists can become quite complicated, but this flexibility makes lists a useful all-purpose storage tool in R: you can group together anything with a list. 
 
