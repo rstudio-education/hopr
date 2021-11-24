@@ -336,7 +336,7 @@ show_env()
 
 Let's put this all together to see how R evaluates a function. Before you call a function, R is working in an active environment; let's call this the _calling environment_. It is the environment R calls the function from. 
 
-Then you call the function. R responds by setting up a new runtime environment. This environment will be a child of the function's origin enviornment. R will copy each of the function's arguments into the runtime environment and then make the runtime environment the new active environment. 
+Then you call the function. R responds by setting up a new runtime environment. This environment will be a child of the function's origin environment. R will copy each of the function's arguments into the runtime environment and then make the runtime environment the new active environment. 
 
 Next, R runs the code in the body of the function. If the code creates any objects, R stores them in the active, that is, runtime environment. If the code calls any objects, R uses its scoping rules to look them up. R will search the runtime environment, then the parent of the runtime environment (which will be the origin environment), then the parent of the origin environment, and so on. Notice that the calling environment might not be on the search path. Usually, a function will only call its arguments, which R can find in the active runtime environment. 
 
