@@ -727,7 +727,7 @@ if (cherries == 2) {
   prize <- 5
 } else if (cherries == 1) {
   prize <- 2
-} else {}
+} else {
   prize <- 0
 }
 ```
