@@ -36,7 +36,7 @@ You'll notice that a `[1]` appears next to your result. R is just letting you kn
 > 100:130
  [1] 100 101 102 103 104 105 106 107 108 109 110 111 112
 [14] 113 114 115 116 117 118 119 120 121 122 123 124 125
-[25] 126 127 128 129 130
+[27] 126 127 128 129 130
 ```
 
 ```{block2, colon, type = "rmdtip"}
