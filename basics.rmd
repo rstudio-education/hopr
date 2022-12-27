@@ -260,7 +260,7 @@ In die + 1:4 :
 ```
 
 ```{r recycle, echo = FALSE, fig.cap = "R will repeat a short vector to do element-wise operations with two vectors of uneven lengths."}
-knitr::include_graphics("images/hopr_0104.png")
+knitr::include_graphics("images/hopr_0104edited.png")
 ```
 
 Element-wise operations are a very useful feature in R because they manipulate groups of values in an orderly way. When you start working with data sets, element-wise operations will ensure that values from one observation or case are only paired with values from the same observation or case. Element-wise operations also make it easier to write your own programs and functions in R. 
