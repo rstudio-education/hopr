@@ -8,4 +8,6 @@ bookdown::gitbook:
       link: https://github.com/rstudio-education/hopr/edit/master/%s
       text: "Edit"
     sharing: no
+  includes:
+    after_body: fold_solutions.html
   css: hopr.css
