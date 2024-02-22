@@ -778,7 +778,7 @@ bars &lt;-<span class="st"> </span>symbols <span class="op">%in%</span><span cla
 <span class="kw">all</span>(symbols <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;B&quot;</span>, <span class="st">&quot;BB&quot;</span>, <span class="st">&quot;BBB&quot;</span>))
 ## TRUE</code></pre>
 <p>That won’t be a problem, however, because we’ve connected our cases with <code>else if</code> in the <code>if</code> tree. As soon as R comes to a case that evaluates to <code>TRUE</code>, it will skip over the rest of the tree. Think of it this way: each <code>else</code> tells R to only run the code that follows it <em>if none of the previous conditions have been met</em>. So when we have three of the same type of bar, R will evaluate the code for Case 1 and then skip the code for Case 2 (and Case 3).</p>
-<p>Our next subtask is to assign a prize for <code>symbols</code>. When the <code>symbols</code> vector contains three of the same symbol, the prize will depend on which symbol there are three of. If there are three <code>DD</code>s, the prize will be $100; if there are three <code>7</code>s, the prize will be $80; and so on.</p>
+<p>Our next subtask is to assign a prize for <code>symbols</code>. When the <code>symbols</code> vector contains three of the same symbol, the prize will depend on which symbol there are three of. If there are three <code>DD</code>s, the prize will be $800; if there are three <code>7</code>s, the prize will be $80; and so on.</p>
 <p>This suggests another <code>if</code> tree. You could assign a prize with some code like this:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="cf">if</span> (same) {
   symbol &lt;-<span class="st"> </span>symbols[<span class="dv">1</span>]
@@ -789,7 +789,7 @@ bars &lt;-<span class="st"> </span>symbols <span class="op">%in%</span><span cla
   } <span class="cf">else</span> <span class="cf">if</span> (symbol <span class="op">==</span><span class="st"> &quot;BBB&quot;</span>) {
     prize &lt;-<span class="st"> </span><span class="dv">40</span>
   } <span class="cf">else</span> <span class="cf">if</span> (symbol <span class="op">==</span><span class="st"> &quot;BB&quot;</span>) {
-    prize &lt;-<span class="st"> </span><span class="dv">5</span>
+    prize &lt;-<span class="st"> </span><span class="dv">25</span>
   } <span class="cf">else</span> <span class="cf">if</span> (symbol <span class="op">==</span><span class="st"> &quot;B&quot;</span>) {
     prize &lt;-<span class="st"> </span><span class="dv">10</span>
   } <span class="cf">else</span> <span class="cf">if</span> (symbol <span class="op">==</span><span class="st"> &quot;C&quot;</span>) {
