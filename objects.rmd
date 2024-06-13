@@ -763,18 +763,22 @@ class(df)
 
 str(df)
 ## 'data.frame':	3 obs. of  3 variables:
-##  $ face : Factor w/ 3 levels "ace","six","two": 1 3 2
-##  $ suit : Factor w/ 1 level "clubs": 1 1 1
+##  $ face : chr  "ace" "two" "six"
+##  $ suit : chr  "clubs" "clubs" "clubs"
 ##  $ value: num  1 2 3
 ```
 
-Notice that R saved your character strings as factors. I told you that R likes factors! It is not a very big deal here, but you can prevent this behavior by adding the argument `stringsAsFactors = FALSE` to `data.frame`:
+Note how R saved your character strings - as character strings! This is the default. Since, however, having variables saved as factors can be appropriate and useful in many contexts, be aware that you can update this behavior by adding the argument `stringsAsFactors = TRUE` to `data.frame`:
 
 ```r
 df <- data.frame(face = c("ace", "two", "six"),  
   suit = c("clubs", "clubs", "clubs"), value = c(1, 2, 3),
-  stringsAsFactors = FALSE)
+  stringsAsFactors = TRUE)
 ```
+
+The default had previously been `stringsAsFactors = TRUE`, but has been changed 
+to `FALSE`. was See [here](https://blog.r-project.org/2020/02/16/stringsasfactors/) 
+for a thoughtful discussion of the history of this default and its reproducibility implications. 
 
 A data frame is a great way to build an entire deck of cards. You can make each row in the data frame a playing card, and each column a type of value—each with its own appropriate data type. The data frame would look something like this:
 
