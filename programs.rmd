@@ -444,7 +444,7 @@ all(symbols == symbols[1])
 As your vocabulary of R functions broadens, you'll think of more ways to do basic tasks. One method that I like for checking three of a kind is:
 
 ```r
-length(unique(symbols) == 1)
+length(unique(symbols)) == 1
 ```
 
 The `unique` function returns every unique term that appears in a vector. If your `symbols` vector contains three of a kind (i.e., one unique term that appears three times), then `unique(symbols)` will return a vector of length `1`.
