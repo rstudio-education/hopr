@@ -396,7 +396,7 @@ score <- function(symbols) {
 }
 ```
 
-Its argument, `symbols`, will be the output of `get_symbols`, a vector that contains three character strings. You could start writing `score` as I have written it, by defining an object named `score` and then slowly filling in the body of the function. However, this would be a bad idea. The eventual function will have eight separate parts, and it will not work correctly until _all_ of those parts are written (and themselves work correctly). This means you would have to write the entire `score` function before you could test any of the subtasks. If `score` doesn't work—which is very likely—you will not know which subtask needs fixed.
+Its argument, `symbols`, will be the output of `get_symbols`, a vector that contains three character strings. You could start writing `score` as I have written it, by defining an object named `score` and then slowly filling in the body of the function. However, this would be a bad idea. The eventual function will have eight separate parts, and it will not work correctly until _all_ of those parts are written (and themselves work correctly). This means you would have to write the entire `score` function before you could test any of the subtasks. If `score` doesn't work—which is very likely—you will not know which subtask needs to be fixed.
 
 You can save yourself time and headaches if you focus on one subtask at a time. For each subtask, create a concrete example that you can test your code on. For example, you know that `score` will need to work on a vector named `symbols` that contains three character strings. If you make a real vector named `symbols`, you can run the code for many of your subtasks on the vector as you go:
 
@@ -444,7 +444,7 @@ all(symbols == symbols[1])
 As your vocabulary of R functions broadens, you'll think of more ways to do basic tasks. One method that I like for checking three of a kind is:
 
 ```r
-length(unique(symbols) == 1)
+length(unique(symbols)) == 1
 ```
 
 The `unique` function returns every unique term that appears in a vector. If your `symbols` vector contains three of a kind (i.e., one unique term that appears three times), then `unique(symbols)` will return a vector of length `1`.
