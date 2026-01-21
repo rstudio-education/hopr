@@ -17,7 +17,7 @@ knitr::include_graphics("images/hopr_0101.png")
 ```
 
 ```{block2, install-tip, type='rmdimportant'}
-If you do not yet have R and RStudio intalled on your computer--or do not know what I am talking about--visit [Appendix A](#starting). The appendix will give you an overview of the two free tools and tell you how to download them. 
+If you do not yet have R and RStudio installed on your computer--or do not know what I am talking about--visit [Appendix A](#starting). The appendix will give you an overview of the two free tools and tell you how to download them. 
 ```
 
 The RStudio interface is simple. You type R code into the bottom line of the RStudio console pane and then click Enter to run it. The code you type is called a _command_, because it will command your computer to do something for you. The line you type it into is called the _command line_.
