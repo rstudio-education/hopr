@@ -71,7 +71,7 @@ qplot(x, y)
 knitr::include_graphics("images/hopr_0201.png")
 ```
 
-You don't need to name your vectors `x` and `y`. I just did that to make the example clear. As you can see in Figure \@ref(fig:qplot), a scatterplot is a set of points, each plotted according to its x and y values. Together, the vectors `x` and `y` describe a set of 10 points. How did R match up the values in `x` and `y` to make these points? With element-wise execution, as we saw in Figure \@ref(fig:elementwise).
+You don't need to name your vectors `x` and `y`. I just did that to make the example clear. As you can see in Figure \@ref(fig:qplot), a scatterplot is a set of points, each plotted according to its x and y values. Together, the vectors `x` and `y` describe a set of 11 points. How did R match up the values in `x` and `y` to make these points? With element-wise execution, as we saw in Figure \@ref(fig:elementwise).
 
 Scatterplots are useful for visualizing the relationship between two variables. However, we're going to use a different type of graph, a _histogram_. A histogram visualizes the distribution of a single variable; it displays how many data points appear at each value of x. 
 
